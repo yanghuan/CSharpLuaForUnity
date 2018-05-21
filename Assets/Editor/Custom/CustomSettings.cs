@@ -41,7 +41,7 @@ public static class CustomSettings
     };
 
     //在这里添加你要导出注册到lua的类型列表
-    public static BindType[] customTypeList =
+    public static BindType[] customTypeList_ =
     {                
         //------------------------为例子导出--------------------------------
         //_GT(typeof(TestEventListener)),
@@ -253,4 +253,23 @@ public static class CustomSettings
 
         LuaClient.Instance.DetachProfiler();
     }
+
+  public static BindType[] customTypeList {
+    get {
+      List<BindType> result = new List<BindType>(customTypeList_);
+      AssemblyName[] names = Assembly.GetExecutingAssembly().GetReferencedAssemblies();
+      foreach (AssemblyName name in names) {
+        if (name.FullName.Contains("Assembly-CSharp")) {
+          Assembly a = Assembly.Load(name);
+          Type[] types = a.GetExportedTypes();
+          foreach (Type type in types) {
+            if (type.IsDefined(typeof(LuaAutoWrapAttribute), false)) {
+              result.Add(_GT(type));
+            }
+          }
+        }
+      }
+      return result.ToArray();
+    }
+  }
 }

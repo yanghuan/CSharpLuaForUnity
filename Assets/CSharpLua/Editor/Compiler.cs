@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 
 using UnityEditor;
 using UnityEngine;
@@ -19,9 +16,12 @@ public static class Compiler {
     string[] libs = new string[] {
       typeof(UnityEngine.Object).Assembly.Location,
     };
-
+    string[] metas = new string[] {
+      toolsDir_ + "/UnityEngine.xml",
+    };
     string lib = string.Join(";", libs);
-    string args = $"{csharpLua_}  -s \"{compiledScriptDir_}\" -d \"{outDir_}\" -l \"{lib}\"";
+    string meta = string.Join(";", metas);
+    string args = $"{csharpLua_}  -s \"{compiledScriptDir_}\" -d \"{outDir_}\" -l \"{lib}\" -m {meta}";
     var info = new ProcessStartInfo() {
       FileName = kDotnet,
       Arguments = args,
@@ -36,6 +36,8 @@ public static class Compiler {
         string outString = p.StandardOutput.ReadToEnd();
         string errorString = p.StandardError.ReadToEnd();
         throw new Exception($"Compile fail, {kDotnet} {args}, \n{outString}, {errorString}");
+      } else {
+        UnityEngine.Debug.Log("compile success");
       }
     }
   }

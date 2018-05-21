@@ -1,3 +1,7 @@
+require("CoreSystemLua.All")("CoreSystemLua")
+require("AdapterMonoBehaviour")
+require("CompiledScript.manifest")("CompiledScript")
+
 --主入口函数。从这里开始lua逻辑
 function Main()					
 	print("logic start")	 		

@@ -10,7 +10,7 @@ System.namespace("", function (namespace)
     return {
       __inherits__ = function (global) 
         return {
-          global.UnityEngine.MonoBehaviour
+          global.AdapterMonoBehaviour
         }
       end
     }
