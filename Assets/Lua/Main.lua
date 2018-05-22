@@ -1,5 +1,5 @@
 require("CoreSystemLua.All")("CoreSystemLua")
-require("AdapterMonoBehaviour")
+require("MonoBehaviour")
 require("CompiledScript.manifest")("CompiledScript")
 
 --主入口函数。从这里开始lua逻辑

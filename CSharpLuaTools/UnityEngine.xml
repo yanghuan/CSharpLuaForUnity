@@ -2,7 +2,7 @@
 <meta>
   <assembly>
     <namespace name="UnityEngine">
-      <class name="MonoBehaviour" Name="AdapterMonoBehaviour" />
+      <class name="MonoBehaviour" Name="MonoBehaviour" />
     </namespace>
   </assembly>
 </meta>
