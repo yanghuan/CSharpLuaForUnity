@@ -11,7 +11,11 @@ public class UnityEngine_BoxColliderWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("center", get_center, set_center);
+		L.RegFunction("getcenter", get_center);
+		L.RegFunction("setcenter", set_center);
 		L.RegVar("size", get_size, set_size);
+		L.RegFunction("getsize", get_size);
+		L.RegFunction("setsize", set_size);
 		L.EndClass();
 	}
 

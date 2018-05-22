@@ -25,7 +25,9 @@ public class UnityEngine_AssetBundleWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("mainAsset", get_mainAsset, null);
+		L.RegFunction("getmainAsset", get_mainAsset);
 		L.RegVar("isStreamedSceneAssetBundle", get_isStreamedSceneAssetBundle, null);
+		L.RegFunction("getisStreamedSceneAssetBundle", get_isStreamedSceneAssetBundle);
 		L.EndClass();
 	}
 

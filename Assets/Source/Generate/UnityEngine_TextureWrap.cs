@@ -13,15 +13,34 @@ public class UnityEngine_TextureWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("masterTextureLimit", get_masterTextureLimit, set_masterTextureLimit);
+		L.RegFunction("getmasterTextureLimit", get_masterTextureLimit);
+		L.RegFunction("setmasterTextureLimit", set_masterTextureLimit);
 		L.RegVar("anisotropicFiltering", get_anisotropicFiltering, set_anisotropicFiltering);
+		L.RegFunction("getanisotropicFiltering", get_anisotropicFiltering);
+		L.RegFunction("setanisotropicFiltering", set_anisotropicFiltering);
 		L.RegVar("width", get_width, set_width);
+		L.RegFunction("getwidth", get_width);
+		L.RegFunction("setwidth", set_width);
 		L.RegVar("height", get_height, set_height);
+		L.RegFunction("getheight", get_height);
+		L.RegFunction("setheight", set_height);
 		L.RegVar("dimension", get_dimension, set_dimension);
+		L.RegFunction("getdimension", get_dimension);
+		L.RegFunction("setdimension", set_dimension);
 		L.RegVar("filterMode", get_filterMode, set_filterMode);
+		L.RegFunction("getfilterMode", get_filterMode);
+		L.RegFunction("setfilterMode", set_filterMode);
 		L.RegVar("anisoLevel", get_anisoLevel, set_anisoLevel);
+		L.RegFunction("getanisoLevel", get_anisoLevel);
+		L.RegFunction("setanisoLevel", set_anisoLevel);
 		L.RegVar("wrapMode", get_wrapMode, set_wrapMode);
+		L.RegFunction("getwrapMode", get_wrapMode);
+		L.RegFunction("setwrapMode", set_wrapMode);
 		L.RegVar("mipMapBias", get_mipMapBias, set_mipMapBias);
+		L.RegFunction("getmipMapBias", get_mipMapBias);
+		L.RegFunction("setmipMapBias", set_mipMapBias);
 		L.RegVar("texelSize", get_texelSize, null);
+		L.RegFunction("gettexelSize", get_texelSize);
 		L.EndClass();
 	}
 

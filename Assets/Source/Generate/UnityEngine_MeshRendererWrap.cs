@@ -11,6 +11,8 @@ public class UnityEngine_MeshRendererWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("additionalVertexStreams", get_additionalVertexStreams, set_additionalVertexStreams);
+		L.RegFunction("getadditionalVertexStreams", get_additionalVertexStreams);
+		L.RegFunction("setadditionalVertexStreams", set_additionalVertexStreams);
 		L.EndClass();
 	}
 

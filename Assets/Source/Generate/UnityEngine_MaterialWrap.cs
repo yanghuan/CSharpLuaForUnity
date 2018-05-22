@@ -47,14 +47,31 @@ public class UnityEngine_MaterialWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("shader", get_shader, set_shader);
+		L.RegFunction("getshader", get_shader);
+		L.RegFunction("setshader", set_shader);
 		L.RegVar("color", get_color, set_color);
+		L.RegFunction("getcolor", get_color);
+		L.RegFunction("setcolor", set_color);
 		L.RegVar("mainTexture", get_mainTexture, set_mainTexture);
+		L.RegFunction("getmainTexture", get_mainTexture);
+		L.RegFunction("setmainTexture", set_mainTexture);
 		L.RegVar("mainTextureOffset", get_mainTextureOffset, set_mainTextureOffset);
+		L.RegFunction("getmainTextureOffset", get_mainTextureOffset);
+		L.RegFunction("setmainTextureOffset", set_mainTextureOffset);
 		L.RegVar("mainTextureScale", get_mainTextureScale, set_mainTextureScale);
+		L.RegFunction("getmainTextureScale", get_mainTextureScale);
+		L.RegFunction("setmainTextureScale", set_mainTextureScale);
 		L.RegVar("passCount", get_passCount, null);
+		L.RegFunction("getpassCount", get_passCount);
 		L.RegVar("renderQueue", get_renderQueue, set_renderQueue);
+		L.RegFunction("getrenderQueue", get_renderQueue);
+		L.RegFunction("setrenderQueue", set_renderQueue);
 		L.RegVar("shaderKeywords", get_shaderKeywords, set_shaderKeywords);
+		L.RegFunction("getshaderKeywords", get_shaderKeywords);
+		L.RegFunction("setshaderKeywords", set_shaderKeywords);
 		L.RegVar("globalIlluminationFlags", get_globalIlluminationFlags, set_globalIlluminationFlags);
+		L.RegFunction("getglobalIlluminationFlags", get_globalIlluminationFlags);
+		L.RegFunction("setglobalIlluminationFlags", set_globalIlluminationFlags);
 		L.EndClass();
 	}
 

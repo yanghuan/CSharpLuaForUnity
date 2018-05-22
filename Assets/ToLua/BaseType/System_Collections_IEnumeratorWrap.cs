@@ -10,6 +10,7 @@ public class System_Collections_IEnumeratorWrap
 		L.RegFunction("MoveNext", MoveNext);
 		L.RegFunction("Reset", Reset);
 		L.RegVar("Current", get_Current, null);
+		L.RegFunction("getCurrent", get_Current);
 		L.EndClass();
 	}
 

@@ -11,9 +11,17 @@ public class UnityEngine_MeshColliderWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("sharedMesh", get_sharedMesh, set_sharedMesh);
+		L.RegFunction("getsharedMesh", get_sharedMesh);
+		L.RegFunction("setsharedMesh", set_sharedMesh);
 		L.RegVar("convex", get_convex, set_convex);
+		L.RegFunction("getconvex", get_convex);
+		L.RegFunction("setconvex", set_convex);
 		L.RegVar("inflateMesh", get_inflateMesh, set_inflateMesh);
+		L.RegFunction("getinflateMesh", get_inflateMesh);
+		L.RegFunction("setinflateMesh", set_inflateMesh);
 		L.RegVar("skinWidth", get_skinWidth, set_skinWidth);
+		L.RegFunction("getskinWidth", get_skinWidth);
+		L.RegFunction("setskinWidth", set_skinWidth);
 		L.EndClass();
 	}
 

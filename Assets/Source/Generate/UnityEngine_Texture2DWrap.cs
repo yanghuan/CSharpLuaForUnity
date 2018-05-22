@@ -30,9 +30,13 @@ public class UnityEngine_Texture2DWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("mipmapCount", get_mipmapCount, null);
+		L.RegFunction("getmipmapCount", get_mipmapCount);
 		L.RegVar("format", get_format, null);
+		L.RegFunction("getformat", get_format);
 		L.RegVar("whiteTexture", get_whiteTexture, null);
+		L.RegFunction("getwhiteTexture", get_whiteTexture);
 		L.RegVar("blackTexture", get_blackTexture, null);
+		L.RegFunction("getblackTexture", get_blackTexture);
 		L.EndClass();
 	}
 

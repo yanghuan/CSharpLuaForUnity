@@ -10,9 +10,15 @@ public class UnityEngine_AsyncOperationWrap
 		L.RegFunction("New", _CreateUnityEngine_AsyncOperation);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("isDone", get_isDone, null);
+		L.RegFunction("getisDone", get_isDone);
 		L.RegVar("progress", get_progress, null);
+		L.RegFunction("getprogress", get_progress);
 		L.RegVar("priority", get_priority, set_priority);
+		L.RegFunction("getpriority", get_priority);
+		L.RegFunction("setpriority", set_priority);
 		L.RegVar("allowSceneActivation", get_allowSceneActivation, set_allowSceneActivation);
+		L.RegFunction("getallowSceneActivation", get_allowSceneActivation);
+		L.RegFunction("setallowSceneActivation", set_allowSceneActivation);
 		L.EndClass();
 	}
 

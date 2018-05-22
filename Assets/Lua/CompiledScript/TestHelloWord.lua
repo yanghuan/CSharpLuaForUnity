@@ -6,13 +6,17 @@ System.namespace("", function (namespace)
     local Awake
     Awake = function (this) 
       UnityEngine.Debug.Log("hello, word")
+      UnityEngine.Debug.Log(this:getname())
+      this:getgameObject():setname("test")
+      UnityEngine.Debug.Log(this:getgameObject():getname())
     end
     return {
       __inherits__ = function (global) 
         return {
           global.MonoBehaviour
         }
-      end
+      end, 
+      Awake = Awake
     }
   end)
 end)

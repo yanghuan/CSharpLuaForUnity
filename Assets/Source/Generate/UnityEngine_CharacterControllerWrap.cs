@@ -13,16 +13,35 @@ public class UnityEngine_CharacterControllerWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("isGrounded", get_isGrounded, null);
+		L.RegFunction("getisGrounded", get_isGrounded);
 		L.RegVar("velocity", get_velocity, null);
+		L.RegFunction("getvelocity", get_velocity);
 		L.RegVar("collisionFlags", get_collisionFlags, null);
+		L.RegFunction("getcollisionFlags", get_collisionFlags);
 		L.RegVar("radius", get_radius, set_radius);
+		L.RegFunction("getradius", get_radius);
+		L.RegFunction("setradius", set_radius);
 		L.RegVar("height", get_height, set_height);
+		L.RegFunction("getheight", get_height);
+		L.RegFunction("setheight", set_height);
 		L.RegVar("center", get_center, set_center);
+		L.RegFunction("getcenter", get_center);
+		L.RegFunction("setcenter", set_center);
 		L.RegVar("slopeLimit", get_slopeLimit, set_slopeLimit);
+		L.RegFunction("getslopeLimit", get_slopeLimit);
+		L.RegFunction("setslopeLimit", set_slopeLimit);
 		L.RegVar("stepOffset", get_stepOffset, set_stepOffset);
+		L.RegFunction("getstepOffset", get_stepOffset);
+		L.RegFunction("setstepOffset", set_stepOffset);
 		L.RegVar("skinWidth", get_skinWidth, set_skinWidth);
+		L.RegFunction("getskinWidth", get_skinWidth);
+		L.RegFunction("setskinWidth", set_skinWidth);
 		L.RegVar("detectCollisions", get_detectCollisions, set_detectCollisions);
+		L.RegFunction("getdetectCollisions", get_detectCollisions);
+		L.RegFunction("setdetectCollisions", set_detectCollisions);
 		L.RegVar("enableOverlapRecovery", get_enableOverlapRecovery, set_enableOverlapRecovery);
+		L.RegFunction("getenableOverlapRecovery", get_enableOverlapRecovery);
+		L.RegFunction("setenableOverlapRecovery", set_enableOverlapRecovery);
 		L.EndClass();
 	}
 

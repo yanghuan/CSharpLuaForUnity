@@ -18,20 +18,36 @@ public class UnityEngine_WWWWrap
 		L.RegFunction("New", _CreateUnityEngine_WWW);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("responseHeaders", get_responseHeaders, null);
+		L.RegFunction("getresponseHeaders", get_responseHeaders);
 		L.RegVar("text", get_text, null);
+		L.RegFunction("gettext", get_text);
 		L.RegVar("bytes", get_bytes, null);
+		L.RegFunction("getbytes", get_bytes);
 		L.RegVar("size", get_size, null);
+		L.RegFunction("getsize", get_size);
 		L.RegVar("error", get_error, null);
+		L.RegFunction("geterror", get_error);
 		L.RegVar("texture", get_texture, null);
+		L.RegFunction("gettexture", get_texture);
 		L.RegVar("textureNonReadable", get_textureNonReadable, null);
+		L.RegFunction("gettextureNonReadable", get_textureNonReadable);
 		L.RegVar("audioClip", get_audioClip, null);
+		L.RegFunction("getaudioClip", get_audioClip);
 		L.RegVar("isDone", get_isDone, null);
+		L.RegFunction("getisDone", get_isDone);
 		L.RegVar("progress", get_progress, null);
+		L.RegFunction("getprogress", get_progress);
 		L.RegVar("uploadProgress", get_uploadProgress, null);
+		L.RegFunction("getuploadProgress", get_uploadProgress);
 		L.RegVar("bytesDownloaded", get_bytesDownloaded, null);
+		L.RegFunction("getbytesDownloaded", get_bytesDownloaded);
 		L.RegVar("url", get_url, null);
+		L.RegFunction("geturl", get_url);
 		L.RegVar("assetBundle", get_assetBundle, null);
+		L.RegFunction("getassetBundle", get_assetBundle);
 		L.RegVar("threadPriority", get_threadPriority, set_threadPriority);
+		L.RegFunction("getthreadPriority", get_threadPriority);
+		L.RegFunction("setthreadPriority", set_threadPriority);
 		L.EndClass();
 	}
 

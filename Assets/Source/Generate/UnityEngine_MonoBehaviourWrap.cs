@@ -18,6 +18,8 @@ public class UnityEngine_MonoBehaviourWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("useGUILayout", get_useGUILayout, set_useGUILayout);
+		L.RegFunction("getuseGUILayout", get_useGUILayout);
+		L.RegFunction("setuseGUILayout", set_useGUILayout);
 		L.EndClass();
 	}
 

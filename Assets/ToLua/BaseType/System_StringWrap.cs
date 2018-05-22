@@ -53,6 +53,7 @@ public class System_StringWrap
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("Empty", get_Empty, null);
 		L.RegVar("Length", get_Length, null);
+		L.RegFunction("getLength", get_Length);
 		L.EndClass();
 	}
 

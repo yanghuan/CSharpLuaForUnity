@@ -21,8 +21,12 @@ public class UnityEngine_ComponentWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("transform", get_transform, null);
+		L.RegFunction("gettransform", get_transform);
 		L.RegVar("gameObject", get_gameObject, null);
+		L.RegFunction("getgameObject", get_gameObject);
 		L.RegVar("tag", get_tag, set_tag);
+		L.RegFunction("gettag", get_tag);
+		L.RegFunction("settag", set_tag);
 		L.EndClass();
 	}
 

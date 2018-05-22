@@ -6,7 +6,10 @@ using System.Text;
 using UnityEngine;
 
 public sealed class TestHelloWord : MonoBehaviour {
-  private void Awake() {
+  public void Awake() {
     Debug.Log("hello, word");
+    Debug.Log(name);
+    gameObject.name = "test";
+    Debug.Log(gameObject.name);
   }
 }

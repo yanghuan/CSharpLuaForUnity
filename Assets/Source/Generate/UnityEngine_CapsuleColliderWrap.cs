@@ -11,9 +11,17 @@ public class UnityEngine_CapsuleColliderWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("center", get_center, set_center);
+		L.RegFunction("getcenter", get_center);
+		L.RegFunction("setcenter", set_center);
 		L.RegVar("radius", get_radius, set_radius);
+		L.RegFunction("getradius", get_radius);
+		L.RegFunction("setradius", set_radius);
 		L.RegVar("height", get_height, set_height);
+		L.RegFunction("getheight", get_height);
+		L.RegFunction("setheight", set_height);
 		L.RegVar("direction", get_direction, set_direction);
+		L.RegFunction("getdirection", get_direction);
+		L.RegFunction("setdirection", set_direction);
 		L.EndClass();
 	}
 

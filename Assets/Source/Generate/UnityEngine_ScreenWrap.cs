@@ -9,17 +9,36 @@ public class UnityEngine_ScreenWrap
 		L.BeginStaticLibs("Screen");
 		L.RegFunction("SetResolution", SetResolution);
 		L.RegVar("resolutions", get_resolutions, null);
+		L.RegFunction("getresolutions", get_resolutions);
 		L.RegVar("currentResolution", get_currentResolution, null);
+		L.RegFunction("getcurrentResolution", get_currentResolution);
 		L.RegVar("width", get_width, null);
+		L.RegFunction("getwidth", get_width);
 		L.RegVar("height", get_height, null);
+		L.RegFunction("getheight", get_height);
 		L.RegVar("dpi", get_dpi, null);
+		L.RegFunction("getdpi", get_dpi);
 		L.RegVar("fullScreen", get_fullScreen, set_fullScreen);
+		L.RegFunction("getfullScreen", get_fullScreen);
+		L.RegFunction("setfullScreen", set_fullScreen);
 		L.RegVar("autorotateToPortrait", get_autorotateToPortrait, set_autorotateToPortrait);
+		L.RegFunction("getautorotateToPortrait", get_autorotateToPortrait);
+		L.RegFunction("setautorotateToPortrait", set_autorotateToPortrait);
 		L.RegVar("autorotateToPortraitUpsideDown", get_autorotateToPortraitUpsideDown, set_autorotateToPortraitUpsideDown);
+		L.RegFunction("getautorotateToPortraitUpsideDown", get_autorotateToPortraitUpsideDown);
+		L.RegFunction("setautorotateToPortraitUpsideDown", set_autorotateToPortraitUpsideDown);
 		L.RegVar("autorotateToLandscapeLeft", get_autorotateToLandscapeLeft, set_autorotateToLandscapeLeft);
+		L.RegFunction("getautorotateToLandscapeLeft", get_autorotateToLandscapeLeft);
+		L.RegFunction("setautorotateToLandscapeLeft", set_autorotateToLandscapeLeft);
 		L.RegVar("autorotateToLandscapeRight", get_autorotateToLandscapeRight, set_autorotateToLandscapeRight);
+		L.RegFunction("getautorotateToLandscapeRight", get_autorotateToLandscapeRight);
+		L.RegFunction("setautorotateToLandscapeRight", set_autorotateToLandscapeRight);
 		L.RegVar("orientation", get_orientation, set_orientation);
+		L.RegFunction("getorientation", get_orientation);
+		L.RegFunction("setorientation", set_orientation);
 		L.RegVar("sleepTimeout", get_sleepTimeout, set_sleepTimeout);
+		L.RegFunction("getsleepTimeout", get_sleepTimeout);
+		L.RegFunction("setsleepTimeout", set_sleepTimeout);
 		L.EndStaticLibs();
 	}
 

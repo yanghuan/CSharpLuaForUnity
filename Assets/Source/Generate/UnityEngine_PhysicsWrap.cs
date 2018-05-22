@@ -36,13 +36,29 @@ public class UnityEngine_PhysicsWrap
 		L.RegConstant("DefaultRaycastLayers", -5);
 		L.RegConstant("AllLayers", -1);
 		L.RegVar("gravity", get_gravity, set_gravity);
+		L.RegFunction("getgravity", get_gravity);
+		L.RegFunction("setgravity", set_gravity);
 		L.RegVar("defaultContactOffset", get_defaultContactOffset, set_defaultContactOffset);
+		L.RegFunction("getdefaultContactOffset", get_defaultContactOffset);
+		L.RegFunction("setdefaultContactOffset", set_defaultContactOffset);
 		L.RegVar("bounceThreshold", get_bounceThreshold, set_bounceThreshold);
+		L.RegFunction("getbounceThreshold", get_bounceThreshold);
+		L.RegFunction("setbounceThreshold", set_bounceThreshold);
 		L.RegVar("defaultSolverIterations", get_defaultSolverIterations, set_defaultSolverIterations);
+		L.RegFunction("getdefaultSolverIterations", get_defaultSolverIterations);
+		L.RegFunction("setdefaultSolverIterations", set_defaultSolverIterations);
 		L.RegVar("defaultSolverVelocityIterations", get_defaultSolverVelocityIterations, set_defaultSolverVelocityIterations);
+		L.RegFunction("getdefaultSolverVelocityIterations", get_defaultSolverVelocityIterations);
+		L.RegFunction("setdefaultSolverVelocityIterations", set_defaultSolverVelocityIterations);
 		L.RegVar("sleepThreshold", get_sleepThreshold, set_sleepThreshold);
+		L.RegFunction("getsleepThreshold", get_sleepThreshold);
+		L.RegFunction("setsleepThreshold", set_sleepThreshold);
 		L.RegVar("queriesHitTriggers", get_queriesHitTriggers, set_queriesHitTriggers);
+		L.RegFunction("getqueriesHitTriggers", get_queriesHitTriggers);
+		L.RegFunction("setqueriesHitTriggers", set_queriesHitTriggers);
 		L.RegVar("queriesHitBackfaces", get_queriesHitBackfaces, set_queriesHitBackfaces);
+		L.RegFunction("getqueriesHitBackfaces", get_queriesHitBackfaces);
+		L.RegFunction("setqueriesHitBackfaces", set_queriesHitBackfaces);
 		L.EndStaticLibs();
 	}
 

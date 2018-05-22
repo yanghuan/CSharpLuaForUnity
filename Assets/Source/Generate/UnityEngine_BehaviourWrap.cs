@@ -11,7 +11,10 @@ public class UnityEngine_BehaviourWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("enabled", get_enabled, set_enabled);
+		L.RegFunction("getenabled", get_enabled);
+		L.RegFunction("setenabled", set_enabled);
 		L.RegVar("isActiveAndEnabled", get_isActiveAndEnabled, null);
+		L.RegFunction("getisActiveAndEnabled", get_isActiveAndEnabled);
 		L.EndClass();
 	}
 

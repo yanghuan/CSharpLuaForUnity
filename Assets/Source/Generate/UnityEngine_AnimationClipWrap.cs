@@ -16,12 +16,24 @@ public class UnityEngine_AnimationClipWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("length", get_length, null);
+		L.RegFunction("getlength", get_length);
 		L.RegVar("frameRate", get_frameRate, set_frameRate);
+		L.RegFunction("getframeRate", get_frameRate);
+		L.RegFunction("setframeRate", set_frameRate);
 		L.RegVar("wrapMode", get_wrapMode, set_wrapMode);
+		L.RegFunction("getwrapMode", get_wrapMode);
+		L.RegFunction("setwrapMode", set_wrapMode);
 		L.RegVar("localBounds", get_localBounds, set_localBounds);
+		L.RegFunction("getlocalBounds", get_localBounds);
+		L.RegFunction("setlocalBounds", set_localBounds);
 		L.RegVar("legacy", get_legacy, set_legacy);
+		L.RegFunction("getlegacy", get_legacy);
+		L.RegFunction("setlegacy", set_legacy);
 		L.RegVar("humanMotion", get_humanMotion, null);
+		L.RegFunction("gethumanMotion", get_humanMotion);
 		L.RegVar("events", get_events, set_events);
+		L.RegFunction("getevents", get_events);
+		L.RegFunction("setevents", set_events);
 		L.EndClass();
 	}
 

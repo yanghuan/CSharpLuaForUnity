@@ -14,12 +14,26 @@ public class UnityEngine_SkinnedMeshRendererWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("bones", get_bones, set_bones);
+		L.RegFunction("getbones", get_bones);
+		L.RegFunction("setbones", set_bones);
 		L.RegVar("rootBone", get_rootBone, set_rootBone);
+		L.RegFunction("getrootBone", get_rootBone);
+		L.RegFunction("setrootBone", set_rootBone);
 		L.RegVar("quality", get_quality, set_quality);
+		L.RegFunction("getquality", get_quality);
+		L.RegFunction("setquality", set_quality);
 		L.RegVar("sharedMesh", get_sharedMesh, set_sharedMesh);
+		L.RegFunction("getsharedMesh", get_sharedMesh);
+		L.RegFunction("setsharedMesh", set_sharedMesh);
 		L.RegVar("updateWhenOffscreen", get_updateWhenOffscreen, set_updateWhenOffscreen);
+		L.RegFunction("getupdateWhenOffscreen", get_updateWhenOffscreen);
+		L.RegFunction("setupdateWhenOffscreen", set_updateWhenOffscreen);
 		L.RegVar("skinnedMotionVectors", get_skinnedMotionVectors, set_skinnedMotionVectors);
+		L.RegFunction("getskinnedMotionVectors", get_skinnedMotionVectors);
+		L.RegFunction("setskinnedMotionVectors", set_skinnedMotionVectors);
 		L.RegVar("localBounds", get_localBounds, set_localBounds);
+		L.RegFunction("getlocalBounds", get_localBounds);
+		L.RegFunction("setlocalBounds", set_localBounds);
 		L.EndClass();
 	}
 

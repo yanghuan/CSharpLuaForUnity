@@ -8,20 +8,40 @@ public class UnityEngine_TimeWrap
 	{
 		L.BeginStaticLibs("Time");
 		L.RegVar("time", get_time, null);
+		L.RegFunction("gettime", get_time);
 		L.RegVar("timeSinceLevelLoad", get_timeSinceLevelLoad, null);
+		L.RegFunction("gettimeSinceLevelLoad", get_timeSinceLevelLoad);
 		L.RegVar("deltaTime", get_deltaTime, null);
+		L.RegFunction("getdeltaTime", get_deltaTime);
 		L.RegVar("fixedTime", get_fixedTime, null);
+		L.RegFunction("getfixedTime", get_fixedTime);
 		L.RegVar("unscaledTime", get_unscaledTime, null);
+		L.RegFunction("getunscaledTime", get_unscaledTime);
 		L.RegVar("unscaledDeltaTime", get_unscaledDeltaTime, null);
+		L.RegFunction("getunscaledDeltaTime", get_unscaledDeltaTime);
 		L.RegVar("fixedDeltaTime", get_fixedDeltaTime, set_fixedDeltaTime);
+		L.RegFunction("getfixedDeltaTime", get_fixedDeltaTime);
+		L.RegFunction("setfixedDeltaTime", set_fixedDeltaTime);
 		L.RegVar("maximumDeltaTime", get_maximumDeltaTime, set_maximumDeltaTime);
+		L.RegFunction("getmaximumDeltaTime", get_maximumDeltaTime);
+		L.RegFunction("setmaximumDeltaTime", set_maximumDeltaTime);
 		L.RegVar("smoothDeltaTime", get_smoothDeltaTime, null);
+		L.RegFunction("getsmoothDeltaTime", get_smoothDeltaTime);
 		L.RegVar("maximumParticleDeltaTime", get_maximumParticleDeltaTime, set_maximumParticleDeltaTime);
+		L.RegFunction("getmaximumParticleDeltaTime", get_maximumParticleDeltaTime);
+		L.RegFunction("setmaximumParticleDeltaTime", set_maximumParticleDeltaTime);
 		L.RegVar("timeScale", get_timeScale, set_timeScale);
+		L.RegFunction("gettimeScale", get_timeScale);
+		L.RegFunction("settimeScale", set_timeScale);
 		L.RegVar("frameCount", get_frameCount, null);
+		L.RegFunction("getframeCount", get_frameCount);
 		L.RegVar("renderedFrameCount", get_renderedFrameCount, null);
+		L.RegFunction("getrenderedFrameCount", get_renderedFrameCount);
 		L.RegVar("realtimeSinceStartup", get_realtimeSinceStartup, null);
+		L.RegFunction("getrealtimeSinceStartup", get_realtimeSinceStartup);
 		L.RegVar("captureFramerate", get_captureFramerate, set_captureFramerate);
+		L.RegFunction("getcaptureFramerate", get_captureFramerate);
+		L.RegFunction("setcaptureFramerate", set_captureFramerate);
 		L.EndStaticLibs();
 	}
 

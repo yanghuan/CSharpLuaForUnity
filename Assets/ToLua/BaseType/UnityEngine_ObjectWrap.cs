@@ -21,7 +21,11 @@ public class UnityEngine_ObjectWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("name", get_name, set_name);
+		L.RegFunction("getname", get_name);
+		L.RegFunction("setname", set_name);
 		L.RegVar("hideFlags", get_hideFlags, set_hideFlags);
+		L.RegFunction("gethideFlags", get_hideFlags);
+		L.RegFunction("sethideFlags", set_hideFlags);
 		L.EndClass();
 	}
 

@@ -13,12 +13,24 @@ public class UnityEngine_ColliderWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("enabled", get_enabled, set_enabled);
+		L.RegFunction("getenabled", get_enabled);
+		L.RegFunction("setenabled", set_enabled);
 		L.RegVar("attachedRigidbody", get_attachedRigidbody, null);
+		L.RegFunction("getattachedRigidbody", get_attachedRigidbody);
 		L.RegVar("isTrigger", get_isTrigger, set_isTrigger);
+		L.RegFunction("getisTrigger", get_isTrigger);
+		L.RegFunction("setisTrigger", set_isTrigger);
 		L.RegVar("contactOffset", get_contactOffset, set_contactOffset);
+		L.RegFunction("getcontactOffset", get_contactOffset);
+		L.RegFunction("setcontactOffset", set_contactOffset);
 		L.RegVar("material", get_material, set_material);
+		L.RegFunction("getmaterial", get_material);
+		L.RegFunction("setmaterial", set_material);
 		L.RegVar("sharedMaterial", get_sharedMaterial, set_sharedMaterial);
+		L.RegFunction("getsharedMaterial", get_sharedMaterial);
+		L.RegFunction("setsharedMaterial", set_sharedMaterial);
 		L.RegVar("bounds", get_bounds, null);
+		L.RegFunction("getbounds", get_bounds);
 		L.EndClass();
 	}
 

@@ -1313,16 +1313,20 @@ public static class ToLuaExport
                 md = methods.Find((p) => { return p.Name == "set_" + props[i].Name; });
                 string set = md == null ? "set" : "_set";
                 sb.AppendFormat("\t\tL.RegVar(\"{0}\", {1}_{0}, {2}_{0});\r\n", props[i].Name, get, set);
+                sb.AppendFormat("\t\tL.RegFunction(\"get{0}\", {1}_{0});\r\n", props[i].Name, get);
+                sb.AppendFormat("\t\tL.RegFunction(\"set{0}\", {1}_{0});\r\n", props[i].Name, set);
             }
             else if (props[i].CanRead)
             {
                 _MethodBase md = methods.Find((p) => { return p.Name == "get_" + props[i].Name; });
                 sb.AppendFormat("\t\tL.RegVar(\"{0}\", {1}_{0}, null);\r\n", props[i].Name, md == null ? "get" : "_get");
+                sb.AppendFormat("\t\tL.RegFunction(\"get{0}\", {1}_{0});\r\n", props[i].Name, md == null ? "get" : "_get");
             }
             else if (props[i].CanWrite)
             {
                 _MethodBase md = methods.Find((p) => { return p.Name == "set_" + props[i].Name; });
                 sb.AppendFormat("\t\tL.RegVar(\"{0}\", null, {1}_{0});\r\n", props[i].Name, md == null ? "set" : "_set");
+                sb.AppendFormat("\t\tL.RegFunction(\"set{0}\", {1}_{0});\r\n", props[i].Name, md == null ? "set" : "_set");
             }
         }
 

@@ -28,12 +28,25 @@ public class UnityEngine_AnimationWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("clip", get_clip, set_clip);
+		L.RegFunction("getclip", get_clip);
+		L.RegFunction("setclip", set_clip);
 		L.RegVar("playAutomatically", get_playAutomatically, set_playAutomatically);
+		L.RegFunction("getplayAutomatically", get_playAutomatically);
+		L.RegFunction("setplayAutomatically", set_playAutomatically);
 		L.RegVar("wrapMode", get_wrapMode, set_wrapMode);
+		L.RegFunction("getwrapMode", get_wrapMode);
+		L.RegFunction("setwrapMode", set_wrapMode);
 		L.RegVar("isPlaying", get_isPlaying, null);
+		L.RegFunction("getisPlaying", get_isPlaying);
 		L.RegVar("animatePhysics", get_animatePhysics, set_animatePhysics);
+		L.RegFunction("getanimatePhysics", get_animatePhysics);
+		L.RegFunction("setanimatePhysics", set_animatePhysics);
 		L.RegVar("cullingType", get_cullingType, set_cullingType);
+		L.RegFunction("getcullingType", get_cullingType);
+		L.RegFunction("setcullingType", set_cullingType);
 		L.RegVar("localBounds", get_localBounds, set_localBounds);
+		L.RegFunction("getlocalBounds", get_localBounds);
+		L.RegFunction("setlocalBounds", set_localBounds);
 		L.EndClass();
 	}
 

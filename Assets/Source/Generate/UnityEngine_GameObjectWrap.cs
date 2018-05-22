@@ -28,13 +28,24 @@ public class UnityEngine_GameObjectWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("transform", get_transform, null);
+		L.RegFunction("gettransform", get_transform);
 		L.RegVar("layer", get_layer, set_layer);
+		L.RegFunction("getlayer", get_layer);
+		L.RegFunction("setlayer", set_layer);
 		L.RegVar("activeSelf", get_activeSelf, null);
+		L.RegFunction("getactiveSelf", get_activeSelf);
 		L.RegVar("activeInHierarchy", get_activeInHierarchy, null);
+		L.RegFunction("getactiveInHierarchy", get_activeInHierarchy);
 		L.RegVar("isStatic", get_isStatic, set_isStatic);
+		L.RegFunction("getisStatic", get_isStatic);
+		L.RegFunction("setisStatic", set_isStatic);
 		L.RegVar("tag", get_tag, set_tag);
+		L.RegFunction("gettag", get_tag);
+		L.RegFunction("settag", set_tag);
 		L.RegVar("scene", get_scene, null);
+		L.RegFunction("getscene", get_scene);
 		L.RegVar("gameObject", get_gameObject, null);
+		L.RegFunction("getgameObject", get_gameObject);
 		L.EndClass();
 	}
 

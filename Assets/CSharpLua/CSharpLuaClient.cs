@@ -8,19 +8,29 @@ using UnityEngine;
 public sealed class CSharpLuaClient : LuaClient {
   private const bool kIsRunFromLua = true;
 
+  private sealed class BridgeMonoBehaviour : MonoBehaviour {
+  }
+
   protected override void OpenLibs() {
     base.OpenLibs();
     OpenCJson();
-    Run<TestHelloWord>();
   }
 
   protected override void StartMain() {
     if (kIsRunFromLua) {
       base.StartMain();
     }
+    Run<TestHelloWord>();
   }
 
   private void Run<T>() where T : MonoBehaviour {
-    gameObject.AddComponent<T>();
+    if (kIsRunFromLua) {
+      var bridge = gameObject.AddComponent<BridgeMonoBehaviour>();
+      using (var fn = luaState.GetFunction("bindMonoBehaviour")) {
+        fn.Call(bridge, typeof(T).FullName);
+      }
+    } else {
+      gameObject.AddComponent<T>();
+    }
   }
 }

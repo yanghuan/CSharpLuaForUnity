@@ -36,9 +36,15 @@ public class UnityEngine_ShaderWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("isSupported", get_isSupported, null);
+		L.RegFunction("getisSupported", get_isSupported);
 		L.RegVar("maximumLOD", get_maximumLOD, set_maximumLOD);
+		L.RegFunction("getmaximumLOD", get_maximumLOD);
+		L.RegFunction("setmaximumLOD", set_maximumLOD);
 		L.RegVar("globalMaximumLOD", get_globalMaximumLOD, set_globalMaximumLOD);
+		L.RegFunction("getglobalMaximumLOD", get_globalMaximumLOD);
+		L.RegFunction("setglobalMaximumLOD", set_globalMaximumLOD);
 		L.RegVar("renderQueue", get_renderQueue, null);
+		L.RegFunction("getrenderQueue", get_renderQueue);
 		L.EndClass();
 	}
 
