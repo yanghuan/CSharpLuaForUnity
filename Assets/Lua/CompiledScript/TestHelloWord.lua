@@ -2,13 +2,27 @@
 local System = System
 local UnityEngine = UnityEngine
 System.namespace("", function (namespace) 
+  namespace.class("TestHelloWord2", function (namespace) 
+    local Awake
+    Awake = function (this) 
+      UnityEngine.Debug.Log("TestHelloWord2")
+    end
+    return {
+      __inherits__ = function (global) 
+        return {
+          global.MonoBehaviour
+        }
+      end, 
+      Awake = Awake
+    }
+  end)
+end)
+System.namespace("", function (namespace) 
   namespace.class("TestHelloWord", function (namespace) 
     local Awake
     Awake = function (this) 
-      UnityEngine.Debug.Log("hello, word")
-      UnityEngine.Debug.Log(this:getname())
-      this:getgameObject():setname("test")
-      UnityEngine.Debug.Log(this:getgameObject():getname())
+      UnityEngine.Debug.Log("TestHelloWord")
+      UnityEngine.AddComponent(this:getgameObject(), TestHelloWord2)
     end
     return {
       __inherits__ = function (global) 

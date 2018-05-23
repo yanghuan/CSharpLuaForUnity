@@ -7,6 +7,7 @@ return function (dir)
   load("TestHelloWord")
 
   System.init({
-    "TestHelloWord"
+    "TestHelloWord", 
+    "TestHelloWord2"
   })
 end

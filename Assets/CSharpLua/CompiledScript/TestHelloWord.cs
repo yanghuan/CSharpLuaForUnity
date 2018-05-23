@@ -5,11 +5,15 @@ using System.Text;
 
 using UnityEngine;
 
+public sealed class TestHelloWord2 : MonoBehaviour {
+  public void Awake() {
+	Debug.Log("TestHelloWord2");
+  }
+}
+
 public sealed class TestHelloWord : MonoBehaviour {
   public void Awake() {
-    Debug.Log("hello, word");
-    Debug.Log(name);
-    gameObject.name = "test";
-    Debug.Log(gameObject.name);
+    Debug.Log("TestHelloWord");
+	gameObject.AddComponent<TestHelloWord2>();
   }
 }

@@ -3,6 +3,10 @@
   <assembly>
     <namespace name="UnityEngine">
       <class name="MonoBehaviour" Name="MonoBehaviour" />
+      <class name="GameObject">
+        <method name="AddComponent" ArgCount="0" Template="UnityEngine.AddComponent({this}, {^0})" />
+        <method name="AddComponent" ArgCount="1" Template="UnityEngine.AddComponentOfType({this}, {0})" />
+      </class>
     </namespace>
   </assembly>
 </meta>
