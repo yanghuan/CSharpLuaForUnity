@@ -1,4 +1,6 @@
-require("CoreSystemLua.All")("CoreSystemLua")
+local socket = require("socket")
+
+require("CoreSystemLua.All")("CoreSystemLua", { time = socket.gettime })
 require("UnityAdapter")
 require("CompiledScript.manifest")("CompiledScript")
 

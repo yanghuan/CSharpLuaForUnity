@@ -7,9 +7,27 @@ public class BridgeMonoBehaviourWrap
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(BridgeMonoBehaviour), typeof(UnityEngine.MonoBehaviour));
+		L.RegFunction("Bind", Bind);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.EndClass();
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int Bind(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			BridgeMonoBehaviour obj = (BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(BridgeMonoBehaviour));
+			LuaTable arg0 = ToLua.CheckLuaTable(L, 2);
+			obj.Bind(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]

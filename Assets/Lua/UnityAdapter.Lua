@@ -18,6 +18,7 @@ local MonoBehaviour = {
   __kind__ = "C",
   __ctor__ = function (this, monoBehaviour)
     this.ref = monoBehaviour
+    monoBehaviour:Bind(this)
   end,
   getname = function (this)
     return this.ref.name

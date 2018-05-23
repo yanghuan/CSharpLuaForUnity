@@ -4,9 +4,15 @@ using System.Linq;
 using System.Text;
 
 using UnityEngine;
+using LuaInterface;
 
 [LuaAutoWrap]
 public sealed class BridgeMonoBehaviour : MonoBehaviour {
+  private LuaTable table_;
+
+  public void Bind(LuaTable table) {
+	table_ = table;
+  }
 }
 
 public sealed class LaunchClient : LuaClient {
