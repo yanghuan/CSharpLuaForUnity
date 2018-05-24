@@ -40,9 +40,9 @@ public static class CustomSettings
         _DT(typeof(System.Func<int, int>)),
     };
 
-    //在这里添加你要导出注册到lua的类型列表
-    public static BindType[] customTypeList_ =
-    {                
+  //在这里添加你要导出注册到lua的类型列表
+  public static BindType[] customTypeList_ =
+  {                
         //------------------------为例子导出--------------------------------
         //_GT(typeof(TestEventListener)),
         //_GT(typeof(TestProtol)),
@@ -78,17 +78,22 @@ public static class CustomSettings
 #else
                                          
         _GT(typeof(Component)),
-        _GT(typeof(Transform)),
-        _GT(typeof(Material)),
-        _GT(typeof(Light)),
-        _GT(typeof(Rigidbody)),
-        _GT(typeof(Camera)),
-        _GT(typeof(AudioSource)),
+		_GT(typeof(Transform)),
+		_GT(typeof(Material)),
+		_GT(typeof(Light)),
+		_GT(typeof(Rigidbody)),
+		_GT(typeof(Camera)),
+		_GT(typeof(AudioSource)),
         //_GT(typeof(LineRenderer))
         //_GT(typeof(TrailRenderer))
 #endif
-      
-        _GT(typeof(Behaviour)),
+
+		_GT(typeof(YieldInstruction)),
+		_GT(typeof(WaitForEndOfFrame)),
+		_GT(typeof(WaitForFixedUpdate)),
+		_GT(typeof(WaitForSeconds)),
+
+		_GT(typeof(Behaviour)),
         _GT(typeof(MonoBehaviour)),        
         _GT(typeof(GameObject)),
         _GT(typeof(TrackedReference)),

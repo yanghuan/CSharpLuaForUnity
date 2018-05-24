@@ -35,7 +35,7 @@ public static class Compiler {
       if (p.ExitCode != 0) {
         string outString = p.StandardOutput.ReadToEnd();
         string errorString = p.StandardError.ReadToEnd();
-        throw new Exception($"Compile fail, {kDotnet} {args}, \n{outString}, {errorString}");
+        throw new Exception($"Compile fail, {errorString}\n{outString}\n{kDotnet} {args}");
       } else {
         UnityEngine.Debug.Log("compile success");
       }

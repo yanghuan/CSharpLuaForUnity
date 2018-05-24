@@ -19,6 +19,10 @@ public static class LuaBinder
 		UnityEngine_LightWrap.Register(L);
 		UnityEngine_CameraWrap.Register(L);
 		UnityEngine_AudioSourceWrap.Register(L);
+		UnityEngine_YieldInstructionWrap.Register(L);
+		UnityEngine_WaitForEndOfFrameWrap.Register(L);
+		UnityEngine_WaitForFixedUpdateWrap.Register(L);
+		UnityEngine_WaitForSecondsWrap.Register(L);
 		UnityEngine_BehaviourWrap.Register(L);
 		UnityEngine_MonoBehaviourWrap.Register(L);
 		UnityEngine_GameObjectWrap.Register(L);

@@ -8,6 +8,7 @@ public class BridgeMonoBehaviourWrap
 	{
 		L.BeginClass(typeof(BridgeMonoBehaviour), typeof(UnityEngine.MonoBehaviour));
 		L.RegFunction("Bind", Bind);
+		L.RegFunction("StartCoroutine", StartCoroutine);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.EndClass();
@@ -23,6 +24,57 @@ public class BridgeMonoBehaviourWrap
 			LuaTable arg0 = ToLua.CheckLuaTable(L, 2);
 			obj.Bind(arg0);
 			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int StartCoroutine(IntPtr L)
+	{
+		try
+		{
+			int count = LuaDLL.lua_gettop(L);
+
+			if (count == 2 && TypeChecker.CheckTypes<string>(L, 2))
+			{
+				BridgeMonoBehaviour obj = (BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(BridgeMonoBehaviour));
+				string arg0 = ToLua.ToString(L, 2);
+				UnityEngine.Coroutine o = obj.StartCoroutine(arg0);
+				ToLua.PushSealed(L, o);
+				return 1;
+			}
+			else if (count == 2 && TypeChecker.CheckTypes<System.Collections.IEnumerator>(L, 2))
+			{
+				BridgeMonoBehaviour obj = (BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(BridgeMonoBehaviour));
+				System.Collections.IEnumerator arg0 = (System.Collections.IEnumerator)ToLua.ToObject(L, 2);
+				UnityEngine.Coroutine o = obj.StartCoroutine(arg0);
+				ToLua.PushSealed(L, o);
+				return 1;
+			}
+			else if (count == 2 && TypeChecker.CheckTypes<LuaInterface.LuaTable>(L, 2))
+			{
+				BridgeMonoBehaviour obj = (BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(BridgeMonoBehaviour));
+				LuaTable arg0 = ToLua.ToLuaTable(L, 2);
+				UnityEngine.Coroutine o = obj.StartCoroutine(arg0);
+				ToLua.PushSealed(L, o);
+				return 1;
+			}
+			else if (count == 3)
+			{
+				BridgeMonoBehaviour obj = (BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(BridgeMonoBehaviour));
+				string arg0 = ToLua.CheckString(L, 2);
+				object arg1 = ToLua.ToVarObject(L, 3);
+				UnityEngine.Coroutine o = obj.StartCoroutine(arg0, arg1);
+				ToLua.PushSealed(L, o);
+				return 1;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to method: BridgeMonoBehaviour.StartCoroutine");
+			}
 		}
 		catch (Exception e)
 		{

@@ -52,10 +52,13 @@ public static class ToLuaMenu
 #if UNITY_5_3_OR_NEWER
         typeof(UnityEngine.CustomYieldInstruction),
 #endif
-        typeof(UnityEngine.YieldInstruction),               //无需导出的类      
+
+#if false
+	    typeof(UnityEngine.YieldInstruction),               //无需导出的类      
         typeof(UnityEngine.WaitForEndOfFrame),              //内部支持
         typeof(UnityEngine.WaitForFixedUpdate),
-        typeof(UnityEngine.WaitForSeconds),        
+        typeof(UnityEngine.WaitForSeconds),       
+#endif
         typeof(UnityEngine.Mathf),                          //lua层支持                
         typeof(Plane),                                      
         typeof(LayerMask),                                  

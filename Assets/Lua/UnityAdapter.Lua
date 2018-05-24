@@ -1,13 +1,16 @@
 local System = System
+local throw = System.throw
 local getClass = System.getClass
-local Debugger = Debugger
-local BridgeMonoBehaviour = BridgeMonoBehaviour
-local UnityEngine = UnityEngine
+local NotSupportedException = System.NotSupportedException
 
 local assert = assert
 local setmetatable = setmetatable
 local type = type
 local typeof = typeof
+
+local Debugger = Debugger
+local BridgeMonoBehaviour = BridgeMonoBehaviour
+local UnityEngine = UnityEngine
 
 local Debug = {
   Log = Debugger.Log
@@ -34,12 +37,34 @@ local MonoBehaviour = {
     this.ref.useGUILayout = value
   end,
   print = UnityEngine.MonoBehaviour.print,
-  CancelInvoke = function (this, methodName)
+  CancelInvoke = function (this, methodName)  
     if methodName == nil then
       this.ref:CancelInvoke()
     else
-      
+      throw(NotSupportedException())
     end
+  end,
+  Invoke = function (this, methodName, time)
+    throw(NotSupportedException())
+  end,
+  InvokeRepeating = function (this, methodName, time, repeatRate)
+    throw(NotSupportedException())
+  end,
+  IsInvoking = function (this, methodName)
+    if methodName == nil then
+      this.ref:IsInvoking()
+    else
+      throw(NotSupportedException())
+    end
+  end,
+  StartCoroutine = function (this, routine)
+    return this.ref:StartCoroutine(routine)
+  end,
+  StopAllCoroutines = function (this)
+    this.ref:StopAllCoroutines()
+  end,
+  StopCoroutine = function (this, routine)
+    this.ref:StopCoroutine(routine)
   end,
   
   getname = function (this)

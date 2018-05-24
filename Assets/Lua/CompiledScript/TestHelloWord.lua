@@ -3,10 +3,21 @@ local System = System
 local UnityEngine = UnityEngine
 System.namespace("", function (namespace) 
   namespace.class("TestHelloWord2", function (namespace) 
-    local Awake
+    local Awake, TestCoroutine
     Awake = function (this) 
       UnityEngine.Debug.Log("TestHelloWord2")
-      MonoBehaviour.print("dddddd")
+      local cc = this:StartCoroutine(TestCoroutine(this))
+      MonoBehaviour.print("after")
+      this:StopCoroutine(cc)
+    end
+    TestCoroutine = function (this) 
+      return System.yieldIEnumerator(function (this) 
+        MonoBehaviour.print("start")
+        while true do
+          System.yieldReturn(UnityEngine.WaitForSeconds(1))
+          MonoBehaviour.print("tick")
+        end
+      end, System.Object, this)
     end
     return {
       __inherits__ = function (global) 

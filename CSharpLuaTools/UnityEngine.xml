@@ -2,7 +2,23 @@
 <meta>
   <assembly>
     <namespace name="UnityEngine">
-      <class name="MonoBehaviour" Name="MonoBehaviour" />
+      <class name="MonoBehaviour" Name="MonoBehaviour">
+        <method name="CancelInvoke" ArgCount="1" Baned="true" />
+        <method name="Invoke" Baned="true" />
+        <method name="InvokeRepeating" Baned="true" />
+        <method name="IsInvoking" ArgCount="1" Baned="true" />
+        <method name="StartCoroutine" ArgCount="2" Baned="true" />
+        <method name="StartCoroutine" Baned="true">
+          <arg type="System.String" />
+        </method>
+        <method name="StartCoroutine_Auto" Baned="true" />
+        <method name="StopCoroutine" Baned="true">
+          <arg type="System.String" />
+        </method>
+        <method name="StopCoroutine" Baned="true">
+          <arg type="System.Collections.IEnumerator" />
+        </method>
+      </class>
       <class name="GameObject">
         <method name="AddComponent" ArgCount="0" Template="UnityEngine.AddComponent({this}, {^0})" />
         <method name="AddComponent" ArgCount="1" Template="UnityEngine.AddComponentOfType({this}, {0})" />

@@ -27,3 +27,4 @@ sysinfo.txt
 /UnityVS.tolua.sln
 
 .vs/
+CSharpLuaTools/update_csharp.lua.cmd
