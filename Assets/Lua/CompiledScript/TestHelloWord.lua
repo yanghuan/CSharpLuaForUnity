@@ -6,6 +6,7 @@ System.namespace("", function (namespace)
     local Awake
     Awake = function (this) 
       UnityEngine.Debug.Log("TestHelloWord2")
+      MonoBehaviour.print("dddddd")
     end
     return {
       __inherits__ = function (global) 

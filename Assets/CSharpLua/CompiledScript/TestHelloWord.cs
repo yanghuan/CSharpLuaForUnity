@@ -8,6 +8,7 @@ using UnityEngine;
 public sealed class TestHelloWord2 : MonoBehaviour {
   public void Awake() {
 	Debug.Log("TestHelloWord2");
+	print("dddddd");
   }
 }
 

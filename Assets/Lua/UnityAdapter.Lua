@@ -2,6 +2,7 @@ local System = System
 local getClass = System.getClass
 local Debugger = Debugger
 local BridgeMonoBehaviour = BridgeMonoBehaviour
+local UnityEngine = UnityEngine
 
 local assert = assert
 local setmetatable = setmetatable
@@ -20,18 +21,35 @@ local MonoBehaviour = {
     this.ref = monoBehaviour
     monoBehaviour:Bind(this)
   end,
-  getname = function (this)
-    return this.ref.name
-  end,
-  setname = function (this, name)
-    this.ref.name = name
-  end,
-  getgameObject = function (this)
-    return this.ref.gameObject
-  end,
   Awake = function ()
   end,
   Start = function ()
+  end,
+  
+  -- MonoBehaviour methods
+  getuseGUILayout = function (this)
+    return this.ref.useGUILayout
+  end,
+  setuseGUILayout = function (this, value)
+    this.ref.useGUILayout = value
+  end,
+  print = UnityEngine.MonoBehaviour.print,
+  CancelInvoke = function (this, methodName)
+    if methodName == nil then
+      this.ref:CancelInvoke()
+    else
+      
+    end
+  end,
+  
+  getname = function (this)
+    return this.ref.name
+  end,
+  setname = function (this, value)
+    this.ref.name = value
+  end,
+  getgameObject = function (this)
+    return this.ref.gameObject
   end,
 }
 
