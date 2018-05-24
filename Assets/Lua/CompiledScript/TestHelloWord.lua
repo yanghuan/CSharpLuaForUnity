@@ -6,16 +6,13 @@ System.namespace("", function (namespace)
     local Awake, TestCoroutine
     Awake = function (this) 
       UnityEngine.Debug.Log("TestHelloWord2")
-      local cc = this:StartCoroutine(TestCoroutine(this))
-      MonoBehaviour.print("after")
-      this:StopCoroutine(cc)
+      this:StartCoroutine(TestCoroutine(this))
     end
     TestCoroutine = function (this) 
       return System.yieldIEnumerator(function (this) 
-        MonoBehaviour.print("start")
         while true do
           System.yieldReturn(UnityEngine.WaitForSeconds(1))
-          MonoBehaviour.print("tick")
+          MonoBehaviour.print("TestCoroutine.tick")
         end
       end, System.Object, this)
     end

@@ -19,6 +19,9 @@
           <arg type="System.Collections.IEnumerator" />
         </method>
       </class>
+      <class name="Component">
+        <method name="BroadcastMessage" Baned="true" />
+      </class>
       <class name="GameObject">
         <method name="AddComponent" ArgCount="0" Template="UnityEngine.AddComponent({this}, {^0})" />
         <method name="AddComponent" ArgCount="1" Template="UnityEngine.AddComponentOfType({this}, {0})" />

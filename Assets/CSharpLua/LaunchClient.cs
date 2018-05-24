@@ -18,6 +18,12 @@ public sealed class BridgeMonoBehaviour : MonoBehaviour {
 	public Coroutine StartCoroutine(LuaTable routine) {
 		return StartCoroutine(new LuaIEnumerator(routine));
 	}
+
+	private void Start() {
+		using (var fn = table_.GetLuaFunction("Start")) {
+			fn.Call(table_);
+		}
+	}
 }
 
 sealed class LuaIEnumerator : IEnumerator, IDisposable {

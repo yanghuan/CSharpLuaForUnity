@@ -9,16 +9,15 @@ using UnityEngine;
 public sealed class TestHelloWord2 : MonoBehaviour {
   public void Awake() {
     Debug.Log("TestHelloWord2");
-    var cc = StartCoroutine(TestCoroutine());
-    print("after");
-    StopCoroutine(cc);
+    StartCoroutine(TestCoroutine());
+		print(gameObject.name);
+		GetComponents<TestHelloWord>();
   }
 
   private IEnumerator TestCoroutine() {
-    print("start");
     while (true) {
       yield return new WaitForSeconds(1);
-      print("tick");
+      print("TestCoroutine.tick");
     }
   }
 }
