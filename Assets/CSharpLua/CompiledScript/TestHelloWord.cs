@@ -10,8 +10,8 @@ public sealed class TestHelloWord2 : MonoBehaviour {
   public void Awake() {
     Debug.Log("TestHelloWord2");
     StartCoroutine(TestCoroutine());
-		print(gameObject.name);
-		GetComponents<TestHelloWord>();
+    print(gameObject.name);
+    GetComponents<TestHelloWord>();
   }
 
   private IEnumerator TestCoroutine() {
