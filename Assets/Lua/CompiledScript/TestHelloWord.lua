@@ -3,10 +3,11 @@ local System = System
 local UnityEngine = UnityEngine
 System.namespace("", function (namespace) 
   namespace.class("TestHelloWord2", function (namespace) 
-    local Awake, TestCoroutine
+    local Awake, TestCoroutine, Test
     Awake = function (this) 
       UnityEngine.Debug.Log("TestHelloWord2")
       this:StartCoroutine(TestCoroutine(this))
+      MonoBehaviour.print(this:getgameObject():getname())
     end
     TestCoroutine = function (this) 
       return System.yieldIEnumerator(function (this) 
@@ -16,13 +17,17 @@ System.namespace("", function (namespace)
         end
       end, System.Object, this)
     end
+    Test = function (this) 
+      MonoBehaviour.print("Test")
+    end
     return {
       __inherits__ = function (global) 
         return {
           global.MonoBehaviour
         }
       end, 
-      Awake = Awake
+      Awake = Awake, 
+      Test = Test
     }
   end)
 end)
@@ -31,7 +36,10 @@ System.namespace("", function (namespace)
     local Awake
     Awake = function (this) 
       UnityEngine.Debug.Log("TestHelloWord")
-      UnityEngine.AddComponent(this:getgameObject(), TestHelloWord2)
+      this:getgameObject():AddComponent(TestHelloWord2)
+      local c = this:GetComponent(TestHelloWord2)
+      MonoBehaviour.print(c:getname())
+      c:Test()
     end
     return {
       __inherits__ = function (global) 

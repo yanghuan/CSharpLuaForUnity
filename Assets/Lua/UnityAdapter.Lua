@@ -1,10 +1,15 @@
 local System = System
 local throw = System.throw
 local getClass = System.getClass
+local is = System.is
 local NotSupportedException = System.NotSupportedException
+local SystemType = System.Type
 
 local assert = assert
 local setmetatable = setmetatable
+local getmetatable = getmetatable
+local rawget = rawget
+local rawset = rawset
 local type = type
 local typeof = typeof
 
@@ -157,6 +162,12 @@ local MonoBehaviour = {
   CompareTag = function (this, tag)
     return this.ref:CompareTag(tag)
   end,
+  GetComponent = function (this, componentType)
+    return this.ref:GetComponent(componentType)
+  end,
+  GetComponentInChildren = function (this, t, includeInactive)
+    return this.ref:GetComponentInChildren(t, includeInactive)
+  end,
   
   
   -- Object methods
@@ -170,34 +181,81 @@ local MonoBehaviour = {
 
 System.define("MonoBehaviour", MonoBehaviour)
 
+local function isFromCSharp(T)
+  return T.__gc ~= nil
+end
+
+local metatableOfComponent = getmetatable(UnityEngine.Component)
+local sourceGetComponent = rawget(metatableOfComponent, "GetComponent")
+local sourceGetComponentInChildren = rawget(metatableOfComponent, "GetComponentInChildren")
+local sourceGetComponentInParent = rawget(metatableOfComponent, "GetComponentInParent")
+local sourceGetComponents = rawget(metatableOfComponent, "GetComponents")
+
+local function getBridgeComponent(component, T)
+  local coms = sourceGetComponents(component, typeof(BridgeMonoBehaviour))
+  for i = 0, coms.Length - 1 do
+    local t = coms[i].Table
+    if is(t, T) then
+      return t
+    end
+  end
+end
+
+local function getComponent(component, componentType)
+  if isFromCSharp(componentType) then
+    return sourceGetComponent(component, typeof(componentType))
+  elseif getmetatable(componentType) == SystemType then
+    local T = componentType.c
+    if isFromCSharp(T) then
+      return sourceGetComponent(component, typeof(componentType))   
+    else
+      return getBridgeComponent(component, T)
+    end    
+  elseif type(componentType) == "string" then
+    local T = getClass(componentType)
+    if T ~= nil then
+      return getBridgeComponent(gameObject, T)
+    else
+      return sourceGetComponent(gameObject, typeof(T))
+    end
+  else
+    return getBridgeComponent(component, componentType)
+  end
+end
+
+rawset(metatableOfComponent, "GetComponent", getComponent)
+
+local metatableOfGameObject = getmetatable(UnityEngine.GameObject)
+local sourceAddComponent = rawget(metatableOfGameObject, "AddComponent")
+
 local function addBridgeMonoBehaviour(gameObject, T)
-  local monoBehaviour = gameObject:AddComponent(typeof(BridgeMonoBehaviour))
+  local monoBehaviour = sourceAddComponent(gameObject, typeof(BridgeMonoBehaviour))
   local t = T(monoBehaviour)
   t:Awake()
   return t
 end
 
-function UnityEngine.AddComponent(gameObject, T)
-  if type(T) == "userdata" then
-    return gameObject:AddComponent(typeof(T))
+local function addComponent(gameObject, componentType)
+  if isFromCSharp(componentType) then
+    return sourceAddComponent(gameObject, typeof(componentType))
+  elseif getmetatable(componentType) == SystemType then
+    local T = componentType.c
+    if isFromCSharp(T) then
+      return sourceAddComponent(gameObject, typeof(T))
+    else
+      return addBridgeMonoBehaviour(gameObject, T)
+    end
+  elseif type(componentType) == "string" then
+    local T = getClass(componentType)  
+    if T ~= nil then
+      return addBridgeMonoBehaviour(gameObject, T)
+    else
+      return sourceAddComponent(gameObject, typeof(T))
+    end
   else
-    return addBridgeMonoBehaviour(gameObject, T)
+    return addBridgeMonoBehaviour(gameObject, componentType)
   end
 end
 
-function UnityEngine.AddComponentOfType(gameObject, componentType)
-  local t = type(componentType)
-  if t == "userdata" then
-    return gameObject:AddComponent(componentType)
-  elseif t == "table" then
-    return addBridgeMonoBehaviour(gameObject, componentType.c)
-  else
-    assert(t == "string")
-    local cls = getClass(componentType)  
-    if cls ~= nil then
-      return addBridgeMonoBehaviour(gameObject, cls)
-    else
-      return gameObject:AddComponent(typeof(componentType))
-    end
-  end
-end
+rawset(metatableOfGameObject, "AddComponent", addComponent)
+UnityEngine.addComponentTo = addComponent

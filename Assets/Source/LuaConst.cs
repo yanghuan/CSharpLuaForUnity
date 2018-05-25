@@ -26,5 +26,5 @@ public static class LuaConst
 #endif    
 
     public static bool openLuaSocket = true;            //是否打开Lua Socket库
-    public static bool openLuaDebugger = false;         //是否连接lua调试器
+    public static bool openLuaDebugger = true;         //是否连接lua调试器
 }

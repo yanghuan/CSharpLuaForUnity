@@ -9,10 +9,10 @@ using LuaInterface;
 
 [LuaAutoWrap]
 public sealed class BridgeMonoBehaviour : MonoBehaviour {
-  private LuaTable table_;
+  public LuaTable Table { get; private set; }
 
   public void Bind(LuaTable table) {
-    table_ = table;
+    Table = table;
   }
 
   public Coroutine StartCoroutine(LuaTable routine) {
@@ -20,8 +20,8 @@ public sealed class BridgeMonoBehaviour : MonoBehaviour {
   }
 
   private void Start() {
-    using (var fn = table_.GetLuaFunction("Start")) {
-      fn.Call(table_);
+    using (var fn = Table.GetLuaFunction("Start")) {
+      fn.Call(Table);
     }
   }
 }
@@ -95,7 +95,7 @@ public sealed class LaunchClient : LuaClient {
 
     if (kIsRunFromLua) {
       base.StartMain();
-      using (var fn = luaState.GetFunction("UnityEngine.AddComponentOfType")) {
+      using (var fn = luaState.GetFunction("UnityEngine.addComponentTo")) {
         fn.Call(gameObject, LaunchTypeName);
       }
     } else {

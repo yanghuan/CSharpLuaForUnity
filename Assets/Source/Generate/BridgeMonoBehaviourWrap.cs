@@ -11,6 +11,8 @@ public class BridgeMonoBehaviourWrap
 		L.RegFunction("StartCoroutine", StartCoroutine);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
+		L.RegVar("Table", get_Table, null);
+		L.RegFunction("getTable", get_Table);
 		L.EndClass();
 	}
 
@@ -97,6 +99,25 @@ public class BridgeMonoBehaviourWrap
 		catch (Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_Table(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			BridgeMonoBehaviour obj = (BridgeMonoBehaviour)o;
+			LuaInterface.LuaTable ret = obj.Table;
+			ToLua.Push(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Table on a nil value");
 		}
 	}
 }

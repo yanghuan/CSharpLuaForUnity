@@ -11,7 +11,6 @@ public sealed class TestHelloWord2 : MonoBehaviour {
     Debug.Log("TestHelloWord2");
     StartCoroutine(TestCoroutine());
     print(gameObject.name);
-    GetComponents<TestHelloWord>();
   }
 
   private IEnumerator TestCoroutine() {
@@ -20,11 +19,18 @@ public sealed class TestHelloWord2 : MonoBehaviour {
       print("TestCoroutine.tick");
     }
   }
+
+  public void Test() {
+    print("Test");
+  }
 }
 
 public sealed class TestHelloWord : MonoBehaviour {
   public void Awake() {
     Debug.Log("TestHelloWord");
     gameObject.AddComponent<TestHelloWord2>();
+    var c = GetComponent<TestHelloWord2>();
+    print(c.name);
+    c.Test();
   }
 }
