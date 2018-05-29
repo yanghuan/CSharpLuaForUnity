@@ -95,7 +95,7 @@ public sealed class LaunchClient : LuaClient {
 
     if (kIsRunFromLua) {
       base.StartMain();
-      using (var fn = luaState.DoString<LuaFunction>("return UnityEngine.GameObject.AddComponent")) {
+      using (var fn = luaState.GetFunction("UnityEngine.addComponent")) {
         fn.Call(gameObject, LaunchTypeName);
       }
     } else {

@@ -4,7 +4,8 @@ local getClass = System.getClass
 local is = System.is
 local NotSupportedException = System.NotSupportedException
 local SystemType = System.Type
-local SystemArray = System.Array
+local SystemList = System.List
+local arrayFromList = System.arrayFromList
 
 local assert = assert
 local setmetatable = setmetatable
@@ -171,6 +172,9 @@ local MonoBehaviour = {
   GetComponentInChildren = function (this, t, includeInactive)
     return this.ref:GetComponentInChildren(t, includeInactive)
   end,
+  GetComponents = function (this, t, results)
+    return this.ref:GetComponents(t, results)
+  end,
   
   -- Object methods
   getname = function (this)
@@ -278,7 +282,7 @@ local function getComponents(component, T, results)
   end
   hasReturn = results == nil
   if hasReturn then
-    results = {}
+    results = SystemList(T)
   end
   if isFromCSharp(T) then
     local coms = sourceGetComponents(component, typeof(T))
@@ -287,19 +291,19 @@ local function getComponents(component, T, results)
       if isInstanceOfType(typeofBridgeMonoBehaviour, t) then
         t = t.Table
       end
-      tinsert(results, t)
+      results:Add(t)
     end
   else
     local coms = sourceGetComponents(component, typeof(BridgeMonoBehaviour))
     for i = 0, coms.Length - 1 do
       local t = coms[i].Table
       if is(t, T) then
-        tinsert(results, t)    
+        results:Add(t)
       end
     end
   end
   if hasReturn then
-    return setmetatable(results, SystemArray(T))
+    return arrayFromList(results)
   end
 end
 
@@ -338,3 +342,32 @@ local function addComponent(gameObject, T)
 end
 
 rawset(metatableOfGameObject, "AddComponent", addComponent)
+
+local metatableOfObject = getmetatable(UnityEngine.Object)
+local source__eq = rawget(metatableOfObject, "__eq")
+
+local function op_Equality(x, y)
+  if x == nil and y == nil then
+    return true
+  end
+  if x and not isFromCSharp(x) then
+    x = x.ref
+  end
+  if y and not isFromCSharp(y) then
+    y = y.ref
+  end
+  return source__eq(x, y)
+end
+
+local function op_Inequality(x, y)
+  return not op_Equality(x, y)
+end
+
+local function op_Implicit(x)
+  return not op_Equality(x, nil)
+end
+
+UnityEngine.addComponent = addComponent 
+UnityEngine.op_Equality = op_Equality
+UnityEngine.op_Inequality = op_Inequality
+UnityEngine.op_Implicit = op_Implicit

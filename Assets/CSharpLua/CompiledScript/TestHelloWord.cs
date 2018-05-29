@@ -32,5 +32,19 @@ public sealed class TestHelloWord : MonoBehaviour {
     var c = GetComponent<TestHelloWord2>();
     print(c.name);
     c.Test();
+
+    //List<Component> list = new List<Component>();
+    var list = GetComponents<Component>();
+    print(list.Length);
+
+    foreach(var i in list) {
+      if (i != null) {
+        print(i.name);
+      }
+
+      if (i) {
+
+      }
+    }
   }
 }

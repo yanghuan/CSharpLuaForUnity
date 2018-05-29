@@ -22,6 +22,11 @@
       <class name="Component">
         <method name="BroadcastMessage" Baned="true" />
       </class>
+      <class name="Object">
+        <method name="op_Equality" Template="UnityEngine.op_Equality({0}, {1})" />
+        <method name="op_Inequality" Template="UnityEngine.op_Inequality({0}, {1})" />
+        <method name="op_Implicit" Template="UnityEngine.op_Implicit({0})" />
+      </class> 
     </namespace>
   </assembly>
 </meta>

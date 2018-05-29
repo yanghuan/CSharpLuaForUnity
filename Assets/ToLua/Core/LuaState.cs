@@ -414,11 +414,13 @@ namespace LuaInterface
             {
                 LuaDLL.tolua_beginclass(L, name, baseMetaRef, reference);
                 RegFunction("__gc", Collect);
+                RegConstant("__name__", t.FullName);
             }
             else
             {
                 reference = LuaDLL.tolua_beginclass(L, name, baseMetaRef);
-                RegFunction("__gc", Collect);                
+                RegFunction("__gc", Collect);
+                RegConstant("__name__", t.FullName);
                 BindTypeRef(reference, t);
             }
 
@@ -496,6 +498,12 @@ namespace LuaInterface
         {
             LuaDLL.lua_pushstring(L, name);
             LuaDLL.lua_pushboolean(L, flag);
+            LuaDLL.lua_rawset(L, -3);
+        }
+
+        public void RegConstant(string name, string s) {
+            LuaDLL.lua_pushstring(L, name);
+            LuaDLL.lua_pushstring(L, s);
             LuaDLL.lua_rawset(L, -3);
         }
 
