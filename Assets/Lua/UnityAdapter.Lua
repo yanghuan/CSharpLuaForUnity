@@ -6,6 +6,7 @@ local NotSupportedException = System.NotSupportedException
 local SystemType = System.Type
 local SystemList = System.List
 local arrayFromList = System.arrayFromList
+local ArgumentNullException = System.ArgumentNullException
 
 local assert = assert
 local setmetatable = setmetatable
@@ -214,6 +215,7 @@ local function getBridgeComponent(sourceGetComponents, component, T, ...)
 end
 
 local function getComponent(component, T)
+  if T == nil then throw(ArgumentNullException("type")) end
   if isFromCSharp(T) then
     return sourceGetComponent(component, typeof(T))
   elseif isSystemType(T) then
@@ -238,6 +240,7 @@ end
 rawset(metatableOfComponent, "GetComponent", getComponent)
 
 local function getComponentInChildren(component, T, includeInactive)
+  if T == nil then throw(ArgumentNullException("type")) end
   if isSystemType(T) then
     if includeInactive == nil then
       includeInactive = false
@@ -259,6 +262,7 @@ end
 rawset(metatableOfComponent, "GetComponentInChildren", getComponentInChildren)
 
 local function getComponentInParent(component, T)
+  if T == nil then throw(ArgumentNullException("type")) end
   if isSystemType(T) then
     T = T.c 
   end
@@ -274,18 +278,13 @@ rawset(metatableOfComponent, "GetComponentInParent", getComponentInParent)
 local typeofBridgeMonoBehaviour = typeof(BridgeMonoBehaviour)
 local isInstanceOfType = typeofBridgeMonoBehaviour.IsInstanceOfType 
 
-local function getComponents(component, T, results)
-  if isSystemType(T) then
-    T = T.c
-  elseif results then
-    T, results = results, T
-  end
+local function getBridgeComponents(sourceGetComponents, component, T, results, ...)
   hasReturn = results == nil
   if hasReturn then
     results = SystemList(T)
   end
   if isFromCSharp(T) then
-    local coms = sourceGetComponents(component, typeof(T))
+    local coms = sourceGetComponents(component, typeof(T), ...)
     for i = 0, coms.Length - 1 do
       local t = coms[i]
       if isInstanceOfType(typeofBridgeMonoBehaviour, t) then
@@ -294,7 +293,7 @@ local function getComponents(component, T, results)
       results:Add(t)
     end
   else
-    local coms = sourceGetComponents(component, typeof(BridgeMonoBehaviour))
+    local coms = sourceGetComponents(component, typeof(BridgeMonoBehaviour), ...)
     for i = 0, coms.Length - 1 do
       local t = coms[i].Table
       if is(t, T) then
@@ -307,7 +306,65 @@ local function getComponents(component, T, results)
   end
 end
 
+local function getComponents(component, T, results)
+  if T == nil then throw(ArgumentNullException("type")) end
+  if isSystemType(T) then
+    T = T.c
+  elseif results then
+    T, results = results, T
+  end
+  return getBridgeComponents(sourceGetComponents, component, T, results)
+end
+
 rawset(metatableOfComponent, "GetComponents", getComponents)
+
+local function getComponentsInChildren(component, T, includeInactive, results)
+  if T == nil then throw(ArgumentNullException("type")) end
+  if isSystemType(T) then
+    T = T.c
+    if includeInactive == nil then
+      includeInactive = false
+    end
+  else
+    if type(T) == "boolean" then
+      if not results then
+        T, includeInactive = includeInactive, T
+      else
+        T, includeInactive, results = results, T, includeInactive    
+      end
+    else
+      if not includeInactive then
+        includeInactive = false
+      else
+        T, includeInactive, results = includeInactive, false, T
+      end
+    end
+  end
+  return getBridgeComponents(sourceGetComponentsInChildren, component, T, results, includeInactive)
+end
+
+rawset(metatableOfComponent, "GetComponentsInChildren", getComponentsInChildren)
+
+local function getComponentsInParent(component, T, includeInactive, results)
+  if T == nil then throw(ArgumentNullException("type")) end
+  if isSystemType(T) then
+     T = T.c
+     includeInactive = false
+  else
+    if type(T) == "boolean" then
+      if not results then
+        T, includeInactive = includeInactive, T
+      else
+        T, includeInactive, results = results, T, includeInactive    
+      end
+    else
+      includeInactive = false
+    end
+  end
+  return getBridgeComponents(sourceGetComponentsInParent, component, T, results, includeInactive)
+end
+
+rawset(metatableOfComponent, "GetComponentsInParent", getComponentsInParent)
 
 local metatableOfGameObject = getmetatable(UnityEngine.GameObject)
 local sourceAddComponent = rawget(metatableOfGameObject, "AddComponent")
@@ -320,6 +377,7 @@ local function addBridgeMonoBehaviour(gameObject, T)
 end
 
 local function addComponent(gameObject, T)
+  if T == nil then throw(ArgumentNullException("type")) end
   if isFromCSharp(T) then
     return sourceAddComponent(gameObject, typeof(T))
   elseif isSystemType(T) then

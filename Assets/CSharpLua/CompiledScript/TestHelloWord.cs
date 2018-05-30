@@ -34,7 +34,8 @@ public sealed class TestHelloWord : MonoBehaviour {
     c.Test();
 
     //List<Component> list = new List<Component>();
-    var list = GetComponents<Component>();
+    Type t = null;
+    var list = GetComponents(t);
     print(list.Length);
 
     foreach(var i in list) {

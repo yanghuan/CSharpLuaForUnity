@@ -42,7 +42,8 @@ System.namespace("", function (namespace)
       c:Test()
 
       --List<Component> list = new List<Component>();
-      local list = this:GetComponents(UnityEngine.Component)
+      local t = nil
+      local list = this:GetComponents(t)
       MonoBehaviour.print(#list)
 
       for _, i in System.each(list) do
