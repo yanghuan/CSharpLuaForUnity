@@ -28,6 +28,10 @@ local Debug = {
 
 System.define("UnityEngine.Debug", Debug)
 
+local function isFromCSharp(T)
+  return T.__gc ~= nil
+end
+
 local MonoBehaviour = {
   __kind__ = "C",
   __ctor__ = function (this, monoBehaviour)
@@ -184,13 +188,32 @@ local MonoBehaviour = {
   setname = function (this, value)
     this.ref.name = value
   end,
+  gethideFlags = function (this)
+    return this.ref.hideFlags
+  end,
+  sethideFlags = function (this, value)
+    this.ref.hideFlags = value
+  end,
+  EqualsObj = function (this, other)
+    if other ~= nil then
+      if not isFromCSharp(other) then
+        other = other.ref
+        if other == nil or not isFromCSharp(other) then
+          return false
+        end
+      end
+    end
+    return this.ref:EqualsObj(other)
+  end,
+  GetInstanceID = function (this)
+    return this.ref:GetInstanceID()
+  end,
+  ToString = function (this)
+    return this.ref:ToString()
+  end,
 }
 
 System.define("MonoBehaviour", MonoBehaviour)
-
-local function isFromCSharp(T)
-  return T.__gc ~= nil
-end
 
 local function isSystemType(t)
   return getmetatable(t) == SystemType

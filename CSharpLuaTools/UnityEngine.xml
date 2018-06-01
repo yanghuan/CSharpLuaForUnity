@@ -21,6 +21,7 @@
       </class>
       <class name="Component">
         <method name="BroadcastMessage" Baned="true" />
+        <method name="SendMessage" Baned="true" />
       </class>
       <class name="Object">
         <method name="op_Equality" Template="UnityEngine.op_Equality({0}, {1})" />
