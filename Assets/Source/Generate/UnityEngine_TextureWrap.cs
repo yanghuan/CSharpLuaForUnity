@@ -139,7 +139,7 @@ public class UnityEngine_TextureWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.Texture.anisotropicFiltering);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.Texture.anisotropicFiltering);
 			return 1;
 		}
 		catch (Exception e)
@@ -196,7 +196,7 @@ public class UnityEngine_TextureWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Texture obj = (UnityEngine.Texture)o;
 			UnityEngine.Rendering.TextureDimension ret = obj.dimension;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -215,7 +215,7 @@ public class UnityEngine_TextureWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Texture obj = (UnityEngine.Texture)o;
 			UnityEngine.FilterMode ret = obj.filterMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -253,7 +253,7 @@ public class UnityEngine_TextureWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Texture obj = (UnityEngine.Texture)o;
 			UnityEngine.TextureWrapMode ret = obj.wrapMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -320,7 +320,7 @@ public class UnityEngine_TextureWrap
 	{
 		try
 		{
-			UnityEngine.AnisotropicFiltering arg0 = (UnityEngine.AnisotropicFiltering)ToLua.CheckObject(L, 2, typeof(UnityEngine.AnisotropicFiltering));
+			UnityEngine.AnisotropicFiltering arg0 = (UnityEngine.AnisotropicFiltering)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Texture.anisotropicFiltering = arg0;
 			return 0;
 		}
@@ -377,7 +377,7 @@ public class UnityEngine_TextureWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Texture obj = (UnityEngine.Texture)o;
-			UnityEngine.Rendering.TextureDimension arg0 = (UnityEngine.Rendering.TextureDimension)ToLua.CheckObject(L, 2, typeof(UnityEngine.Rendering.TextureDimension));
+			UnityEngine.Rendering.TextureDimension arg0 = (UnityEngine.Rendering.TextureDimension)LuaDLL.luaL_checknumber(L, 2);
 			obj.dimension = arg0;
 			return 0;
 		}
@@ -396,7 +396,7 @@ public class UnityEngine_TextureWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Texture obj = (UnityEngine.Texture)o;
-			UnityEngine.FilterMode arg0 = (UnityEngine.FilterMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.FilterMode));
+			UnityEngine.FilterMode arg0 = (UnityEngine.FilterMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.filterMode = arg0;
 			return 0;
 		}
@@ -434,7 +434,7 @@ public class UnityEngine_TextureWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Texture obj = (UnityEngine.Texture)o;
-			UnityEngine.TextureWrapMode arg0 = (UnityEngine.TextureWrapMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.TextureWrapMode));
+			UnityEngine.TextureWrapMode arg0 = (UnityEngine.TextureWrapMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.wrapMode = arg0;
 			return 0;
 		}

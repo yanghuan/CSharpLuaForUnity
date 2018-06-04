@@ -139,11 +139,11 @@ public class UnityEngine_TransformWrap
 				obj.Translate(arg0, arg1);
 				return 0;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes<UnityEngine.Space>(L, 3))
+			else if (count == 3 && TypeChecker.CheckTypes<uint>(L, 3))
 			{
 				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-				UnityEngine.Space arg1 = (UnityEngine.Space)ToLua.ToObject(L, 3);
+				UnityEngine.Space arg1 = (UnityEngine.Space)LuaDLL.lua_tonumber(L, 3);
 				obj.Translate(arg0, arg1);
 				return 0;
 			}
@@ -166,13 +166,13 @@ public class UnityEngine_TransformWrap
 				obj.Translate(arg0, arg1, arg2, arg3);
 				return 0;
 			}
-			else if (count == 5 && TypeChecker.CheckTypes<UnityEngine.Space>(L, 5))
+			else if (count == 5 && TypeChecker.CheckTypes<uint>(L, 5))
 			{
 				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.Space arg3 = (UnityEngine.Space)ToLua.ToObject(L, 5);
+				UnityEngine.Space arg3 = (UnityEngine.Space)LuaDLL.lua_tonumber(L, 5);
 				obj.Translate(arg0, arg1, arg2, arg3);
 				return 0;
 			}
@@ -209,20 +209,20 @@ public class UnityEngine_TransformWrap
 				obj.Rotate(arg0, arg1);
 				return 0;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes<UnityEngine.Space>(L, 3))
+			else if (count == 3 && TypeChecker.CheckTypes<uint>(L, 3))
 			{
 				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-				UnityEngine.Space arg1 = (UnityEngine.Space)ToLua.ToObject(L, 3);
+				UnityEngine.Space arg1 = (UnityEngine.Space)LuaDLL.lua_tonumber(L, 3);
 				obj.Rotate(arg0, arg1);
 				return 0;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes<UnityEngine.Vector3, float, UnityEngine.Space>(L, 2))
+			else if (count == 4 && TypeChecker.CheckTypes<UnityEngine.Vector3, float, uint>(L, 2))
 			{
 				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
 				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-				UnityEngine.Space arg2 = (UnityEngine.Space)ToLua.ToObject(L, 4);
+				UnityEngine.Space arg2 = (UnityEngine.Space)LuaDLL.lua_tonumber(L, 4);
 				obj.Rotate(arg0, arg1, arg2);
 				return 0;
 			}
@@ -241,7 +241,7 @@ public class UnityEngine_TransformWrap
 				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.Space arg3 = (UnityEngine.Space)ToLua.CheckObject(L, 5, typeof(UnityEngine.Space));
+				UnityEngine.Space arg3 = (UnityEngine.Space)LuaDLL.luaL_checknumber(L, 5);
 				obj.Rotate(arg0, arg1, arg2, arg3);
 				return 0;
 			}

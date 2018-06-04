@@ -96,7 +96,7 @@ public class UnityEngine_CharacterControllerWrap
 			UnityEngine.CharacterController obj = (UnityEngine.CharacterController)ToLua.CheckObject(L, 1, typeof(UnityEngine.CharacterController));
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
 			UnityEngine.CollisionFlags o = obj.Move(arg0);
-			ToLua.Push(L, o);
+			LuaDLL.lua_pushinteger(L, (int)o);
 			return 1;
 		}
 		catch (Exception e)
@@ -171,7 +171,7 @@ public class UnityEngine_CharacterControllerWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.CharacterController obj = (UnityEngine.CharacterController)o;
 			UnityEngine.CollisionFlags ret = obj.collisionFlags;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)

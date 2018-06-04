@@ -222,7 +222,7 @@ public class UnityEngine_ScreenWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.Screen.orientation);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.Screen.orientation);
 			return 1;
 		}
 		catch (Exception e)
@@ -325,7 +325,7 @@ public class UnityEngine_ScreenWrap
 	{
 		try
 		{
-			UnityEngine.ScreenOrientation arg0 = (UnityEngine.ScreenOrientation)ToLua.CheckObject(L, 2, typeof(UnityEngine.ScreenOrientation));
+			UnityEngine.ScreenOrientation arg0 = (UnityEngine.ScreenOrientation)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Screen.orientation = arg0;
 			return 0;
 		}

@@ -2566,11 +2566,15 @@ public static class ToLuaExport
 
     static bool IsNumberEnum(Type t)
     {
+        if (t.IsEnum) 
+        {
+          return true;
+        }
+      
         if (t == typeof(BindingFlags))
         {
             return true;
         }
-
         return false;
     }
 
@@ -2603,6 +2607,10 @@ public static class ToLuaExport
         else if ((t.IsPrimitive))
         {
             sb.AppendFormat("{0}LuaDLL.lua_pushnumber(L, {1});\r\n", head, arg);
+        }
+        else if (t.IsEnum) 
+        {
+            sb.AppendFormat("{0}LuaDLL.lua_pushinteger(L, (int){1});\r\n", head, arg);
         }
         else
         {           

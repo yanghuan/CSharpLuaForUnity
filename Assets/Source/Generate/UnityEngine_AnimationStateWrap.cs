@@ -189,7 +189,7 @@ public class UnityEngine_AnimationStateWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.AnimationState obj = (UnityEngine.AnimationState)o;
 			UnityEngine.WrapMode ret = obj.wrapMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -360,7 +360,7 @@ public class UnityEngine_AnimationStateWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.AnimationState obj = (UnityEngine.AnimationState)o;
 			UnityEngine.AnimationBlendMode ret = obj.blendMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -416,7 +416,7 @@ public class UnityEngine_AnimationStateWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.AnimationState obj = (UnityEngine.AnimationState)o;
-			UnityEngine.WrapMode arg0 = (UnityEngine.WrapMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.WrapMode));
+			UnityEngine.WrapMode arg0 = (UnityEngine.WrapMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.wrapMode = arg0;
 			return 0;
 		}
@@ -549,7 +549,7 @@ public class UnityEngine_AnimationStateWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.AnimationState obj = (UnityEngine.AnimationState)o;
-			UnityEngine.AnimationBlendMode arg0 = (UnityEngine.AnimationBlendMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.AnimationBlendMode));
+			UnityEngine.AnimationBlendMode arg0 = (UnityEngine.AnimationBlendMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.blendMode = arg0;
 			return 0;
 		}

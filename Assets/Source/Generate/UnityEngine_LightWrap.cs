@@ -111,7 +111,7 @@ public class UnityEngine_LightWrap
 		{
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.Light obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
-			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)ToLua.CheckObject(L, 2, typeof(UnityEngine.Rendering.LightEvent));
+			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.CheckObject(L, 3, typeof(UnityEngine.Rendering.CommandBuffer));
 			obj.AddCommandBuffer(arg0, arg1);
 			return 0;
@@ -129,7 +129,7 @@ public class UnityEngine_LightWrap
 		{
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.Light obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
-			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)ToLua.CheckObject(L, 2, typeof(UnityEngine.Rendering.LightEvent));
+			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.CheckObject(L, 3, typeof(UnityEngine.Rendering.CommandBuffer));
 			obj.RemoveCommandBuffer(arg0, arg1);
 			return 0;
@@ -147,7 +147,7 @@ public class UnityEngine_LightWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			UnityEngine.Light obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
-			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)ToLua.CheckObject(L, 2, typeof(UnityEngine.Rendering.LightEvent));
+			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.luaL_checknumber(L, 2);
 			obj.RemoveCommandBuffers(arg0);
 			return 0;
 		}
@@ -180,7 +180,7 @@ public class UnityEngine_LightWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			UnityEngine.Light obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
-			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)ToLua.CheckObject(L, 2, typeof(UnityEngine.Rendering.LightEvent));
+			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Rendering.CommandBuffer[] o = obj.GetCommandBuffers(arg0);
 			ToLua.Push(L, o);
 			return 1;
@@ -197,7 +197,7 @@ public class UnityEngine_LightWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.LightType arg0 = (UnityEngine.LightType)ToLua.CheckObject(L, 1, typeof(UnityEngine.LightType));
+			UnityEngine.LightType arg0 = (UnityEngine.LightType)LuaDLL.luaL_checknumber(L, 1);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Light[] o = UnityEngine.Light.GetLights(arg0, arg1);
 			ToLua.Push(L, o);
@@ -237,7 +237,7 @@ public class UnityEngine_LightWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Light obj = (UnityEngine.Light)o;
 			UnityEngine.LightType ret = obj.type;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -313,7 +313,7 @@ public class UnityEngine_LightWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Light obj = (UnityEngine.Light)o;
 			UnityEngine.LightShadows ret = obj.shadows;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -351,7 +351,7 @@ public class UnityEngine_LightWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Light obj = (UnityEngine.Light)o;
 			UnityEngine.Rendering.LightShadowResolution ret = obj.shadowResolution;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -541,7 +541,7 @@ public class UnityEngine_LightWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Light obj = (UnityEngine.Light)o;
 			UnityEngine.LightRenderMode ret = obj.renderMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -635,7 +635,7 @@ public class UnityEngine_LightWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Light obj = (UnityEngine.Light)o;
-			UnityEngine.LightType arg0 = (UnityEngine.LightType)ToLua.CheckObject(L, 2, typeof(UnityEngine.LightType));
+			UnityEngine.LightType arg0 = (UnityEngine.LightType)LuaDLL.luaL_checknumber(L, 2);
 			obj.type = arg0;
 			return 0;
 		}
@@ -711,7 +711,7 @@ public class UnityEngine_LightWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Light obj = (UnityEngine.Light)o;
-			UnityEngine.LightShadows arg0 = (UnityEngine.LightShadows)ToLua.CheckObject(L, 2, typeof(UnityEngine.LightShadows));
+			UnityEngine.LightShadows arg0 = (UnityEngine.LightShadows)LuaDLL.luaL_checknumber(L, 2);
 			obj.shadows = arg0;
 			return 0;
 		}
@@ -749,7 +749,7 @@ public class UnityEngine_LightWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Light obj = (UnityEngine.Light)o;
-			UnityEngine.Rendering.LightShadowResolution arg0 = (UnityEngine.Rendering.LightShadowResolution)ToLua.CheckObject(L, 2, typeof(UnityEngine.Rendering.LightShadowResolution));
+			UnityEngine.Rendering.LightShadowResolution arg0 = (UnityEngine.Rendering.LightShadowResolution)LuaDLL.luaL_checknumber(L, 2);
 			obj.shadowResolution = arg0;
 			return 0;
 		}
@@ -939,7 +939,7 @@ public class UnityEngine_LightWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Light obj = (UnityEngine.Light)o;
-			UnityEngine.LightRenderMode arg0 = (UnityEngine.LightRenderMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.LightRenderMode));
+			UnityEngine.LightRenderMode arg0 = (UnityEngine.LightRenderMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.renderMode = arg0;
 			return 0;
 		}

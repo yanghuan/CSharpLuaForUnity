@@ -262,7 +262,7 @@ public class UnityEngine_RendererWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Renderer obj = (UnityEngine.Renderer)o;
 			UnityEngine.Rendering.ShadowCastingMode ret = obj.shadowCastingMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -452,7 +452,7 @@ public class UnityEngine_RendererWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Renderer obj = (UnityEngine.Renderer)o;
 			UnityEngine.MotionVectorGenerationMode ret = obj.motionVectorGenerationMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -509,7 +509,7 @@ public class UnityEngine_RendererWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Renderer obj = (UnityEngine.Renderer)o;
 			UnityEngine.Rendering.LightProbeUsage ret = obj.lightProbeUsage;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -566,7 +566,7 @@ public class UnityEngine_RendererWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Renderer obj = (UnityEngine.Renderer)o;
 			UnityEngine.Rendering.ReflectionProbeUsage ret = obj.reflectionProbeUsage;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -660,7 +660,7 @@ public class UnityEngine_RendererWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Renderer obj = (UnityEngine.Renderer)o;
-			UnityEngine.Rendering.ShadowCastingMode arg0 = (UnityEngine.Rendering.ShadowCastingMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.Rendering.ShadowCastingMode));
+			UnityEngine.Rendering.ShadowCastingMode arg0 = (UnityEngine.Rendering.ShadowCastingMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.shadowCastingMode = arg0;
 			return 0;
 		}
@@ -831,7 +831,7 @@ public class UnityEngine_RendererWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Renderer obj = (UnityEngine.Renderer)o;
-			UnityEngine.MotionVectorGenerationMode arg0 = (UnityEngine.MotionVectorGenerationMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.MotionVectorGenerationMode));
+			UnityEngine.MotionVectorGenerationMode arg0 = (UnityEngine.MotionVectorGenerationMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.motionVectorGenerationMode = arg0;
 			return 0;
 		}
@@ -869,7 +869,7 @@ public class UnityEngine_RendererWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Renderer obj = (UnityEngine.Renderer)o;
-			UnityEngine.Rendering.LightProbeUsage arg0 = (UnityEngine.Rendering.LightProbeUsage)ToLua.CheckObject(L, 2, typeof(UnityEngine.Rendering.LightProbeUsage));
+			UnityEngine.Rendering.LightProbeUsage arg0 = (UnityEngine.Rendering.LightProbeUsage)LuaDLL.luaL_checknumber(L, 2);
 			obj.lightProbeUsage = arg0;
 			return 0;
 		}
@@ -926,7 +926,7 @@ public class UnityEngine_RendererWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Renderer obj = (UnityEngine.Renderer)o;
-			UnityEngine.Rendering.ReflectionProbeUsage arg0 = (UnityEngine.Rendering.ReflectionProbeUsage)ToLua.CheckObject(L, 2, typeof(UnityEngine.Rendering.ReflectionProbeUsage));
+			UnityEngine.Rendering.ReflectionProbeUsage arg0 = (UnityEngine.Rendering.ReflectionProbeUsage)LuaDLL.luaL_checknumber(L, 2);
 			obj.reflectionProbeUsage = arg0;
 			return 0;
 		}

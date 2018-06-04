@@ -117,7 +117,7 @@ public class UnityEngine_RenderSettingsWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.RenderSettings.fogMode);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.RenderSettings.fogMode);
 			return 1;
 		}
 		catch (Exception e)
@@ -187,7 +187,7 @@ public class UnityEngine_RenderSettingsWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.RenderSettings.ambientMode);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.RenderSettings.ambientMode);
 			return 1;
 		}
 		catch (Exception e)
@@ -383,7 +383,7 @@ public class UnityEngine_RenderSettingsWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.RenderSettings.defaultReflectionMode);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.RenderSettings.defaultReflectionMode);
 			return 1;
 		}
 		catch (Exception e)
@@ -440,7 +440,7 @@ public class UnityEngine_RenderSettingsWrap
 	{
 		try
 		{
-			UnityEngine.FogMode arg0 = (UnityEngine.FogMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.FogMode));
+			UnityEngine.FogMode arg0 = (UnityEngine.FogMode)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.RenderSettings.fogMode = arg0;
 			return 0;
 		}
@@ -515,7 +515,7 @@ public class UnityEngine_RenderSettingsWrap
 	{
 		try
 		{
-			UnityEngine.Rendering.AmbientMode arg0 = (UnityEngine.Rendering.AmbientMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.Rendering.AmbientMode));
+			UnityEngine.Rendering.AmbientMode arg0 = (UnityEngine.Rendering.AmbientMode)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.RenderSettings.ambientMode = arg0;
 			return 0;
 		}
@@ -725,7 +725,7 @@ public class UnityEngine_RenderSettingsWrap
 	{
 		try
 		{
-			UnityEngine.Rendering.DefaultReflectionMode arg0 = (UnityEngine.Rendering.DefaultReflectionMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.Rendering.DefaultReflectionMode));
+			UnityEngine.Rendering.DefaultReflectionMode arg0 = (UnityEngine.Rendering.DefaultReflectionMode)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.RenderSettings.defaultReflectionMode = arg0;
 			return 0;
 		}

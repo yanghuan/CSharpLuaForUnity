@@ -231,7 +231,7 @@ public class UnityEngine_WWWWrap
 				UnityEngine.WWW obj = (UnityEngine.WWW)ToLua.CheckObject(L, 1, typeof(UnityEngine.WWW));
 				bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 				bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
-				UnityEngine.AudioType arg2 = (UnityEngine.AudioType)ToLua.CheckObject(L, 4, typeof(UnityEngine.AudioType));
+				UnityEngine.AudioType arg2 = (UnityEngine.AudioType)LuaDLL.luaL_checknumber(L, 4);
 				UnityEngine.AudioClip o = obj.GetAudioClip(arg0, arg1, arg2);
 				ToLua.PushSealed(L, o);
 				return 1;
@@ -273,7 +273,7 @@ public class UnityEngine_WWWWrap
 			{
 				UnityEngine.WWW obj = (UnityEngine.WWW)ToLua.CheckObject(L, 1, typeof(UnityEngine.WWW));
 				bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
-				UnityEngine.AudioType arg1 = (UnityEngine.AudioType)ToLua.CheckObject(L, 3, typeof(UnityEngine.AudioType));
+				UnityEngine.AudioType arg1 = (UnityEngine.AudioType)LuaDLL.luaL_checknumber(L, 3);
 				UnityEngine.AudioClip o = obj.GetAudioClipCompressed(arg0, arg1);
 				ToLua.PushSealed(L, o);
 				return 1;
@@ -634,7 +634,7 @@ public class UnityEngine_WWWWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.WWW obj = (UnityEngine.WWW)o;
 			UnityEngine.ThreadPriority ret = obj.threadPriority;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -652,7 +652,7 @@ public class UnityEngine_WWWWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.WWW obj = (UnityEngine.WWW)o;
-			UnityEngine.ThreadPriority arg0 = (UnityEngine.ThreadPriority)ToLua.CheckObject(L, 2, typeof(UnityEngine.ThreadPriority));
+			UnityEngine.ThreadPriority arg0 = (UnityEngine.ThreadPriority)LuaDLL.luaL_checknumber(L, 2);
 			obj.threadPriority = arg0;
 			return 0;
 		}

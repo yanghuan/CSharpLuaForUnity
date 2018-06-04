@@ -159,7 +159,7 @@ public class UnityEngine_RigidbodyWrap
 			{
 				UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rigidbody));
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-				UnityEngine.ForceMode arg1 = (UnityEngine.ForceMode)ToLua.CheckObject(L, 3, typeof(UnityEngine.ForceMode));
+				UnityEngine.ForceMode arg1 = (UnityEngine.ForceMode)LuaDLL.luaL_checknumber(L, 3);
 				obj.AddForce(arg0, arg1);
 				return 0;
 			}
@@ -178,7 +178,7 @@ public class UnityEngine_RigidbodyWrap
 				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.ForceMode arg3 = (UnityEngine.ForceMode)ToLua.CheckObject(L, 5, typeof(UnityEngine.ForceMode));
+				UnityEngine.ForceMode arg3 = (UnityEngine.ForceMode)LuaDLL.luaL_checknumber(L, 5);
 				obj.AddForce(arg0, arg1, arg2, arg3);
 				return 0;
 			}
@@ -211,7 +211,7 @@ public class UnityEngine_RigidbodyWrap
 			{
 				UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rigidbody));
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-				UnityEngine.ForceMode arg1 = (UnityEngine.ForceMode)ToLua.CheckObject(L, 3, typeof(UnityEngine.ForceMode));
+				UnityEngine.ForceMode arg1 = (UnityEngine.ForceMode)LuaDLL.luaL_checknumber(L, 3);
 				obj.AddRelativeForce(arg0, arg1);
 				return 0;
 			}
@@ -230,7 +230,7 @@ public class UnityEngine_RigidbodyWrap
 				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.ForceMode arg3 = (UnityEngine.ForceMode)ToLua.CheckObject(L, 5, typeof(UnityEngine.ForceMode));
+				UnityEngine.ForceMode arg3 = (UnityEngine.ForceMode)LuaDLL.luaL_checknumber(L, 5);
 				obj.AddRelativeForce(arg0, arg1, arg2, arg3);
 				return 0;
 			}
@@ -263,7 +263,7 @@ public class UnityEngine_RigidbodyWrap
 			{
 				UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rigidbody));
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-				UnityEngine.ForceMode arg1 = (UnityEngine.ForceMode)ToLua.CheckObject(L, 3, typeof(UnityEngine.ForceMode));
+				UnityEngine.ForceMode arg1 = (UnityEngine.ForceMode)LuaDLL.luaL_checknumber(L, 3);
 				obj.AddTorque(arg0, arg1);
 				return 0;
 			}
@@ -282,7 +282,7 @@ public class UnityEngine_RigidbodyWrap
 				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.ForceMode arg3 = (UnityEngine.ForceMode)ToLua.CheckObject(L, 5, typeof(UnityEngine.ForceMode));
+				UnityEngine.ForceMode arg3 = (UnityEngine.ForceMode)LuaDLL.luaL_checknumber(L, 5);
 				obj.AddTorque(arg0, arg1, arg2, arg3);
 				return 0;
 			}
@@ -315,7 +315,7 @@ public class UnityEngine_RigidbodyWrap
 			{
 				UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rigidbody));
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-				UnityEngine.ForceMode arg1 = (UnityEngine.ForceMode)ToLua.CheckObject(L, 3, typeof(UnityEngine.ForceMode));
+				UnityEngine.ForceMode arg1 = (UnityEngine.ForceMode)LuaDLL.luaL_checknumber(L, 3);
 				obj.AddRelativeTorque(arg0, arg1);
 				return 0;
 			}
@@ -334,7 +334,7 @@ public class UnityEngine_RigidbodyWrap
 				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.ForceMode arg3 = (UnityEngine.ForceMode)ToLua.CheckObject(L, 5, typeof(UnityEngine.ForceMode));
+				UnityEngine.ForceMode arg3 = (UnityEngine.ForceMode)LuaDLL.luaL_checknumber(L, 5);
 				obj.AddRelativeTorque(arg0, arg1, arg2, arg3);
 				return 0;
 			}
@@ -369,7 +369,7 @@ public class UnityEngine_RigidbodyWrap
 				UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rigidbody));
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
 				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 3);
-				UnityEngine.ForceMode arg2 = (UnityEngine.ForceMode)ToLua.CheckObject(L, 4, typeof(UnityEngine.ForceMode));
+				UnityEngine.ForceMode arg2 = (UnityEngine.ForceMode)LuaDLL.luaL_checknumber(L, 4);
 				obj.AddForceAtPosition(arg0, arg1, arg2);
 				return 0;
 			}
@@ -417,7 +417,7 @@ public class UnityEngine_RigidbodyWrap
 				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 3);
 				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
 				float arg3 = (float)LuaDLL.luaL_checknumber(L, 5);
-				UnityEngine.ForceMode arg4 = (UnityEngine.ForceMode)ToLua.CheckObject(L, 6, typeof(UnityEngine.ForceMode));
+				UnityEngine.ForceMode arg4 = (UnityEngine.ForceMode)LuaDLL.luaL_checknumber(L, 6);
 				obj.AddExplosionForce(arg0, arg1, arg2, arg3, arg4);
 				return 0;
 			}
@@ -635,7 +635,7 @@ public class UnityEngine_RigidbodyWrap
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
 				UnityEngine.RaycastHit arg1;
 				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.QueryTriggerInteraction arg3 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 5, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg3 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 5);
 				bool o = obj.SweepTest(arg0, out arg1, arg2, arg3);
 				LuaDLL.lua_pushboolean(L, o);
 				ToLua.Push(L, arg1);
@@ -681,7 +681,7 @@ public class UnityEngine_RigidbodyWrap
 				UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)ToLua.CheckObject(L, 1, typeof(UnityEngine.Rigidbody));
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
-				UnityEngine.QueryTriggerInteraction arg2 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 4, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg2 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 4);
 				UnityEngine.RaycastHit[] o = obj.SweepTestAll(arg0, arg1, arg2);
 				ToLua.Push(L, o);
 				return 1;
@@ -896,7 +896,7 @@ public class UnityEngine_RigidbodyWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)o;
 			UnityEngine.RigidbodyConstraints ret = obj.constraints;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -915,7 +915,7 @@ public class UnityEngine_RigidbodyWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)o;
 			UnityEngine.CollisionDetectionMode ret = obj.collisionDetectionMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -1067,7 +1067,7 @@ public class UnityEngine_RigidbodyWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)o;
 			UnityEngine.RigidbodyInterpolation ret = obj.interpolation;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -1332,7 +1332,7 @@ public class UnityEngine_RigidbodyWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)o;
-			UnityEngine.RigidbodyConstraints arg0 = (UnityEngine.RigidbodyConstraints)ToLua.CheckObject(L, 2, typeof(UnityEngine.RigidbodyConstraints));
+			UnityEngine.RigidbodyConstraints arg0 = (UnityEngine.RigidbodyConstraints)LuaDLL.luaL_checknumber(L, 2);
 			obj.constraints = arg0;
 			return 0;
 		}
@@ -1351,7 +1351,7 @@ public class UnityEngine_RigidbodyWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)o;
-			UnityEngine.CollisionDetectionMode arg0 = (UnityEngine.CollisionDetectionMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.CollisionDetectionMode));
+			UnityEngine.CollisionDetectionMode arg0 = (UnityEngine.CollisionDetectionMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.collisionDetectionMode = arg0;
 			return 0;
 		}
@@ -1484,7 +1484,7 @@ public class UnityEngine_RigidbodyWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Rigidbody obj = (UnityEngine.Rigidbody)o;
-			UnityEngine.RigidbodyInterpolation arg0 = (UnityEngine.RigidbodyInterpolation)ToLua.CheckObject(L, 2, typeof(UnityEngine.RigidbodyInterpolation));
+			UnityEngine.RigidbodyInterpolation arg0 = (UnityEngine.RigidbodyInterpolation)LuaDLL.luaL_checknumber(L, 2);
 			obj.interpolation = arg0;
 			return 0;
 		}

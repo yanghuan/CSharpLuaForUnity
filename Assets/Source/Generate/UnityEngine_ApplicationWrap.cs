@@ -301,9 +301,9 @@ public class UnityEngine_ApplicationWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.LogType arg0 = (UnityEngine.LogType)ToLua.CheckObject(L, 1, typeof(UnityEngine.LogType));
+			UnityEngine.LogType arg0 = (UnityEngine.LogType)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.StackTraceLogType o = UnityEngine.Application.GetStackTraceLogType(arg0);
-			ToLua.Push(L, o);
+			LuaDLL.lua_pushinteger(L, (int)o);
 			return 1;
 		}
 		catch (Exception e)
@@ -318,8 +318,8 @@ public class UnityEngine_ApplicationWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.LogType arg0 = (UnityEngine.LogType)ToLua.CheckObject(L, 1, typeof(UnityEngine.LogType));
-			UnityEngine.StackTraceLogType arg1 = (UnityEngine.StackTraceLogType)ToLua.CheckObject(L, 2, typeof(UnityEngine.StackTraceLogType));
+			UnityEngine.LogType arg0 = (UnityEngine.LogType)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.StackTraceLogType arg1 = (UnityEngine.StackTraceLogType)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Application.SetStackTraceLogType(arg0, arg1);
 			return 0;
 		}
@@ -335,7 +335,7 @@ public class UnityEngine_ApplicationWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UserAuthorization arg0 = (UnityEngine.UserAuthorization)ToLua.CheckObject(L, 1, typeof(UnityEngine.UserAuthorization));
+			UnityEngine.UserAuthorization arg0 = (UnityEngine.UserAuthorization)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.AsyncOperation o = UnityEngine.Application.RequestUserAuthorization(arg0);
 			ToLua.PushObject(L, o);
 			return 1;
@@ -352,7 +352,7 @@ public class UnityEngine_ApplicationWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.UserAuthorization arg0 = (UnityEngine.UserAuthorization)ToLua.CheckObject(L, 1, typeof(UnityEngine.UserAuthorization));
+			UnityEngine.UserAuthorization arg0 = (UnityEngine.UserAuthorization)LuaDLL.luaL_checknumber(L, 1);
 			bool o = UnityEngine.Application.HasUserAuthorization(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
@@ -424,7 +424,7 @@ public class UnityEngine_ApplicationWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.Application.platform);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.Application.platform);
 			return 1;
 		}
 		catch (Exception e)
@@ -620,7 +620,7 @@ public class UnityEngine_ApplicationWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.Application.installMode);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.Application.installMode);
 			return 1;
 		}
 		catch (Exception e)
@@ -634,7 +634,7 @@ public class UnityEngine_ApplicationWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.Application.sandboxType);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.Application.sandboxType);
 			return 1;
 		}
 		catch (Exception e)
@@ -704,7 +704,7 @@ public class UnityEngine_ApplicationWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.Application.systemLanguage);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.Application.systemLanguage);
 			return 1;
 		}
 		catch (Exception e)
@@ -718,7 +718,7 @@ public class UnityEngine_ApplicationWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.Application.backgroundLoadingPriority);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.Application.backgroundLoadingPriority);
 			return 1;
 		}
 		catch (Exception e)
@@ -732,7 +732,7 @@ public class UnityEngine_ApplicationWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.Application.internetReachability);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.Application.internetReachability);
 			return 1;
 		}
 		catch (Exception e)
@@ -818,7 +818,7 @@ public class UnityEngine_ApplicationWrap
 	{
 		try
 		{
-			UnityEngine.ThreadPriority arg0 = (UnityEngine.ThreadPriority)ToLua.CheckObject(L, 2, typeof(UnityEngine.ThreadPriority));
+			UnityEngine.ThreadPriority arg0 = (UnityEngine.ThreadPriority)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Application.backgroundLoadingPriority = arg0;
 			return 0;
 		}

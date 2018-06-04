@@ -277,11 +277,11 @@ public class UnityEngine_ComponentWrap
 				obj.SendMessageUpwards(arg0);
 				return 0;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes<UnityEngine.SendMessageOptions>(L, 3))
+			else if (count == 3 && TypeChecker.CheckTypes<uint>(L, 3))
 			{
 				UnityEngine.Component obj = (UnityEngine.Component)ToLua.CheckObject<UnityEngine.Component>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
-				UnityEngine.SendMessageOptions arg1 = (UnityEngine.SendMessageOptions)ToLua.ToObject(L, 3);
+				UnityEngine.SendMessageOptions arg1 = (UnityEngine.SendMessageOptions)LuaDLL.lua_tonumber(L, 3);
 				obj.SendMessageUpwards(arg0, arg1);
 				return 0;
 			}
@@ -298,7 +298,7 @@ public class UnityEngine_ComponentWrap
 				UnityEngine.Component obj = (UnityEngine.Component)ToLua.CheckObject<UnityEngine.Component>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
 				object arg1 = ToLua.ToVarObject(L, 3);
-				UnityEngine.SendMessageOptions arg2 = (UnityEngine.SendMessageOptions)ToLua.CheckObject(L, 4, typeof(UnityEngine.SendMessageOptions));
+				UnityEngine.SendMessageOptions arg2 = (UnityEngine.SendMessageOptions)LuaDLL.luaL_checknumber(L, 4);
 				obj.SendMessageUpwards(arg0, arg1, arg2);
 				return 0;
 			}
@@ -327,11 +327,11 @@ public class UnityEngine_ComponentWrap
 				obj.SendMessage(arg0);
 				return 0;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes<UnityEngine.SendMessageOptions>(L, 3))
+			else if (count == 3 && TypeChecker.CheckTypes<uint>(L, 3))
 			{
 				UnityEngine.Component obj = (UnityEngine.Component)ToLua.CheckObject<UnityEngine.Component>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
-				UnityEngine.SendMessageOptions arg1 = (UnityEngine.SendMessageOptions)ToLua.ToObject(L, 3);
+				UnityEngine.SendMessageOptions arg1 = (UnityEngine.SendMessageOptions)LuaDLL.lua_tonumber(L, 3);
 				obj.SendMessage(arg0, arg1);
 				return 0;
 			}
@@ -348,7 +348,7 @@ public class UnityEngine_ComponentWrap
 				UnityEngine.Component obj = (UnityEngine.Component)ToLua.CheckObject<UnityEngine.Component>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
 				object arg1 = ToLua.ToVarObject(L, 3);
-				UnityEngine.SendMessageOptions arg2 = (UnityEngine.SendMessageOptions)ToLua.CheckObject(L, 4, typeof(UnityEngine.SendMessageOptions));
+				UnityEngine.SendMessageOptions arg2 = (UnityEngine.SendMessageOptions)LuaDLL.luaL_checknumber(L, 4);
 				obj.SendMessage(arg0, arg1, arg2);
 				return 0;
 			}
@@ -377,11 +377,11 @@ public class UnityEngine_ComponentWrap
 				obj.BroadcastMessage(arg0);
 				return 0;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes<UnityEngine.SendMessageOptions>(L, 3))
+			else if (count == 3 && TypeChecker.CheckTypes<uint>(L, 3))
 			{
 				UnityEngine.Component obj = (UnityEngine.Component)ToLua.CheckObject<UnityEngine.Component>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
-				UnityEngine.SendMessageOptions arg1 = (UnityEngine.SendMessageOptions)ToLua.ToObject(L, 3);
+				UnityEngine.SendMessageOptions arg1 = (UnityEngine.SendMessageOptions)LuaDLL.lua_tonumber(L, 3);
 				obj.BroadcastMessage(arg0, arg1);
 				return 0;
 			}
@@ -398,7 +398,7 @@ public class UnityEngine_ComponentWrap
 				UnityEngine.Component obj = (UnityEngine.Component)ToLua.CheckObject<UnityEngine.Component>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
 				object arg1 = ToLua.ToVarObject(L, 3);
-				UnityEngine.SendMessageOptions arg2 = (UnityEngine.SendMessageOptions)ToLua.CheckObject(L, 4, typeof(UnityEngine.SendMessageOptions));
+				UnityEngine.SendMessageOptions arg2 = (UnityEngine.SendMessageOptions)LuaDLL.luaL_checknumber(L, 4);
 				obj.BroadcastMessage(arg0, arg1, arg2);
 				return 0;
 			}

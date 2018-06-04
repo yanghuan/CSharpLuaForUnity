@@ -244,10 +244,10 @@ public class UnityEngine_AnimationWrap
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
 			}
-			else if (count == 2 && TypeChecker.CheckTypes<UnityEngine.PlayMode>(L, 2))
+			else if (count == 2 && TypeChecker.CheckTypes<uint>(L, 2))
 			{
 				UnityEngine.Animation obj = (UnityEngine.Animation)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animation));
-				UnityEngine.PlayMode arg0 = (UnityEngine.PlayMode)ToLua.ToObject(L, 2);
+				UnityEngine.PlayMode arg0 = (UnityEngine.PlayMode)LuaDLL.lua_tonumber(L, 2);
 				bool o = obj.Play(arg0);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -256,7 +256,7 @@ public class UnityEngine_AnimationWrap
 			{
 				UnityEngine.Animation obj = (UnityEngine.Animation)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animation));
 				string arg0 = ToLua.CheckString(L, 2);
-				UnityEngine.PlayMode arg1 = (UnityEngine.PlayMode)ToLua.CheckObject(L, 3, typeof(UnityEngine.PlayMode));
+				UnityEngine.PlayMode arg1 = (UnityEngine.PlayMode)LuaDLL.luaL_checknumber(L, 3);
 				bool o = obj.Play(arg0, arg1);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -299,7 +299,7 @@ public class UnityEngine_AnimationWrap
 				UnityEngine.Animation obj = (UnityEngine.Animation)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animation));
 				string arg0 = ToLua.CheckString(L, 2);
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
-				UnityEngine.PlayMode arg2 = (UnityEngine.PlayMode)ToLua.CheckObject(L, 4, typeof(UnityEngine.PlayMode));
+				UnityEngine.PlayMode arg2 = (UnityEngine.PlayMode)LuaDLL.luaL_checknumber(L, 4);
 				obj.CrossFade(arg0, arg1, arg2);
 				return 0;
 			}
@@ -385,7 +385,7 @@ public class UnityEngine_AnimationWrap
 				UnityEngine.Animation obj = (UnityEngine.Animation)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animation));
 				string arg0 = ToLua.CheckString(L, 2);
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
-				UnityEngine.QueueMode arg2 = (UnityEngine.QueueMode)ToLua.CheckObject(L, 4, typeof(UnityEngine.QueueMode));
+				UnityEngine.QueueMode arg2 = (UnityEngine.QueueMode)LuaDLL.luaL_checknumber(L, 4);
 				UnityEngine.AnimationState o = obj.CrossFadeQueued(arg0, arg1, arg2);
 				ToLua.PushSealed(L, o);
 				return 1;
@@ -395,8 +395,8 @@ public class UnityEngine_AnimationWrap
 				UnityEngine.Animation obj = (UnityEngine.Animation)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animation));
 				string arg0 = ToLua.CheckString(L, 2);
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
-				UnityEngine.QueueMode arg2 = (UnityEngine.QueueMode)ToLua.CheckObject(L, 4, typeof(UnityEngine.QueueMode));
-				UnityEngine.PlayMode arg3 = (UnityEngine.PlayMode)ToLua.CheckObject(L, 5, typeof(UnityEngine.PlayMode));
+				UnityEngine.QueueMode arg2 = (UnityEngine.QueueMode)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.PlayMode arg3 = (UnityEngine.PlayMode)LuaDLL.luaL_checknumber(L, 5);
 				UnityEngine.AnimationState o = obj.CrossFadeQueued(arg0, arg1, arg2, arg3);
 				ToLua.PushSealed(L, o);
 				return 1;
@@ -431,7 +431,7 @@ public class UnityEngine_AnimationWrap
 			{
 				UnityEngine.Animation obj = (UnityEngine.Animation)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animation));
 				string arg0 = ToLua.CheckString(L, 2);
-				UnityEngine.QueueMode arg1 = (UnityEngine.QueueMode)ToLua.CheckObject(L, 3, typeof(UnityEngine.QueueMode));
+				UnityEngine.QueueMode arg1 = (UnityEngine.QueueMode)LuaDLL.luaL_checknumber(L, 3);
 				UnityEngine.AnimationState o = obj.PlayQueued(arg0, arg1);
 				ToLua.PushSealed(L, o);
 				return 1;
@@ -440,8 +440,8 @@ public class UnityEngine_AnimationWrap
 			{
 				UnityEngine.Animation obj = (UnityEngine.Animation)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animation));
 				string arg0 = ToLua.CheckString(L, 2);
-				UnityEngine.QueueMode arg1 = (UnityEngine.QueueMode)ToLua.CheckObject(L, 3, typeof(UnityEngine.QueueMode));
-				UnityEngine.PlayMode arg2 = (UnityEngine.PlayMode)ToLua.CheckObject(L, 4, typeof(UnityEngine.PlayMode));
+				UnityEngine.QueueMode arg1 = (UnityEngine.QueueMode)LuaDLL.luaL_checknumber(L, 3);
+				UnityEngine.PlayMode arg2 = (UnityEngine.PlayMode)LuaDLL.luaL_checknumber(L, 4);
 				UnityEngine.AnimationState o = obj.PlayQueued(arg0, arg1, arg2);
 				ToLua.PushSealed(L, o);
 				return 1;
@@ -671,7 +671,7 @@ public class UnityEngine_AnimationWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Animation obj = (UnityEngine.Animation)o;
 			UnityEngine.WrapMode ret = obj.wrapMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -728,7 +728,7 @@ public class UnityEngine_AnimationWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Animation obj = (UnityEngine.Animation)o;
 			UnityEngine.AnimationCullingType ret = obj.cullingType;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -803,7 +803,7 @@ public class UnityEngine_AnimationWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Animation obj = (UnityEngine.Animation)o;
-			UnityEngine.WrapMode arg0 = (UnityEngine.WrapMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.WrapMode));
+			UnityEngine.WrapMode arg0 = (UnityEngine.WrapMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.wrapMode = arg0;
 			return 0;
 		}
@@ -841,7 +841,7 @@ public class UnityEngine_AnimationWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Animation obj = (UnityEngine.Animation)o;
-			UnityEngine.AnimationCullingType arg0 = (UnityEngine.AnimationCullingType)ToLua.CheckObject(L, 2, typeof(UnityEngine.AnimationCullingType));
+			UnityEngine.AnimationCullingType arg0 = (UnityEngine.AnimationCullingType)LuaDLL.luaL_checknumber(L, 2);
 			obj.cullingType = arg0;
 			return 0;
 		}

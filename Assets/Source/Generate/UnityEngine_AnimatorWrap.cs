@@ -521,7 +521,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)ToLua.CheckObject(L, 2, typeof(UnityEngine.AvatarIKGoal));
+			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Vector3 o = obj.GetIKPosition(arg0);
 			ToLua.Push(L, o);
 			return 1;
@@ -539,7 +539,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)ToLua.CheckObject(L, 2, typeof(UnityEngine.AvatarIKGoal));
+			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 3);
 			obj.SetIKPosition(arg0, arg1);
 			return 0;
@@ -557,7 +557,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)ToLua.CheckObject(L, 2, typeof(UnityEngine.AvatarIKGoal));
+			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Quaternion o = obj.GetIKRotation(arg0);
 			ToLua.Push(L, o);
 			return 1;
@@ -575,7 +575,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)ToLua.CheckObject(L, 2, typeof(UnityEngine.AvatarIKGoal));
+			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Quaternion arg1 = ToLua.ToQuaternion(L, 3);
 			obj.SetIKRotation(arg0, arg1);
 			return 0;
@@ -593,7 +593,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)ToLua.CheckObject(L, 2, typeof(UnityEngine.AvatarIKGoal));
+			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
 			float o = obj.GetIKPositionWeight(arg0);
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
@@ -611,7 +611,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)ToLua.CheckObject(L, 2, typeof(UnityEngine.AvatarIKGoal));
+			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 			obj.SetIKPositionWeight(arg0, arg1);
 			return 0;
@@ -629,7 +629,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)ToLua.CheckObject(L, 2, typeof(UnityEngine.AvatarIKGoal));
+			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
 			float o = obj.GetIKRotationWeight(arg0);
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
@@ -647,7 +647,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)ToLua.CheckObject(L, 2, typeof(UnityEngine.AvatarIKGoal));
+			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 			obj.SetIKRotationWeight(arg0, arg1);
 			return 0;
@@ -665,7 +665,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.AvatarIKHint arg0 = (UnityEngine.AvatarIKHint)ToLua.CheckObject(L, 2, typeof(UnityEngine.AvatarIKHint));
+			UnityEngine.AvatarIKHint arg0 = (UnityEngine.AvatarIKHint)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Vector3 o = obj.GetIKHintPosition(arg0);
 			ToLua.Push(L, o);
 			return 1;
@@ -683,7 +683,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.AvatarIKHint arg0 = (UnityEngine.AvatarIKHint)ToLua.CheckObject(L, 2, typeof(UnityEngine.AvatarIKHint));
+			UnityEngine.AvatarIKHint arg0 = (UnityEngine.AvatarIKHint)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 3);
 			obj.SetIKHintPosition(arg0, arg1);
 			return 0;
@@ -701,7 +701,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.AvatarIKHint arg0 = (UnityEngine.AvatarIKHint)ToLua.CheckObject(L, 2, typeof(UnityEngine.AvatarIKHint));
+			UnityEngine.AvatarIKHint arg0 = (UnityEngine.AvatarIKHint)LuaDLL.luaL_checknumber(L, 2);
 			float o = obj.GetIKHintPositionWeight(arg0);
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
@@ -719,7 +719,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.AvatarIKHint arg0 = (UnityEngine.AvatarIKHint)ToLua.CheckObject(L, 2, typeof(UnityEngine.AvatarIKHint));
+			UnityEngine.AvatarIKHint arg0 = (UnityEngine.AvatarIKHint)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 			obj.SetIKHintPositionWeight(arg0, arg1);
 			return 0;
@@ -817,7 +817,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.HumanBodyBones arg0 = (UnityEngine.HumanBodyBones)ToLua.CheckObject(L, 2, typeof(UnityEngine.HumanBodyBones));
+			UnityEngine.HumanBodyBones arg0 = (UnityEngine.HumanBodyBones)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Quaternion arg1 = ToLua.ToQuaternion(L, 3);
 			obj.SetBoneLocalRotation(arg0, arg1);
 			return 0;
@@ -1106,7 +1106,7 @@ public class UnityEngine_AnimatorWrap
 				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
 				UnityEngine.Quaternion arg1 = ToLua.ToQuaternion(L, 3);
-				UnityEngine.AvatarTarget arg2 = (UnityEngine.AvatarTarget)ToLua.CheckObject(L, 4, typeof(UnityEngine.AvatarTarget));
+				UnityEngine.AvatarTarget arg2 = (UnityEngine.AvatarTarget)LuaDLL.luaL_checknumber(L, 4);
 				UnityEngine.MatchTargetWeightMask arg3 = StackTraits<UnityEngine.MatchTargetWeightMask>.Check(L, 5);
 				float arg4 = (float)LuaDLL.luaL_checknumber(L, 6);
 				obj.MatchTarget(arg0, arg1, arg2, arg3, arg4);
@@ -1117,7 +1117,7 @@ public class UnityEngine_AnimatorWrap
 				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
 				UnityEngine.Quaternion arg1 = ToLua.ToQuaternion(L, 3);
-				UnityEngine.AvatarTarget arg2 = (UnityEngine.AvatarTarget)ToLua.CheckObject(L, 4, typeof(UnityEngine.AvatarTarget));
+				UnityEngine.AvatarTarget arg2 = (UnityEngine.AvatarTarget)LuaDLL.luaL_checknumber(L, 4);
 				UnityEngine.MatchTargetWeightMask arg3 = StackTraits<UnityEngine.MatchTargetWeightMask>.Check(L, 5);
 				float arg4 = (float)LuaDLL.luaL_checknumber(L, 6);
 				float arg5 = (float)LuaDLL.luaL_checknumber(L, 7);
@@ -1456,7 +1456,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.AvatarTarget arg0 = (UnityEngine.AvatarTarget)ToLua.CheckObject(L, 2, typeof(UnityEngine.AvatarTarget));
+			UnityEngine.AvatarTarget arg0 = (UnityEngine.AvatarTarget)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 			obj.SetTarget(arg0, arg1);
 			return 0;
@@ -1474,7 +1474,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject(L, 1, typeof(UnityEngine.Animator));
-			UnityEngine.HumanBodyBones arg0 = (UnityEngine.HumanBodyBones)ToLua.CheckObject(L, 2, typeof(UnityEngine.HumanBodyBones));
+			UnityEngine.HumanBodyBones arg0 = (UnityEngine.HumanBodyBones)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Transform o = obj.GetBoneTransform(arg0);
 			ToLua.Push(L, o);
 			return 1;
@@ -1910,7 +1910,7 @@ public class UnityEngine_AnimatorWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Animator obj = (UnityEngine.Animator)o;
 			UnityEngine.AnimatorUpdateMode ret = obj.updateMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -2214,7 +2214,7 @@ public class UnityEngine_AnimatorWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Animator obj = (UnityEngine.Animator)o;
 			UnityEngine.AnimatorCullingMode ret = obj.cullingMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -2290,7 +2290,7 @@ public class UnityEngine_AnimatorWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Animator obj = (UnityEngine.Animator)o;
 			UnityEngine.AnimatorRecorderMode ret = obj.recorderMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -2517,7 +2517,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Animator obj = (UnityEngine.Animator)o;
-			UnityEngine.AnimatorUpdateMode arg0 = (UnityEngine.AnimatorUpdateMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.AnimatorUpdateMode));
+			UnityEngine.AnimatorUpdateMode arg0 = (UnityEngine.AnimatorUpdateMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.updateMode = arg0;
 			return 0;
 		}
@@ -2631,7 +2631,7 @@ public class UnityEngine_AnimatorWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Animator obj = (UnityEngine.Animator)o;
-			UnityEngine.AnimatorCullingMode arg0 = (UnityEngine.AnimatorCullingMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.AnimatorCullingMode));
+			UnityEngine.AnimatorCullingMode arg0 = (UnityEngine.AnimatorCullingMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.cullingMode = arg0;
 			return 0;
 		}

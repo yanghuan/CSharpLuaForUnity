@@ -214,7 +214,7 @@ public class UnityEngine_AnimationClipWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.AnimationClip obj = (UnityEngine.AnimationClip)o;
 			UnityEngine.WrapMode ret = obj.wrapMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -327,7 +327,7 @@ public class UnityEngine_AnimationClipWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.AnimationClip obj = (UnityEngine.AnimationClip)o;
-			UnityEngine.WrapMode arg0 = (UnityEngine.WrapMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.WrapMode));
+			UnityEngine.WrapMode arg0 = (UnityEngine.WrapMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.wrapMode = arg0;
 			return 0;
 		}

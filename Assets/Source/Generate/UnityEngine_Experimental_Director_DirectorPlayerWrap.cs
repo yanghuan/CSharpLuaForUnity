@@ -117,7 +117,7 @@ public class UnityEngine_Experimental_Director_DirectorPlayerWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			UnityEngine.Experimental.Director.DirectorPlayer obj = (UnityEngine.Experimental.Director.DirectorPlayer)ToLua.CheckObject<UnityEngine.Experimental.Director.DirectorPlayer>(L, 1);
-			UnityEngine.Experimental.Director.DirectorUpdateMode arg0 = (UnityEngine.Experimental.Director.DirectorUpdateMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.Experimental.Director.DirectorUpdateMode));
+			UnityEngine.Experimental.Director.DirectorUpdateMode arg0 = (UnityEngine.Experimental.Director.DirectorUpdateMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.SetTimeUpdateMode(arg0);
 			return 0;
 		}
@@ -135,7 +135,7 @@ public class UnityEngine_Experimental_Director_DirectorPlayerWrap
 			ToLua.CheckArgsCount(L, 1);
 			UnityEngine.Experimental.Director.DirectorPlayer obj = (UnityEngine.Experimental.Director.DirectorPlayer)ToLua.CheckObject<UnityEngine.Experimental.Director.DirectorPlayer>(L, 1);
 			UnityEngine.Experimental.Director.DirectorUpdateMode o = obj.GetTimeUpdateMode();
-			ToLua.Push(L, o);
+			LuaDLL.lua_pushinteger(L, (int)o);
 			return 1;
 		}
 		catch (Exception e)

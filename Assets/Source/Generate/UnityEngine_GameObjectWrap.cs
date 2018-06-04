@@ -94,7 +94,7 @@ public class UnityEngine_GameObjectWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.PrimitiveType arg0 = (UnityEngine.PrimitiveType)ToLua.CheckObject(L, 1, typeof(UnityEngine.PrimitiveType));
+			UnityEngine.PrimitiveType arg0 = (UnityEngine.PrimitiveType)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.GameObject o = UnityEngine.GameObject.CreatePrimitive(arg0);
 			ToLua.PushSealed(L, o);
 			return 1;

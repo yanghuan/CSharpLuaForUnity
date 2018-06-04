@@ -1432,7 +1432,7 @@ public class UnityEngine_MaterialWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Material obj = (UnityEngine.Material)o;
 			UnityEngine.MaterialGlobalIlluminationFlags ret = obj.globalIlluminationFlags;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -1583,7 +1583,7 @@ public class UnityEngine_MaterialWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Material obj = (UnityEngine.Material)o;
-			UnityEngine.MaterialGlobalIlluminationFlags arg0 = (UnityEngine.MaterialGlobalIlluminationFlags)ToLua.CheckObject(L, 2, typeof(UnityEngine.MaterialGlobalIlluminationFlags));
+			UnityEngine.MaterialGlobalIlluminationFlags arg0 = (UnityEngine.MaterialGlobalIlluminationFlags)LuaDLL.luaL_checknumber(L, 2);
 			obj.globalIlluminationFlags = arg0;
 			return 0;
 		}

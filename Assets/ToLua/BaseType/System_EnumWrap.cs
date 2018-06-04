@@ -33,7 +33,7 @@ public class System_EnumWrap
 			ToLua.CheckArgsCount(L, 1);
 			System.Enum obj = (System.Enum)ToLua.CheckObject<System.Enum>(L, 1);
 			System.TypeCode o = obj.GetTypeCode();
-			ToLua.Push(L, o);
+			LuaDLL.lua_pushinteger(L, (int)o);
 			return 1;
 		}
 		catch (Exception e)

@@ -290,7 +290,7 @@ public class UnityEngine_AudioClipWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.AudioClip obj = (UnityEngine.AudioClip)o;
 			UnityEngine.AudioClipLoadType ret = obj.loadType;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -328,7 +328,7 @@ public class UnityEngine_AudioClipWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.AudioClip obj = (UnityEngine.AudioClip)o;
 			UnityEngine.AudioDataLoadState ret = obj.loadState;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)

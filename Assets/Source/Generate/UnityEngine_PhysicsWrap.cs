@@ -139,12 +139,12 @@ public class UnityEngine_PhysicsWrap
 				if (o) ToLua.Push(L, arg1); else LuaDLL.lua_pushnil(L);
 				return 2;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes<UnityEngine.Ray, float, int, UnityEngine.QueryTriggerInteraction>(L, 1))
+			else if (count == 4 && TypeChecker.CheckTypes<UnityEngine.Ray, float, int, uint>(L, 1))
 			{
 				UnityEngine.Ray arg0 = ToLua.ToRay(L, 1);
 				float arg1 = (float)LuaDLL.lua_tonumber(L, 2);
 				int arg2 = (int)LuaDLL.lua_tonumber(L, 3);
-				UnityEngine.QueryTriggerInteraction arg3 = (UnityEngine.QueryTriggerInteraction)ToLua.ToObject(L, 4);
+				UnityEngine.QueryTriggerInteraction arg3 = (UnityEngine.QueryTriggerInteraction)LuaDLL.lua_tonumber(L, 4);
 				bool o = UnityEngine.Physics.Raycast(arg0, arg1, arg2, arg3);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -181,13 +181,13 @@ public class UnityEngine_PhysicsWrap
 				if (o) ToLua.Push(L, arg1); else LuaDLL.lua_pushnil(L);
 				return 2;
 			}
-			else if (count == 5 && TypeChecker.CheckTypes<UnityEngine.Vector3, UnityEngine.Vector3, float, int, UnityEngine.QueryTriggerInteraction>(L, 1))
+			else if (count == 5 && TypeChecker.CheckTypes<UnityEngine.Vector3, UnityEngine.Vector3, float, int, uint>(L, 1))
 			{
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 1);
 				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
 				float arg2 = (float)LuaDLL.lua_tonumber(L, 3);
 				int arg3 = (int)LuaDLL.lua_tonumber(L, 4);
-				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)ToLua.ToObject(L, 5);
+				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)LuaDLL.lua_tonumber(L, 5);
 				bool o = UnityEngine.Physics.Raycast(arg0, arg1, arg2, arg3, arg4);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -204,13 +204,13 @@ public class UnityEngine_PhysicsWrap
 				if (o) ToLua.Push(L, arg2); else LuaDLL.lua_pushnil(L);
 				return 2;
 			}
-			else if (count == 5 && TypeChecker.CheckTypes<UnityEngine.Ray, LuaInterface.LuaOut<UnityEngine.RaycastHit>, float, int, UnityEngine.QueryTriggerInteraction>(L, 1))
+			else if (count == 5 && TypeChecker.CheckTypes<UnityEngine.Ray, LuaInterface.LuaOut<UnityEngine.RaycastHit>, float, int, uint>(L, 1))
 			{
 				UnityEngine.Ray arg0 = ToLua.ToRay(L, 1);
 				UnityEngine.RaycastHit arg1;
 				float arg2 = (float)LuaDLL.lua_tonumber(L, 3);
 				int arg3 = (int)LuaDLL.lua_tonumber(L, 4);
-				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)ToLua.ToObject(L, 5);
+				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)LuaDLL.lua_tonumber(L, 5);
 				bool o = UnityEngine.Physics.Raycast(arg0, out arg1, arg2, arg3, arg4);
 				LuaDLL.lua_pushboolean(L, o);
 				if (o) ToLua.Push(L, arg1); else LuaDLL.lua_pushnil(L);
@@ -223,7 +223,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.RaycastHit arg2;
 				float arg3 = (float)LuaDLL.luaL_checknumber(L, 4);
 				int arg4 = (int)LuaDLL.luaL_checknumber(L, 5);
-				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 6, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 6);
 				bool o = UnityEngine.Physics.Raycast(arg0, arg1, out arg2, arg3, arg4, arg5);
 				LuaDLL.lua_pushboolean(L, o);
 				if (o) ToLua.Push(L, arg2); else LuaDLL.lua_pushnil(L);
@@ -298,12 +298,12 @@ public class UnityEngine_PhysicsWrap
 				ToLua.Push(L, o);
 				return 1;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes<UnityEngine.Ray, float, int, UnityEngine.QueryTriggerInteraction>(L, 1))
+			else if (count == 4 && TypeChecker.CheckTypes<UnityEngine.Ray, float, int, uint>(L, 1))
 			{
 				UnityEngine.Ray arg0 = ToLua.ToRay(L, 1);
 				float arg1 = (float)LuaDLL.lua_tonumber(L, 2);
 				int arg2 = (int)LuaDLL.lua_tonumber(L, 3);
-				UnityEngine.QueryTriggerInteraction arg3 = (UnityEngine.QueryTriggerInteraction)ToLua.ToObject(L, 4);
+				UnityEngine.QueryTriggerInteraction arg3 = (UnityEngine.QueryTriggerInteraction)LuaDLL.lua_tonumber(L, 4);
 				UnityEngine.RaycastHit[] o = UnityEngine.Physics.RaycastAll(arg0, arg1, arg2, arg3);
 				ToLua.Push(L, o);
 				return 1;
@@ -314,7 +314,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
 				float arg2 = (float)LuaDLL.luaL_checknumber(L, 3);
 				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 5, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 5);
 				UnityEngine.RaycastHit[] o = UnityEngine.Physics.RaycastAll(arg0, arg1, arg2, arg3, arg4);
 				ToLua.Push(L, o);
 				return 1;
@@ -394,13 +394,13 @@ public class UnityEngine_PhysicsWrap
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 5 && TypeChecker.CheckTypes<UnityEngine.Ray, UnityEngine.RaycastHit[], float, int, UnityEngine.QueryTriggerInteraction>(L, 1))
+			else if (count == 5 && TypeChecker.CheckTypes<UnityEngine.Ray, UnityEngine.RaycastHit[], float, int, uint>(L, 1))
 			{
 				UnityEngine.Ray arg0 = ToLua.ToRay(L, 1);
 				UnityEngine.RaycastHit[] arg1 = ToLua.ToStructArray<UnityEngine.RaycastHit>(L, 2);
 				float arg2 = (float)LuaDLL.lua_tonumber(L, 3);
 				int arg3 = (int)LuaDLL.lua_tonumber(L, 4);
-				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)ToLua.ToObject(L, 5);
+				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)LuaDLL.lua_tonumber(L, 5);
 				int o = UnityEngine.Physics.RaycastNonAlloc(arg0, arg1, arg2, arg3, arg4);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -412,7 +412,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.RaycastHit[] arg2 = ToLua.CheckStructArray<UnityEngine.RaycastHit>(L, 3);
 				float arg3 = (float)LuaDLL.luaL_checknumber(L, 4);
 				int arg4 = (int)LuaDLL.luaL_checknumber(L, 5);
-				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 6, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 6);
 				int o = UnityEngine.Physics.RaycastNonAlloc(arg0, arg1, arg2, arg3, arg4, arg5);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -473,12 +473,12 @@ public class UnityEngine_PhysicsWrap
 				ToLua.Push(L, arg2);
 				return 2;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes<int, UnityEngine.QueryTriggerInteraction>(L, 3))
+			else if (count == 4 && TypeChecker.CheckTypes<int, uint>(L, 3))
 			{
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 1);
 				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
 				int arg2 = (int)LuaDLL.lua_tonumber(L, 3);
-				UnityEngine.QueryTriggerInteraction arg3 = (UnityEngine.QueryTriggerInteraction)ToLua.ToObject(L, 4);
+				UnityEngine.QueryTriggerInteraction arg3 = (UnityEngine.QueryTriggerInteraction)LuaDLL.lua_tonumber(L, 4);
 				bool o = UnityEngine.Physics.Linecast(arg0, arg1, arg2, arg3);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -489,7 +489,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
 				UnityEngine.RaycastHit arg2;
 				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 5, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 5);
 				bool o = UnityEngine.Physics.Linecast(arg0, arg1, out arg2, arg3, arg4);
 				LuaDLL.lua_pushboolean(L, o);
 				ToLua.Push(L, arg2);
@@ -535,7 +535,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 1);
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 2);
 				int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
-				UnityEngine.QueryTriggerInteraction arg3 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 4, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg3 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 4);
 				UnityEngine.Collider[] o = UnityEngine.Physics.OverlapSphere(arg0, arg1, arg2, arg3);
 				ToLua.Push(L, o);
 				return 1;
@@ -583,7 +583,7 @@ public class UnityEngine_PhysicsWrap
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 2);
 				UnityEngine.Collider[] arg2 = ToLua.CheckObjectArray<UnityEngine.Collider>(L, 3);
 				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 5, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 5);
 				int o = UnityEngine.Physics.OverlapSphereNonAlloc(arg0, arg1, arg2, arg3, arg4);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -631,7 +631,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
 				float arg2 = (float)LuaDLL.luaL_checknumber(L, 3);
 				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 5, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 5);
 				UnityEngine.Collider[] o = UnityEngine.Physics.OverlapCapsule(arg0, arg1, arg2, arg3, arg4);
 				ToLua.Push(L, o);
 				return 1;
@@ -682,7 +682,7 @@ public class UnityEngine_PhysicsWrap
 				float arg2 = (float)LuaDLL.luaL_checknumber(L, 3);
 				UnityEngine.Collider[] arg3 = ToLua.CheckObjectArray<UnityEngine.Collider>(L, 4);
 				int arg4 = (int)LuaDLL.luaL_checknumber(L, 5);
-				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 6, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 6);
 				int o = UnityEngine.Physics.OverlapCapsuleNonAlloc(arg0, arg1, arg2, arg3, arg4, arg5);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -763,7 +763,7 @@ public class UnityEngine_PhysicsWrap
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
 			}
-			else if (count == 7 && TypeChecker.CheckTypes<float, int, UnityEngine.QueryTriggerInteraction>(L, 5))
+			else if (count == 7 && TypeChecker.CheckTypes<float, int, uint>(L, 5))
 			{
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 1);
 				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
@@ -771,7 +771,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Vector3 arg3 = ToLua.ToVector3(L, 4);
 				float arg4 = (float)LuaDLL.lua_tonumber(L, 5);
 				int arg5 = (int)LuaDLL.lua_tonumber(L, 6);
-				UnityEngine.QueryTriggerInteraction arg6 = (UnityEngine.QueryTriggerInteraction)ToLua.ToObject(L, 7);
+				UnityEngine.QueryTriggerInteraction arg6 = (UnityEngine.QueryTriggerInteraction)LuaDLL.lua_tonumber(L, 7);
 				bool o = UnityEngine.Physics.CapsuleCast(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -799,7 +799,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.RaycastHit arg4;
 				float arg5 = (float)LuaDLL.luaL_checknumber(L, 6);
 				int arg6 = (int)LuaDLL.luaL_checknumber(L, 7);
-				UnityEngine.QueryTriggerInteraction arg7 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 8, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg7 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 8);
 				bool o = UnityEngine.Physics.CapsuleCast(arg0, arg1, arg2, arg3, out arg4, arg5, arg6, arg7);
 				LuaDLL.lua_pushboolean(L, o);
 				ToLua.Push(L, arg4);
@@ -894,13 +894,13 @@ public class UnityEngine_PhysicsWrap
 				ToLua.Push(L, arg2);
 				return 2;
 			}
-			else if (count == 5 && TypeChecker.CheckTypes<UnityEngine.Ray, float, float, int, UnityEngine.QueryTriggerInteraction>(L, 1))
+			else if (count == 5 && TypeChecker.CheckTypes<UnityEngine.Ray, float, float, int, uint>(L, 1))
 			{
 				UnityEngine.Ray arg0 = ToLua.ToRay(L, 1);
 				float arg1 = (float)LuaDLL.lua_tonumber(L, 2);
 				float arg2 = (float)LuaDLL.lua_tonumber(L, 3);
 				int arg3 = (int)LuaDLL.lua_tonumber(L, 4);
-				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)ToLua.ToObject(L, 5);
+				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)LuaDLL.lua_tonumber(L, 5);
 				bool o = UnityEngine.Physics.SphereCast(arg0, arg1, arg2, arg3, arg4);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -930,14 +930,14 @@ public class UnityEngine_PhysicsWrap
 				ToLua.Push(L, arg3);
 				return 2;
 			}
-			else if (count == 6 && TypeChecker.CheckTypes<UnityEngine.Ray, float, LuaInterface.LuaOut<UnityEngine.RaycastHit>, float, int, UnityEngine.QueryTriggerInteraction>(L, 1))
+			else if (count == 6 && TypeChecker.CheckTypes<UnityEngine.Ray, float, LuaInterface.LuaOut<UnityEngine.RaycastHit>, float, int, uint>(L, 1))
 			{
 				UnityEngine.Ray arg0 = ToLua.ToRay(L, 1);
 				float arg1 = (float)LuaDLL.lua_tonumber(L, 2);
 				UnityEngine.RaycastHit arg2;
 				float arg3 = (float)LuaDLL.lua_tonumber(L, 4);
 				int arg4 = (int)LuaDLL.lua_tonumber(L, 5);
-				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)ToLua.ToObject(L, 6);
+				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)LuaDLL.lua_tonumber(L, 6);
 				bool o = UnityEngine.Physics.SphereCast(arg0, arg1, out arg2, arg3, arg4, arg5);
 				LuaDLL.lua_pushboolean(L, o);
 				ToLua.Push(L, arg2);
@@ -951,7 +951,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.RaycastHit arg3;
 				float arg4 = (float)LuaDLL.luaL_checknumber(L, 5);
 				int arg5 = (int)LuaDLL.luaL_checknumber(L, 6);
-				UnityEngine.QueryTriggerInteraction arg6 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 7, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg6 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 7);
 				bool o = UnityEngine.Physics.SphereCast(arg0, arg1, arg2, out arg3, arg4, arg5, arg6);
 				LuaDLL.lua_pushboolean(L, o);
 				ToLua.Push(L, arg3);
@@ -1016,7 +1016,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Vector3 arg3 = ToLua.ToVector3(L, 4);
 				float arg4 = (float)LuaDLL.luaL_checknumber(L, 5);
 				int arg5 = (int)LuaDLL.luaL_checknumber(L, 6);
-				UnityEngine.QueryTriggerInteraction arg6 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 7, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg6 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 7);
 				UnityEngine.RaycastHit[] o = UnityEngine.Physics.CapsuleCastAll(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
 				ToLua.Push(L, o);
 				return 1;
@@ -1084,7 +1084,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.RaycastHit[] arg4 = ToLua.CheckStructArray<UnityEngine.RaycastHit>(L, 5);
 				float arg5 = (float)LuaDLL.luaL_checknumber(L, 6);
 				int arg6 = (int)LuaDLL.luaL_checknumber(L, 7);
-				UnityEngine.QueryTriggerInteraction arg7 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 8, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg7 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 8);
 				int o = UnityEngine.Physics.CapsuleCastNonAlloc(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -1164,13 +1164,13 @@ public class UnityEngine_PhysicsWrap
 				ToLua.Push(L, o);
 				return 1;
 			}
-			else if (count == 5 && TypeChecker.CheckTypes<UnityEngine.Ray, float, float, int, UnityEngine.QueryTriggerInteraction>(L, 1))
+			else if (count == 5 && TypeChecker.CheckTypes<UnityEngine.Ray, float, float, int, uint>(L, 1))
 			{
 				UnityEngine.Ray arg0 = ToLua.ToRay(L, 1);
 				float arg1 = (float)LuaDLL.lua_tonumber(L, 2);
 				float arg2 = (float)LuaDLL.lua_tonumber(L, 3);
 				int arg3 = (int)LuaDLL.lua_tonumber(L, 4);
-				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)ToLua.ToObject(L, 5);
+				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)LuaDLL.lua_tonumber(L, 5);
 				UnityEngine.RaycastHit[] o = UnityEngine.Physics.SphereCastAll(arg0, arg1, arg2, arg3, arg4);
 				ToLua.Push(L, o);
 				return 1;
@@ -1182,7 +1182,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Vector3 arg2 = ToLua.ToVector3(L, 3);
 				float arg3 = (float)LuaDLL.luaL_checknumber(L, 4);
 				int arg4 = (int)LuaDLL.luaL_checknumber(L, 5);
-				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 6, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 6);
 				UnityEngine.RaycastHit[] o = UnityEngine.Physics.SphereCastAll(arg0, arg1, arg2, arg3, arg4, arg5);
 				ToLua.Push(L, o);
 				return 1;
@@ -1268,14 +1268,14 @@ public class UnityEngine_PhysicsWrap
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
 			}
-			else if (count == 6 && TypeChecker.CheckTypes<UnityEngine.Ray, float, UnityEngine.RaycastHit[], float, int, UnityEngine.QueryTriggerInteraction>(L, 1))
+			else if (count == 6 && TypeChecker.CheckTypes<UnityEngine.Ray, float, UnityEngine.RaycastHit[], float, int, uint>(L, 1))
 			{
 				UnityEngine.Ray arg0 = ToLua.ToRay(L, 1);
 				float arg1 = (float)LuaDLL.lua_tonumber(L, 2);
 				UnityEngine.RaycastHit[] arg2 = ToLua.ToStructArray<UnityEngine.RaycastHit>(L, 3);
 				float arg3 = (float)LuaDLL.lua_tonumber(L, 4);
 				int arg4 = (int)LuaDLL.lua_tonumber(L, 5);
-				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)ToLua.ToObject(L, 6);
+				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)LuaDLL.lua_tonumber(L, 6);
 				int o = UnityEngine.Physics.SphereCastNonAlloc(arg0, arg1, arg2, arg3, arg4, arg5);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -1288,7 +1288,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.RaycastHit[] arg3 = ToLua.CheckStructArray<UnityEngine.RaycastHit>(L, 4);
 				float arg4 = (float)LuaDLL.luaL_checknumber(L, 5);
 				int arg5 = (int)LuaDLL.luaL_checknumber(L, 6);
-				UnityEngine.QueryTriggerInteraction arg6 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 7, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg6 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 7);
 				int o = UnityEngine.Physics.SphereCastNonAlloc(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -1333,7 +1333,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 1);
 				float arg1 = (float)LuaDLL.luaL_checknumber(L, 2);
 				int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
-				UnityEngine.QueryTriggerInteraction arg3 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 4, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg3 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 4);
 				bool o = UnityEngine.Physics.CheckSphere(arg0, arg1, arg2, arg3);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -1381,7 +1381,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
 				float arg2 = (float)LuaDLL.luaL_checknumber(L, 3);
 				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 5, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 5);
 				bool o = UnityEngine.Physics.CheckCapsule(arg0, arg1, arg2, arg3, arg4);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -1437,7 +1437,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
 				UnityEngine.Quaternion arg2 = ToLua.ToQuaternion(L, 3);
 				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 5, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 5);
 				bool o = UnityEngine.Physics.CheckBox(arg0, arg1, arg2, arg3, arg4);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -1493,7 +1493,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
 				UnityEngine.Quaternion arg2 = ToLua.ToQuaternion(L, 3);
 				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
-				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 5, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg4 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 5);
 				UnityEngine.Collider[] o = UnityEngine.Physics.OverlapBox(arg0, arg1, arg2, arg3, arg4);
 				ToLua.Push(L, o);
 				return 1;
@@ -1553,7 +1553,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Collider[] arg2 = ToLua.CheckObjectArray<UnityEngine.Collider>(L, 3);
 				UnityEngine.Quaternion arg3 = ToLua.ToQuaternion(L, 4);
 				int arg4 = (int)LuaDLL.luaL_checknumber(L, 5);
-				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 6, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg5 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 6);
 				int o = UnityEngine.Physics.OverlapBoxNonAlloc(arg0, arg1, arg2, arg3, arg4, arg5);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -1626,7 +1626,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Quaternion arg3 = ToLua.ToQuaternion(L, 4);
 				float arg4 = (float)LuaDLL.luaL_checknumber(L, 5);
 				int arg5 = (int)LuaDLL.luaL_checknumber(L, 6);
-				UnityEngine.QueryTriggerInteraction arg6 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 7, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg6 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 7);
 				UnityEngine.RaycastHit[] o = UnityEngine.Physics.BoxCastAll(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
 				ToLua.Push(L, o);
 				return 1;
@@ -1704,7 +1704,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Quaternion arg4 = ToLua.ToQuaternion(L, 5);
 				float arg5 = (float)LuaDLL.luaL_checknumber(L, 6);
 				int arg6 = (int)LuaDLL.luaL_checknumber(L, 7);
-				UnityEngine.QueryTriggerInteraction arg7 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 8, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg7 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 8);
 				int o = UnityEngine.Physics.BoxCastNonAlloc(arg0, arg1, arg2, arg3, arg4, arg5, arg6, arg7);
 				LuaDLL.lua_pushinteger(L, o);
 				return 1;
@@ -1805,7 +1805,7 @@ public class UnityEngine_PhysicsWrap
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
 			}
-			else if (count == 7 && TypeChecker.CheckTypes<UnityEngine.Quaternion, float, int, UnityEngine.QueryTriggerInteraction>(L, 4))
+			else if (count == 7 && TypeChecker.CheckTypes<UnityEngine.Quaternion, float, int, uint>(L, 4))
 			{
 				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 1);
 				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
@@ -1813,7 +1813,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Quaternion arg3 = ToLua.ToQuaternion(L, 4);
 				float arg4 = (float)LuaDLL.lua_tonumber(L, 5);
 				int arg5 = (int)LuaDLL.lua_tonumber(L, 6);
-				UnityEngine.QueryTriggerInteraction arg6 = (UnityEngine.QueryTriggerInteraction)ToLua.ToObject(L, 7);
+				UnityEngine.QueryTriggerInteraction arg6 = (UnityEngine.QueryTriggerInteraction)LuaDLL.lua_tonumber(L, 7);
 				bool o = UnityEngine.Physics.BoxCast(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -1841,7 +1841,7 @@ public class UnityEngine_PhysicsWrap
 				UnityEngine.Quaternion arg4 = ToLua.ToQuaternion(L, 5);
 				float arg5 = (float)LuaDLL.luaL_checknumber(L, 6);
 				int arg6 = (int)LuaDLL.luaL_checknumber(L, 7);
-				UnityEngine.QueryTriggerInteraction arg7 = (UnityEngine.QueryTriggerInteraction)ToLua.CheckObject(L, 8, typeof(UnityEngine.QueryTriggerInteraction));
+				UnityEngine.QueryTriggerInteraction arg7 = (UnityEngine.QueryTriggerInteraction)LuaDLL.luaL_checknumber(L, 8);
 				bool o = UnityEngine.Physics.BoxCast(arg0, arg1, arg2, out arg3, arg4, arg5, arg6, arg7);
 				LuaDLL.lua_pushboolean(L, o);
 				ToLua.Push(L, arg3);

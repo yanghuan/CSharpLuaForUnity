@@ -59,7 +59,7 @@ public class UnityEngine_Texture2DWrap
 			{
 				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
-				UnityEngine.TextureFormat arg2 = (UnityEngine.TextureFormat)ToLua.CheckObject(L, 3, typeof(UnityEngine.TextureFormat));
+				UnityEngine.TextureFormat arg2 = (UnityEngine.TextureFormat)LuaDLL.luaL_checknumber(L, 3);
 				bool arg3 = LuaDLL.luaL_checkboolean(L, 4);
 				UnityEngine.Texture2D obj = new UnityEngine.Texture2D(arg0, arg1, arg2, arg3);
 				ToLua.PushSealed(L, obj);
@@ -69,7 +69,7 @@ public class UnityEngine_Texture2DWrap
 			{
 				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
-				UnityEngine.TextureFormat arg2 = (UnityEngine.TextureFormat)ToLua.CheckObject(L, 3, typeof(UnityEngine.TextureFormat));
+				UnityEngine.TextureFormat arg2 = (UnityEngine.TextureFormat)LuaDLL.luaL_checknumber(L, 3);
 				bool arg3 = LuaDLL.luaL_checkboolean(L, 4);
 				bool arg4 = LuaDLL.luaL_checkboolean(L, 5);
 				UnityEngine.Texture2D obj = new UnityEngine.Texture2D(arg0, arg1, arg2, arg3, arg4);
@@ -95,7 +95,7 @@ public class UnityEngine_Texture2DWrap
 			ToLua.CheckArgsCount(L, 6);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
-			UnityEngine.TextureFormat arg2 = (UnityEngine.TextureFormat)ToLua.CheckObject(L, 3, typeof(UnityEngine.TextureFormat));
+			UnityEngine.TextureFormat arg2 = (UnityEngine.TextureFormat)LuaDLL.luaL_checknumber(L, 3);
 			bool arg3 = LuaDLL.luaL_checkboolean(L, 4);
 			bool arg4 = LuaDLL.luaL_checkboolean(L, 5);
 			System.IntPtr arg5 = ToLua.CheckIntPtr(L, 6);
@@ -529,7 +529,7 @@ public class UnityEngine_Texture2DWrap
 				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
 				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
-				UnityEngine.TextureFormat arg2 = (UnityEngine.TextureFormat)ToLua.CheckObject(L, 4, typeof(UnityEngine.TextureFormat));
+				UnityEngine.TextureFormat arg2 = (UnityEngine.TextureFormat)LuaDLL.luaL_checknumber(L, 4);
 				bool arg3 = LuaDLL.luaL_checkboolean(L, 5);
 				bool o = obj.Resize(arg0, arg1, arg2, arg3);
 				LuaDLL.lua_pushboolean(L, o);
@@ -745,7 +745,7 @@ public class UnityEngine_Texture2DWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Texture2D obj = (UnityEngine.Texture2D)o;
 			UnityEngine.TextureFormat ret = obj.format;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)

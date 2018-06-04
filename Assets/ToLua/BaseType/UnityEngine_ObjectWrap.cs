@@ -423,7 +423,7 @@ public class UnityEngine_ObjectWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Object obj = (UnityEngine.Object)o;
 			UnityEngine.HideFlags ret = obj.hideFlags;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -460,7 +460,7 @@ public class UnityEngine_ObjectWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.Object obj = (UnityEngine.Object)o;
-			UnityEngine.HideFlags arg0 = (UnityEngine.HideFlags)ToLua.CheckObject(L, 2, typeof(UnityEngine.HideFlags));
+			UnityEngine.HideFlags arg0 = (UnityEngine.HideFlags)LuaDLL.luaL_checknumber(L, 2);
 			obj.hideFlags = arg0;
 			return 0;
 		}

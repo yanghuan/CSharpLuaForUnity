@@ -153,7 +153,7 @@ public class UnityEngine_ParticleSystemWrap
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
 			System.Collections.Generic.List<UnityEngine.Vector4> arg0 = (System.Collections.Generic.List<UnityEngine.Vector4>)ToLua.CheckObject(L, 2, typeof(System.Collections.Generic.List<UnityEngine.Vector4>));
-			UnityEngine.ParticleSystemCustomData arg1 = (UnityEngine.ParticleSystemCustomData)ToLua.CheckObject(L, 3, typeof(UnityEngine.ParticleSystemCustomData));
+			UnityEngine.ParticleSystemCustomData arg1 = (UnityEngine.ParticleSystemCustomData)LuaDLL.luaL_checknumber(L, 3);
 			obj.SetCustomParticleData(arg0, arg1);
 			return 0;
 		}
@@ -171,7 +171,7 @@ public class UnityEngine_ParticleSystemWrap
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
 			System.Collections.Generic.List<UnityEngine.Vector4> arg0 = (System.Collections.Generic.List<UnityEngine.Vector4>)ToLua.CheckObject(L, 2, typeof(System.Collections.Generic.List<UnityEngine.Vector4>));
-			UnityEngine.ParticleSystemCustomData arg1 = (UnityEngine.ParticleSystemCustomData)ToLua.CheckObject(L, 3, typeof(UnityEngine.ParticleSystemCustomData));
+			UnityEngine.ParticleSystemCustomData arg1 = (UnityEngine.ParticleSystemCustomData)LuaDLL.luaL_checknumber(L, 3);
 			int o = obj.GetCustomParticleData(arg0, arg1);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
@@ -289,7 +289,7 @@ public class UnityEngine_ParticleSystemWrap
 			{
 				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
 				bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
-				UnityEngine.ParticleSystemStopBehavior arg1 = (UnityEngine.ParticleSystemStopBehavior)ToLua.CheckObject(L, 3, typeof(UnityEngine.ParticleSystemStopBehavior));
+				UnityEngine.ParticleSystemStopBehavior arg1 = (UnityEngine.ParticleSystemStopBehavior)LuaDLL.luaL_checknumber(L, 3);
 				obj.Stop(arg0, arg1);
 				return 0;
 			}

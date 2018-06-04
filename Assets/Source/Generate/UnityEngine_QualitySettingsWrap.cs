@@ -249,7 +249,7 @@ public class UnityEngine_QualitySettingsWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.QualitySettings.shadows);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.QualitySettings.shadows);
 			return 1;
 		}
 		catch (Exception e)
@@ -263,7 +263,7 @@ public class UnityEngine_QualitySettingsWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.QualitySettings.shadowProjection);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.QualitySettings.shadowProjection);
 			return 1;
 		}
 		catch (Exception e)
@@ -305,7 +305,7 @@ public class UnityEngine_QualitySettingsWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.QualitySettings.shadowResolution);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.QualitySettings.shadowResolution);
 			return 1;
 		}
 		catch (Exception e)
@@ -375,7 +375,7 @@ public class UnityEngine_QualitySettingsWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.QualitySettings.anisotropicFiltering);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.QualitySettings.anisotropicFiltering);
 			return 1;
 		}
 		catch (Exception e)
@@ -529,7 +529,7 @@ public class UnityEngine_QualitySettingsWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.QualitySettings.desiredColorSpace);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.QualitySettings.desiredColorSpace);
 			return 1;
 		}
 		catch (Exception e)
@@ -543,7 +543,7 @@ public class UnityEngine_QualitySettingsWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.QualitySettings.activeColorSpace);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.QualitySettings.activeColorSpace);
 			return 1;
 		}
 		catch (Exception e)
@@ -557,7 +557,7 @@ public class UnityEngine_QualitySettingsWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.QualitySettings.blendWeights);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.QualitySettings.blendWeights);
 			return 1;
 		}
 		catch (Exception e)
@@ -614,7 +614,7 @@ public class UnityEngine_QualitySettingsWrap
 	{
 		try
 		{
-			UnityEngine.ShadowQuality arg0 = (UnityEngine.ShadowQuality)ToLua.CheckObject(L, 2, typeof(UnityEngine.ShadowQuality));
+			UnityEngine.ShadowQuality arg0 = (UnityEngine.ShadowQuality)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.QualitySettings.shadows = arg0;
 			return 0;
 		}
@@ -629,7 +629,7 @@ public class UnityEngine_QualitySettingsWrap
 	{
 		try
 		{
-			UnityEngine.ShadowProjection arg0 = (UnityEngine.ShadowProjection)ToLua.CheckObject(L, 2, typeof(UnityEngine.ShadowProjection));
+			UnityEngine.ShadowProjection arg0 = (UnityEngine.ShadowProjection)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.QualitySettings.shadowProjection = arg0;
 			return 0;
 		}
@@ -674,7 +674,7 @@ public class UnityEngine_QualitySettingsWrap
 	{
 		try
 		{
-			UnityEngine.ShadowResolution arg0 = (UnityEngine.ShadowResolution)ToLua.CheckObject(L, 2, typeof(UnityEngine.ShadowResolution));
+			UnityEngine.ShadowResolution arg0 = (UnityEngine.ShadowResolution)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.QualitySettings.shadowResolution = arg0;
 			return 0;
 		}
@@ -749,7 +749,7 @@ public class UnityEngine_QualitySettingsWrap
 	{
 		try
 		{
-			UnityEngine.AnisotropicFiltering arg0 = (UnityEngine.AnisotropicFiltering)ToLua.CheckObject(L, 2, typeof(UnityEngine.AnisotropicFiltering));
+			UnityEngine.AnisotropicFiltering arg0 = (UnityEngine.AnisotropicFiltering)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.QualitySettings.anisotropicFiltering = arg0;
 			return 0;
 		}
@@ -914,7 +914,7 @@ public class UnityEngine_QualitySettingsWrap
 	{
 		try
 		{
-			UnityEngine.BlendWeights arg0 = (UnityEngine.BlendWeights)ToLua.CheckObject(L, 2, typeof(UnityEngine.BlendWeights));
+			UnityEngine.BlendWeights arg0 = (UnityEngine.BlendWeights)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.QualitySettings.blendWeights = arg0;
 			return 0;
 		}

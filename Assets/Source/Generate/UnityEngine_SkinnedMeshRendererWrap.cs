@@ -180,7 +180,7 @@ public class UnityEngine_SkinnedMeshRendererWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.SkinnedMeshRenderer obj = (UnityEngine.SkinnedMeshRenderer)o;
 			UnityEngine.SkinQuality ret = obj.quality;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -312,7 +312,7 @@ public class UnityEngine_SkinnedMeshRendererWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.SkinnedMeshRenderer obj = (UnityEngine.SkinnedMeshRenderer)o;
-			UnityEngine.SkinQuality arg0 = (UnityEngine.SkinQuality)ToLua.CheckObject(L, 2, typeof(UnityEngine.SkinQuality));
+			UnityEngine.SkinQuality arg0 = (UnityEngine.SkinQuality)LuaDLL.luaL_checknumber(L, 2);
 			obj.quality = arg0;
 			return 0;
 		}

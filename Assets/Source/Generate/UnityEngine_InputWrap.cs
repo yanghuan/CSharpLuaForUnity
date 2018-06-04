@@ -175,9 +175,9 @@ public class UnityEngine_InputWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 1 && TypeChecker.CheckTypes<UnityEngine.KeyCode>(L, 1))
+			if (count == 1 && TypeChecker.CheckTypes<uint>(L, 1))
 			{
-				UnityEngine.KeyCode arg0 = (UnityEngine.KeyCode)ToLua.ToObject(L, 1);
+				UnityEngine.KeyCode arg0 = (UnityEngine.KeyCode)LuaDLL.lua_tonumber(L, 1);
 				bool o = UnityEngine.Input.GetKey(arg0);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -207,9 +207,9 @@ public class UnityEngine_InputWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 1 && TypeChecker.CheckTypes<UnityEngine.KeyCode>(L, 1))
+			if (count == 1 && TypeChecker.CheckTypes<uint>(L, 1))
 			{
-				UnityEngine.KeyCode arg0 = (UnityEngine.KeyCode)ToLua.ToObject(L, 1);
+				UnityEngine.KeyCode arg0 = (UnityEngine.KeyCode)LuaDLL.lua_tonumber(L, 1);
 				bool o = UnityEngine.Input.GetKeyDown(arg0);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -239,9 +239,9 @@ public class UnityEngine_InputWrap
 		{
 			int count = LuaDLL.lua_gettop(L);
 
-			if (count == 1 && TypeChecker.CheckTypes<UnityEngine.KeyCode>(L, 1))
+			if (count == 1 && TypeChecker.CheckTypes<uint>(L, 1))
 			{
-				UnityEngine.KeyCode arg0 = (UnityEngine.KeyCode)ToLua.ToObject(L, 1);
+				UnityEngine.KeyCode arg0 = (UnityEngine.KeyCode)LuaDLL.lua_tonumber(L, 1);
 				bool o = UnityEngine.Input.GetKeyUp(arg0);
 				LuaDLL.lua_pushboolean(L, o);
 				return 1;
@@ -665,7 +665,7 @@ public class UnityEngine_InputWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.Input.deviceOrientation);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.Input.deviceOrientation);
 			return 1;
 		}
 		catch (Exception e)
@@ -679,7 +679,7 @@ public class UnityEngine_InputWrap
 	{
 		try
 		{
-			ToLua.Push(L, UnityEngine.Input.imeCompositionMode);
+			LuaDLL.lua_pushinteger(L, (int)UnityEngine.Input.imeCompositionMode);
 			return 1;
 		}
 		catch (Exception e)
@@ -794,7 +794,7 @@ public class UnityEngine_InputWrap
 	{
 		try
 		{
-			UnityEngine.IMECompositionMode arg0 = (UnityEngine.IMECompositionMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.IMECompositionMode));
+			UnityEngine.IMECompositionMode arg0 = (UnityEngine.IMECompositionMode)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Input.imeCompositionMode = arg0;
 			return 0;
 		}

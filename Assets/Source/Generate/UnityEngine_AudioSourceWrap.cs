@@ -355,7 +355,7 @@ public class UnityEngine_AudioSourceWrap
 		{
 			ToLua.CheckArgsCount(L, 3);
 			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
-			UnityEngine.AudioSourceCurveType arg0 = (UnityEngine.AudioSourceCurveType)ToLua.CheckObject(L, 2, typeof(UnityEngine.AudioSourceCurveType));
+			UnityEngine.AudioSourceCurveType arg0 = (UnityEngine.AudioSourceCurveType)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.AnimationCurve arg1 = (UnityEngine.AnimationCurve)ToLua.CheckObject(L, 3, typeof(UnityEngine.AnimationCurve));
 			obj.SetCustomCurve(arg0, arg1);
 			return 0;
@@ -373,7 +373,7 @@ public class UnityEngine_AudioSourceWrap
 		{
 			ToLua.CheckArgsCount(L, 2);
 			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
-			UnityEngine.AudioSourceCurveType arg0 = (UnityEngine.AudioSourceCurveType)ToLua.CheckObject(L, 2, typeof(UnityEngine.AudioSourceCurveType));
+			UnityEngine.AudioSourceCurveType arg0 = (UnityEngine.AudioSourceCurveType)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.AnimationCurve o = obj.GetCustomCurve(arg0);
 			ToLua.PushSealed(L, o);
 			return 1;
@@ -411,7 +411,7 @@ public class UnityEngine_AudioSourceWrap
 			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			float[] arg0 = ToLua.CheckNumberArray<float>(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
-			UnityEngine.FFTWindow arg2 = (UnityEngine.FFTWindow)ToLua.CheckObject(L, 4, typeof(UnityEngine.FFTWindow));
+			UnityEngine.FFTWindow arg2 = (UnityEngine.FFTWindow)LuaDLL.luaL_checknumber(L, 4);
 			obj.GetSpectrumData(arg0, arg1, arg2);
 			return 0;
 		}
@@ -716,7 +716,7 @@ public class UnityEngine_AudioSourceWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)o;
 			UnityEngine.AudioVelocityUpdateMode ret = obj.velocityUpdateMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -1001,7 +1001,7 @@ public class UnityEngine_AudioSourceWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)o;
 			UnityEngine.AudioRolloffMode ret = obj.rolloffMode;
-			ToLua.Push(L, ret);
+			LuaDLL.lua_pushinteger(L, (int)ret);
 			return 1;
 		}
 		catch(Exception e)
@@ -1209,7 +1209,7 @@ public class UnityEngine_AudioSourceWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)o;
-			UnityEngine.AudioVelocityUpdateMode arg0 = (UnityEngine.AudioVelocityUpdateMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.AudioVelocityUpdateMode));
+			UnityEngine.AudioVelocityUpdateMode arg0 = (UnityEngine.AudioVelocityUpdateMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.velocityUpdateMode = arg0;
 			return 0;
 		}
@@ -1494,7 +1494,7 @@ public class UnityEngine_AudioSourceWrap
 		{
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)o;
-			UnityEngine.AudioRolloffMode arg0 = (UnityEngine.AudioRolloffMode)ToLua.CheckObject(L, 2, typeof(UnityEngine.AudioRolloffMode));
+			UnityEngine.AudioRolloffMode arg0 = (UnityEngine.AudioRolloffMode)LuaDLL.luaL_checknumber(L, 2);
 			obj.rolloffMode = arg0;
 			return 0;
 		}
