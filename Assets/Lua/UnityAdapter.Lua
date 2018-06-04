@@ -28,10 +28,6 @@ local Debug = {
 
 System.define("UnityEngine.Debug", Debug)
 
-local function isFromCSharp(T)
-  return T.__gc ~= nil
-end
-
 local MonoBehaviour = {
   __kind__ = "C",
   __ctor__ = function (this, monoBehaviour)
@@ -195,14 +191,6 @@ local MonoBehaviour = {
     this.ref.hideFlags = value
   end,
   EqualsObj = function (this, other)
-    if other ~= nil then
-      if not isFromCSharp(other) then
-        other = other.ref
-        if other == nil or not isFromCSharp(other) then
-          return false
-        end
-      end
-    end
     return this.ref:EqualsObj(other)
   end,
   GetInstanceID = function (this)
@@ -214,6 +202,10 @@ local MonoBehaviour = {
 }
 
 System.define("MonoBehaviour", MonoBehaviour)
+
+local function isFromCSharp(T)
+  return T.__gc ~= nil
+end
 
 local function isSystemType(t)
   return getmetatable(t) == SystemType
@@ -447,6 +439,18 @@ end
 local function op_Implicit(x)
   return not op_Equality(x, nil)
 end
+
+rawset(metatableOfObject, "EqualsObj", function (this, other)
+  if other ~= nil then
+    if not isFromCSharp(other) then
+      other = other.ref
+      if other == nil or not isFromCSharp(other) then
+        return false
+      end
+    end
+  end
+  this:Equals(other)
+end)
 
 UnityEngine.addComponent = addComponent 
 UnityEngine.op_Equality = op_Equality
