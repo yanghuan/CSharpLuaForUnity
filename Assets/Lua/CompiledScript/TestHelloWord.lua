@@ -40,20 +40,6 @@ System.namespace("", function (namespace)
       local c = this:GetComponent(TestHelloWord2)
       MonoBehaviour.print(c:getname())
       c:Test()
-
-      --List<Component> list = new List<Component>();
-      local t = nil
-      local list = this:GetComponents(t)
-      MonoBehaviour.print(#list)
-
-      for _, i in System.each(list) do
-        if UnityEngine.op_Inequality(i, nil) then
-          MonoBehaviour.print(i:getname())
-        end
-
-        if UnityEngine.op_Implicit(i) then
-        end
-      end
     end
     return {
       __inherits__ = function (global) 

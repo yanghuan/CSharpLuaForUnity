@@ -5,6 +5,7 @@ local is = System.is
 local NotSupportedException = System.NotSupportedException
 local SystemType = System.Type
 local SystemList = System.List
+local SystemTypeof = System.typeof
 local arrayFromList = System.arrayFromList
 local ArgumentNullException = System.ArgumentNullException
 
@@ -17,10 +18,12 @@ local type = type
 local table = table
 local tinsert = table.insert
 local typeof = typeof
+local _G = _G
 
 local Debugger = Debugger
 local BridgeMonoBehaviour = BridgeMonoBehaviour
 local UnityEngine = UnityEngine
+local toluaSystem = toluaSystem
 
 local Debug = {
   Log = Debugger.Log
@@ -424,10 +427,10 @@ local function op_Equality(x, y)
     return true
   end
   if x and not isFromCSharp(x) then
-    x = x.ref
+    x = assert(x.ref)
   end
   if y and not isFromCSharp(y) then
-    y = y.ref
+    y = assert(y.ref)
   end
   return source__eq(x, y)
 end
@@ -440,7 +443,7 @@ local function op_Implicit(x)
   return not op_Equality(x, nil)
 end
 
-rawset(metatableOfObject, "EqualsObj", function (this, other)
+local function equalsObj(this, other)
   if other ~= nil then
     if not isFromCSharp(other) then
       other = other.ref
@@ -450,7 +453,23 @@ rawset(metatableOfObject, "EqualsObj", function (this, other)
     end
   end
   this:Equals(other)
-end)
+end
+
+rawset(metatableOfObject, "EqualsObj", equalsObj)
+
+local metatableOfSystemObject = getmetatable(toluaSystem.Object)
+local equals = rawget(metatableOfSystemObject, "Equals")
+
+local function getType(this)
+  local name = assert(this.__name__)
+  local cls = _G[name]
+  return SystemTypeof(cls)
+end
+
+rawset(metatableOfSystemObject, "__kind__", "C")
+rawset(metatableOfSystemObject, "__default__", System.emptyFn)
+rawset(metatableOfSystemObject, "EqualsObj", equals)
+rawset(metatableOfSystemObject, "GetType", getType)
 
 UnityEngine.addComponent = addComponent 
 UnityEngine.op_Equality = op_Equality

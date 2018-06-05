@@ -1,4 +1,5 @@
 require("functions")
+toluaSystem = System
 require("CoreSystemLua.All")("CoreSystemLua", { time = tolua.gettime })
 require("UnityAdapter")
 require("CompiledScript.manifest")("CompiledScript")
