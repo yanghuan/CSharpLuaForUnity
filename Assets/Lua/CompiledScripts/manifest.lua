@@ -4,10 +4,13 @@ return function (dir)
   local require = require
   local load = function(module) return require(dir .. module) end
 
-  load("TestHelloWord")
+  load("Sample.TestCoroutine")
+  load("Sample.TestHangingScript")
+  load("Sample.TestHelloWord")
 
   System.init({
-    "TestHelloWord", 
-    "TestHelloWord2"
+    "CSharpLua.Sample.TestCoroutine", 
+    "CSharpLua.Sample.TestHangingScript", 
+    "CSharpLua.Sample.TestHelloWord"
   })
 end

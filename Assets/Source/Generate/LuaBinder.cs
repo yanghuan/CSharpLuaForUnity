@@ -11,7 +11,6 @@ public static class LuaBinder
 		L.BeginModule(null);
 		LuaInterface_DebuggerWrap.Register(L);
 		LuaProfilerWrap.Register(L);
-		BridgeMonoBehaviourWrap.Register(L);
 		L.BeginModule("UnityEngine");
 		UnityEngine_ComponentWrap.Register(L);
 		UnityEngine_TransformWrap.Register(L);
@@ -75,6 +74,9 @@ public static class LuaBinder
 		L.RegFunction("PCMReaderCallback", UnityEngine_AudioClip_PCMReaderCallback);
 		L.RegFunction("PCMSetPositionCallback", UnityEngine_AudioClip_PCMSetPositionCallback);
 		L.EndModule();
+		L.EndModule();
+		L.BeginModule("CSharpLua");
+		CSharpLua_BridgeMonoBehaviourWrap.Register(L);
 		L.EndModule();
 		L.BeginModule("System");
 		L.RegFunction("Action", System_Action);

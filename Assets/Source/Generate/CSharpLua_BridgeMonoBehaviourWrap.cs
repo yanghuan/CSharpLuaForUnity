@@ -2,11 +2,11 @@
 using System;
 using LuaInterface;
 
-public class BridgeMonoBehaviourWrap
+public class CSharpLua_BridgeMonoBehaviourWrap
 {
 	public static void Register(LuaState L)
 	{
-		L.BeginClass(typeof(BridgeMonoBehaviour), typeof(UnityEngine.MonoBehaviour));
+		L.BeginClass(typeof(CSharpLua.BridgeMonoBehaviour), typeof(UnityEngine.MonoBehaviour));
 		L.RegFunction("Bind", Bind);
 		L.RegFunction("StartCoroutine", StartCoroutine);
 		L.RegFunction("__eq", op_Equality);
@@ -22,7 +22,7 @@ public class BridgeMonoBehaviourWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			BridgeMonoBehaviour obj = (BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(BridgeMonoBehaviour));
+			CSharpLua.BridgeMonoBehaviour obj = (CSharpLua.BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(CSharpLua.BridgeMonoBehaviour));
 			LuaTable arg0 = ToLua.CheckLuaTable(L, 2);
 			obj.Bind(arg0);
 			return 0;
@@ -42,7 +42,7 @@ public class BridgeMonoBehaviourWrap
 
 			if (count == 2 && TypeChecker.CheckTypes<string>(L, 2))
 			{
-				BridgeMonoBehaviour obj = (BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(BridgeMonoBehaviour));
+				CSharpLua.BridgeMonoBehaviour obj = (CSharpLua.BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(CSharpLua.BridgeMonoBehaviour));
 				string arg0 = ToLua.ToString(L, 2);
 				UnityEngine.Coroutine o = obj.StartCoroutine(arg0);
 				ToLua.PushSealed(L, o);
@@ -50,7 +50,7 @@ public class BridgeMonoBehaviourWrap
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<System.Collections.IEnumerator>(L, 2))
 			{
-				BridgeMonoBehaviour obj = (BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(BridgeMonoBehaviour));
+				CSharpLua.BridgeMonoBehaviour obj = (CSharpLua.BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(CSharpLua.BridgeMonoBehaviour));
 				System.Collections.IEnumerator arg0 = (System.Collections.IEnumerator)ToLua.ToObject(L, 2);
 				UnityEngine.Coroutine o = obj.StartCoroutine(arg0);
 				ToLua.PushSealed(L, o);
@@ -58,7 +58,7 @@ public class BridgeMonoBehaviourWrap
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<LuaInterface.LuaTable>(L, 2))
 			{
-				BridgeMonoBehaviour obj = (BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(BridgeMonoBehaviour));
+				CSharpLua.BridgeMonoBehaviour obj = (CSharpLua.BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(CSharpLua.BridgeMonoBehaviour));
 				LuaTable arg0 = ToLua.ToLuaTable(L, 2);
 				UnityEngine.Coroutine o = obj.StartCoroutine(arg0);
 				ToLua.PushSealed(L, o);
@@ -66,7 +66,7 @@ public class BridgeMonoBehaviourWrap
 			}
 			else if (count == 3)
 			{
-				BridgeMonoBehaviour obj = (BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(BridgeMonoBehaviour));
+				CSharpLua.BridgeMonoBehaviour obj = (CSharpLua.BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(CSharpLua.BridgeMonoBehaviour));
 				string arg0 = ToLua.CheckString(L, 2);
 				object arg1 = ToLua.ToVarObject(L, 3);
 				UnityEngine.Coroutine o = obj.StartCoroutine(arg0, arg1);
@@ -75,7 +75,7 @@ public class BridgeMonoBehaviourWrap
 			}
 			else
 			{
-				return LuaDLL.luaL_throw(L, "invalid arguments to method: BridgeMonoBehaviour.StartCoroutine");
+				return LuaDLL.luaL_throw(L, "invalid arguments to method: CSharpLua.BridgeMonoBehaviour.StartCoroutine");
 			}
 		}
 		catch (Exception e)
@@ -110,7 +110,7 @@ public class BridgeMonoBehaviourWrap
 		try
 		{
 			o = ToLua.ToObject(L, 1);
-			BridgeMonoBehaviour obj = (BridgeMonoBehaviour)o;
+			CSharpLua.BridgeMonoBehaviour obj = (CSharpLua.BridgeMonoBehaviour)o;
 			LuaInterface.LuaTable ret = obj.Table;
 			ToLua.Push(L, ret);
 			return 1;

@@ -8,6 +8,7 @@ local SystemList = System.List
 local SystemTypeof = System.typeof
 local arrayFromList = System.arrayFromList
 local ArgumentNullException = System.ArgumentNullException
+local CSharpLua = CSharpLua
 
 local assert = assert
 local setmetatable = setmetatable
@@ -21,7 +22,7 @@ local typeof = typeof
 local _G = _G
 
 local Debugger = Debugger
-local BridgeMonoBehaviour = BridgeMonoBehaviour
+local BridgeMonoBehaviour = CSharpLua.BridgeMonoBehaviour
 local UnityEngine = UnityEngine
 local toluaSystem = toluaSystem
 
