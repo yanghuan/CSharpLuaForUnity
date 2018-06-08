@@ -5,6 +5,10 @@ System.namespace("CSharpLua.Sample", function (namespace)
     local Awake, Start
     Awake = function (this) 
       MonoBehaviour.print("Awake")
+      MonoBehaviour.print(this.DataOfString)
+      MonoBehaviour.print(this.DataOfInt)
+      MonoBehaviour.print(this.DataOfString2)
+      MonoBehaviour.print(this.a)
     end
     Start = function (this) 
       MonoBehaviour.print("Start")
@@ -17,6 +21,7 @@ System.namespace("CSharpLua.Sample", function (namespace)
       end, 
       DataOfInt = 0, 
       DataOfString2 = "ddddd", 
+      a = 10, 
       Awake = Awake, 
       Start = Start
     }

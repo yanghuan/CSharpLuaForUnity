@@ -18,6 +18,8 @@ local rawset = rawset
 local type = type
 local table = table
 local tinsert = table.insert
+local loadstring = loadstring
+local pairs = pairs
 local typeof = typeof
 local _G = _G
 
@@ -476,3 +478,26 @@ UnityEngine.addComponent = addComponent
 UnityEngine.op_Equality = op_Equality
 UnityEngine.op_Inequality = op_Inequality
 UnityEngine.op_Implicit = op_Implicit
+
+function UnityEngine.bind(monoBehaviour, luaClass, serializeData)
+  T = getClass(luaClass)
+  assert(T)
+  local t = setmetatable({ ref = monoBehaviour }, T)
+  if serializeData and #serializeData > 0 then
+    local datas = loadstring(serializeData)()
+    local normals = datas[1]
+    if normals then
+      for k, v in pairs(normals) do
+        t[k] = v
+      end
+    end
+  end
+  t:Awake()
+  return t
+end
+
+
+
+
+
+

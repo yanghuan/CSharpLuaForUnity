@@ -11,15 +11,27 @@ namespace CSharpLua {
   [LuaAutoWrap]
   public sealed class BridgeMonoBehaviour : MonoBehaviour {
     public LuaTable Table { get; private set; }
-    public string Name;
+    public string LuaClass;
+    public string SerializeData;
 
     public void Bind(LuaTable table) {
       Table = table;
-      Name = (string)table["__name__"];
+      LuaClass = (string)table["__name__"];
+    }
+
+    internal void Bind(string luaClass, string serializeData) {
+      LuaClass = luaClass;
+      SerializeData = serializeData;
     }
 
     public Coroutine StartCoroutine(LuaTable routine) {
       return StartCoroutine(new LuaIEnumerator(routine));
+    }
+
+    private void Awake() {
+      if (!string.IsNullOrEmpty(LuaClass)) {
+        Table = CSharpLuaClient.Instance.BindLua(this);
+      }
     }
 
     private void Start() {
@@ -83,20 +95,34 @@ namespace CSharpLua {
   }
 
   public static class Consts {
-    public const bool IsRunFromLua = false;
+    public const bool IsRunFromLua = true;
   }
 
   public class CSharpLuaClient : LuaClient {
     public string[] Components;
+    private LuaFunction bindFn_;
+    public static new CSharpLuaClient Instance { get { return (CSharpLuaClient)LuaClient.Instance; } }
 
     protected override void OpenLibs() {
       base.OpenLibs();
       OpenCJson();
     }
 
+    public override void Destroy() {
+      if (bindFn_ != null) {
+        bindFn_.Dispose();
+        bindFn_ = null;
+      }
+      base.Destroy();
+    }
+
     protected override void StartMain() {
       if (Consts.IsRunFromLua) {
         base.StartMain();
+        bindFn_ = luaState.GetFunction("UnityEngine.bind");
+        if (bindFn_ == null) {
+          throw new ArgumentNullException();
+        }
         if (Components != null) {
           foreach (string type in Components) {
             using (var fn = luaState.GetFunction("UnityEngine.addComponent")) {
@@ -111,6 +137,10 @@ namespace CSharpLua {
           }
         }
       }
+    }
+
+    internal LuaTable BindLua(BridgeMonoBehaviour bridgeMonoBehaviour) {
+      return bindFn_.Invoke<BridgeMonoBehaviour, string, string, LuaTable>(bridgeMonoBehaviour, bridgeMonoBehaviour.LuaClass, bridgeMonoBehaviour.SerializeData);
     }
   }
 }

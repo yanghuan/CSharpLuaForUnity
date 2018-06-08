@@ -10,3 +10,8 @@ function error(str)
   end
   originalError(str)
 end
+
+toluaSystem = System
+require("CoreSystemLua.All")("CoreSystemLua", { time = tolua.gettime })
+require("UnityAdapter")
+require("CompiledScripts.manifest")("CompiledScripts")

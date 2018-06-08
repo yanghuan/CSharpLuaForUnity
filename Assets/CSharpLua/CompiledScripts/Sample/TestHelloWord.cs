@@ -15,23 +15,9 @@ namespace CSharpLua.Sample {
       print(c.name);
       c.Test();
 
-      
-      var obj = (GameObject)AssetDatabase.LoadMainAssetAtPath("Assets/CSharpLua/Examples/01_HelloWorld/TestLoader.prefab");
-      UserMonoBehaviourConverter.Do(obj);
-      var i = obj.GetComponent<TestHangingScript>();
-      string path = AssetDatabase.GetAssetPath(i.DataOfGameObject);
-      string path2 = GetGameObjectPath(i.DataOfGameObject);
-      print(path);
-      print(path2);
-    }
-
-    public static string GetGameObjectPath(GameObject obj) {
-      string path = "/" + obj.name;
-      while (obj.transform.parent != null) {
-        obj = obj.transform.parent.gameObject;
-        path = "/" + obj.name + path;
-      }
-      return path;
+      GameObject i = TestUtils.Load("Assets/CSharpLua/Examples/01_HelloWorld/TestLoader.prefab");
+      var obj = Instantiate(i);
+      obj.transform.parent = transform;
     }
   }
 }
