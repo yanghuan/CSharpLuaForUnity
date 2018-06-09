@@ -28,6 +28,17 @@ namespace CSharpLua {
       return StartCoroutine(new LuaIEnumerator(routine));
     }
 
+    public void RegisterUpdate(LuaFunction updateFn) {
+      StartCoroutine(StartUpdate(updateFn));
+    }
+
+    private IEnumerator StartUpdate(LuaFunction updateFn) {
+      while (true) {
+        yield return null;
+        updateFn.Call(Table);
+      }
+    }
+
     private void Awake() {
       if (!string.IsNullOrEmpty(LuaClass)) {
         Table = CSharpLuaClient.Instance.BindLua(this);
@@ -90,7 +101,7 @@ namespace CSharpLua {
     }
 
     public void Reset() {
-      throw new NotImplementedException();
+      throw new NotSupportedException();
     }
   }
 
@@ -123,9 +134,9 @@ namespace CSharpLua {
         if (bindFn_ == null) {
           throw new ArgumentNullException();
         }
-        if (Components != null) {
-          foreach (string type in Components) {
-            using (var fn = luaState.GetFunction("UnityEngine.addComponent")) {
+        if (Components != null && Components.Length > 0) {
+          using (var fn = luaState.GetFunction("UnityEngine.addComponent")) {
+            foreach (string type in Components) {
               fn.Call(gameObject, type);
             }
           }

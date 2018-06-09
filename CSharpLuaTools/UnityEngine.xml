@@ -24,6 +24,7 @@
         <method name="SendMessage" Baned="true" />
       </class>
       <class name="Object">
+        <method name="Instantiate" GenericArgCount="1" IgnoreGeneric="true" />
         <method name="op_Equality" Template="UnityEngine.op_Equality({0}, {1})" />
         <method name="op_Inequality" Template="UnityEngine.op_Inequality({0}, {1})" />
         <method name="op_Implicit" Template="UnityEngine.op_Implicit({0})" />

@@ -6,7 +6,7 @@ using System.Text;
 
 using UnityEngine;
 
-namespace CSharpLua.Sample {
+namespace Sample {
   public sealed class TestCoroutine : MonoBehaviour {
     public void Awake() {
       Debug.Log("TestCoroutine");
@@ -17,12 +17,12 @@ namespace CSharpLua.Sample {
     private IEnumerator OnTick() {
       while (true) {
         yield return new WaitForSeconds(1);
-        print("OnTick");
+        print("TestCoroutine.OnTick");
       }
     }
 
     public void Test() {
-      print("Test");
+      print("TestCoroutine.Test");
     }
   }
 }

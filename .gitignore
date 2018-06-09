@@ -29,4 +29,6 @@ sysinfo.txt
 .vs/
 Assets/Source/Generate
 Packages
+ProjectSettings
 CSharpLuaTools/update_csharp.lua.cmd
+/Assets/CSharpLua/Temp.meta

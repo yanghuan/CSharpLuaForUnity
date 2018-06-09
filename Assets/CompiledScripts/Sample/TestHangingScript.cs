@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-namespace CSharpLua.Sample {
+namespace Sample {
   public class TestHangingScript : MonoBehaviour {
     public string DataOfString;
     public int DataOfInt;

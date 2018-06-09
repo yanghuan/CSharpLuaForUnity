@@ -11,7 +11,7 @@ using UnityEngine;
 namespace CSharpLua {
   public static class Compiler {
     private const string kDotnet = "dotnet";
-    private static readonly string compiledScriptDir_ = Application.dataPath + "/CSharpLua/CompiledScripts/";
+    private static readonly string compiledScriptDir_ = Application.dataPath + "/CompiledScripts/";
     private static readonly string outDir_ = Application.dataPath + "/Lua/CompiledScripts/";
     private static readonly string toolsDir_ = Application.dataPath + "/../CSharpLuaTools";
     private static readonly string csharpLua_ = toolsDir_ + "/CSharp.lua/CSharp.lua.Launcher.dll";
@@ -60,5 +60,21 @@ namespace CSharpLua {
       }
     }
   }
+
+#if UNITY_2018
+  [InitializeOnLoad]
+  public class EditorQuitHandler {
+    static void Quit() {
+      string tempDir = Application.dataPath + "/CSharpLua/Temp";
+      if (Directory.Exists(tempDir)) {
+        Directory.Delete(tempDir, true);
+      }
+    }
+
+    static EditorQuitHandler() {
+      EditorApplication.quitting += Quit;
+    }
+  }
+#endif
 }
 

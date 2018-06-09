@@ -9,8 +9,8 @@ return function (dir)
   load("Sample.TestHelloWord")
 
   System.init({
-    "CSharpLua.Sample.TestCoroutine", 
-    "CSharpLua.Sample.TestHangingScript", 
-    "CSharpLua.Sample.TestHelloWord"
+    "Sample.TestCoroutine", 
+    "Sample.TestHangingScript", 
+    "Sample.TestHelloWord"
   })
 end

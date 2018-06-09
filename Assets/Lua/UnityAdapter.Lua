@@ -35,11 +35,7 @@ local Debug = {
 System.define("UnityEngine.Debug", Debug)
 
 local MonoBehaviour = {
-  __kind__ = "C",
-  __ctor__ = function (this, monoBehaviour)
-    this.ref = monoBehaviour
-    monoBehaviour:Bind(this)
-  end,
+  __ctor__ = false,
   Awake = function (this)
   end,
   Start = function (this)
@@ -207,6 +203,28 @@ local MonoBehaviour = {
   end,
 }
 
+function MonoBehaviour.__ctor__(this, bridgeMonoBehaviour, isFromConverter, serializeData)
+  this.ref = bridgeMonoBehaviour
+  if not isFromConverter then
+    bridgeMonoBehaviour:Bind(this)
+  else
+    if serializeData and #serializeData > 0 then
+      local datas = loadstring(serializeData)()
+      local normals = datas[1]
+      if normals then
+        for k, v in pairs(normals) do
+          this[k] = v
+        end
+      end
+    end
+  end
+  local update = this.Update
+  if update and type(update) == "function" then
+    bridgeMonoBehaviour:RegisterUpdate(update)
+  end
+  this:Awake()
+end
+
 System.define("MonoBehaviour", MonoBehaviour)
 
 local function isFromCSharp(T)
@@ -247,11 +265,13 @@ local function getComponent(component, T)
       return getBridgeComponent(sourceGetComponents, component, T)
     end    
   elseif type(T) == "string" then
-    T = getClass(T)
-    if T ~= nil then
-      return getBridgeComponent(gameObject, T)
+    local cls = getClass(T)
+    if cls ~= nil then
+      return getBridgeComponent(gameObject, cls)
     else
-      return sourceGetComponent(sourceGetComponents, gameObject, typeof(T))
+      local type_ = typeof(T)
+      assert(type_, T .. " is not found")
+      return sourceGetComponent(sourceGetComponents, gameObject, type_)
     end
   else
     return getBridgeComponent(sourceGetComponents, component, T)
@@ -392,9 +412,7 @@ local sourceAddComponent = rawget(metatableOfGameObject, "AddComponent")
 
 local function addBridgeMonoBehaviour(gameObject, T)
   local monoBehaviour = sourceAddComponent(gameObject, typeof(BridgeMonoBehaviour))
-  local t = T(monoBehaviour)
-  t:Awake()
-  return t
+  return T(monoBehaviour)
 end
 
 local function addComponent(gameObject, T)
@@ -409,11 +427,13 @@ local function addComponent(gameObject, T)
       return addBridgeMonoBehaviour(gameObject, T)
     end
   elseif type(T) == "string" then
-    T = getClass(T)  
-    if T ~= nil then
-      return addBridgeMonoBehaviour(gameObject, T)
+    local cls = getClass(T)  
+    if cls ~= nil then
+      return addBridgeMonoBehaviour(gameObject, cls)
     else
-      return sourceAddComponent(gameObject, typeof(T))
+      local type_ = typeof(T)
+      assert(type_, T .. " is not found")
+      return sourceAddComponent(gameObject, type_)
     end
   else
     return addBridgeMonoBehaviour(gameObject, T)
@@ -481,19 +501,8 @@ UnityEngine.op_Implicit = op_Implicit
 
 function UnityEngine.bind(monoBehaviour, luaClass, serializeData)
   T = getClass(luaClass)
-  assert(T)
-  local t = setmetatable({ ref = monoBehaviour }, T)
-  if serializeData and #serializeData > 0 then
-    local datas = loadstring(serializeData)()
-    local normals = datas[1]
-    if normals then
-      for k, v in pairs(normals) do
-        t[k] = v
-      end
-    end
-  end
-  t:Awake()
-  return t
+  assert(T, luaClass .. " is not found")
+  return T(monoBehaviour, true, serializeData)
 end
 
 

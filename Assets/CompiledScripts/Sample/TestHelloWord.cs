@@ -6,7 +6,7 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-namespace CSharpLua.Sample {
+namespace Sample {
   public sealed class TestHelloWord : MonoBehaviour {
     public void Awake() {
       Debug.Log("TestHelloWord");
@@ -18,6 +18,14 @@ namespace CSharpLua.Sample {
       GameObject i = TestUtils.Load("Assets/CSharpLua/Examples/01_HelloWorld/TestLoader.prefab");
       var obj = Instantiate(i);
       obj.transform.parent = transform;
+    }
+
+    public void Start() {
+      print("TestHelloWord.Start");
+    }
+
+    public void Update() {
+      print("TestHelloWord.Update");
     }
   }
 }
