@@ -11,6 +11,8 @@ public class CSharpLua_BridgeMonoBehaviourWrap
 		L.RegFunction("StartCoroutine", StartCoroutine);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
+		L.RegVar("LuaClass", get_LuaClass, set_LuaClass);
+		L.RegVar("SerializeData", get_SerializeData, set_SerializeData);
 		L.RegVar("Table", get_Table, null);
 		L.RegFunction("getTable", get_Table);
 		L.EndClass();
@@ -103,6 +105,44 @@ public class CSharpLua_BridgeMonoBehaviourWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_LuaClass(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			CSharpLua.BridgeMonoBehaviour obj = (CSharpLua.BridgeMonoBehaviour)o;
+			string ret = obj.LuaClass;
+			LuaDLL.lua_pushstring(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index LuaClass on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_SerializeData(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			CSharpLua.BridgeMonoBehaviour obj = (CSharpLua.BridgeMonoBehaviour)o;
+			string ret = obj.SerializeData;
+			LuaDLL.lua_pushstring(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index SerializeData on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_Table(IntPtr L)
 	{
 		object o = null;
@@ -118,6 +158,44 @@ public class CSharpLua_BridgeMonoBehaviourWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o, "attempt to index Table on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_LuaClass(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			CSharpLua.BridgeMonoBehaviour obj = (CSharpLua.BridgeMonoBehaviour)o;
+			string arg0 = ToLua.CheckString(L, 2);
+			obj.LuaClass = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index LuaClass on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_SerializeData(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			CSharpLua.BridgeMonoBehaviour obj = (CSharpLua.BridgeMonoBehaviour)o;
+			string arg0 = ToLua.CheckString(L, 2);
+			obj.SerializeData = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index SerializeData on a nil value");
 		}
 	}
 }

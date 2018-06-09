@@ -15,13 +15,9 @@ System.namespace("CSharpLua.Sample", function (namespace)
       MonoBehaviour.print(c:getname())
       c:Test()
 
-      --[[
-      var obj = (GameObject)AssetDatabase.LoadMainAssetAtPath("Assets/CSharpLua/Examples/01_HelloWorld/TestLoader.prefab");
-      var i = obj.GetComponent<TestHangingScript>();
-      string path = AssetDatabase.GetAssetPath(i.DataOfGameObject);
-      string path2 = GetGameObjectPath(i.DataOfGameObject);
-      print(path);
-      print(path2);]]
+      local i = TestUtils.Load("Assets/CSharpLua/Examples/01_HelloWorld/TestLoader.prefab")
+      local obj = UnityEngine.Object.Instantiate(i)
+      obj:gettransform():setparent(this:gettransform())
     end
     GetGameObjectPath = function (obj) 
       local path = "/" .. obj:getname()

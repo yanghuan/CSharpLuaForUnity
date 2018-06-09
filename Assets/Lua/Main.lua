@@ -1,8 +1,4 @@
-require("functions")
-toluaSystem = System
-require("CoreSystemLua.All")("CoreSystemLua", { time = tolua.gettime })
-require("UnityAdapter")
-require("CompiledScript.manifest")("CompiledScript")
+require("Classloader")
 
 --主入口函数。从这里开始lua逻辑
 function Main()					

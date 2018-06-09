@@ -8,7 +8,6 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
-
 namespace CSharpLua {
   public static class Compiler {
     private const string kDotnet = "dotnet";
@@ -29,6 +28,7 @@ namespace CSharpLua {
       List<string> libs = new List<string>();
       AssemblyName assemblyName = Assembly.GetExecutingAssembly().GetReferencedAssemblies().Single(i => i.FullName.Contains("Assembly-CSharp"));
       Assembly assembly = Assembly.Load(assemblyName);
+      libs.Add(assembly.Location);
       foreach (var referenced in assembly.GetReferencedAssemblies()) {
         if(referenced.Name != "mscorlib" && !referenced.Name.StartsWith("System")) {
           string libPath = Assembly.Load(referenced).Location;

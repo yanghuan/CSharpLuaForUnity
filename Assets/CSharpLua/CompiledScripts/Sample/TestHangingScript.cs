@@ -10,9 +10,14 @@ namespace CSharpLua.Sample {
     public int DataOfInt;
     public GameObject DataOfGameObject;
     public string DataOfString2 = "ddddd";
+    public int a = 10;
 
     public void Awake() {
       print("Awake");
+      print(DataOfString);
+      print(DataOfInt);
+      print(DataOfString2);
+      print(a);
     }
 
     public void Start() {
