@@ -216,6 +216,13 @@ function MonoBehaviour.__ctor__(this, bridgeMonoBehaviour, isFromConverter, seri
           this[k] = v
         end
       end
+      local objects = datas[2]
+      if objects then
+        local serializeObjects = bridgeMonoBehaviour.SerializeObjects 
+        for k, v in pairs(objects) do
+          this[k] = serializeObjects[v]
+        end 
+      end
     end
   end
   local update = this.Update
@@ -504,9 +511,3 @@ function UnityEngine.bind(monoBehaviour, luaClass, serializeData)
   assert(T, luaClass .. " is not found")
   return T(monoBehaviour, true, serializeData)
 end
-
-
-
-
-
-

@@ -8,9 +8,10 @@ namespace Sample {
   public class TestHangingScript : MonoBehaviour {
     public string DataOfString;
     public int DataOfInt;
-    public GameObject DataOfGameObject;
     public string DataOfString2 = "ddddd";
     public int a = 10;
+    public GameObject DataOfGameObject;
+    public UnityEngine.Object DateOfObject;
 
     public void Awake() {
       print("Awake");

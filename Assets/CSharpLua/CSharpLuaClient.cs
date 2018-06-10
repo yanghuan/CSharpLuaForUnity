@@ -13,15 +13,17 @@ namespace CSharpLua {
     public LuaTable Table { get; private set; }
     public string LuaClass;
     public string SerializeData;
+    public UnityEngine.Object[] SerializeObjects;
 
     public void Bind(LuaTable table) {
       Table = table;
       LuaClass = (string)table["__name__"];
     }
 
-    internal void Bind(string luaClass, string serializeData) {
+    internal void Bind(string luaClass, string serializeData, UnityEngine.Object[] serializeObjects) {
       LuaClass = luaClass;
       SerializeData = serializeData;
+      SerializeObjects = serializeObjects;
     }
 
     public Coroutine StartCoroutine(LuaTable routine) {
@@ -52,7 +54,7 @@ namespace CSharpLua {
     }
   }
 
-  public sealed class LuaIEnumerator : IEnumerator, IDisposable {
+  internal sealed class LuaIEnumerator : IEnumerator, IDisposable {
     private LuaTable table_;
     private LuaFunction current_;
     private LuaFunction moveNext_;

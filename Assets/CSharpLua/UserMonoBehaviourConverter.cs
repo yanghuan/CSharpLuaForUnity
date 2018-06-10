@@ -14,9 +14,10 @@ namespace CSharpLua {
   public sealed class UserMonoBehaviourConverter {
     private sealed class SerializeFieldsInfo {
       public Dictionary<string, object> Normals = new Dictionary<string, object>();
+      public Dictionary<string, UnityEngine.Object> Objects = new Dictionary<string, UnityEngine.Object>();
 
-      public override string ToString() {
-        bool isEmpty = Normals.Count == 0;
+      public string GetSerializeData() {
+        bool isEmpty = Normals.Count == 0 && Objects.Count == 0;
         StringBuilder sb = new StringBuilder();
         if (!isEmpty) {
           sb.Append("return{");
@@ -32,10 +33,29 @@ namespace CSharpLua {
             sb.Append('=');
             sb.Append(ValueToString(normal.Value));
           }
+          sb.Append("},");
+          sb.Append('{');
+          isFirst = true;
+          int objectIndex = 0;
+          foreach (string key in Objects.Keys) {
+            if (isFirst) {
+              isFirst = false;
+            } else {
+              sb.Append(',');
+            }
+            sb.Append(key);
+            sb.Append('=');
+            sb.Append(objectIndex);
+            ++objectIndex;
+          }
           sb.Append('}');
           sb.Append('}');
         }
         return sb.ToString();
+      }
+
+      public UnityEngine.Object[] GetSerializeObjects() {
+        return Objects.Count > 0 ? Objects.Values.ToArray() : null;
       }
 
       private static string ValueToString(object v) {
@@ -54,7 +74,6 @@ namespace CSharpLua {
     private static UserMonoBehaviourConverter default_;
 
     private HashSet<string> userDefinedNames_;
-    private DateTime lastLoadNamesTime_;
     private LuaState luaState_;
 
     public UserMonoBehaviourConverter() {
@@ -84,12 +103,19 @@ namespace CSharpLua {
       }
     }
 
+    private void Throw<T>(string message) where T : Exception {
+      if (Application.isPlaying) {
+        UnityEngine.Debug.Break();
+      }
+      throw (Exception)Activator.CreateInstance(typeof(T), message);
+    }
+
     private void LoadClassNames() {
       const string kBeginToken = "System.init({";
       const string kEndToken = "})";
 
       if (!File.Exists(compiledScriptsManifestPath_)) {
-        throw new InvalidOperationException("please compiled scripts first");
+        Throw<InvalidOperationException>("please compiled scripts first");
       }
 
       string content = File.ReadAllText(compiledScriptsManifestPath_);
@@ -105,7 +131,6 @@ namespace CSharpLua {
 
       var userDefines = content.Substring(begin, end - begin).Split(',').Select(i => i.Trim().Trim('"')).ToArray();
       userDefinedNames_ = new HashSet<string>(userDefines);
-      lastLoadNamesTime_ = DateTime.Now;
     }
 
     private static void CopyTempPrefab(ref GameObject prefab) {
@@ -124,8 +149,7 @@ namespace CSharpLua {
     }
 
     private List<Transform> GetChildrenTransform(Transform parent) {
-      List<Transform> list = new List<Transform>();
-      list.Add(parent);
+      List<Transform> list = new List<Transform> { parent };
       GetChildrenTransform(list, parent);
       return list;
     }
@@ -180,8 +204,14 @@ namespace CSharpLua {
         GameObject gameObject = monoBehaviour.gameObject;
         UnityEngine.Object.DestroyImmediate(monoBehaviour, true);
         var bridgeMonoBehaviour = gameObject.AddComponent<BridgeMonoBehaviour>();
-        bridgeMonoBehaviour.Bind(className, info.ToString());
+        bridgeMonoBehaviour.Bind(className, info.GetSerializeData(), info.GetSerializeObjects());
       }
+    }
+
+    private bool IsSameRootGameObject(GameObject x, GameObject y) {
+      string pathX = AssetDatabase.GetAssetPath(x);
+      string pathY = AssetDatabase.GetAssetPath(y);
+      return pathX == pathY;
     }
 
     private void Convert(MonoBehaviour monoBehaviour, LuaTable luaClass, FieldInfo field, SerializeFieldsInfo info) {
@@ -206,6 +236,31 @@ namespace CSharpLua {
             if (!EqualityComparer<object>.Default.Equals(x, y)) {
               info.Normals.Add(field.Name, x);
             }
+            break;
+          }
+        case TypeCode.Object: {
+            object x = field.GetValue(monoBehaviour);
+            if (x != null) {
+              var obj = x as UnityEngine.Object;
+              if (obj != null) {
+                var gameObject = obj as GameObject;
+                if (gameObject != null) {
+                  if (!IsSameRootGameObject(monoBehaviour.gameObject, gameObject)) {
+                    Do(ref gameObject);
+                    obj = gameObject;
+                  }
+                }
+                info.Objects.Add(field.Name, obj);
+              } else {
+                if (fieldType.IsDefined(typeof(SerializableAttribute))) {
+                  Throw<NotImplementedException>($"{monoBehaviour.GetType()}'s field[{field.Name}] type[{fieldType}] not implemented serialized");
+                }
+              }
+            }
+            break;
+          }
+        default: {
+            Throw<NotSupportedException>($"{monoBehaviour.GetType()}'s field[{field.Name}] type[{fieldType}] not support serialized");
             break;
           }
       }
