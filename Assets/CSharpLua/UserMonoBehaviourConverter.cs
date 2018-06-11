@@ -103,11 +103,10 @@ namespace CSharpLua {
       }
     }
 
-    private void Throw<T>(string message) where T : Exception {
+    private void PauseEdit() {
       if (Application.isPlaying) {
         UnityEngine.Debug.Break();
       }
-      throw (Exception)Activator.CreateInstance(typeof(T), message);
     }
 
     private void LoadClassNames() {
@@ -115,7 +114,8 @@ namespace CSharpLua {
       const string kEndToken = "})";
 
       if (!File.Exists(compiledScriptsManifestPath_)) {
-        Throw<InvalidOperationException>("please compiled scripts first");
+        PauseEdit();
+        throw new InvalidOperationException("please compiled scripts first");
       }
 
       string content = File.ReadAllText(compiledScriptsManifestPath_);
@@ -190,6 +190,7 @@ namespace CSharpLua {
       string className = type.FullName;
       using (var luaClass = luaState_.GetTable(className)) {
         if (luaClass == null) {
+          PauseEdit();
           throw new InvalidOperationException($"{className} is not found in lua env");
         }
 
@@ -239,29 +240,32 @@ namespace CSharpLua {
             break;
           }
         case TypeCode.Object: {
-            object x = field.GetValue(monoBehaviour);
-            if (x != null) {
-              var obj = x as UnityEngine.Object;
-              if (obj != null) {
-                var gameObject = obj as GameObject;
-                if (gameObject != null) {
-                  if (!IsSameRootGameObject(monoBehaviour.gameObject, gameObject)) {
-                    Do(ref gameObject);
-                    obj = gameObject;
+            if (typeof(UnityEngine.Object).IsAssignableFrom(fieldType)) {
+              object x = field.GetValue(monoBehaviour);
+              if (x != null) {
+                var obj = x as UnityEngine.Object;
+                if (obj != null) {
+                  var gameObject = obj as GameObject;
+                  if (gameObject != null) {
+                    if (!IsSameRootGameObject(monoBehaviour.gameObject, gameObject)) {
+                      Do(ref gameObject);
+                      obj = gameObject;
+                    }
                   }
-                }
-                info.Objects.Add(field.Name, obj);
-              } else {
-                if (fieldType.IsDefined(typeof(SerializableAttribute))) {
-                  Throw<NotImplementedException>($"{monoBehaviour.GetType()}'s field[{field.Name}] type[{fieldType}] not implemented serialized");
-                }
+                  info.Objects.Add(field.Name, obj);
+                } 
+              }
+            } else {
+              if (fieldType.IsDefined(typeof(SerializableAttribute), true)) {
+                PauseEdit();
+                throw new NotImplementedException($"{monoBehaviour.GetType()}'s field[{field.Name}] type[{fieldType}] not implemented serialized");
               }
             }
             break;
           }
         default: {
-            Throw<NotSupportedException>($"{monoBehaviour.GetType()}'s field[{field.Name}] type[{fieldType}] not support serialized");
-            break;
+            PauseEdit();
+            throw new NotSupportedException($"{monoBehaviour.GetType()}'s field[{field.Name}] type[{fieldType}] not support serialized");
           }
       }
     }

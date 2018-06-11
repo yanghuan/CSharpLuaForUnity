@@ -108,7 +108,7 @@ namespace CSharpLua {
   }
 
   public static class Consts {
-    public const bool IsRunFromLua = true;
+    public const bool IsRunFromLua = false;
   }
 
   public class CSharpLuaClient : LuaClient {

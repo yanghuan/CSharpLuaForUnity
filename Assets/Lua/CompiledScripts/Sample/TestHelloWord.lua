@@ -11,24 +11,26 @@ System.namespace("Sample", function (namespace)
     Awake = function (this) 
       UnityEngine.Debug.Log("TestHelloWord")
       this:getgameObject():AddComponent(Sample.TestCoroutine)
-      local c = this:GetComponent(Sample.TestCoroutine)
-      MonoBehaviour.print(c:getname())
-      c:Test()
+      local c = this:GetComponent(UnityEngine.MonoBehaviour)
+      UnityEngine.MonoBehaviour.print(c:getname())
+
+      local obj1 = UnityEngine.Object.FindObjectOfType(UnityEngine.MonoBehaviour)
+      UnityEngine.Object.Destroy(obj1)
 
       local i = TestUtils.Load("Assets/CSharpLua/Examples/01_HelloWorld/TestLoader.prefab")
       local obj = UnityEngine.Object.Instantiate(i)
       obj:gettransform():setparent(this:gettransform())
     end
     Start = function (this) 
-      MonoBehaviour.print("TestHelloWord.Start")
+      UnityEngine.MonoBehaviour.print("TestHelloWord.Start")
     end
     Update = function (this) 
-      MonoBehaviour.print("TestHelloWord.Update")
+      UnityEngine.MonoBehaviour.print("TestHelloWord.Update")
     end
     return {
       __inherits__ = function (global) 
         return {
-          global.MonoBehaviour
+          global.UnityEngine.MonoBehaviour
         }
       end, 
       Awake = Awake, 

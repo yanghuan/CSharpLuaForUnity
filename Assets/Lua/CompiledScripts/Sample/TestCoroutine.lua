@@ -7,23 +7,23 @@ System.namespace("Sample", function (namespace)
     Awake = function (this) 
       UnityEngine.Debug.Log("TestCoroutine")
       this:StartCoroutine(OnTick(this))
-      MonoBehaviour.print(this:getgameObject():getname())
+      UnityEngine.MonoBehaviour.print(this:getgameObject():getname())
     end
     OnTick = function (this) 
       return System.yieldIEnumerator(function (this) 
         while true do
           System.yieldReturn(UnityEngine.WaitForSeconds(1))
-          MonoBehaviour.print("TestCoroutine.OnTick")
+          UnityEngine.MonoBehaviour.print("TestCoroutine.OnTick")
         end
       end, System.Object, this)
     end
     Test = function (this) 
-      MonoBehaviour.print("TestCoroutine.Test")
+      UnityEngine.MonoBehaviour.print("TestCoroutine.Test")
     end
     return {
       __inherits__ = function (global) 
         return {
-          global.MonoBehaviour
+          global.UnityEngine.MonoBehaviour
         }
       end, 
       Awake = Awake, 

@@ -11,9 +11,11 @@ namespace Sample {
     public void Awake() {
       Debug.Log("TestHelloWord");
       gameObject.AddComponent<TestCoroutine>();
-      var c = GetComponent<TestCoroutine>();
+      var c = GetComponent<MonoBehaviour>();
       print(c.name);
-      c.Test();
+
+      var obj1 = FindObjectOfType<MonoBehaviour>();
+      Destroy(obj1);
 
       GameObject i = TestUtils.Load("Assets/CSharpLua/Examples/01_HelloWorld/TestLoader.prefab");
       var obj = Instantiate(i);

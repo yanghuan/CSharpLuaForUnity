@@ -242,6 +242,16 @@ local function isSystemType(t)
   return getmetatable(t) == SystemType
 end
 
+local typeofBridgeMonoBehaviour = typeof(BridgeMonoBehaviour)
+local isInstanceOfType = typeofBridgeMonoBehaviour.IsInstanceOfType 
+
+local function checkBridgeMonoBehaviour(t)
+  if isInstanceOfType(typeofBridgeMonoBehaviour, t) then
+    t = t.Table
+  end
+  return t
+end
+
 local metatableOfComponent = getmetatable(UnityEngine.Component)
 local sourceGetComponent = rawget(metatableOfComponent, "GetComponent")
 local sourceGetComponentInChildren = rawget(metatableOfComponent, "GetComponentInChildren")
@@ -251,7 +261,7 @@ local sourceGetComponentsInChildren = rawget(metatableOfComponent, "GetComponent
 local sourceGetComponentsInParent = rawget(metatableOfComponent, "GetComponentsInParent")
 
 local function getBridgeComponent(sourceGetComponents, component, T, ...)
-  local coms = sourceGetComponents(component, typeof(BridgeMonoBehaviour), ...)
+  local coms = sourceGetComponents(component, typeofBridgeMonoBehaviour, ...)
   for i = 0, coms.Length - 1 do
     local t = coms[i].Table
     if is(t, T) then
@@ -262,23 +272,19 @@ end
 
 local function getComponent(component, T)
   if T == nil then throw(ArgumentNullException("type")) end
-  if isFromCSharp(T) then
-    return sourceGetComponent(component, typeof(T))
-  elseif isSystemType(T) then
+  if isSystemType(T) then
     T = T.c
-    if isFromCSharp(T) then
-      return sourceGetComponent(component, typeof(T))   
-    else
-      return getBridgeComponent(sourceGetComponents, component, T)
-    end    
+  end  
+  if isFromCSharp(T) then
+    return sourceGetComponent(component, typeof(T))   
   elseif type(T) == "string" then
     local cls = getClass(T)
     if cls ~= nil then
-      return getBridgeComponent(gameObject, cls)
+      return checkBridgeMonoBehaviour(getBridgeComponent(sourceGetComponents, component, cls))
     else
       local type_ = typeof(T)
       assert(type_, T .. " is not found")
-      return sourceGetComponent(sourceGetComponents, gameObject, type_)
+      return checkBridgeMonoBehaviour(sourceGetComponent(component, type_))
     end
   else
     return getBridgeComponent(sourceGetComponents, component, T)
@@ -302,7 +308,7 @@ local function getComponentInChildren(component, T, includeInactive)
     end
   end
   if isFromCSharp(T) then
-    return sourceGetComponentInChildren(component, typeof(T), includeInactive)
+    return checkBridgeMonoBehaviour(sourceGetComponentInChildren(component, typeof(T), includeInactive))
   end
     return getBridgeComponent(sourceGetComponentsInChildren, component, T, includeInactive)
 end
@@ -315,16 +321,13 @@ local function getComponentInParent(component, T)
     T = T.c 
   end
   if isFromCSharp(T) then
-    return sourceGetComponentInParent(component, typeof(T))
+    return checkBridgeMonoBehaviour(sourceGetComponentInParent(component, typeof(T)))
   else
     return getBridgeComponent(sourceGetComponentsInParent, component, T, false)
   end  
 end
 
 rawset(metatableOfComponent, "GetComponentInParent", getComponentInParent)
-
-local typeofBridgeMonoBehaviour = typeof(BridgeMonoBehaviour)
-local isInstanceOfType = typeofBridgeMonoBehaviour.IsInstanceOfType 
 
 local function getBridgeComponents(sourceGetComponents, component, T, results, ...)
   hasReturn = results == nil
@@ -335,13 +338,10 @@ local function getBridgeComponents(sourceGetComponents, component, T, results, .
     local coms = sourceGetComponents(component, typeof(T), ...)
     for i = 0, coms.Length - 1 do
       local t = coms[i]
-      if isInstanceOfType(typeofBridgeMonoBehaviour, t) then
-        t = t.Table
-      end
-      results:Add(t)
+      results:Add(checkBridgeMonoBehaviour(t))
     end
   else
-    local coms = sourceGetComponents(component, typeof(BridgeMonoBehaviour), ...)
+    local coms = sourceGetComponents(component, typeofBridgeMonoBehaviour, ...)
     for i = 0, coms.Length - 1 do
       local t = coms[i].Table
       if is(t, T) then
@@ -418,21 +418,17 @@ local metatableOfGameObject = getmetatable(UnityEngine.GameObject)
 local sourceAddComponent = rawget(metatableOfGameObject, "AddComponent")
 
 local function addBridgeMonoBehaviour(gameObject, T)
-  local monoBehaviour = sourceAddComponent(gameObject, typeof(BridgeMonoBehaviour))
+  local monoBehaviour = sourceAddComponent(gameObject, typeofBridgeMonoBehaviour)
   return T(monoBehaviour)
 end
 
 local function addComponent(gameObject, T)
   if T == nil then throw(ArgumentNullException("type")) end
+  if isSystemType(T) then
+    T = T.c
+  end  
   if isFromCSharp(T) then
     return sourceAddComponent(gameObject, typeof(T))
-  elseif isSystemType(T) then
-    T = T.c
-    if isFromCSharp(T) then
-      return sourceAddComponent(gameObject, typeof(T))
-    else
-      return addBridgeMonoBehaviour(gameObject, T)
-    end
   elseif type(T) == "string" then
     local cls = getClass(T)  
     if cls ~= nil then
@@ -450,7 +446,105 @@ end
 rawset(metatableOfGameObject, "AddComponent", addComponent)
 
 local metatableOfObject = getmetatable(UnityEngine.Object)
+local sourceDestroy = rawget(metatableOfObject, "Destroy")
+local sourceDestroyImmediate = rawget(metatableOfObject, "DestroyImmediate")
+local sourceDontDestroyOnLoad = rawget(metatableOfObject, "DontDestroyOnLoad")
+local sourceFindObjectOfType = rawget(metatableOfObject, "FindObjectOfType")
+local sourceFindObjectsOfType = rawget(metatableOfObject, "FindObjectsOfType")
+local sourceFindObjectsOfTypeAll = rawget(metatableOfObject, "FindObjectsOfTypeAll")
+local sourceFindObjectsOfTypeIncludingAssets = rawget(metatableOfObject, "FindObjectsOfTypeIncludingAssets")
+local sourceFindSceneObjectsOfType = rawget(metatableOfObject, "FindSceneObjectsOfType")
 local source__eq = rawget(metatableOfObject, "__eq")
+
+local function destroy(obj, t)
+  if obj and not isFromCSharp(obj) then
+    obj = assert(obj.ref)
+  end
+  if t then
+    sourceDestroy(obj, t)
+  else
+    sourceDestroy(obj)  
+  end  
+end
+
+local function destroyImmediate(obj, t)
+  if obj and not isFromCSharp(obj) then
+    obj = assert(obj.ref)
+  end
+  if t then
+    sourceDestroyImmediate(obj, t)
+  else
+    sourceDestroyImmediate(obj)  
+  end  
+end
+
+local function dontDestroyOnLoad(target)
+  if obj and not isFromCSharp(obj) then
+    obj = assert(obj.ref)
+  end
+  sourceDontDestroyOnLoad(target)
+end
+
+local function findObjectOfType(T)
+  if T == nil then throw(ArgumentNullException("type")) end
+  if isSystemType(T) then
+    T = T.c
+  end
+  if isFromCSharp(T) then
+    return checkBridgeMonoBehaviour(sourceFindObjectOfType(typeof(T)))
+  else
+    local objs = sourceFindObjectsOfType(typeofBridgeMonoBehaviour)
+    for i = 0, objs.Length - 1 do
+      local t = coms[i].Table
+      if is(t, T) then
+        return t
+      end
+    end
+  end
+end
+
+local function findBridgeObjectsOfType(sourceFindObjectsOfType, T)
+  local results = SystemList(T)
+  if isFromCSharp(T) then
+    local objs = sourceFindObjectsOfType(typeof(T))
+    for i = 0, objs.Length - 1 do
+      local t = objs[i]
+      results:Add(checkBridgeMonoBehaviour(t))
+    end
+  else
+    local objs = sourceFindObjectsOfType(typeofBridgeMonoBehaviour)
+    for i = 0, coms.Length - 1 do
+      local t = coms[i].Table
+      if is(t, T) then
+        results:Add(t)
+      end
+    end
+  end
+  return arrayFromList(results)
+end
+
+local function findObjectsOfType(T)
+  if T == nil then throw(ArgumentNullException("type")) end
+  if isSystemType(T) then
+    T = T.c
+  end
+  return findBridgeObjectsOfType(sourceFindObjectsOfType, T)
+end
+
+local function findObjectsOfTypeAll(t)
+  if t == nil then throw(ArgumentNullException("type")) end
+  return findBridgeObjectsOfType(sourceFindObjectsOfTypeAll, t.c)
+end
+
+local function findObjectsOfTypeIncludingAssets(t)
+  if t == nil then throw(ArgumentNullException("type")) end
+  return findBridgeObjectsOfType(sourceFindObjectsOfTypeIncludingAssets, t.c)
+end
+
+local function findSceneObjectsOfType(t)
+  if t == nil then throw(ArgumentNullException("type")) end
+  return findBridgeObjectsOfType(sourceFindSceneObjectsOfType, t.c)
+end
 
 local function op_Equality(x, y)
   if x == nil and y == nil then
@@ -485,6 +579,14 @@ local function equalsObj(this, other)
   this:Equals(other)
 end
 
+rawset(metatableOfObject, "Destroy", destroy)
+rawset(metatableOfObject, "DestroyImmediate", destroyImmediate)
+rawset(metatableOfObject, "DontDestroyOnLoad", dontDestroyOnLoad)
+rawset(metatableOfObject, "FindObjectOfType", findObjectOfType)
+rawset(metatableOfObject, "FindObjectsOfType", findObjectsOfType)
+rawset(metatableOfObject, "FindObjectsOfTypeAll", findObjectsOfTypeAll)
+rawset(metatableOfObject, "FindObjectsOfTypeIncludingAssets", findObjectsOfTypeIncludingAssets)
+rawset(metatableOfObject, "FindSceneObjectsOfType", findSceneObjectsOfType)
 rawset(metatableOfObject, "EqualsObj", equalsObj)
 
 local metatableOfSystemObject = getmetatable(toluaSystem.Object)
