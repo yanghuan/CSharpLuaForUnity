@@ -10,6 +10,8 @@ using LuaInterface;
 namespace CSharpLua {
   [LuaAutoWrap]
   public sealed class BridgeMonoBehaviour : MonoBehaviour {
+    private static readonly YieldInstruction[] updateYieldInstructions_ = new YieldInstruction[] { null, new WaitForFixedUpdate(), new WaitForEndOfFrame() };
+
     public LuaTable Table { get; private set; }
     public string LuaClass;
     public string SerializeData;
@@ -30,13 +32,13 @@ namespace CSharpLua {
       return StartCoroutine(new LuaIEnumerator(routine));
     }
 
-    public void RegisterUpdate(LuaFunction updateFn) {
-      StartCoroutine(StartUpdate(updateFn));
+    public void RegisterUpdate(int instructionIndex, LuaFunction updateFn) {
+      StartCoroutine(StartUpdate(updateFn, updateYieldInstructions_[instructionIndex]));
     }
 
-    private IEnumerator StartUpdate(LuaFunction updateFn) {
+    private IEnumerator StartUpdate(LuaFunction updateFn, YieldInstruction yieldInstruction) {
       while (true) {
-        yield return null;
+        yield return yieldInstruction;
         updateFn.Call(Table);
       }
     }
@@ -108,7 +110,7 @@ namespace CSharpLua {
   }
 
   public static class Consts {
-    public const bool IsRunFromLua = false;
+    public const bool IsRunFromLua = true;
   }
 
   public class CSharpLuaClient : LuaClient {

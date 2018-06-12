@@ -30,7 +30,25 @@
         <method name="op_Equality" Template="UnityEngine.op_Equality({0}, {1})" />
         <method name="op_Inequality" Template="UnityEngine.op_Inequality({0}, {1})" />
         <method name="op_Implicit" Template="UnityEngine.op_Implicit({0})" />
-      </class> 
+      </class>
+      <class name="Vector2">
+        <method name="Normalize" Template="this = this:Normalize()" />
+        <method name="Scale" Template="this = this:Scale({0})" />
+        <method name="Set" Template="this = this.__clone__() this:Set({0}, {1})" />
+        <method name="op_Addition" Template="{0} + {1}" />
+        <method name="op_UnaryNegation" Template="- {0}" />
+        <method name="op_Subtraction" Template="{0} - {1}" />
+        <method name="op_Multiply" Template="{0} * {1}" />
+        <method name="op_Division" Template="{0} / {1}" />
+        <method name="op_Equality" Template="{0} == {1}" />
+        <method name="op_Inequality" Template="{0} ~= {1}" />
+        <method name="op_Implicit" Template="UnityEngine.ToVector3({0})">
+          <arg type="UnityEngine.Vector2" />
+        </method>
+        <method name="op_Implicit" Template="UnityEngine.ToVector2({0})">
+          <arg type="UnityEngine.Vector3" />
+        </method>
+      </class>
     </namespace>
   </assembly>
 </meta>

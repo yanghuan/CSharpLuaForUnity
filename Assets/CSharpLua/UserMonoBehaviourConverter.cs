@@ -16,39 +16,48 @@ namespace CSharpLua {
       public Dictionary<string, object> Normals = new Dictionary<string, object>();
       public Dictionary<string, UnityEngine.Object> Objects = new Dictionary<string, UnityEngine.Object>();
 
+      private void AppendNormals(StringBuilder sb) {
+        sb.Append('{');
+        bool isFirst = true;
+        foreach (var normal in Normals) {
+          if (isFirst) {
+            isFirst = false;
+          } else {
+            sb.Append(',');
+          }
+          sb.Append(normal.Key);
+          sb.Append('=');
+          sb.Append(ValueToString(normal.Value));
+        }
+        sb.Append("}");
+      }
+
+      private void AppendObjects(StringBuilder sb) {
+        sb.Append('{');
+        bool isFirst = true;
+        int objectIndex = 0;
+        foreach (string key in Objects.Keys) {
+          if (isFirst) {
+            isFirst = false;
+          } else {
+            sb.Append(',');
+          }
+          sb.Append(key);
+          sb.Append('=');
+          sb.Append(objectIndex);
+          ++objectIndex;
+        }
+        sb.Append('}');
+      }
+
       public string GetSerializeData() {
         bool isEmpty = Normals.Count == 0 && Objects.Count == 0;
         StringBuilder sb = new StringBuilder();
         if (!isEmpty) {
           sb.Append("return{");
-          sb.Append('{');
-          bool isFirst = true;
-          foreach (var normal in Normals) {
-            if (isFirst) {
-              isFirst = false;
-            } else {
-              sb.Append(',');
-            }
-            sb.Append(normal.Key);
-            sb.Append('=');
-            sb.Append(ValueToString(normal.Value));
-          }
-          sb.Append("},");
-          sb.Append('{');
-          isFirst = true;
-          int objectIndex = 0;
-          foreach (string key in Objects.Keys) {
-            if (isFirst) {
-              isFirst = false;
-            } else {
-              sb.Append(',');
-            }
-            sb.Append(key);
-            sb.Append('=');
-            sb.Append(objectIndex);
-            ++objectIndex;
-          }
-          sb.Append('}');
+          AppendNormals(sb);
+          sb.Append(',');
+          AppendObjects(sb);
           sb.Append('}');
         }
         return sb.ToString();
@@ -63,6 +72,9 @@ namespace CSharpLua {
           return "\"" + v + "\"";
         } else if (v is char) {
           int i = (char)v;
+          return i.ToString();
+        } else if (v is Enum) {
+          int i = (int)(ValueType)v;
           return i.ToString();
         }
         return v.ToString();
@@ -139,13 +151,29 @@ namespace CSharpLua {
       prefab = PrefabUtility.CreatePrefab(path, prefab);
     }
 
-    public void Do(ref GameObject prefab) {
-      CopyTempPrefab(ref prefab);
-      bool hasChanged = false;
+    private bool IsUserMonoBehaviourExists(GameObject prefab) {
       var childrens = GetChildrenTransform(prefab.transform);
-      foreach (var t in childrens) {
-        hasChanged |= Convert(t.gameObject);
+      foreach (var gameObject in childrens) {
+        var monoBehaviours = gameObject.GetComponents<MonoBehaviour>();
+        foreach (MonoBehaviour monoBehaviour in monoBehaviours) {
+          if (IsUserDefine(monoBehaviour.GetType())) {
+            return true;
+          }
+        }
       }
+      return false;
+    }
+
+    public bool Do(ref GameObject prefab) {
+      if (IsUserMonoBehaviourExists(prefab)) {
+        CopyTempPrefab(ref prefab);
+        var childrens = GetChildrenTransform(prefab.transform);
+        foreach (var t in childrens) {
+          Convert(t.gameObject);
+        }
+        return true;
+      }
+      return false;
     }
 
     private List<Transform> GetChildrenTransform(Transform parent) {
@@ -167,14 +195,13 @@ namespace CSharpLua {
       return userDefinedNames_.Contains(type.FullName);
     }
 
-    private bool Convert(GameObject gameObject) {
+    private void Convert(GameObject gameObject) {
       var monoBehaviours = gameObject.GetComponents<MonoBehaviour>();
       foreach (MonoBehaviour monoBehaviour in monoBehaviours) {
         if (IsUserDefine(monoBehaviour.GetType())) {
           Convert(monoBehaviour);
         }
       }
-      return false;
     }
 
     private bool IsSerializedField(FieldInfo field) {

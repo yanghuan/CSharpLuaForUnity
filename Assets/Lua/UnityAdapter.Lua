@@ -8,6 +8,7 @@ local SystemList = System.List
 local SystemTypeof = System.typeof
 local arrayFromList = System.arrayFromList
 local ArgumentNullException = System.ArgumentNullException
+local ArgumentOutOfRangeException = System.ArgumentOutOfRangeException
 local CSharpLua = CSharpLua
 
 local assert = assert
@@ -21,7 +22,6 @@ local tinsert = table.insert
 local loadstring = loadstring
 local pairs = pairs
 local typeof = typeof
-local _G = _G
 
 local Debugger = Debugger
 local BridgeMonoBehaviour = CSharpLua.BridgeMonoBehaviour
@@ -203,6 +203,15 @@ local MonoBehaviour = {
   end,
 }
 
+local updateIndexs = { Update = 0, FixedUpdate = 1, LateUpdate = 2 }
+
+local function registerUpdate(this, bridgeMonoBehaviour, nameOfFn)
+  local update = this[nameOfFn]
+  if update and type(update) == "function" then
+    bridgeMonoBehaviour:RegisterUpdate(updateIndexs[nameOfFn], update)
+  end
+end
+
 function MonoBehaviour.__ctor__(this, bridgeMonoBehaviour, isFromConverter, serializeData)
   this.ref = bridgeMonoBehaviour
   if not isFromConverter then
@@ -225,10 +234,9 @@ function MonoBehaviour.__ctor__(this, bridgeMonoBehaviour, isFromConverter, seri
       end
     end
   end
-  local update = this.Update
-  if update and type(update) == "function" then
-    bridgeMonoBehaviour:RegisterUpdate(update)
-  end
+  registerUpdate(this, bridgeMonoBehaviour, "Update")
+  registerUpdate(this, bridgeMonoBehaviour, "FixedUpdate")
+  registerUpdate(this, bridgeMonoBehaviour, "LateUpdate")
   this:Awake()
 end
 
@@ -594,7 +602,7 @@ local equals = rawget(metatableOfSystemObject, "Equals")
 
 local function getType(this)
   local name = assert(this.__name__)
-  local cls = _G[name]
+  local cls = getClass(name)
   return SystemTypeof(cls)
 end
 
@@ -613,3 +621,66 @@ function UnityEngine.bind(monoBehaviour, luaClass, serializeData)
   assert(T, luaClass .. " is not found")
   return T(monoBehaviour, true, serializeData)
 end
+
+
+local Vector2 = UnityEngine.Vector2
+UnityEngine.Vector2 = nil
+
+function Vector2.__ctor__(this, x, y)
+  this.x = x
+  this.y = y
+end
+
+function Vector2.get(this, index)
+  if index < 0 or index > 1 then
+    throw(ArgumentOutOfRangeException("index"))
+  end
+  return index == 0 and this.x or this.y
+end
+
+function Vector2.set(this, index, value)
+  if index < 0 or index > 1 then
+    throw(ArgumentOutOfRangeException("index"))
+  end
+  if index == 0 then
+    this.x = value
+  else
+    this.y = value
+  end
+end
+
+local function equalsOfVector2(this, other)
+  return this.x:Equals(other.x) and this.y:Equals(other.y)
+end
+
+function Vector2.EqualsObj(this, other)
+  if getmetatable(other) ~= Vector2 then
+    return false
+  end
+  return equalsOfVector2(this, other)
+end
+
+function Vector2.getdown(this)
+  return setmetatable({ x = 0, y = -1 }, Vector2) 
+end
+
+function Vector2.getleft(this)
+  return setmetatable({ x = -1, y = 0 }, Vector2)
+end
+
+Vector2.getup = Vector2.up
+Vector2.getone = Vector2.one
+Vector2.getzero = Vector2.zero
+Vector2.getright = Vector2.right
+Vector2.getmagnitude = Vector2.Magnitude
+Vector2.getsqrMagnitude = Vector2.SqrMagnitude
+Vector2.getnormalized = Vector2.Normalize
+Vector2.Equals = equalsOfVector2
+Vector2.ToString = Vector2.__tostring
+Vector2.__clone__ = Vector2.Clone
+
+function Vector2.__inherits__()
+  return { System.IEquatable_1(Vector2) }
+end
+
+System.defStc("UnityEngine.Vector2", Vector2)
