@@ -622,25 +622,24 @@ function UnityEngine.bind(monoBehaviour, luaClass, serializeData)
   return T(monoBehaviour, true, serializeData)
 end
 
+local function refactorCall(cls, call)
+  local super = getmetatable(cls)
+  setmetatable(cls, { __index = super, __call = call })
+end
 
 local Vector2 = UnityEngine.Vector2
 UnityEngine.Vector2 = nil
 
-function Vector2.__ctor__(this, x, y)
-  this.x = x
-  this.y = y
-end
-
 function Vector2.get(this, index)
   if index < 0 or index > 1 then
-    throw(ArgumentOutOfRangeException("index"))
+    throw(ArgumentOutOfRangeException("Invalid Vector2 index!"))
   end
   return index == 0 and this.x or this.y
 end
 
 function Vector2.set(this, index, value)
   if index < 0 or index > 1 then
-    throw(ArgumentOutOfRangeException("index"))
+    throw(ArgumentOutOfRangeException("Invalid Vector2 index!"))
   end
   if index == 0 then
     this.x = value
@@ -648,6 +647,26 @@ function Vector2.set(this, index, value)
     this.y = value
   end
 end
+
+local PositiveInfinity = System.Double.PositiveInfinity
+local NegativeInfinity = System.Double.NegativeInfinity
+
+local function newVector2(x, y)
+  return setmetatable({ x = x, y = y }, Vector2)
+end
+
+Vector2.getdown = function() return newVector2(0, -1) end
+Vector2.getleft = function() return newVector2(-1, 0) end
+Vector2.getup = function() return newVector2(0, 1) end
+Vector2.getright = function() return newVector2(1, 0) end
+Vector2.getzero = function() return newVector2(0, 0) end
+Vector2.getone = function() return newVector2(1, 1) end
+Vector2.getpositiveInfinityVector = function() return newVector2(PositiveInfinity, PositiveInfinity) end
+Vector2.getnegativeInfinityVector = function() return newVector2(NegativeInfinity, NegativeInfinity) end
+
+Vector2.getmagnitude = Vector2.Magnitude
+Vector2.getsqrMagnitude = Vector2.SqrMagnitude
+Vector2.getnormalized = Vector2.Normalize
 
 local function equalsOfVector2(this, other)
   return this.x:Equals(other.x) and this.y:Equals(other.y)
@@ -660,21 +679,6 @@ function Vector2.EqualsObj(this, other)
   return equalsOfVector2(this, other)
 end
 
-function Vector2.getdown(this)
-  return setmetatable({ x = 0, y = -1 }, Vector2) 
-end
-
-function Vector2.getleft(this)
-  return setmetatable({ x = -1, y = 0 }, Vector2)
-end
-
-Vector2.getup = Vector2.up
-Vector2.getone = Vector2.one
-Vector2.getzero = Vector2.zero
-Vector2.getright = Vector2.right
-Vector2.getmagnitude = Vector2.Magnitude
-Vector2.getsqrMagnitude = Vector2.SqrMagnitude
-Vector2.getnormalized = Vector2.Normalize
 Vector2.Equals = equalsOfVector2
 Vector2.ToString = Vector2.__tostring
 Vector2.__clone__ = Vector2.Clone
@@ -683,4 +687,250 @@ function Vector2.__inherits__()
   return { System.IEquatable_1(Vector2) }
 end
 
+local __call = Vector2.__call
 System.defStc("UnityEngine.Vector2", Vector2)
+refactorCall(Vector2, __call)
+
+local Vector3 = UnityEngine.Vector3
+UnityEngine.Vector3 = nil
+
+function Vector3.get(this, index)
+  if index < 0 or index > 2 then
+    throw(ArgumentOutOfRangeException("Invalid Vector3 index!"))
+  end
+  if index == 0 then
+    return this.x
+  elseif index == 1 then
+    return this.y
+  else
+    return this.z
+  end
+end
+
+function Vector3.set(this, index, value) 
+  if index < 0 or index > 2 then
+    throw(ArgumentOutOfRangeException("Invalid Vector3 index!"))
+  end
+  if index == 0 then
+    this.x = value
+  elseif index == 1 then
+    this.y = value
+  else
+    this.z = value
+  end
+end
+
+local function newVector3(x, y, z)
+  return setmetatable({ x = x, y = y, z = z }, Vector3)
+end
+
+Vector3.getup = function() return newVector3(0, 1, 0) end
+Vector3.getdown = function() return newVector3(0, -1, 0) end
+Vector3.getright = function() return newVector3(1, 0, 0) end
+Vector3.getleft = function() return newVector3(-1, 0, 0) end
+Vector3.getforward = function() return newVector3(0, 0, 1) end
+Vector3.getback = function() return newVector3(0, 0, -1) end
+Vector3.getzero = function() return newVector3(0, 0, 0) end
+Vector3.getone = function() return newVector3(1, 1, 1) end
+
+Vector3.getnormalized = Vector3.Magnitude
+Vector3.getsqrMagnitude = Vector3.SqrMagnitude
+Vector3.getnormalized = Vector3.Normalize
+
+function Vector3.LerpUnclamped(a, b, t)
+  return setmetatable({
+    x = a.x + (b.x - a.x) * t,
+    y = a.y + (b.y - a.y) * t,
+    z = a.z + (b.z - a.z) * t
+  }, Vector3)
+end
+
+local function equalsOfVector3(this, other)
+  return this.x:Equals(other.x) and this.y:Equals(other.y) and this.z:Equals(other.z)
+end
+
+function Vector3.EqualsObj(this, other)
+  if getmetatable(other) ~= Vector2 then
+    return false
+  end
+  return equalsOfVector3(this, other)
+end
+
+Vector3.Equals = equalsOfVector3
+Vector3.ToString = Vector3.__tostring
+Vector3.__clone__ = Vector3.Clone
+
+function Vector3.__inherits__()
+  return { System.IEquatable_1(Vector3) }
+end
+
+__call = Vector3.__call
+System.defStc("UnityEngine.Vector3", Vector3)
+refactorCall(Vector3, __call)
+
+local Vector4 = UnityEngine.Vector4
+UnityEngine.Vector4 = nil
+
+function Vector4.get(this, index)
+  if index < 0 or index > 2 then
+    throw(ArgumentOutOfRangeException("Invalid Vector4 index!"))
+  end
+  if index == 0 then
+    return this.x
+  elseif index == 1 then
+    return this.y
+  elseif index == 2 then
+    return this.z
+  else 
+    return this.w
+  end
+end
+
+function Vector4.set(this, index, value) 
+  if index < 0 or index > 2 then
+    throw(ArgumentOutOfRangeException("Invalid Vector4 index!"))
+  end
+  if index == 0 then
+    this.x = value
+  elseif index == 1 then
+    this.y = value
+  elseif index == 2 then
+    this.z = value
+  else 
+    this.w = value
+  end
+end
+
+local function newVector4(x, y, z, w)
+  return setmetatable({ x = x, y = y, z = z, w = w }, Vector4)
+end 
+
+Vector4.getzero = function() return newVector4(0, 0, 0, 0) end
+Vector4.getone	 = function() return newVector4(1, 1, 1, 1) end
+Vector4.getsqrMagnitude = Vector4.SqrMagnitude
+Vector4.getmagnitude = Vector4.Magnitude
+Vector4.getnormalized = Vector4.Normalize
+
+local function equalsOfVector4(this, other)
+  return this.x:Equals(other.x) and this.y:Equals(other.y) and this.z:Equals(other.z) and this.w:Equals(other.w)
+end
+
+function Vector4.EqualsObj(this, other)
+  if getmetatable(other) ~= Vector2 then
+    return false
+  end
+  return equalsOfVector4(this, other)
+end
+
+Vector4.Equals = equalsOfVector4
+Vector4.ToString = Vector4.__tostring
+Vector4.__clone__ = Vector4.Clone
+
+function Vector4.__inherits__()
+  return { System.IEquatable_1(Vector4) }
+end
+
+__call = Vector4.__call
+System.defStc("UnityEngine.Vector4", Vector4)
+refactorCall(Vector4, __call)
+
+function UnityEngine.ToVector2(v)
+  return setmetatable({ x = v.x, y = v.y }, Vector2) 
+end
+
+function UnityEngine.ToVector3(v)
+  return setmetatable({ x = v.x, y = v.y, z = v.z or 0 }, Vector3) 
+end
+
+function UnityEngine.ToVector4(v)
+  return setmetatable({ x = v.x, y = v.y, z = v.z or 0, w = v.w or 0 }, Vector4) 
+end
+
+local Color = UnityEngine.Color
+UnityEngine.Color = nil
+
+function Color.get(this, index)
+  if index < 0 or index > 2 then
+    throw(ArgumentOutOfRangeException("Invalid Color index!"))
+  end
+  if index == 0 then
+    return this.r
+  elseif index == 1 then
+    return this.g
+  elseif index == 2 then
+    return this.b
+  else 
+    return this.a
+  end
+end
+
+function Color.set(this, index, value) 
+  if index < 0 or index > 2 then
+    throw(ArgumentOutOfRangeException("Invalid Color index!"))
+  end
+  if index == 0 then
+    this.r = value
+  elseif index == 1 then
+    this.g = value
+  elseif index == 2 then
+    this.b = value
+  else 
+    this.a = value
+  end
+end
+
+local function buildColor(r, g, b, a)
+  return setmetatable({ r = this.r, g = this.g, b = this.b, a = this.a }, Color) 
+end
+
+local Mathf = Mathf
+local LinearToGammaSpace = Mathf.LinearToGammaSpace
+local GammaToLinearSpace = Mathf.GammaToLinearSpace
+local Max = Mathf.Max
+
+Color.getred 	= function() return buildColor(1, 0, 0, 1) end
+Color.getgreen	= function() return buildColor(0, 1, 0, 1) end
+Color.getblue	= function() return buildColor(0, 0, 1, 1) end
+Color.getwhite	= function() return buildColor(1, 1, 1, 1) end
+Color.getblack	= function() return buildColor(0, 0, 0, 1) end
+Color.getyellow	= function() return buildColor(1, 0.9215686, 0.01568628, 1) end
+Color.getcyan	= function() return buildColor(0, 1, 1, 1) end
+Color.getmagenta	= function() return buildColor(1, 0, 1, 1) end
+Color.getgray	= function() return buildColor(0.5, 0.5, 0.5, 1) end
+Color.getclear	= function() return buildColor(0, 0, 0, 0) end
+Color.getgrey = Color.gray
+Color.getgrayscale = Color.GrayScale
+Color.getgamma = function(c) return buildColor(LinearToGammaSpace(c.r), LinearToGammaSpace(c.g), LinearToGammaSpace(c.b), c.a) end
+Color.getlinear = function(c) return buildColor(GammaToLinearSpace(c.r), GammaToLinearSpace(c.g), GammaToLinearSpace(c.b), c.a) end
+Color.getmaxColorComponent = function(c) return Max(Max(c.r, c.g), c.b) end
+
+local function equalsOfColor(this, other)
+  return this.r:Equals(other.r) and this.g:Equals(other.g) and this.b:Equals(other.b) and this.a:Equals(other.a)
+end
+
+function Color.EqualsObj(this, other)
+  if getmetatable(other) ~= Vector2 then
+    return false
+  end
+  return equalsOfColor(this, other)
+end
+
+Color.Equals = equalsOfColor
+Color.ToString = Color.__tostring
+Color.__clone__ = function(this) return buildColor(this.r, this.g, this.b, this.a) end
+
+function Color.__inherits__()
+  return { System.IEquatable_1(Color) }
+end
+
+__call = Color.__call
+System.defStc("UnityEngine.Color", Color)
+refactorCall(Color, __call)
+
+function UnityEngine.ToColor(v)
+  return setmetatable({ r = v.x, g = v.y, b = v.z, a = v.w }, Color)
+end
+
+function UnityEngine.ToVector4FromColor(v)
+  return setmetatable({ x = v.r, y = v.g, z = v.b, w = v.a }, Vector4) 
+end

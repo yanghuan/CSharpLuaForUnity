@@ -32,9 +32,6 @@
         <method name="op_Implicit" Template="UnityEngine.op_Implicit({0})" />
       </class>
       <class name="Vector2">
-        <method name="Normalize" Template="this = this:Normalize()" />
-        <method name="Scale" Template="this = this:Scale({0})" />
-        <method name="Set" Template="this = this.__clone__() this:Set({0}, {1})" />
         <method name="op_Addition" Template="{0} + {1}" />
         <method name="op_UnaryNegation" Template="- {0}" />
         <method name="op_Subtraction" Template="{0} - {1}" />
@@ -42,12 +39,39 @@
         <method name="op_Division" Template="{0} / {1}" />
         <method name="op_Equality" Template="{0} == {1}" />
         <method name="op_Inequality" Template="{0} ~= {1}" />
-        <method name="op_Implicit" Template="UnityEngine.ToVector3({0})">
-          <arg type="UnityEngine.Vector2" />
-        </method>
-        <method name="op_Implicit" Template="UnityEngine.ToVector2({0})">
-          <arg type="UnityEngine.Vector3" />
-        </method>
+        <method name="op_Implicit" RetType="UnityEngine.Vector3" Template="UnityEngine.ToVector3({0})" />
+        <method name="op_Implicit" RetType="UnityEngine.Vector2"  Template="UnityEngine.ToVector2({0})" />
+      </class>
+      <class name="Vector3">
+        <method name="op_Addition" Template="{0} + {1}" />
+        <method name="op_UnaryNegation" Template="- {0}" />
+        <method name="op_Subtraction" Template="{0} - {1}" />
+        <method name="op_Multiply" Template="{0} * {1}" />
+        <method name="op_Division" Template="{0} / {1}" />
+        <method name="op_Equality" Template="{0} == {1}" />
+        <method name="op_Inequality" Template="{0} ~= {1}" />
+      </class>
+      <class name="Vector4">
+        <method name="op_Addition" Template="{0} + {1}" />
+        <method name="op_UnaryNegation" Template="- {0}" />
+        <method name="op_Subtraction" Template="{0} - {1}" />
+        <method name="op_Multiply" Template="{0} * {1}" />
+        <method name="op_Division" Template="{0} / {1}" />
+        <method name="op_Equality" Template="{0} == {1}" />
+        <method name="op_Inequality" Template="{0} ~= {1}" />
+        <method name="op_Implicit" RetType="UnityEngine.Vector4" Template="UnityEngine.ToVector4({0})" />
+        <method name="op_Implicit" RetType="UnityEngine.Vector3" Template="UnityEngine.ToVector3({0})" />
+        <method name="op_Implicit" RetType="UnityEngine.Vector2" Template="UnityEngine.ToVector2({0})" />
+      </class>
+      <class name="Color">
+        <method name="op_Addition" Template="{0} + {1}" />
+        <method name="op_Subtraction" Template="{0} - {1}" />
+        <method name="op_Multiply" Template="{0} * {1}" />
+        <method name="op_Division" Template="{0} / {1}" />
+        <method name="op_Equality" Template="{0} == {1}" />
+        <method name="op_Inequality" Template="{0} ~= {1}" />
+        <method name="op_Implicit" RetType="UnityEngine.Color" Template="UnityEngine.ToColor({0})" />
+        <method name="op_Implicit" RetType="UnityEngine.Vector4" Template="UnityEngine.ToVector4FromColor({0})" />
       </class>
     </namespace>
   </assembly>

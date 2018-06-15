@@ -10,6 +10,11 @@ using UnityEngine;
 
 namespace CSharpLua {
   public static class Compiler {
+    private sealed class CompiledFail : Exception {
+      public CompiledFail(string message) : base(message) {
+      }
+    }
+
     private const string kDotnet = "dotnet";
     private static readonly string compiledScriptDir_ = Application.dataPath + "/CompiledScripts/";
     private static readonly string outDir_ = Application.dataPath + "/Lua/CompiledScripts/";
@@ -18,10 +23,6 @@ namespace CSharpLua {
 
     [MenuItem("CharpLua/Compile")]
     public static void Compile() {
-      if(!CheckDotnetInstall()) {
-        return;
-      }
-
       if (Directory.Exists(outDir_)) {
         string[] files = Directory.GetFiles(outDir_, "*.lua");
         foreach (string file in files) {
@@ -51,40 +52,25 @@ namespace CSharpLua {
         RedirectStandardOutput = true,
         RedirectStandardError = true,
       };
-
-      using (var p = Process.Start(info)) {
-        p.WaitForExit();
-        if (p.ExitCode != 0) {
-          string outString = p.StandardOutput.ReadToEnd();
-          string errorString = p.StandardError.ReadToEnd();
-          throw new Exception($"Compile fail, {errorString}\n{outString}\n{kDotnet} {args}");
-        } else {
-          UnityEngine.Debug.Log("compile success");
+      try {
+        using (var p = Process.Start(info)) {
+          p.WaitForExit();
+          if (p.ExitCode != 0) {
+            string outString = p.StandardOutput.ReadToEnd();
+            string errorString = p.StandardError.ReadToEnd();
+            throw new CompiledFail($"Compile fail, {errorString}\n{outString}\n{kDotnet} {args}");
+          } else {
+            UnityEngine.Debug.Log("compile success");
+          }
         }
-      }
-    }
-
-    private static bool CheckDotnetInstall() {
-      var info = new ProcessStartInfo() {
-        FileName = kDotnet,
-        Arguments = "--version",
-        UseShellExecute = false,
-        RedirectStandardOutput = true,
-        RedirectStandardError = true,
-        CreateNoWindow = true,
-      };
-      using (var p = Process.Start(info)) {
-        p.WaitForExit();
-        if (p.ExitCode != 0) {
-          UnityEngine.Debug.LogWarning("not found dotnet");
+      } catch (Exception e) {
+        if (e is CompiledFail) {
+          throw e;
+        } else {
+          UnityEngine.Debug.LogWarningFormat("not found dotnet {0}", e);
           if (EditorUtility.DisplayDialog("dotnet未安装", "未安装.NET Core 2.0+运行环境，点击确定前往安装", "确定", "取消")) {
             Application.OpenURL("https://www.microsoft.com/net/download");
           }
-          return false;
-        } else {
-          string version = p.StandardOutput.ReadToEnd();
-          UnityEngine.Debug.Log("found dotnet " + version);
-          return true;
         }
       }
     }
