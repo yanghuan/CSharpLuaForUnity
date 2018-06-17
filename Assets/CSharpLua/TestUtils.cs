@@ -14,7 +14,7 @@ namespace CSharpLua {
 public sealed class TestUtils {
   public static GameObject Load(string path) {
     GameObject prefab = (GameObject)AssetDatabase.LoadMainAssetAtPath(path);
-    if (Consts.IsRunFromLua) {
+    if (Settings.kIsRunFromLua) {
       UserMonoBehaviourConverter.Default.Do(ref prefab);
     }
     return prefab;

@@ -109,10 +109,6 @@ namespace CSharpLua {
     }
   }
 
-  public static class Consts {
-    public const bool IsRunFromLua = true;
-  }
-
   public class CSharpLuaClient : LuaClient {
     public string[] Components;
     private LuaFunction bindFn_;
@@ -132,7 +128,7 @@ namespace CSharpLua {
     }
 
     protected override void StartMain() {
-      if (Consts.IsRunFromLua) {
+      if (Settings.kIsRunFromLua) {
         base.StartMain();
         bindFn_ = luaState.GetFunction("UnityEngine.bind");
         if (bindFn_ == null) {
@@ -155,7 +151,10 @@ namespace CSharpLua {
     }
 
     internal LuaTable BindLua(BridgeMonoBehaviour bridgeMonoBehaviour) {
-      return bindFn_.Invoke<BridgeMonoBehaviour, string, string, LuaTable>(bridgeMonoBehaviour, bridgeMonoBehaviour.LuaClass, bridgeMonoBehaviour.SerializeData);
+      return bindFn_.Invoke<BridgeMonoBehaviour, string, string, LuaTable>(
+        bridgeMonoBehaviour, 
+        bridgeMonoBehaviour.LuaClass, 
+        bridgeMonoBehaviour.SerializeData);
     }
   }
 }

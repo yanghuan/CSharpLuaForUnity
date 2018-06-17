@@ -55,23 +55,49 @@ namespace CSharpLua {
       try {
         using (var p = Process.Start(info)) {
           p.WaitForExit();
-          if (p.ExitCode != 0) {
+          if (p.ExitCode == 0) {
+            UnityEngine.Debug.Log("compile success");
+          } else if (p.ExitCode == -1) {
             string outString = p.StandardOutput.ReadToEnd();
             string errorString = p.StandardError.ReadToEnd();
             throw new CompiledFail($"Compile fail, {errorString}\n{outString}\n{kDotnet} {args}");
           } else {
-            UnityEngine.Debug.Log("compile success");
+            throw new Exception($"not found {kDotnet}");
           }
         }
       } catch (Exception e) {
         if (e is CompiledFail) {
           throw e;
         } else {
-          UnityEngine.Debug.LogWarningFormat("not found dotnet {0}", e);
+          UnityEngine.Debug.LogException(e);
           if (EditorUtility.DisplayDialog("dotnet未安装", "未安装.NET Core 2.0+运行环境，点击确定前往安装", "确定", "取消")) {
             Application.OpenURL("https://www.microsoft.com/net/download");
           }
         }
+      }
+    }
+
+    [MenuItem(Settings.kIsRunFromLua ? "CharpLua/Switch to RunFromCSharp" : "CharpLua/Swicth to RunFromLua")]
+    public static void Switch() {
+      const string kFieldName = nameof(Settings.kIsRunFromLua);
+      string settingFilePath = Application.dataPath + "/CSharpLua/Settings.cs";
+      string text = File.ReadAllText(settingFilePath);
+      int begin = text.IndexOf(kFieldName);
+      if (begin != -1) {
+        int end = text.IndexOf(';', begin + kFieldName.Length);
+        if (end != -1) {
+          string s = text.Substring(begin, end - begin);
+          string[] array = s.Split('=');
+          bool v = bool.Parse(array[1]);
+          string replace = kFieldName + " = " + (v ? "false" : "true");
+          text = text.Replace(s, replace);
+          File.WriteAllText(settingFilePath, text);
+          AssetDatabase.Refresh();
+        } else {
+          throw new InvalidProgramException($"field {kFieldName} not found end symbol in {settingFilePath}");
+        }
+      } else {
+        throw new InvalidProgramException($"not found field {kFieldName} in {settingFilePath}");
       }
     }
   }
