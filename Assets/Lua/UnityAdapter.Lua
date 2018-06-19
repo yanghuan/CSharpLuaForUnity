@@ -17,8 +17,8 @@ local getmetatable = getmetatable
 local rawget = rawget
 local rawset = rawset
 local type = type
-local table = table
 local tinsert = table.insert
+local sformat = string.format
 local loadstring = loadstring
 local pairs = pairs
 local typeof = typeof
@@ -622,6 +622,7 @@ function UnityEngine.bind(monoBehaviour, luaClass, serializeData)
   return T(monoBehaviour, true, serializeData)
 end
 
+
 local function refactorCall(cls, call)
   local super = getmetatable(cls)
   setmetatable(cls, { __index = super, __call = call })
@@ -688,6 +689,7 @@ local __call = Vector2.__call
 System.defStc("UnityEngine.Vector2", Vector2)
 refactorCall(Vector2, __call)
 
+
 local Vector3 = UnityEngine.Vector3
 local newVector3 = Vector3.New
 UnityEngine.Vector3 = nil
@@ -740,7 +742,7 @@ local function equalsOfVector3(this, other)
 end
 
 function Vector3.EqualsObj(this, other)
-  if getmetatable(other) ~= Vector2 then
+  if getmetatable(other) ~= Vector3 then
     return false
   end
   return equalsOfVector3(this, other)
@@ -758,13 +760,14 @@ __call = Vector3.__call
 System.defStc("UnityEngine.Vector3", Vector3)
 refactorCall(Vector3, __call)
 
+
 local Vector4 = UnityEngine.Vector4
 local newVector4 = Vector4.New
 UnityEngine.Vector4 = nil
 
-function Vector4.get(this, index)
+local function getOfVector4(this, index, error)
   if index < 0 or index > 2 then
-    throw(ArgumentOutOfRangeException("Invalid Vector4 index!"))
+    throw(ArgumentOutOfRangeException(error), 1)
   end
   if index == 0 then
     return this.x
@@ -777,9 +780,13 @@ function Vector4.get(this, index)
   end
 end
 
-function Vector4.set(this, index, value) 
+function Vector4.get(this, index)
+  return getOfVector4(this, index, "Invalid Vector4 index!")
+end
+
+local function setOfVector4(this, inde, value, error)
   if index < 0 or index > 2 then
-    throw(ArgumentOutOfRangeException("Invalid Vector4 index!"))
+    throw(ArgumentOutOfRangeException(error), 1)
   end
   if index == 0 then
     this.x = value
@@ -790,6 +797,10 @@ function Vector4.set(this, index, value)
   else 
     this.w = value
   end
+end
+
+function Vector4.set(this, index, value) 
+  setOfVector4(this, inde, value, "Invalid Vector4 index!")
 end
 
 Vector4.getzero = function() return newVector4(0, 0, 0, 0) end
@@ -803,7 +814,7 @@ local function equalsOfVector4(this, other)
 end
 
 function Vector4.EqualsObj(this, other)
-  if getmetatable(other) ~= Vector2 then
+  if getmetatable(other) ~= Vector4 then
     return false
   end
   return equalsOfVector4(this, other)
@@ -832,6 +843,7 @@ end
 function UnityEngine.ToVector4(v)
   return newVector4(v.x, v.y, v.z, v.w)
 end
+
 
 local Color = UnityEngine.Color
 local newColor = Color.New
@@ -893,7 +905,7 @@ local function equalsOfColor(this, other)
 end
 
 function Color.EqualsObj(this, other)
-  if getmetatable(other) ~= Vector2 then
+  if getmetatable(other) ~= Color then
     return false
   end
   return equalsOfColor(this, other)
@@ -918,3 +930,118 @@ end
 function UnityEngine.ToVector4FromColor(v)
   return newVector4(v.r, v.g, v.b, b.a)
 end
+
+
+local Quaternion = UnityEngine.Quaternion
+local newQuaternion = Quaternion.New
+UnityEngine.Quaternion = nil
+
+function Quaternion.get(this, index)
+  return getOfVector4(this, index, "Invalid Quaternion index!") 
+end
+
+function Quaternion.set(this, index, value)
+  setOfVector4(this, inde, value, "Invalid Quaternion index!")
+end
+
+Quaternion.getidentity = function() return newQuaternion(0, 0, 0, 1) end
+Quaternion.geteulerAngles = Quaternion.ToEulerAngles
+Quaternion.seteulerAngles = Quaternion.SetEuler
+Quaternion.getnormalized = Quaternion.Normalize
+
+function Quaternion.EqualsObj(this, other)
+  if getmetatable(other) ~= Quaternion then
+    return false
+  end
+  return equalsOfVector4(this, other)
+end
+
+Quaternion.Equals = equalsOfVector4
+Quaternion.ToString = Quaternion.__tostring
+Quaternion.__clone__ = Quaternion.Clone
+
+function Quaternion.__inherits__()
+  return { System.IEquatable_1(Quaternion) }
+end
+
+__call = Quaternion.__call
+System.defStc("UnityEngine.Quaternion", Quaternion)
+refactorCall(Quaternion, __call)
+
+
+local Bounds = UnityEngine.Bounds
+local newBounds = Bounds.New
+UnityEngine.Bounds = nil
+
+Bounds.getsize = Bounds.GetSize
+Bounds.getmin = Bounds.GetMin
+Bounds.getmax = Bounds.GetMax
+
+local function equalsOfBounds(this, other)
+  return this.center:Equals(other.center) and this.extents:Equals(other.extents)
+end
+
+function Bounds.EqualsObj(this, other)
+  if getmetatable(other) ~= Bounds then
+    return false
+  end
+  return equalsOfBounds(this, other)
+end
+
+Bounds.Equals = equalsOfBounds
+Bounds.ToString = Quaternion.__tostring
+Bounds.__clone__ = function (this) return newBounds(this.center, this.extents) end
+
+function Bounds.__inherits__()
+  return { System.IEquatable_1(Bounds) }
+end
+
+__call = Bounds.__call
+System.defStc("UnityEngine.Bounds", Bounds)
+refactorCall(Bounds, __call)
+
+
+local Plane = UnityEngine.Plane
+local newPlane = Plane.New
+UnityEngine.Plane = nil
+
+Plane.ToString = function (this) 
+  local normal = this.normal
+  return sformat("(normal:(%.1f, %.1f, %.1f), distance:%1.f)", normal.x, normal.y, normal.z, this.distance)  
+end
+
+Plane.__clone__ = function (this) return newPlane(this.normal, this.distance) end
+
+local Set3Points = Plane.Set3Points
+local SetNormalAndPosition = Plane.SetNormalAndPosition
+
+__call = function (cls, a, b, c)
+  if c ~= nil then
+    local this = setmetatable({ normal = false, distance = false }, Plane)
+    Set3Points(this, a, b, c)
+    return this
+  elseif type(b) == "number" then
+    return newPlane(a, b)  
+  else
+    local this = setmetatable({ normal = false, distance = false }, Plane)
+    SetNormalAndPosition(this, a, b)
+    return this
+  end
+end
+
+Plane.__inherits__ = System.emptyFn
+System.defStc("UnityEngine.Plane", Plane)
+refactorCall(Plane, __call)
+
+
+local LayerMask = UnityEngine.LayerMask
+local newLayerMask = LayerMask.New
+UnityEngine.LayerMask = nil
+
+LayerMask.__clone__ = function (this) return newLayerMask(this.value) end
+UnityEngine.ToLayerMask = newLayerMask
+
+LayerMask.__inherits__ = System.emptyFn
+__call = LayerMask.__call
+System.defStc("UnityEngine.LayerMask", LayerMask)
+refactorCall(LayerMask, __call)

@@ -73,6 +73,26 @@
         <method name="op_Implicit" RetType="UnityEngine.Color" Template="UnityEngine.ToColor({0})" />
         <method name="op_Implicit" RetType="UnityEngine.Vector4" Template="UnityEngine.ToVector4FromColor({0})" />
       </class>
+      <class name="Quaternion">
+        <method name="Normalize" Name="SetNormalize" />
+        <method name="op_Multiply" Template="{0} * {1}" />
+        <method name="op_Equality" Template="{0} == {1}" />
+        <method name="op_Inequality" Template="{0} ~= {1}" />
+      </class>
+      <class name="Bounds">
+        <property name="extents" IsField="true" />
+        <property name="center" IsField="true" />
+        <method name="op_Equality" Template="{0} == {1}" />
+        <method name="op_Inequality" Template="{0} ~= {1}" />
+      </class>
+      <class name="Plane">
+        <property name="normal" IsField="true" />
+        <property name="distance" IsField="true" />
+      </class>
+      <class name="LayerMask">
+        <method name="op_Implicit" RetType="System.Int32" Template="this.value" />
+        <method name="op_Implicit" RetType="UnityEngine.LayerMask" Template="UnityEngine.ToLayerMask({0})" />
+      </class>
     </namespace>
   </assembly>
 </meta>
