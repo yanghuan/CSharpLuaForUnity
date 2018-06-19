@@ -628,6 +628,7 @@ local function refactorCall(cls, call)
 end
 
 local Vector2 = UnityEngine.Vector2
+local newVector2 = Vector2.New
 UnityEngine.Vector2 = nil
 
 function Vector2.get(this, index)
@@ -650,10 +651,6 @@ end
 
 local PositiveInfinity = System.Double.PositiveInfinity
 local NegativeInfinity = System.Double.NegativeInfinity
-
-local function newVector2(x, y)
-  return setmetatable({ x = x, y = y }, Vector2)
-end
 
 Vector2.getdown = function() return newVector2(0, -1) end
 Vector2.getleft = function() return newVector2(-1, 0) end
@@ -692,6 +689,7 @@ System.defStc("UnityEngine.Vector2", Vector2)
 refactorCall(Vector2, __call)
 
 local Vector3 = UnityEngine.Vector3
+local newVector3 = Vector3.New
 UnityEngine.Vector3 = nil
 
 function Vector3.get(this, index)
@@ -720,10 +718,6 @@ function Vector3.set(this, index, value)
   end
 end
 
-local function newVector3(x, y, z)
-  return setmetatable({ x = x, y = y, z = z }, Vector3)
-end
-
 Vector3.getup = function() return newVector3(0, 1, 0) end
 Vector3.getdown = function() return newVector3(0, -1, 0) end
 Vector3.getright = function() return newVector3(1, 0, 0) end
@@ -738,11 +732,7 @@ Vector3.getsqrMagnitude = Vector3.SqrMagnitude
 Vector3.getnormalized = Vector3.Normalize
 
 function Vector3.LerpUnclamped(a, b, t)
-  return setmetatable({
-    x = a.x + (b.x - a.x) * t,
-    y = a.y + (b.y - a.y) * t,
-    z = a.z + (b.z - a.z) * t
-  }, Vector3)
+  return newVector3(a.x + (b.x - a.x) * t, a.y + (b.y - a.y) * t, a.z + (b.z - a.z) * t)
 end
 
 local function equalsOfVector3(this, other)
@@ -769,6 +759,7 @@ System.defStc("UnityEngine.Vector3", Vector3)
 refactorCall(Vector3, __call)
 
 local Vector4 = UnityEngine.Vector4
+local newVector4 = Vector4.New
 UnityEngine.Vector4 = nil
 
 function Vector4.get(this, index)
@@ -801,10 +792,6 @@ function Vector4.set(this, index, value)
   end
 end
 
-local function newVector4(x, y, z, w)
-  return setmetatable({ x = x, y = y, z = z, w = w }, Vector4)
-end 
-
 Vector4.getzero = function() return newVector4(0, 0, 0, 0) end
 Vector4.getone	 = function() return newVector4(1, 1, 1, 1) end
 Vector4.getsqrMagnitude = Vector4.SqrMagnitude
@@ -835,18 +822,19 @@ System.defStc("UnityEngine.Vector4", Vector4)
 refactorCall(Vector4, __call)
 
 function UnityEngine.ToVector2(v)
-  return setmetatable({ x = v.x, y = v.y }, Vector2) 
+  return newVector2(v.x, v.y)
 end
 
 function UnityEngine.ToVector3(v)
-  return setmetatable({ x = v.x, y = v.y, z = v.z or 0 }, Vector3) 
+  return newVector3(v.x, v.y, v.z)
 end
 
 function UnityEngine.ToVector4(v)
-  return setmetatable({ x = v.x, y = v.y, z = v.z or 0, w = v.w or 0 }, Vector4) 
+  return newVector4(v.x, v.y, v.z, v.w)
 end
 
 local Color = UnityEngine.Color
+local newColor = Color.New
 UnityEngine.Color = nil
 
 function Color.get(this, index)
@@ -879,29 +867,25 @@ function Color.set(this, index, value)
   end
 end
 
-local function buildColor(r, g, b, a)
-  return setmetatable({ r = this.r, g = this.g, b = this.b, a = this.a }, Color) 
-end
-
 local Mathf = Mathf
 local LinearToGammaSpace = Mathf.LinearToGammaSpace
 local GammaToLinearSpace = Mathf.GammaToLinearSpace
 local Max = Mathf.Max
 
-Color.getred 	= function() return buildColor(1, 0, 0, 1) end
-Color.getgreen	= function() return buildColor(0, 1, 0, 1) end
-Color.getblue	= function() return buildColor(0, 0, 1, 1) end
-Color.getwhite	= function() return buildColor(1, 1, 1, 1) end
-Color.getblack	= function() return buildColor(0, 0, 0, 1) end
-Color.getyellow	= function() return buildColor(1, 0.9215686, 0.01568628, 1) end
-Color.getcyan	= function() return buildColor(0, 1, 1, 1) end
-Color.getmagenta	= function() return buildColor(1, 0, 1, 1) end
-Color.getgray	= function() return buildColor(0.5, 0.5, 0.5, 1) end
-Color.getclear	= function() return buildColor(0, 0, 0, 0) end
+Color.getred 	= function() return newColor(1, 0, 0, 1) end
+Color.getgreen	= function() return newColor(0, 1, 0, 1) end
+Color.getblue	= function() return newColor(0, 0, 1, 1) end
+Color.getwhite	= function() return newColor(1, 1, 1, 1) end
+Color.getblack	= function() return newColor(0, 0, 0, 1) end
+Color.getyellow	= function() return newColor(1, 0.9215686, 0.01568628, 1) end
+Color.getcyan	= function() return newColor(0, 1, 1, 1) end
+Color.getmagenta	= function() return newColor(1, 0, 1, 1) end
+Color.getgray	= function() return newColor(0.5, 0.5, 0.5, 1) end
+Color.getclear	= function() return newColor(0, 0, 0, 0) end
 Color.getgrey = Color.gray
 Color.getgrayscale = Color.GrayScale
-Color.getgamma = function(c) return buildColor(LinearToGammaSpace(c.r), LinearToGammaSpace(c.g), LinearToGammaSpace(c.b), c.a) end
-Color.getlinear = function(c) return buildColor(GammaToLinearSpace(c.r), GammaToLinearSpace(c.g), GammaToLinearSpace(c.b), c.a) end
+Color.getgamma = function(c) return newColor(LinearToGammaSpace(c.r), LinearToGammaSpace(c.g), LinearToGammaSpace(c.b), c.a) end
+Color.getlinear = function(c) return newColor(GammaToLinearSpace(c.r), GammaToLinearSpace(c.g), GammaToLinearSpace(c.b), c.a) end
 Color.getmaxColorComponent = function(c) return Max(Max(c.r, c.g), c.b) end
 
 local function equalsOfColor(this, other)
@@ -917,7 +901,7 @@ end
 
 Color.Equals = equalsOfColor
 Color.ToString = Color.__tostring
-Color.__clone__ = function(this) return buildColor(this.r, this.g, this.b, this.a) end
+Color.__clone__ = function(this) return newColor(this.r, this.g, this.b, this.a) end
 
 function Color.__inherits__()
   return { System.IEquatable_1(Color) }
@@ -928,9 +912,9 @@ System.defStc("UnityEngine.Color", Color)
 refactorCall(Color, __call)
 
 function UnityEngine.ToColor(v)
-  return setmetatable({ r = v.x, g = v.y, b = v.z, a = v.w }, Color)
+  return newColor(v.x ,v.y, v.z, v.w)
 end
 
 function UnityEngine.ToVector4FromColor(v)
-  return setmetatable({ x = v.r, y = v.g, z = v.b, w = v.a }, Vector4) 
+  return newVector4(v.r, v.g, v.b, b.a)
 end

@@ -79,7 +79,11 @@ namespace CSharpLua {
 
     [MenuItem(Settings.kIsRunFromLua ? "CharpLua/Switch to RunFromCSharp" : "CharpLua/Swicth to RunFromLua")]
     public static void Switch() {
+#if UNITY_2017_OR_NEWER
       const string kFieldName = nameof(Settings.kIsRunFromLua);
+#else
+      const string kFieldName = "kIsRunFromLua";
+#endif
       string settingFilePath = Application.dataPath + "/CSharpLua/Settings.cs";
       string text = File.ReadAllText(settingFilePath);
       int begin = text.IndexOf(kFieldName);
