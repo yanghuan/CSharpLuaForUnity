@@ -16,13 +16,18 @@ namespace CSharpLua {
     }
 
     private const string kDotnet = "dotnet";
-    private static readonly string compiledScriptDir_ = Application.dataPath + "/CompiledScripts/";
-    private static readonly string outDir_ = Application.dataPath + "/Lua/CompiledScripts/";
-    private static readonly string toolsDir_ = Application.dataPath + "/../CSharpLuaTools";
+    private static readonly string compiledScriptDir_ = Settings.CompiledScriptDir;
+    private static readonly string outDir_ = Settings.CompiledOutDir;
+    private static readonly string toolsDir_ = Settings.ToolsDir;
     private static readonly string csharpLua_ = toolsDir_ + "/CSharp.lua/CSharp.lua.Launcher.dll";
+    private static readonly string settingFilePath_ = Settings.SettingFilePath;
 
     [MenuItem("CharpLua/Compile")]
     public static void Compile() {
+      if (!File.Exists(csharpLua_)) {
+        throw new InvalidProgramException($"{csharpLua_} not found");
+      }
+
       if (Directory.Exists(outDir_)) {
         string[] files = Directory.GetFiles(outDir_, "*.lua");
         foreach (string file in files) {
@@ -31,7 +36,7 @@ namespace CSharpLua {
       }
 
       List<string> libs = new List<string>();
-      AssemblyName assemblyName = Assembly.GetExecutingAssembly().GetReferencedAssemblies().Single(i => i.FullName.Contains("Assembly-CSharp"));
+      AssemblyName assemblyName = Assembly.GetExecutingAssembly().GetReferencedAssemblies().Single(i => i.FullName.Contains("Assembly-CSharp,"));
       Assembly assembly = Assembly.Load(assemblyName);
       libs.Add(assembly.Location);
       foreach (var referenced in assembly.GetReferencedAssemblies()) {
@@ -84,8 +89,8 @@ namespace CSharpLua {
 #else
       const string kFieldName = "kIsRunFromLua";
 #endif
-      string settingFilePath = Application.dataPath + "/CSharpLua/Settings.cs";
-      string text = File.ReadAllText(settingFilePath);
+
+      string text = File.ReadAllText(settingFilePath_);
       int begin = text.IndexOf(kFieldName);
       if (begin != -1) {
         int end = text.IndexOf(';', begin + kFieldName.Length);
@@ -95,13 +100,13 @@ namespace CSharpLua {
           bool v = bool.Parse(array[1]);
           string replace = kFieldName + " = " + (v ? "false" : "true");
           text = text.Replace(s, replace);
-          File.WriteAllText(settingFilePath, text);
+          File.WriteAllText(settingFilePath_, text);
           AssetDatabase.Refresh();
         } else {
-          throw new InvalidProgramException($"field {kFieldName} not found end symbol in {settingFilePath}");
+          throw new InvalidProgramException($"field {kFieldName} not found end symbol in {settingFilePath_}");
         }
       } else {
-        throw new InvalidProgramException($"not found field {kFieldName} in {settingFilePath}");
+        throw new InvalidProgramException($"not found field {kFieldName} in {settingFilePath_}");
       }
     }
   }
@@ -110,7 +115,7 @@ namespace CSharpLua {
   [InitializeOnLoad]
   public class EditorQuitHandler {
     static void Quit() {
-      string tempDir = Application.dataPath + "/CSharpLua/Temp";
+      string tempDir = Settings.TempDir;
       if (Directory.Exists(tempDir)) {
         Directory.Delete(tempDir, true);
       }

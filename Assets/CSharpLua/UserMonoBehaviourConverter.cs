@@ -81,8 +81,8 @@ namespace CSharpLua {
       }
     }
 
-    private static readonly string tempPrefabDir_ = "Assets/CSharpLua/Temp/prefabs";
-    public static readonly string compiledScriptsManifestPath_ = Application.dataPath + "/Lua/CompiledScripts/manifest.lua";
+    private static readonly string tempPrefabDir_ = Settings.TempDir + "/prefabs";
+    private static readonly string compiledScriptsManifestPath_ = Settings.CompiledOutDir + "/manifest.lua";
     private static UserMonoBehaviourConverter default_;
 
     private HashSet<string> userDefinedNames_;
