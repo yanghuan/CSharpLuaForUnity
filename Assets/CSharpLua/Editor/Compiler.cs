@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Reflection;
 using System.Linq;
+using System.Text;
 
 using UnityEditor;
 using UnityEngine;
@@ -24,6 +25,14 @@ namespace CSharpLua {
 
     [MenuItem("CharpLua/Compile")]
     public static void Compile() {
+      if (!CheckDotnetInstall()) {
+        UnityEngine.Debug.LogWarning("not found dotnet");
+        if (EditorUtility.DisplayDialog("dotnet未安装", "未安装.NET Core 2.0+运行环境，点击确定前往安装", "确定", "取消")) {
+          Application.OpenURL("https://www.microsoft.com/net/download");
+        }
+        return;
+      }
+
       if (!File.Exists(csharpLua_)) {
         throw new InvalidProgramException($"{csharpLua_} not found");
       }
@@ -40,7 +49,7 @@ namespace CSharpLua {
       Assembly assembly = Assembly.Load(assemblyName);
       libs.Add(assembly.Location);
       foreach (var referenced in assembly.GetReferencedAssemblies()) {
-        if(referenced.Name != "mscorlib" && !referenced.Name.StartsWith("System")) {
+        if (referenced.Name != "mscorlib" && !referenced.Name.StartsWith("System")) {
           string libPath = Assembly.Load(referenced).Location;
           libs.Add(libPath);
         }
@@ -56,35 +65,50 @@ namespace CSharpLua {
         UseShellExecute = false,
         RedirectStandardOutput = true,
         RedirectStandardError = true,
+        StandardOutputEncoding = Encoding.UTF8,
+        StandardErrorEncoding = Encoding.UTF8,
+      };
+      using (var p = Process.Start(info)) {
+        p.WaitForExit();
+        if (p.ExitCode == 0) {
+          UnityEngine.Debug.Log("compile success");
+        } else {
+          string outString = p.StandardOutput.ReadToEnd();
+          string errorString = p.StandardError.ReadToEnd();
+          throw new CompiledFail($"Compile fail, {errorString}\n{outString}\n{kDotnet} {args}");
+        }
+      }
+    }
+
+    private static bool CheckDotnetInstall() {
+      var info = new ProcessStartInfo() {
+        FileName = kDotnet,
+        Arguments = "--version",
+        UseShellExecute = false,
+        RedirectStandardOutput = true,
+        RedirectStandardError = true,
+        CreateNoWindow = true,
       };
       try {
         using (var p = Process.Start(info)) {
           p.WaitForExit();
-          if (p.ExitCode == 0) {
-            UnityEngine.Debug.Log("compile success");
-          } else if (p.ExitCode == -1) {
-            string outString = p.StandardOutput.ReadToEnd();
-            string errorString = p.StandardError.ReadToEnd();
-            throw new CompiledFail($"Compile fail, {errorString}\n{outString}\n{kDotnet} {args}");
+          if (p.ExitCode != 0) {
+            return false;
           } else {
-            throw new Exception($"not found {kDotnet}");
+            string version = p.StandardOutput.ReadToEnd();
+            UnityEngine.Debug.Log("found dotnet " + version);
+            return true;
           }
         }
       } catch (Exception e) {
-        if (e is CompiledFail) {
-          throw e;
-        } else {
-          UnityEngine.Debug.LogException(e);
-          if (EditorUtility.DisplayDialog("dotnet未安装", "未安装.NET Core 2.0+运行环境，点击确定前往安装", "确定", "取消")) {
-            Application.OpenURL("https://www.microsoft.com/net/download");
-          }
-        }
+        UnityEngine.Debug.LogException(e);
+        return false;
       }
     }
 
     [MenuItem(Settings.kIsRunFromLua ? "CharpLua/Switch to RunFromCSharp" : "CharpLua/Swicth to RunFromLua")]
     public static void Switch() {
-#if UNITY_2017_OR_NEWER
+#if UNITY_2017 || UNITY_2018
       const string kFieldName = nameof(Settings.kIsRunFromLua);
 #else
       const string kFieldName = "kIsRunFromLua";

@@ -117,6 +117,7 @@ namespace CSharpLua {
     protected override void OpenLibs() {
       base.OpenLibs();
       OpenCJson();
+      //luaState.OpenLibs(LuaDLL.luaopen_protobuf_c);   // oepn pbc
     }
 
     public override void Destroy() {

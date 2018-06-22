@@ -12,7 +12,7 @@ namespace CSharpLua {
     public static readonly string CompiledScriptDir = Application.dataPath + "/CompiledScripts";
     public static readonly string CompiledOutDir = Application.dataPath + "/Lua/CompiledScripts";
     public static readonly string ToolsDir = Application.dataPath + "/../CSharpLuaTools";
-    public static readonly string TempDir = "Assets/CSharpLua/Temp";
+    public static readonly string TempDir = "Assets/CSharpLuaTemp";
     public static readonly string SettingFilePath = Application.dataPath + "/CSharpLua/Settings.cs";
 #endif
 

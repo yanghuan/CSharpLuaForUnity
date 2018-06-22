@@ -31,4 +31,5 @@ Assets/Source/Generate
 Packages
 ProjectSettings
 CSharpLuaTools/update_csharp.lua.cmd
-/Assets/CSharpLua/Temp.meta
+/Assets/CSharpLuaTemp
+/Assets/CSharpLuaTemp.meta
