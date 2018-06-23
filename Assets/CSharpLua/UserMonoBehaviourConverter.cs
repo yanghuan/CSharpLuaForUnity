@@ -81,8 +81,8 @@ namespace CSharpLua {
       }
     }
 
-    private static readonly string tempPrefabDir_ = Settings.TempDir + "/prefabs";
-    private static readonly string compiledScriptsManifestPath_ = Settings.CompiledOutDir + "/manifest.lua";
+    private static readonly string tempPrefabDir_ = Settings.Paths.TempDir + "/prefabs";
+    private static readonly string compiledScriptsManifestPath_ = Settings.Paths.CompiledOutDir + "/manifest.lua";
     private static UserMonoBehaviourConverter default_;
 
     private HashSet<string> userDefinedNames_;
@@ -275,8 +275,11 @@ namespace CSharpLua {
                   var gameObject = obj as GameObject;
                   if (gameObject != null) {
                     if (!IsSameRootGameObject(monoBehaviour.gameObject, gameObject)) {
-                      Do(ref gameObject);
-                      obj = gameObject;
+                      bool hasChanged = Do(ref gameObject);
+                      if (hasChanged) {
+                        obj = gameObject;
+                        field.SetValue(monoBehaviour, obj);
+                      }
                     }
                   }
                   info.Objects.Add(field.Name, obj);

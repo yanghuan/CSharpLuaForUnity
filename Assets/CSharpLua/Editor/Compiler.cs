@@ -17,13 +17,13 @@ namespace CSharpLua {
     }
 
     private const string kDotnet = "dotnet";
-    private static readonly string compiledScriptDir_ = Settings.CompiledScriptDir;
-    private static readonly string outDir_ = Settings.CompiledOutDir;
-    private static readonly string toolsDir_ = Settings.ToolsDir;
+    private static readonly string compiledScriptDir_ = Settings.Paths.CompiledScriptDir;
+    private static readonly string outDir_ = Settings.Paths.CompiledOutDir;
+    private static readonly string toolsDir_ = Settings.Paths.ToolsDir;
     private static readonly string csharpLua_ = toolsDir_ + "/CSharp.lua/CSharp.lua.Launcher.dll";
-    private static readonly string settingFilePath_ = Settings.SettingFilePath;
+    private static readonly string settingFilePath_ = Settings.Paths.SettingFilePath;
 
-    [MenuItem("CharpLua/Compile")]
+    [MenuItem(Settings.Menus.kCompile)]
     public static void Compile() {
       if (!CheckDotnetInstall()) {
         UnityEngine.Debug.LogWarning("not found dotnet");
@@ -106,7 +106,7 @@ namespace CSharpLua {
       }
     }
 
-    [MenuItem(Settings.kIsRunFromLua ? "CharpLua/Switch to RunFromCSharp" : "CharpLua/Swicth to RunFromLua")]
+    [MenuItem(Settings.kIsRunFromLua ? Settings.Menus.kRunFromCSharp : Settings.Menus.kRunFromLua)]
     public static void Switch() {
 #if UNITY_2017 || UNITY_2018
       const string kFieldName = nameof(Settings.kIsRunFromLua);
@@ -139,7 +139,7 @@ namespace CSharpLua {
   [InitializeOnLoad]
   public class EditorQuitHandler {
     static void Quit() {
-      string tempDir = Settings.TempDir;
+      string tempDir = Settings.Paths.TempDir;
       if (Directory.Exists(tempDir)) {
         Directory.Delete(tempDir, true);
       }
