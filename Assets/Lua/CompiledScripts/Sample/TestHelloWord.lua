@@ -17,7 +17,7 @@ System.namespace("Sample", function (namespace)
       local obj1 = UnityEngine.Object.FindObjectOfType(UnityEngine.MonoBehaviour)
       UnityEngine.Object.Destroy(obj1)
 
-      local i = TestUtils.Load("Assets/CSharpLua/Examples/01_HelloWorld/TestLoader.prefab")
+      local i = TestUtils.Load("Assets/BaseScripts/CSharpLua/Examples/01_HelloWorld/TestLoader.prefab")
       local obj = UnityEngine.Object.Instantiate(i)
       obj:gettransform():setparent(this:gettransform())
 
