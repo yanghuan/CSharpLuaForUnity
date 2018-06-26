@@ -70,12 +70,6 @@ namespace CSharpLua {
       private static string ValueToString(object v) {
         if (v is string) {
           return "\"" + v + "\"";
-        } else if (v is char) {
-          int i = (char)v;
-          return i.ToString();
-        } else if (v is Enum) {
-          int i = (int)(ValueType)v;
-          return i.ToString();
         }
         return v.ToString();
       }
@@ -94,16 +88,10 @@ namespace CSharpLua {
 
     private void Load() {
       LoadClassNames();
-      if (luaState_ != null) {
-        luaState_.Dispose();
-        luaState_ = null;
+      luaState_ = LuaClient.GetMainState();
+      if (luaState_ == null) {
+        throw new InvalidProgramException("not found MainState");
       }
-
-      luaState_ = new LuaState();
-      luaState_.LuaSetTop(0);
-      LuaBinder.Bind(luaState_);
-      luaState_.Start();
-      luaState_.DoFile("Classloader.lua");
     }
 
     public static UserMonoBehaviourConverter Default {
@@ -261,6 +249,13 @@ namespace CSharpLua {
         case TypeCode.String: {
             object x = field.GetValue(monoBehaviour);
             object y = luaClass.RawGet<string, object>(field.Name);
+            if (y is double) {
+              if (fieldTypeCode == TypeCode.Char) {
+                x = (double)(char)x;
+              } else {
+                x = System.Convert.ToDouble(x);
+              }
+            }
             if (!EqualityComparer<object>.Default.Equals(x, y)) {
               info.Normals.Add(field.Name, x);
             }
@@ -294,6 +289,13 @@ namespace CSharpLua {
             break;
           }
         default: {
+            if (fieldType.IsEnum) {
+              int x = (int)(ValueType)field.GetValue(monoBehaviour);
+              int y = luaClass.RawGet<string, int>(field.Name);
+              if (x != y) {
+                info.Normals.Add(field.Name, x);
+              }
+            }
             PauseEdit();
             throw new NotSupportedException($"{monoBehaviour.GetType()}'s field[{field.Name}] type[{fieldType}] not support serialized");
           }
