@@ -33,11 +33,11 @@ namespace Sample {
       Vector4 v4 = Vector4.zero;
     }
 
-    public void Start() {
+    private void Start() {
       print("TestHelloWord.Start");
     }
 
-    public void Update() {
+    private void Update() {
       print("TestHelloWord.Update");
     }
   }
