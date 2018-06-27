@@ -5,7 +5,10 @@ CSharpLuaForUnity尝试使用[CSharp.lua](https://github.com/yanghuan/CSharp.lua
 * 使用[tolua1.0.7.392](https://github.com/topameng/tolua/tree/1.0.7.392)版本作为lua支持环境
 * 使用[CSharp.lua](https://github.com/yanghuan/CSharp.lua)来将C#代码转换至lua
 
-## 相关工程
+## 致谢
 * https://github.com/topameng/tolua
 * https://github.com/jarjin/LuaFramework_UGUI
-* https://github.com/Ourpalm/ILRuntime
+
+## 相关工程
+也可以考虑使用ILRuntime完成类似的需求
+https://github.com/Ourpalm/ILRuntime
