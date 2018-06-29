@@ -284,7 +284,10 @@ local function getComponent(component, T)
     T = T.c
   end  
   if isFromCSharp(T) then
-    return sourceGetComponent(component, typeof(T))   
+    if type(T) ~= "userdata" then
+      T = typeof(T)
+    end
+    return sourceGetComponent(component, T) 
   elseif type(T) == "string" then
     local cls = getClass(T)
     if cls ~= nil then
@@ -316,7 +319,10 @@ local function getComponentInChildren(component, T, includeInactive)
     end
   end
   if isFromCSharp(T) then
-    return checkBridgeMonoBehaviour(sourceGetComponentInChildren(component, typeof(T), includeInactive))
+    if type(T) ~= "userdata" then
+      T = typeof(T)
+    end
+    return checkBridgeMonoBehaviour(sourceGetComponentInChildren(component, T, includeInactive))
   end
     return getBridgeComponent(sourceGetComponentsInChildren, component, T, includeInactive)
 end
@@ -329,7 +335,10 @@ local function getComponentInParent(component, T)
     T = T.c 
   end
   if isFromCSharp(T) then
-    return checkBridgeMonoBehaviour(sourceGetComponentInParent(component, typeof(T)))
+    if type(T) ~= "userdata" then
+      T = typeof(T)
+    end
+    return checkBridgeMonoBehaviour(sourceGetComponentInParent(component, T))
   else
     return getBridgeComponent(sourceGetComponentsInParent, component, T, false)
   end  
@@ -343,7 +352,10 @@ local function getBridgeComponents(sourceGetComponents, component, T, results, .
     results = SystemList(T)
   end
   if isFromCSharp(T) then
-    local coms = sourceGetComponents(component, typeof(T), ...)
+    if type(T) ~= "userdata" then
+      T = typeof(T)
+    end
+    local coms = sourceGetComponents(component, T, ...)
     for i = 0, coms.Length - 1 do
       local t = coms[i]
       results:Add(checkBridgeMonoBehaviour(t))
@@ -434,9 +446,12 @@ local function addComponent(gameObject, T)
   if T == nil then throw(ArgumentNullException("type")) end
   if isSystemType(T) then
     T = T.c
-  end  
+  end
   if isFromCSharp(T) then
-    return sourceAddComponent(gameObject, typeof(T))
+    if type(T) ~= "userdata" then
+      T = typeof(T)
+    end
+    return sourceAddComponent(gameObject, T)
   elseif type(T) == "string" then
     local cls = getClass(T)  
     if cls ~= nil then
@@ -499,7 +514,10 @@ local function findObjectOfType(T)
     T = T.c
   end
   if isFromCSharp(T) then
-    return checkBridgeMonoBehaviour(sourceFindObjectOfType(typeof(T)))
+    if type(T) ~= "userdata" then
+      T = typeof(T)
+    end
+    return checkBridgeMonoBehaviour(sourceFindObjectOfType(T))
   else
     local objs = sourceFindObjectsOfType(typeofBridgeMonoBehaviour)
     for i = 0, objs.Length - 1 do
@@ -514,7 +532,10 @@ end
 local function findBridgeObjectsOfType(sourceFindObjectsOfType, T)
   local results = SystemList(T)
   if isFromCSharp(T) then
-    local objs = sourceFindObjectsOfType(typeof(T))
+    if type(T) ~= "userdata" then
+      T = typeof(T)
+    end
+    local objs = sourceFindObjectsOfType(T)
     for i = 0, objs.Length - 1 do
       local t = objs[i]
       results:Add(checkBridgeMonoBehaviour(t))
@@ -622,10 +643,22 @@ function UnityEngine.bind(monoBehaviour, luaClass, serializeData)
   return T(monoBehaviour, true, serializeData)
 end
 
-
-local function refactorCall(cls, call)
+local function defineUnityStruct(name, T)
+  local __call = T.__call
+  local __index = T.__index
+  System.defStc(name, T)
+   
   local super = getmetatable(cls)
-  setmetatable(cls, { __index = super, __call = call })
+  setmetatable(T, { 
+    __call = __call,
+    __index = function (t, k)
+      local v = __index(t, k)
+      if v == nil then
+        v = super[k]
+      end
+      return v
+    end
+  })
 end
 
 local Vector2 = UnityEngine.Vector2
@@ -685,10 +718,7 @@ function Vector2.__inherits__()
   return { System.IEquatable_1(Vector2) }
 end
 
-local __call = Vector2.__call
-System.defStc("UnityEngine.Vector2", Vector2)
-refactorCall(Vector2, __call)
-
+defineUnityStruct("UnityEngine.Vector2", Vector2)
 
 local Vector3 = UnityEngine.Vector3
 local newVector3 = Vector3.New
@@ -756,10 +786,7 @@ function Vector3.__inherits__()
   return { System.IEquatable_1(Vector3) }
 end
 
-__call = Vector3.__call
-System.defStc("UnityEngine.Vector3", Vector3)
-refactorCall(Vector3, __call)
-
+defineUnityStruct("UnityEngine.Vector3", Vector3)
 
 local Vector4 = UnityEngine.Vector4
 local newVector4 = Vector4.New
@@ -828,9 +855,7 @@ function Vector4.__inherits__()
   return { System.IEquatable_1(Vector4) }
 end
 
-__call = Vector4.__call
-System.defStc("UnityEngine.Vector4", Vector4)
-refactorCall(Vector4, __call)
+defineUnityStruct("UnityEngine.Vector4", Vector4)
 
 function UnityEngine.ToVector2(v)
   return newVector2(v.x, v.y)
@@ -919,9 +944,7 @@ function Color.__inherits__()
   return { System.IEquatable_1(Color) }
 end
 
-__call = Color.__call
-System.defStc("UnityEngine.Color", Color)
-refactorCall(Color, __call)
+defineUnityStruct("UnityEngine.Color", Color)
 
 function UnityEngine.ToColor(v)
   return newColor(v.x ,v.y, v.z, v.w)
@@ -930,7 +953,6 @@ end
 function UnityEngine.ToVector4FromColor(v)
   return newVector4(v.r, v.g, v.b, b.a)
 end
-
 
 local Quaternion = UnityEngine.Quaternion
 local newQuaternion = Quaternion.New
@@ -964,10 +986,7 @@ function Quaternion.__inherits__()
   return { System.IEquatable_1(Quaternion) }
 end
 
-__call = Quaternion.__call
-System.defStc("UnityEngine.Quaternion", Quaternion)
-refactorCall(Quaternion, __call)
-
+defineUnityStruct("UnityEngine.Quaternion", Quaternion)
 
 local Bounds = UnityEngine.Bounds
 local newBounds = Bounds.New
@@ -996,10 +1015,7 @@ function Bounds.__inherits__()
   return { System.IEquatable_1(Bounds) }
 end
 
-__call = Bounds.__call
-System.defStc("UnityEngine.Bounds", Bounds)
-refactorCall(Bounds, __call)
-
+defineUnityStruct("UnityEngine.Bounds", Bounds)
 
 local Plane = UnityEngine.Plane
 local newPlane = Plane.New
@@ -1015,7 +1031,7 @@ Plane.__clone__ = function (this) return newPlane(this.normal, this.distance) en
 local Set3Points = Plane.Set3Points
 local SetNormalAndPosition = Plane.SetNormalAndPosition
 
-__call = function (cls, a, b, c)
+Plane.__call = function (cls, a, b, c)
   if c ~= nil then
     local this = setmetatable({ normal = false, distance = false }, Plane)
     Set3Points(this, a, b, c)
@@ -1030,9 +1046,7 @@ __call = function (cls, a, b, c)
 end
 
 Plane.__inherits__ = System.emptyFn
-System.defStc("UnityEngine.Plane", Plane)
-refactorCall(Plane, __call)
-
+defineUnityStruct("UnityEngine.Plane", Plane)
 
 local LayerMask = UnityEngine.LayerMask
 local newLayerMask = LayerMask.New
@@ -1042,6 +1056,4 @@ LayerMask.__clone__ = function (this) return newLayerMask(this.value) end
 UnityEngine.ToLayerMask = newLayerMask
 
 LayerMask.__inherits__ = System.emptyFn
-__call = LayerMask.__call
-System.defStc("UnityEngine.LayerMask", LayerMask)
-refactorCall(LayerMask, __call)
+defineUnityStruct("UnityEngine.LayerMask", LayerMask)

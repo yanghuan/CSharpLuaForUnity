@@ -53,7 +53,7 @@ namespace CSharpLua {
       string[] metas = new string[] { toolsDir_ + "/UnityEngine.xml" };
       string lib = string.Join(";", libs.ToArray());
       string meta = string.Join(";", metas);
-      string args = $"{csharpLua_}  -s \"{compiledScriptDir_}\" -d \"{outDir_}\" -l \"{lib}\" -m {meta}";
+      string args = $"{csharpLua_}  -s \"{compiledScriptDir_}\" -d \"{outDir_}\" -l \"{lib}\" -m {meta} -c";
       var info = new ProcessStartInfo() {
         FileName = kDotnet,
         Arguments = args,
