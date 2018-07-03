@@ -632,7 +632,20 @@ rawset(metatableOfSystemObject, "__default__", System.emptyFn)
 rawset(metatableOfSystemObject, "EqualsObj", equals)
 rawset(metatableOfSystemObject, "GetType", getType)
 
-UnityEngine.addComponent = addComponent 
+function UnityEngine.addComponent(gameObject, componentString)
+  local pos = componentString:find(",")
+  if pos then
+    local name = componentString:sub(1, pos - 1)
+    local cls = getClass(name)  
+    if cls ~= nil then
+      return addBridgeMonoBehaviour(gameObject, cls)
+    end
+  end
+  local type_ = typeof(T)
+  assert(type_, T .. " is not found")
+  return sourceAddComponent(gameObject, type_)
+end 
+
 UnityEngine.op_Equality = op_Equality
 UnityEngine.op_Inequality = op_Inequality
 UnityEngine.op_Implicit = op_Implicit
@@ -642,6 +655,37 @@ function UnityEngine.bind(monoBehaviour, luaClass, serializeData)
   assert(T, luaClass .. " is not found")
   return T(monoBehaviour, true, serializeData)
 end
+
+local cjson = require("cjson")
+local cjsonDecode = cjson.decode
+
+local function fromJsonTable(t, T)
+  for k, v in pairs(t) do
+    if v == cjson.null then
+      t[k] = nil
+    elseif type(v) == "table" then
+      if #v > 0 then  -- is list
+        fromJsonTable(v, System.List(System.Object))
+      else
+        fromJsonTable(v, System.Object)
+      end
+    end
+  end
+  setmetatable(t, T)
+end
+
+System.define("UnityEngine.JsonUtility", {
+  ToJson = cjson.encode,
+  FromJson = function (json, T)
+    if T == nil then throw(ArgumentNullException("type")) end
+    if isSystemType(T) then
+      T = T.c
+    end
+    local t = cjsonDecode(json)
+    fromJsonTable(t, T)
+    return t
+  end
+})
 
 local function defineUnityStruct(name, T)
   local __call = T.__call

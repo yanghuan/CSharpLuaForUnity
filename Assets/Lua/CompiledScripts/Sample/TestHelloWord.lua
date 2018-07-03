@@ -24,13 +24,7 @@ System.namespace("Sample", function (namespace)
       local a = UnityEngine.Vector2(1, 1)
       a:set(0, 10)
       UnityEngine.MonoBehaviour.print(a)
-
       UnityEngine.MonoBehaviour.print(UnityEngine.Vector2.getup())
-
-      local v3 = UnityEngine.Vector3.getzero()
-      this:getgameObject():gettransform():setposition(v3)
-
-      local v4 = UnityEngine.Vector4.getzero()
     end
     Start = function (this) 
       UnityEngine.MonoBehaviour.print("TestHelloWord.Start")

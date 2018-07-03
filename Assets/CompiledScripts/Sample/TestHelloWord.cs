@@ -24,13 +24,7 @@ namespace Sample {
       Vector2 a = new Vector2(1, 1);
       a[0] = 10;
       print(a);
-
       print(Vector2.up);
-
-      Vector3 v3 = Vector3.zero;
-      gameObject.transform.position = v3;
-
-      Vector4 v4 = Vector4.zero;
     }
 
     private void Start() {
