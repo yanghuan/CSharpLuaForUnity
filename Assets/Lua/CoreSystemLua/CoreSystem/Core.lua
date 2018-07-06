@@ -192,7 +192,12 @@ end
 
 local function staticCtorSetBase(cls)
   setmetatable(cls, nil)
-  local kind = cls.__kind__
+  local t = cls[cls]
+  for k, v in pairs(t) do
+    cls[k] = v
+  end
+  cls[cls] = nil
+  local kind = cls.kind
   cls.__kind__ = nil
   setBase(cls, kind)
   cls:__staticCtor__()
@@ -213,6 +218,18 @@ local staticCtorMetatable = {
     return new(cls, ...)
   end,
 }
+
+local function setHasStaticCtor(cls, kind)
+  local t = {}
+  for k, v in pairs(cls) do
+    t[k] = v
+    cls[k] = nil
+  end  
+  cls[cls] = t
+  cls.__kind__ = kind
+  cls.__call = new
+  setmetatable(cls, staticCtorMetatable)
+end  
 
 local function def(name, kind, cls, generic)
   if type(cls) == "function" then
@@ -246,9 +263,7 @@ local function def(name, kind, cls, generic)
     if cls.__staticCtor__ == nil then
       setBase(cls, kind)
     else
-    	cls.__kind__ = kind
-      cls.__call = new
-      setmetatable(cls, staticCtorMetatable)
+      setHasStaticCtor(cls, kind)
     end
   elseif kind == "I" then
     local extends = cls.__inherits__
@@ -1099,5 +1114,9 @@ function System.namespace(name, f)
   curCacheName = nil
 end
 
-return function (config) System.config = config or {} end
-
+System.config = {}
+return function (config) 
+  if config then
+    System.config = config
+  end
+end
