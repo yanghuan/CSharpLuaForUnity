@@ -1314,7 +1314,10 @@ public static class ToLuaExport
                 string set = md == null ? "set" : "_set";
                 sb.AppendFormat("\t\tL.RegVar(\"{0}\", {1}_{0}, {2}_{0});\r\n", props[i].Name, get, set);
                 sb.AppendFormat("\t\tL.RegFunction(\"get{0}\", {1}_{0});\r\n", props[i].Name, get);
-                sb.AppendFormat("\t\tL.RegFunction(\"set{0}\", {1}_{0});\r\n", props[i].Name, set);
+                if(props[i].GetSetMethod().IsStatic)
+                    sb.AppendFormat("\t\tL.RegFunction(\"set{0}\", {1}_{0}ter);\r\n", props[i].Name, set);
+                else
+                    sb.AppendFormat("\t\tL.RegFunction(\"set{0}\", {1}_{0});\r\n", props[i].Name, set);
             }
             else if (props[i].CanRead)
             {
@@ -1326,7 +1329,10 @@ public static class ToLuaExport
             {
                 _MethodBase md = methods.Find((p) => { return p.Name == "set_" + props[i].Name; });
                 sb.AppendFormat("\t\tL.RegVar(\"{0}\", null, {1}_{0});\r\n", props[i].Name, md == null ? "set" : "_set");
-                sb.AppendFormat("\t\tL.RegFunction(\"set{0}\", {1}_{0});\r\n", props[i].Name, md == null ? "set" : "_set");
+                if (props[i].GetSetMethod().IsStatic)
+                    sb.AppendFormat("\t\tL.RegFunction(\"set{0}\", {1}_{0}ter);\r\n", props[i].Name, md == null ? "set" : "_set");
+                else
+                    sb.AppendFormat("\t\tL.RegFunction(\"set{0}\", {1}_{0});\r\n", props[i].Name, md == null ? "set" : "_set");
             }
         }
 
@@ -3130,10 +3136,10 @@ public static class ToLuaExport
         }
     }
 
-    static void GenSetFieldStr(string varName, Type varType, bool isStatic, bool beOverride = false)
+    static void GenSetFieldStr(string varName, Type varType, bool isStatic, bool beOverride = false, bool csharpLike = false)
     {
         sb.AppendLineEx("\r\n\t[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]");
-        sb.AppendFormat("\tstatic int {0}_{1}(IntPtr L)\r\n", beOverride ? "_set" : "set",  varName);        
+        sb.AppendFormat("\tstatic int {0}_{1}(IntPtr L)\r\n", beOverride ? "_set" : "set",  varName + (csharpLike ? "ter" : string.Empty)); 
         sb.AppendLineEx("\t{");        
 
         if (!isStatic)
@@ -3159,7 +3165,7 @@ public static class ToLuaExport
         else
         {
             BeginTry();
-            ProcessArg(varType, "\t\t\t", "arg0", 2);
+            ProcessArg(varType, "\t\t\t", "arg0", csharpLike ? 1 : 2);
             sb.AppendFormat("\t\t\t{0}.{1} = arg0;\r\n", className, varName);
             sb.AppendLineEx("\t\t\treturn 0;");
             EndTry();
@@ -3239,6 +3245,9 @@ public static class ToLuaExport
 
             _MethodBase md = methods.Find((p) => { return p.Name == "set_" + props[i].Name; });
             GenSetFieldStr(props[i].Name, props[i].PropertyType, isStatic, md != null);
+            // 生成CSharp.lua兼容的版本
+            if(isStatic)
+                GenSetFieldStr(props[i].Name, props[i].PropertyType, isStatic, md != null, true);
         }
 
         for (int i = 0; i < events.Length; i++)
