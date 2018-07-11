@@ -23,7 +23,7 @@ System.namespace("Sample", function (namespace)
     return {
       __inherits__ = function (global) 
         return {
-          global.UnityEngine.MonoBehaviour
+          UnityEngine.MonoBehaviour
         }
       end, 
       Awake = Awake, 
