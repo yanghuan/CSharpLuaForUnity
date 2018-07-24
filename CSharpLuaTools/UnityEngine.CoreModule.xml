@@ -1038,10 +1038,10 @@
 				<method name="StartCoroutine" GenericArgCount="0" Template="{this}:StartCoroutine0({0})">
 					<arg type="System.Collections.IEnumerator"/>
 				</method>
-				<method name="StartCoroutine" GenericArgCount="0" Template="{this}:StartCoroutine1({0})">
+				<method name="StartCoroutine" GenericArgCount="0" Baned="true" NotImplementMethod="custom baned!">
 					<arg type="System.String"/>
 				</method>
-				<method name="StartCoroutine" GenericArgCount="0" Template="{this}:StartCoroutine2({0}, {1})">
+				<method name="StartCoroutine" GenericArgCount="0" Baned="true" NotImplementMethod="custom baned!">
 					<arg type="System.String"/>
 					<arg type="System.Object"/>
 				</method>

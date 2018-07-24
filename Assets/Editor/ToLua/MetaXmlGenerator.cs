@@ -247,7 +247,7 @@ public class MetaXmlGenerator
     {
         return param.GetCustomAttributes(typeof(ParamArrayAttribute), false).Length > 0;
     }
-    void GenerateMethod(MetaMethodInfo method)
+    void GenerateMethod(MetaMethodInfo method, bool forceBaned = false)
     {
 
         Type classType = method.method.ReflectedType;
@@ -275,7 +275,16 @@ public class MetaXmlGenerator
                 parameters += "System.TypeOfTolua({^" + i.ToString() + "})";
             }
         }
-        var template = (method.method.IsGenericMethod? GenerateGenericMethodTemplate(method, parameters) : new KeyValuePair<bool, string>(true, GenerateNormalMethodTemplate(method, parameters)));
+        KeyValuePair<bool, string> template;
+        if (forceBaned)
+        {
+            template = new KeyValuePair<bool, string>(false, "custom baned!");
+        }
+        else
+        {
+            template = (method.method.IsGenericMethod ? GenerateGenericMethodTemplate(method, parameters) : new KeyValuePair<bool, string>(true, GenerateNormalMethodTemplate(method, parameters)));
+        }
+
         var genericArgumentsLength = (method.method.IsGenericMethod ? method.method.GetGenericArguments().Length : 0);
         sb.AppendFormat("\t\t\t\t<method name=\"{0}\" GenericArgCount=\"{1}\"{2}>\n", method.method.Name, genericArgumentsLength, !template.Key ? " Baned=\"true\" NotImplementMethod=\"" + template.Value + "\"" : " Template=\"" + template.Value + "\"");
 
@@ -293,7 +302,7 @@ public class MetaXmlGenerator
         sb.AppendFormat("\t\t\t<class name=\"{0}\">\n", classType.Name);
         foreach (var method in classPair)
         {
-            GenerateMethod(method);
+            GenerateMethod(method, CustomSettings.banedMetaList.Contains(method.method));
         }
         sb.AppendFormat("\t\t\t</class>\n");
     }
