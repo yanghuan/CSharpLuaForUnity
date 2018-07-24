@@ -16,6 +16,7 @@ public class System_Collections_ObjectModel_ReadOnlyCollectionWrap
         L.RegFunction("get_Item", get_Item);
         L.RegFunction("__tostring", ToLua.op_ToString);
         L.RegVar("Count", get_Count, null);
+        L.RegFunction("__len", get_Count);
         L.EndClass();
     }
 

@@ -1,0 +1,566 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<meta>
+	<assembly>
+		<namespace name="UnityEngine.UI">
+			<class name="GraphicRaycaster">
+				<method name="Raycast" GenericArgCount="0" Template="{this}:Raycast({0}, {1})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+					<arg type="System.Collections.Generic.List^1">
+						<arg type="UnityEngine.EventSystems.RaycastResult"/>
+					</arg>
+				</method>
+			</class>
+			<class name="Button">
+				<method name="OnPointerClick" GenericArgCount="0" Template="{this}:OnPointerClick({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnSubmit" GenericArgCount="0" Template="{this}:OnSubmit({0})">
+					<arg type="UnityEngine.EventSystems.BaseEventData"/>
+				</method>
+			</class>
+			<class name="Image">
+				<method name="OnBeforeSerialize" GenericArgCount="0" Template="{this}:OnBeforeSerialize()">
+				</method>
+				<method name="OnAfterDeserialize" GenericArgCount="0" Template="{this}:OnAfterDeserialize()">
+				</method>
+				<method name="SetNativeSize" GenericArgCount="0" Template="{this}:SetNativeSize()">
+				</method>
+				<method name="CalculateLayoutInputHorizontal" GenericArgCount="0" Template="{this}:CalculateLayoutInputHorizontal()">
+				</method>
+				<method name="CalculateLayoutInputVertical" GenericArgCount="0" Template="{this}:CalculateLayoutInputVertical()">
+				</method>
+				<method name="IsRaycastLocationValid" GenericArgCount="0" Template="{this}:IsRaycastLocationValid({0}, {1})">
+					<arg type="UnityEngine.Vector2"/>
+					<arg type="UnityEngine.Camera"/>
+				</method>
+			</class>
+			<class name="RawImage">
+				<method name="SetNativeSize" GenericArgCount="0" Template="{this}:SetNativeSize()">
+				</method>
+			</class>
+			<class name="Slider">
+				<method name="Rebuild" GenericArgCount="0" Template="{this}:Rebuild({0})">
+					<arg type="UnityEngine.UI.CanvasUpdate"/>
+				</method>
+				<method name="LayoutComplete" GenericArgCount="0" Template="{this}:LayoutComplete()">
+				</method>
+				<method name="GraphicUpdateComplete" GenericArgCount="0" Template="{this}:GraphicUpdateComplete()">
+				</method>
+				<method name="OnPointerDown" GenericArgCount="0" Template="{this}:OnPointerDown({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnDrag" GenericArgCount="0" Template="{this}:OnDrag({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnMove" GenericArgCount="0" Template="{this}:OnMove({0})">
+					<arg type="UnityEngine.EventSystems.AxisEventData"/>
+				</method>
+				<method name="FindSelectableOnLeft" GenericArgCount="0" Template="{this}:FindSelectableOnLeft()">
+				</method>
+				<method name="FindSelectableOnRight" GenericArgCount="0" Template="{this}:FindSelectableOnRight()">
+				</method>
+				<method name="FindSelectableOnUp" GenericArgCount="0" Template="{this}:FindSelectableOnUp()">
+				</method>
+				<method name="FindSelectableOnDown" GenericArgCount="0" Template="{this}:FindSelectableOnDown()">
+				</method>
+				<method name="OnInitializePotentialDrag" GenericArgCount="0" Template="{this}:OnInitializePotentialDrag({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="SetDirection" GenericArgCount="0" Template="{this}:SetDirection({0}, {1})">
+					<arg type="UnityEngine.UI.Slider+Direction"/>
+					<arg type="System.Boolean"/>
+				</method>
+			</class>
+			<class name="InputField">
+				<method name="MoveTextEnd" GenericArgCount="0" Template="{this}:MoveTextEnd({0})">
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="MoveTextStart" GenericArgCount="0" Template="{this}:MoveTextStart({0})">
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="OnBeginDrag" GenericArgCount="0" Template="{this}:OnBeginDrag({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnDrag" GenericArgCount="0" Template="{this}:OnDrag({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnEndDrag" GenericArgCount="0" Template="{this}:OnEndDrag({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnPointerDown" GenericArgCount="0" Template="{this}:OnPointerDown({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="ProcessEvent" GenericArgCount="0" Template="{this}:ProcessEvent({0})">
+					<arg type="UnityEngine.Event"/>
+				</method>
+				<method name="OnUpdateSelected" GenericArgCount="0" Template="{this}:OnUpdateSelected({0})">
+					<arg type="UnityEngine.EventSystems.BaseEventData"/>
+				</method>
+				<method name="ForceLabelUpdate" GenericArgCount="0" Template="{this}:ForceLabelUpdate()">
+				</method>
+				<method name="Rebuild" GenericArgCount="0" Template="{this}:Rebuild({0})">
+					<arg type="UnityEngine.UI.CanvasUpdate"/>
+				</method>
+				<method name="LayoutComplete" GenericArgCount="0" Template="{this}:LayoutComplete()">
+				</method>
+				<method name="GraphicUpdateComplete" GenericArgCount="0" Template="{this}:GraphicUpdateComplete()">
+				</method>
+				<method name="ActivateInputField" GenericArgCount="0" Template="{this}:ActivateInputField()">
+				</method>
+				<method name="OnSelect" GenericArgCount="0" Template="{this}:OnSelect({0})">
+					<arg type="UnityEngine.EventSystems.BaseEventData"/>
+				</method>
+				<method name="OnPointerClick" GenericArgCount="0" Template="{this}:OnPointerClick({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="DeactivateInputField" GenericArgCount="0" Template="{this}:DeactivateInputField()">
+				</method>
+				<method name="OnDeselect" GenericArgCount="0" Template="{this}:OnDeselect({0})">
+					<arg type="UnityEngine.EventSystems.BaseEventData"/>
+				</method>
+				<method name="OnSubmit" GenericArgCount="0" Template="{this}:OnSubmit({0})">
+					<arg type="UnityEngine.EventSystems.BaseEventData"/>
+				</method>
+				<method name="CalculateLayoutInputHorizontal" GenericArgCount="0" Template="{this}:CalculateLayoutInputHorizontal()">
+				</method>
+				<method name="CalculateLayoutInputVertical" GenericArgCount="0" Template="{this}:CalculateLayoutInputVertical()">
+				</method>
+			</class>
+			<class name="Scrollbar">
+				<method name="Rebuild" GenericArgCount="0" Template="{this}:Rebuild({0})">
+					<arg type="UnityEngine.UI.CanvasUpdate"/>
+				</method>
+				<method name="LayoutComplete" GenericArgCount="0" Template="{this}:LayoutComplete()">
+				</method>
+				<method name="GraphicUpdateComplete" GenericArgCount="0" Template="{this}:GraphicUpdateComplete()">
+				</method>
+				<method name="OnBeginDrag" GenericArgCount="0" Template="{this}:OnBeginDrag({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnDrag" GenericArgCount="0" Template="{this}:OnDrag({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnPointerDown" GenericArgCount="0" Template="{this}:OnPointerDown({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnPointerUp" GenericArgCount="0" Template="{this}:OnPointerUp({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnMove" GenericArgCount="0" Template="{this}:OnMove({0})">
+					<arg type="UnityEngine.EventSystems.AxisEventData"/>
+				</method>
+				<method name="FindSelectableOnLeft" GenericArgCount="0" Template="{this}:FindSelectableOnLeft()">
+				</method>
+				<method name="FindSelectableOnRight" GenericArgCount="0" Template="{this}:FindSelectableOnRight()">
+				</method>
+				<method name="FindSelectableOnUp" GenericArgCount="0" Template="{this}:FindSelectableOnUp()">
+				</method>
+				<method name="FindSelectableOnDown" GenericArgCount="0" Template="{this}:FindSelectableOnDown()">
+				</method>
+				<method name="OnInitializePotentialDrag" GenericArgCount="0" Template="{this}:OnInitializePotentialDrag({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="SetDirection" GenericArgCount="0" Template="{this}:SetDirection({0}, {1})">
+					<arg type="UnityEngine.UI.Scrollbar+Direction"/>
+					<arg type="System.Boolean"/>
+				</method>
+			</class>
+			<class name="Toggle">
+				<method name="Rebuild" GenericArgCount="0" Template="{this}:Rebuild({0})">
+					<arg type="UnityEngine.UI.CanvasUpdate"/>
+				</method>
+				<method name="LayoutComplete" GenericArgCount="0" Template="{this}:LayoutComplete()">
+				</method>
+				<method name="GraphicUpdateComplete" GenericArgCount="0" Template="{this}:GraphicUpdateComplete()">
+				</method>
+				<method name="OnPointerClick" GenericArgCount="0" Template="{this}:OnPointerClick({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnSubmit" GenericArgCount="0" Template="{this}:OnSubmit({0})">
+					<arg type="UnityEngine.EventSystems.BaseEventData"/>
+				</method>
+			</class>
+			<class name="ToggleGroup">
+				<method name="NotifyToggleOn" GenericArgCount="0" Template="{this}:NotifyToggleOn({0})">
+					<arg type="UnityEngine.UI.Toggle"/>
+				</method>
+				<method name="UnregisterToggle" GenericArgCount="0" Template="{this}:UnregisterToggle({0})">
+					<arg type="UnityEngine.UI.Toggle"/>
+				</method>
+				<method name="RegisterToggle" GenericArgCount="0" Template="{this}:RegisterToggle({0})">
+					<arg type="UnityEngine.UI.Toggle"/>
+				</method>
+				<method name="AnyTogglesOn" GenericArgCount="0" Template="{this}:AnyTogglesOn()">
+				</method>
+				<method name="ActiveToggles" GenericArgCount="0" Template="{this}:ActiveToggles()">
+				</method>
+				<method name="SetAllTogglesOff" GenericArgCount="0" Template="{this}:SetAllTogglesOff()">
+				</method>
+			</class>
+			<class name="Mask">
+				<method name="MaskEnabled" GenericArgCount="0" Template="{this}:MaskEnabled()">
+				</method>
+				<method name="IsRaycastLocationValid" GenericArgCount="0" Template="{this}:IsRaycastLocationValid({0}, {1})">
+					<arg type="UnityEngine.Vector2"/>
+					<arg type="UnityEngine.Camera"/>
+				</method>
+				<method name="GetModifiedMaterial" GenericArgCount="0" Template="{this}:GetModifiedMaterial({0})">
+					<arg type="UnityEngine.Material"/>
+				</method>
+			</class>
+			<class name="Text">
+				<method name="FontTextureChanged" GenericArgCount="0" Template="{this}:FontTextureChanged()">
+				</method>
+				<method name="GetGenerationSettings" GenericArgCount="0" Template="{this}:GetGenerationSettings({0})">
+					<arg type="UnityEngine.Vector2"/>
+				</method>
+				<method name="GetTextAnchorPivot" GenericArgCount="0" Template="UnityEngine.UI.Text.GetTextAnchorPivot({0})">
+					<arg type="UnityEngine.TextAnchor"/>
+				</method>
+				<method name="CalculateLayoutInputHorizontal" GenericArgCount="0" Template="{this}:CalculateLayoutInputHorizontal()">
+				</method>
+				<method name="CalculateLayoutInputVertical" GenericArgCount="0" Template="{this}:CalculateLayoutInputVertical()">
+				</method>
+			</class>
+			<class name="Dropdown">
+				<method name="RefreshShownValue" GenericArgCount="0" Template="{this}:RefreshShownValue()">
+				</method>
+				<method name="AddOptions" GenericArgCount="0" Template="{this}:AddOptions0({0})">
+					<arg type="System.Collections.Generic.List^1">
+						<arg type="UnityEngine.UI.Dropdown+OptionData"/>
+					</arg>
+				</method>
+				<method name="AddOptions" GenericArgCount="0" Template="{this}:AddOptions1({0})">
+					<arg type="System.Collections.Generic.List^1">
+						<arg type="System.String"/>
+					</arg>
+				</method>
+				<method name="AddOptions" GenericArgCount="0" Template="{this}:AddOptions2({0})">
+					<arg type="System.Collections.Generic.List^1">
+						<arg type="UnityEngine.Sprite"/>
+					</arg>
+				</method>
+				<method name="ClearOptions" GenericArgCount="0" Template="{this}:ClearOptions()">
+				</method>
+				<method name="OnPointerClick" GenericArgCount="0" Template="{this}:OnPointerClick({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnSubmit" GenericArgCount="0" Template="{this}:OnSubmit({0})">
+					<arg type="UnityEngine.EventSystems.BaseEventData"/>
+				</method>
+				<method name="OnCancel" GenericArgCount="0" Template="{this}:OnCancel({0})">
+					<arg type="UnityEngine.EventSystems.BaseEventData"/>
+				</method>
+				<method name="Show" GenericArgCount="0" Template="{this}:Show()">
+				</method>
+				<method name="Hide" GenericArgCount="0" Template="{this}:Hide()">
+				</method>
+			</class>
+			<class name="Selectable">
+				<method name="IsInteractable" GenericArgCount="0" Template="{this}:IsInteractable()">
+				</method>
+				<method name="FindSelectable" GenericArgCount="0" Template="{this}:FindSelectable({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="FindSelectableOnLeft" GenericArgCount="0" Template="{this}:FindSelectableOnLeft()">
+				</method>
+				<method name="FindSelectableOnRight" GenericArgCount="0" Template="{this}:FindSelectableOnRight()">
+				</method>
+				<method name="FindSelectableOnUp" GenericArgCount="0" Template="{this}:FindSelectableOnUp()">
+				</method>
+				<method name="FindSelectableOnDown" GenericArgCount="0" Template="{this}:FindSelectableOnDown()">
+				</method>
+				<method name="OnMove" GenericArgCount="0" Template="{this}:OnMove({0})">
+					<arg type="UnityEngine.EventSystems.AxisEventData"/>
+				</method>
+				<method name="OnPointerDown" GenericArgCount="0" Template="{this}:OnPointerDown({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnPointerUp" GenericArgCount="0" Template="{this}:OnPointerUp({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnPointerEnter" GenericArgCount="0" Template="{this}:OnPointerEnter({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnPointerExit" GenericArgCount="0" Template="{this}:OnPointerExit({0})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+				</method>
+				<method name="OnSelect" GenericArgCount="0" Template="{this}:OnSelect({0})">
+					<arg type="UnityEngine.EventSystems.BaseEventData"/>
+				</method>
+				<method name="OnDeselect" GenericArgCount="0" Template="{this}:OnDeselect({0})">
+					<arg type="UnityEngine.EventSystems.BaseEventData"/>
+				</method>
+				<method name="Select" GenericArgCount="0" Template="{this}:Select()">
+				</method>
+			</class>
+			<class name="MaskableGraphic">
+				<method name="GetModifiedMaterial" GenericArgCount="0" Template="{this}:GetModifiedMaterial({0})">
+					<arg type="UnityEngine.Material"/>
+				</method>
+				<method name="Cull" GenericArgCount="0" Template="{this}:Cull({0}, {1})">
+					<arg type="UnityEngine.Rect"/>
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="SetClipRect" GenericArgCount="0" Template="{this}:SetClipRect({0}, {1})">
+					<arg type="UnityEngine.Rect"/>
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="RecalculateClipping" GenericArgCount="0" Template="{this}:RecalculateClipping()">
+				</method>
+				<method name="RecalculateMasking" GenericArgCount="0" Template="{this}:RecalculateMasking()">
+				</method>
+			</class>
+			<class name="Graphic">
+				<method name="SetAllDirty" GenericArgCount="0" Template="{this}:SetAllDirty()">
+				</method>
+				<method name="SetLayoutDirty" GenericArgCount="0" Template="{this}:SetLayoutDirty()">
+				</method>
+				<method name="SetVerticesDirty" GenericArgCount="0" Template="{this}:SetVerticesDirty()">
+				</method>
+				<method name="SetMaterialDirty" GenericArgCount="0" Template="{this}:SetMaterialDirty()">
+				</method>
+				<method name="Rebuild" GenericArgCount="0" Template="{this}:Rebuild({0})">
+					<arg type="UnityEngine.UI.CanvasUpdate"/>
+				</method>
+				<method name="LayoutComplete" GenericArgCount="0" Template="{this}:LayoutComplete()">
+				</method>
+				<method name="GraphicUpdateComplete" GenericArgCount="0" Template="{this}:GraphicUpdateComplete()">
+				</method>
+				<method name="SetNativeSize" GenericArgCount="0" Template="{this}:SetNativeSize()">
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="{this}:Raycast({0}, {1})">
+					<arg type="UnityEngine.Vector2"/>
+					<arg type="UnityEngine.Camera"/>
+				</method>
+				<method name="PixelAdjustPoint" GenericArgCount="0" Template="{this}:PixelAdjustPoint({0})">
+					<arg type="UnityEngine.Vector2"/>
+				</method>
+				<method name="GetPixelAdjustedRect" GenericArgCount="0" Template="{this}:GetPixelAdjustedRect()">
+				</method>
+				<method name="CrossFadeColor" GenericArgCount="0" Template="{this}:CrossFadeColor0({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Color"/>
+					<arg type="System.Single"/>
+					<arg type="System.Boolean"/>
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="CrossFadeColor" GenericArgCount="0" Template="{this}:CrossFadeColor1({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Color"/>
+					<arg type="System.Single"/>
+					<arg type="System.Boolean"/>
+					<arg type="System.Boolean"/>
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="CrossFadeAlpha" GenericArgCount="0" Template="{this}:CrossFadeAlpha({0}, {1}, {2})">
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="RegisterDirtyLayoutCallback" GenericArgCount="0" Template="{this}:RegisterDirtyLayoutCallback({0})">
+					<arg type="UnityEngine.Events.UnityAction"/>
+				</method>
+				<method name="UnregisterDirtyLayoutCallback" GenericArgCount="0" Template="{this}:UnregisterDirtyLayoutCallback({0})">
+					<arg type="UnityEngine.Events.UnityAction"/>
+				</method>
+				<method name="RegisterDirtyVerticesCallback" GenericArgCount="0" Template="{this}:RegisterDirtyVerticesCallback({0})">
+					<arg type="UnityEngine.Events.UnityAction"/>
+				</method>
+				<method name="UnregisterDirtyVerticesCallback" GenericArgCount="0" Template="{this}:UnregisterDirtyVerticesCallback({0})">
+					<arg type="UnityEngine.Events.UnityAction"/>
+				</method>
+				<method name="RegisterDirtyMaterialCallback" GenericArgCount="0" Template="{this}:RegisterDirtyMaterialCallback({0})">
+					<arg type="UnityEngine.Events.UnityAction"/>
+				</method>
+				<method name="UnregisterDirtyMaterialCallback" GenericArgCount="0" Template="{this}:UnregisterDirtyMaterialCallback({0})">
+					<arg type="UnityEngine.Events.UnityAction"/>
+				</method>
+			</class>
+		</namespace>
+		<namespace name="UnityEngine.EventSystems">
+			<class name="EventSystem">
+				<method name="UpdateModules" GenericArgCount="0" Template="{this}:UpdateModules()">
+				</method>
+				<method name="SetSelectedGameObject" GenericArgCount="0" Template="{this}:SetSelectedGameObject0({0})">
+					<arg type="UnityEngine.GameObject"/>
+				</method>
+				<method name="SetSelectedGameObject" GenericArgCount="0" Template="{this}:SetSelectedGameObject1({0}, {1})">
+					<arg type="UnityEngine.GameObject"/>
+					<arg type="UnityEngine.EventSystems.BaseEventData"/>
+				</method>
+				<method name="RaycastAll" GenericArgCount="0" Template="{this}:RaycastAll({0}, {1})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+					<arg type="System.Collections.Generic.List^1">
+						<arg type="UnityEngine.EventSystems.RaycastResult"/>
+					</arg>
+				</method>
+				<method name="IsPointerOverGameObject" GenericArgCount="0" Template="{this}:IsPointerOverGameObject0()">
+				</method>
+				<method name="IsPointerOverGameObject" GenericArgCount="0" Template="{this}:IsPointerOverGameObject1({0})">
+					<arg type="System.Int32"/>
+				</method>
+				<method name="ToString" GenericArgCount="0" Template="{this}:ToString()">
+				</method>
+			</class>
+			<class name="StandaloneInputModule">
+				<method name="UpdateModule" GenericArgCount="0" Template="{this}:UpdateModule()">
+				</method>
+				<method name="IsModuleSupported" GenericArgCount="0" Template="{this}:IsModuleSupported()">
+				</method>
+				<method name="ShouldActivateModule" GenericArgCount="0" Template="{this}:ShouldActivateModule()">
+				</method>
+				<method name="ActivateModule" GenericArgCount="0" Template="{this}:ActivateModule()">
+				</method>
+				<method name="DeactivateModule" GenericArgCount="0" Template="{this}:DeactivateModule()">
+				</method>
+				<method name="Process" GenericArgCount="0" Template="{this}:Process()">
+				</method>
+			</class>
+			<class name="BaseRaycaster">
+				<method name="Raycast" GenericArgCount="0" Template="{this}:Raycast({0}, {1})">
+					<arg type="UnityEngine.EventSystems.PointerEventData"/>
+					<arg type="System.Collections.Generic.List^1">
+						<arg type="UnityEngine.EventSystems.RaycastResult"/>
+					</arg>
+				</method>
+				<method name="ToString" GenericArgCount="0" Template="{this}:ToString()">
+				</method>
+			</class>
+			<class name="UIBehaviour">
+				<method name="IsActive" GenericArgCount="0" Template="{this}:IsActive()">
+				</method>
+				<method name="IsDestroyed" GenericArgCount="0" Template="{this}:IsDestroyed()">
+				</method>
+			</class>
+			<class name="PointerInputModule">
+				<method name="IsPointerOverGameObject" GenericArgCount="0" Template="{this}:IsPointerOverGameObject({0})">
+					<arg type="System.Int32"/>
+				</method>
+				<method name="ToString" GenericArgCount="0" Template="{this}:ToString()">
+				</method>
+			</class>
+			<class name="BaseInputModule">
+				<method name="Process" GenericArgCount="0" Template="{this}:Process()">
+				</method>
+				<method name="IsPointerOverGameObject" GenericArgCount="0" Template="{this}:IsPointerOverGameObject({0})">
+					<arg type="System.Int32"/>
+				</method>
+				<method name="ShouldActivateModule" GenericArgCount="0" Template="{this}:ShouldActivateModule()">
+				</method>
+				<method name="DeactivateModule" GenericArgCount="0" Template="{this}:DeactivateModule()">
+				</method>
+				<method name="ActivateModule" GenericArgCount="0" Template="{this}:ActivateModule()">
+				</method>
+				<method name="UpdateModule" GenericArgCount="0" Template="{this}:UpdateModule()">
+				</method>
+				<method name="IsModuleSupported" GenericArgCount="0" Template="{this}:IsModuleSupported()">
+				</method>
+			</class>
+		</namespace>
+		<namespace name="UnityEngine.EventSystems">
+			<class name="EventTrigger" Baned="true">
+			</class>
+			<class name="EventTrigger.TriggerEvent" Baned="true">
+			</class>
+			<class name="EventTrigger.Entry" Baned="true">
+			</class>
+			<class name="ExecuteEvents" Baned="true">
+			</class>
+			<class name="ExecuteEvents.EventFunction`1" Baned="true">
+			</class>
+			<class name="AxisEventData" Baned="true">
+			</class>
+			<class name="AbstractEventData" Baned="true">
+			</class>
+			<class name="BaseEventData" Baned="true">
+			</class>
+			<class name="PointerEventData" Baned="true">
+			</class>
+			<class name="BaseInput" Baned="true">
+			</class>
+			<class name="PointerInputModule.MouseButtonEventData" Baned="true">
+			</class>
+			<class name="TouchInputModule" Baned="true">
+			</class>
+			<class name="Physics2DRaycaster" Baned="true">
+			</class>
+			<class name="PhysicsRaycaster" Baned="true">
+			</class>
+		</namespace>
+		<namespace name="UnityEngine.UI">
+			<class name="AnimationTriggers" Baned="true">
+			</class>
+			<class name="Button.ButtonClickedEvent" Baned="true">
+			</class>
+			<class name="CanvasUpdateRegistry" Baned="true">
+			</class>
+			<class name="DefaultControls" Baned="true">
+			</class>
+			<class name="Dropdown.OptionDataList" Baned="true">
+			</class>
+			<class name="FontData" Baned="true">
+			</class>
+			<class name="FontUpdateTracker" Baned="true">
+			</class>
+			<class name="GraphicRebuildTracker" Baned="true">
+			</class>
+			<class name="GraphicRegistry" Baned="true">
+			</class>
+			<class name="InputField.OnValidateInput" Baned="true">
+			</class>
+			<class name="InputField.SubmitEvent" Baned="true">
+			</class>
+			<class name="MaskableGraphic.CullStateChangedEvent" Baned="true">
+			</class>
+			<class name="MaskUtilities" Baned="true">
+			</class>
+			<class name="RectMask2D" Baned="true">
+			</class>
+			<class name="Scrollbar.ScrollEvent" Baned="true">
+			</class>
+			<class name="ScrollRect" Baned="true">
+			</class>
+			<class name="ScrollRect.ScrollRectEvent" Baned="true">
+			</class>
+			<class name="Slider.SliderEvent" Baned="true">
+			</class>
+			<class name="StencilMaterial" Baned="true">
+			</class>
+			<class name="ClipperRegistry" Baned="true">
+			</class>
+			<class name="Clipping" Baned="true">
+			</class>
+			<class name="AspectRatioFitter" Baned="true">
+			</class>
+			<class name="ContentSizeFitter" Baned="true">
+			</class>
+			<class name="GridLayoutGroup" Baned="true">
+			</class>
+			<class name="HorizontalLayoutGroup" Baned="true">
+			</class>
+			<class name="HorizontalOrVerticalLayoutGroup" Baned="true">
+			</class>
+			<class name="LayoutElement" Baned="true">
+			</class>
+			<class name="LayoutGroup" Baned="true">
+			</class>
+			<class name="LayoutRebuilder" Baned="true">
+			</class>
+			<class name="LayoutUtility" Baned="true">
+			</class>
+			<class name="VerticalLayoutGroup" Baned="true">
+			</class>
+			<class name="VertexHelper" Baned="true">
+			</class>
+			<class name="BaseVertexEffect" Baned="true">
+			</class>
+			<class name="BaseMeshEffect" Baned="true">
+			</class>
+			<class name="Outline" Baned="true">
+			</class>
+			<class name="PositionAsUV1" Baned="true">
+			</class>
+			<class name="Shadow" Baned="true">
+			</class>
+		</namespace>
+	</assembly>
+</meta>

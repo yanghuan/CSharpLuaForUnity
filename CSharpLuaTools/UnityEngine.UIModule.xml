@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<meta>
+	<assembly>
+		<namespace name="UnityEngine">
+			<class name="Canvas">
+				<method name="GetDefaultCanvasMaterial" GenericArgCount="0" Template="UnityEngine.Canvas.GetDefaultCanvasMaterial()">
+				</method>
+				<method name="GetETC1SupportedCanvasMaterial" GenericArgCount="0" Template="UnityEngine.Canvas.GetETC1SupportedCanvasMaterial()">
+				</method>
+				<method name="ForceUpdateCanvases" GenericArgCount="0" Template="UnityEngine.Canvas.ForceUpdateCanvases()">
+				</method>
+			</class>
+			<class name="CanvasGroup">
+				<method name="IsRaycastLocationValid" GenericArgCount="0" Template="{this}:IsRaycastLocationValid({0}, {1})">
+					<arg type="UnityEngine.Vector2"/>
+					<arg type="UnityEngine.Camera"/>
+				</method>
+			</class>
+		</namespace>
+		<namespace name="UnityEngine">
+			<class name="Canvas.WillRenderCanvases" Baned="true">
+			</class>
+			<class name="UISystemProfilerApi" Baned="true">
+			</class>
+			<class name="CanvasRenderer" Baned="true">
+			</class>
+			<class name="CanvasRenderer.OnRequestRebuild" Baned="true">
+			</class>
+			<class name="RectTransformUtility" Baned="true">
+			</class>
+		</namespace>
+	</assembly>
+</meta>

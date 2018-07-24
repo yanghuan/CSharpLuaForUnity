@@ -25,14 +25,13 @@ public class TestCustomLoader : LuaClient
         CallMain();
     }
 
-    new void Awake()
+    void Awake()
     {
 #if UNITY_5 || UNITY_2017 || UNITY_2018
         Application.logMessageReceived += Logger;
 #else
         Application.RegisterLogCallback(Logger);
-#endif    
-        base.Awake();
+#endif
     }
 
     new void OnApplicationQuit()

@@ -10,6 +10,8 @@ public class System_ArrayWrap
         L.BeginClass(typeof(Array), typeof(System.Object));
         L.RegFunction(".geti", get_Item);
         L.RegFunction(".seti", set_Item);
+        L.RegFunction("get", get_Item);
+        L.RegFunction("set", set_Item);
         L.RegFunction("ToTable", ToTable);
 		L.RegFunction("GetLength", GetLength);
 		L.RegFunction("GetLongLength", GetLongLength);
@@ -31,8 +33,9 @@ public class System_ArrayWrap
 		L.RegFunction("CopyTo", CopyTo);
 		L.RegFunction("ConstrainedCopy", ConstrainedCopy);
 		L.RegFunction("__tostring", ToLua.op_ToString);
-		L.RegVar("Length", get_Length, null);
-		L.RegVar("LongLength", get_LongLength, null);
+        L.RegVar("Length", get_Length, null);
+        L.RegFunction("__len", get_Length);
+        L.RegVar("LongLength", get_LongLength, null);
 		L.RegVar("Rank", get_Rank, null);
 		L.RegVar("IsSynchronized", get_IsSynchronized, null);
 		L.RegVar("SyncRoot", get_SyncRoot, null);

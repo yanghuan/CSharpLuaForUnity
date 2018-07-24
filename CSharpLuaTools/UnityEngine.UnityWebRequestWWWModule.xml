@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<meta>
+	<assembly>
+		<namespace name="UnityEngine">
+			<class name="WWW">
+				<method name="EscapeURL" GenericArgCount="0" Template="UnityEngine.WWW.EscapeURL0({0})">
+					<arg type="System.String"/>
+				</method>
+				<method name="EscapeURL" GenericArgCount="0" Template="UnityEngine.WWW.EscapeURL1({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="System.Text.Encoding"/>
+				</method>
+				<method name="UnEscapeURL" GenericArgCount="0" Template="UnityEngine.WWW.UnEscapeURL0({0})">
+					<arg type="System.String"/>
+				</method>
+				<method name="UnEscapeURL" GenericArgCount="0" Template="UnityEngine.WWW.UnEscapeURL1({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="System.Text.Encoding"/>
+				</method>
+				<method name="LoadFromCacheOrDownload" GenericArgCount="0" Template="UnityEngine.WWW.LoadFromCacheOrDownload0({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="LoadFromCacheOrDownload" GenericArgCount="0" Template="UnityEngine.WWW.LoadFromCacheOrDownload1({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="UnityEngine.Hash128"/>
+				</method>
+				<method name="LoadFromCacheOrDownload" GenericArgCount="0" Template="UnityEngine.WWW.LoadFromCacheOrDownload2({0}, {1}, {2})">
+					<arg type="System.String"/>
+					<arg type="System.Int32"/>
+					<arg type="System.UInt32"/>
+				</method>
+				<method name="LoadFromCacheOrDownload" GenericArgCount="0" Template="UnityEngine.WWW.LoadFromCacheOrDownload3({0}, {1}, {2})">
+					<arg type="System.String"/>
+					<arg type="UnityEngine.Hash128"/>
+					<arg type="System.UInt32"/>
+				</method>
+				<method name="LoadFromCacheOrDownload" GenericArgCount="0" Template="UnityEngine.WWW.LoadFromCacheOrDownload4({0}, {1}, {2})">
+					<arg type="System.String"/>
+					<arg type="UnityEngine.CachedAssetBundle"/>
+					<arg type="System.UInt32"/>
+				</method>
+				<method name="LoadImageIntoTexture" GenericArgCount="0" Template="{this}:LoadImageIntoTexture({0})">
+					<arg type="UnityEngine.Texture2D"/>
+				</method>
+				<method name="Dispose" GenericArgCount="0" Template="{this}:Dispose()">
+				</method>
+				<method name="GetAudioClip" GenericArgCount="0" Template="{this}:GetAudioClip0()">
+				</method>
+				<method name="GetAudioClip" GenericArgCount="0" Template="{this}:GetAudioClip1({0})">
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="GetAudioClip" GenericArgCount="0" Template="{this}:GetAudioClip2({0}, {1})">
+					<arg type="System.Boolean"/>
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="GetAudioClip" GenericArgCount="0" Template="{this}:GetAudioClip3({0}, {1}, {2})">
+					<arg type="System.Boolean"/>
+					<arg type="System.Boolean"/>
+					<arg type="UnityEngine.AudioType"/>
+				</method>
+				<method name="GetAudioClipCompressed" GenericArgCount="0" Template="{this}:GetAudioClipCompressed0()">
+				</method>
+				<method name="GetAudioClipCompressed" GenericArgCount="0" Template="{this}:GetAudioClipCompressed1({0})">
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="GetAudioClipCompressed" GenericArgCount="0" Template="{this}:GetAudioClipCompressed2({0}, {1})">
+					<arg type="System.Boolean"/>
+					<arg type="UnityEngine.AudioType"/>
+				</method>
+			</class>
+		</namespace>
+	</assembly>
+</meta>
