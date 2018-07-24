@@ -43,8 +43,11 @@ public class System_Collections_Generic_ListWrap
 		L.RegFunction("set_Item", set_Item);
         L.RegFunction(".geti", get_Item);
         L.RegFunction(".seti", set_Item);
+        L.RegFunction("get", get_Item);
+        L.RegFunction("set", set_Item);
         L.RegFunction("__tostring", ToLua.op_ToString);
-		L.RegVar("Capacity", get_Capacity, set_Capacity);
+        L.RegFunction("__len", get_Count);
+        L.RegVar("Capacity", get_Capacity, set_Capacity);
 		L.RegVar("Count", get_Count, null);
         L.EndClass();        
     }

@@ -1,0 +1,430 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<meta>
+	<assembly>
+		<namespace name="Generic">
+			<class name="GameObjectExternions">
+				<method name="AddComponent0T" GenericArgCount="0" Template="Generic.GameObjectExternions.AddComponent0T({0}, {1})">
+					<arg type="UnityEngine.GameObject"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponent0T" GenericArgCount="0" Template="Generic.GameObjectExternions.GetComponent0T({0}, {1})">
+					<arg type="UnityEngine.GameObject"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentInChildren0T" GenericArgCount="0" Template="Generic.GameObjectExternions.GetComponentInChildren0T({0}, {1})">
+					<arg type="UnityEngine.GameObject"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentInChildren1T" GenericArgCount="0" Template="Generic.GameObjectExternions.GetComponentInChildren1T({0}, {1}, {2})">
+					<arg type="UnityEngine.GameObject"/>
+					<arg type="System.Boolean"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentsInChildren0T" GenericArgCount="0" Template="Generic.GameObjectExternions.GetComponentsInChildren0T({0}, {1})">
+					<arg type="UnityEngine.GameObject"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentsInChildren2T" GenericArgCount="0" Template="Generic.GameObjectExternions.GetComponentsInChildren2T({0}, {1}, {2})">
+					<arg type="UnityEngine.GameObject"/>
+					<arg type="System.Boolean"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentInParent0T" GenericArgCount="0" Template="Generic.GameObjectExternions.GetComponentInParent0T({0}, {1})">
+					<arg type="UnityEngine.GameObject"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentsInParent0T" GenericArgCount="0" Template="Generic.GameObjectExternions.GetComponentsInParent0T({0}, {1})">
+					<arg type="UnityEngine.GameObject"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentsInParent1T" GenericArgCount="0" Template="Generic.GameObjectExternions.GetComponentsInParent1T({0}, {1}, {2})">
+					<arg type="UnityEngine.GameObject"/>
+					<arg type="System.Boolean"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponents0T" GenericArgCount="0" Template="Generic.GameObjectExternions.GetComponents0T({0}, {1})">
+					<arg type="UnityEngine.GameObject"/>
+					<arg type="System.Type"/>
+				</method>
+			</class>
+			<class name="ComponentExternions">
+				<method name="GetComponent0T" GenericArgCount="0" Template="Generic.ComponentExternions.GetComponent0T({0}, {1})">
+					<arg type="UnityEngine.Component"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentInChildren0T" GenericArgCount="0" Template="Generic.ComponentExternions.GetComponentInChildren0T({0}, {1})">
+					<arg type="UnityEngine.Component"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentInChildren1T" GenericArgCount="0" Template="Generic.ComponentExternions.GetComponentInChildren1T({0}, {1}, {2})">
+					<arg type="UnityEngine.Component"/>
+					<arg type="System.Boolean"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentsInChildren0T" GenericArgCount="0" Template="Generic.ComponentExternions.GetComponentsInChildren0T({0}, {1})">
+					<arg type="UnityEngine.Component"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentsInChildren2T" GenericArgCount="0" Template="Generic.ComponentExternions.GetComponentsInChildren2T({0}, {1}, {2})">
+					<arg type="UnityEngine.Component"/>
+					<arg type="System.Boolean"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentInParent0T" GenericArgCount="0" Template="Generic.ComponentExternions.GetComponentInParent0T({0}, {1})">
+					<arg type="UnityEngine.Component"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentsInParent0T" GenericArgCount="0" Template="Generic.ComponentExternions.GetComponentsInParent0T({0}, {1})">
+					<arg type="UnityEngine.Component"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponentsInParent1T" GenericArgCount="0" Template="Generic.ComponentExternions.GetComponentsInParent1T({0}, {1}, {2})">
+					<arg type="UnityEngine.Component"/>
+					<arg type="System.Boolean"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetComponents0T" GenericArgCount="0" Template="Generic.ComponentExternions.GetComponents0T({0}, {1})">
+					<arg type="UnityEngine.Component"/>
+					<arg type="System.Type"/>
+				</method>
+			</class>
+			<class name="ResourcesExternions">
+				<method name="Load0T" GenericArgCount="0" Template="Generic.ResourcesExternions.Load0T({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="FindObjectsOfTypeAll0T" GenericArgCount="0" Template="Generic.ResourcesExternions.FindObjectsOfTypeAll0T({0})">
+					<arg type="System.Type"/>
+				</method>
+				<method name="LoadAsync0T" GenericArgCount="0" Template="Generic.ResourcesExternions.LoadAsync0T({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="LoadAll0T" GenericArgCount="0" Template="Generic.ResourcesExternions.LoadAll0T({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="GetBuiltinResource0T" GenericArgCount="0" Template="Generic.ResourcesExternions.GetBuiltinResource0T({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="System.Type"/>
+				</method>
+			</class>
+		</namespace>
+		<namespace name="">
+			<class name="MonoManager">
+				<method name="Create" GenericArgCount="0" Template="MonoManager.Create()">
+				</method>
+				<method name="Update" GenericArgCount="0" Template="{this}:Update()">
+				</method>
+				<method name="LateUpdate" GenericArgCount="0" Template="{this}:LateUpdate()">
+				</method>
+				<method name="FixedUpdate" GenericArgCount="0" Template="{this}:FixedUpdate()">
+				</method>
+			</class>
+			<class name="LuaProfiler">
+				<method name="Clear" GenericArgCount="0" Template="LuaProfiler.Clear()">
+				</method>
+				<method name="GetID" GenericArgCount="0" Template="LuaProfiler.GetID({0})">
+					<arg type="System.String"/>
+				</method>
+				<method name="BeginSample" GenericArgCount="0" Template="LuaProfiler.BeginSample({0})">
+					<arg type="System.Int32"/>
+				</method>
+				<method name="EndSample" GenericArgCount="0" Template="LuaProfiler.EndSample()">
+				</method>
+			</class>
+		</namespace>
+		<namespace name="CSharpLua">
+			<class name="CSharpLuaClient" Baned="true">
+			</class>
+			<class name="Settings" Baned="true">
+			</class>
+			<class name="Settings.Paths" Baned="true">
+			</class>
+			<class name="Settings.Menus" Baned="true">
+			</class>
+		</namespace>
+		<namespace name="">
+			<class name="LuaAutoWrapAttribute" Baned="true">
+			</class>
+			<class name="ReflectionTools" Baned="true">
+			</class>
+			<class name="LuaBinder" Baned="true">
+			</class>
+			<class name="LuaConst" Baned="true">
+			</class>
+			<class name="LuaInterface_EventObjectWrap" Baned="true">
+			</class>
+			<class name="LuaInterface_LuaConstructorWrap" Baned="true">
+			</class>
+			<class name="LuaInterface_LuaFieldWrap" Baned="true">
+			</class>
+			<class name="LuaInterface_LuaMethodWrap" Baned="true">
+			</class>
+			<class name="LuaInterface_LuaOutWrap" Baned="true">
+			</class>
+			<class name="LuaInterface_LuaPropertyWrap" Baned="true">
+			</class>
+			<class name="System_ArrayWrap" Baned="true">
+			</class>
+			<class name="System_Collections_Generic_Dictionary_KeyCollectionWrap" Baned="true">
+			</class>
+			<class name="System_Collections_Generic_Dictionary_ValueCollectionWrap" Baned="true">
+			</class>
+			<class name="System_Collections_Generic_DictionaryWrap" Baned="true">
+			</class>
+			<class name="System_Collections_Generic_KeyValuePairWrap" Baned="true">
+			</class>
+			<class name="System_Collections_Generic_ListWrap" Baned="true">
+			</class>
+			<class name="System_Collections_IEnumeratorWrap" Baned="true">
+			</class>
+			<class name="System_Collections_ObjectModel_ReadOnlyCollectionWrap" Baned="true">
+			</class>
+			<class name="System_DelegateWrap" Baned="true">
+			</class>
+			<class name="System_EnumWrap" Baned="true">
+			</class>
+			<class name="System_NullObjectWrap" Baned="true">
+			</class>
+			<class name="System_ObjectWrap" Baned="true">
+			</class>
+			<class name="System_StringWrap" Baned="true">
+			</class>
+			<class name="System_TypeWrap" Baned="true">
+			</class>
+			<class name="UnityEngine_CoroutineWrap" Baned="true">
+			</class>
+			<class name="UnityEngine_ObjectWrap" Baned="true">
+			</class>
+			<class name="HelloWorld" Baned="true">
+			</class>
+			<class name="ScriptsFromFile" Baned="true">
+			</class>
+			<class name="CallLuaFunction" Baned="true">
+			</class>
+			<class name="AccessingLuaVariables" Baned="true">
+			</class>
+			<class name="TestCoroutine" Baned="true">
+			</class>
+			<class name="TestCoroutine2" Baned="true">
+			</class>
+			<class name="TestLuaThread" Baned="true">
+			</class>
+			<class name="AccessingArray" Baned="true">
+			</class>
+			<class name="System_Collections_Generic_Dictionary_int_TestAccount_KeyCollectionWrap" Baned="true">
+			</class>
+			<class name="System_Collections_Generic_Dictionary_int_TestAccount_ValueCollectionWrap" Baned="true">
+			</class>
+			<class name="System_Collections_Generic_Dictionary_int_TestAccountWrap" Baned="true">
+			</class>
+			<class name="System_Collections_Generic_KeyValuePair_int_TestAccountWrap" Baned="true">
+			</class>
+			<class name="TestAccountWrap" Baned="true">
+			</class>
+			<class name="TestAccount" Baned="true">
+			</class>
+			<class name="UseDictionary" Baned="true">
+			</class>
+			<class name="AccessingEnum" Baned="true">
+			</class>
+			<class name="TestDelegate" Baned="true">
+			</class>
+			<class name="TestEventListener" Baned="true">
+			</class>
+			<class name="TestEventListener.VoidDelegate" Baned="true">
+			</class>
+			<class name="TestEventListener.OnClick" Baned="true">
+			</class>
+			<class name="TestEventListenerWrap" Baned="true">
+			</class>
+			<class name="TestGameObject" Baned="true">
+			</class>
+			<class name="TestCustomLoader" Baned="true">
+			</class>
+			<class name="TestOutArg" Baned="true">
+			</class>
+			<class name="TestProtoBuffer" Baned="true">
+			</class>
+			<class name="TestProtol" Baned="true">
+			</class>
+			<class name="TestProtolWrap" Baned="true">
+			</class>
+			<class name="TestInt64" Baned="true">
+			</class>
+			<class name="TestInherit" Baned="true">
+			</class>
+			<class name="TestABLoader" Baned="true">
+			</class>
+			<class name="TestCJson" Baned="true">
+			</class>
+			<class name="TestUTF8" Baned="true">
+			</class>
+			<class name="TestString" Baned="true">
+			</class>
+			<class name="TestReflection" Baned="true">
+			</class>
+			<class name="UseList" Baned="true">
+			</class>
+			<class name="PassStruct" Baned="true">
+			</class>
+			<class name="TestPerformance" Baned="true">
+			</class>
+			<class name="TestInstantiate" Baned="true">
+			</class>
+			<class name="TestInstantiate2" Baned="true">
+			</class>
+			<class name="TestLuaStack" Baned="true">
+			</class>
+			<class name="TestExport_SpaceWrap" Baned="true">
+			</class>
+			<class name="TestExportWrap" Baned="true">
+			</class>
+			<class name="TestEnum" Baned="true">
+			</class>
+			<class name="TestExport" Baned="true">
+			</class>
+			<class name="TestExport.TestBuffer" Baned="true">
+			</class>
+			<class name="TestExport.TestRefEvent" Baned="true">
+			</class>
+			<class name="TestOverload" Baned="true">
+			</class>
+			<class name="ToLua_LuaInterface_EventObject" Baned="true">
+			</class>
+			<class name="ToLua_LuaInterface_LuaConstructor" Baned="true">
+			</class>
+			<class name="ToLua_LuaInterface_LuaField" Baned="true">
+			</class>
+			<class name="ToLua_LuaInterface_LuaMethod" Baned="true">
+			</class>
+			<class name="ToLua_LuaInterface_LuaProperty" Baned="true">
+			</class>
+			<class name="ToLua_System_Delegate" Baned="true">
+			</class>
+			<class name="ToLua_System_Enum" Baned="true">
+			</class>
+			<class name="ToLua_System_Object" Baned="true">
+			</class>
+			<class name="ToLua_System_String" Baned="true">
+			</class>
+			<class name="ToLua_System_Type" Baned="true">
+			</class>
+			<class name="LuaClient" Baned="true">
+			</class>
+			<class name="LuaCoroutine" Baned="true">
+			</class>
+			<class name="LuaLooper" Baned="true">
+			</class>
+			<class name="LuaResLoader" Baned="true">
+			</class>
+		</namespace>
+		<namespace name="LuaInterface">
+			<class name="MonoPInvokeCallbackAttribute" Baned="true">
+			</class>
+			<class name="NoToLuaAttribute" Baned="true">
+			</class>
+			<class name="UseDefinedAttribute" Baned="true">
+			</class>
+			<class name="OverrideDefinedAttribute" Baned="true">
+			</class>
+			<class name="LuaByteBufferAttribute" Baned="true">
+			</class>
+			<class name="LuaRenameAttribute" Baned="true">
+			</class>
+			<class name="LuaBaseRef" Baned="true">
+			</class>
+			<class name="LuaBeatEvent" Baned="true">
+			</class>
+			<class name="LuaIndexes" Baned="true">
+			</class>
+			<class name="LuaRIDX" Baned="true">
+			</class>
+			<class name="ToLuaFlags" Baned="true">
+			</class>
+			<class name="LuaCSFunction" Baned="true">
+			</class>
+			<class name="LuaHookFunc" Baned="true">
+			</class>
+			<class name="LuaDLL" Baned="true">
+			</class>
+			<class name="LuaEvent" Baned="true">
+			</class>
+			<class name="LuaException" Baned="true">
+			</class>
+			<class name="LuaFileUtils" Baned="true">
+			</class>
+			<class name="LuaFunction" Baned="true">
+			</class>
+			<class name="LuaMatchType" Baned="true">
+			</class>
+			<class name="LuaMethodCache" Baned="true">
+			</class>
+			<class name="GCRef" Baned="true">
+			</class>
+			<class name="LuaOut`1" Baned="true">
+			</class>
+			<class name="NullObject" Baned="true">
+			</class>
+			<class name="LuaDelegate" Baned="true">
+			</class>
+			<class name="LuaMisc" Baned="true">
+			</class>
+			<class name="TouchBits" Baned="true">
+			</class>
+			<class name="RaycastBits" Baned="true">
+			</class>
+			<class name="EventObject" Baned="true">
+			</class>
+			<class name="LuaStackOp" Baned="true">
+			</class>
+			<class name="LuaState" Baned="true">
+			</class>
+			<class name="LuaStatePtr" Baned="true">
+			</class>
+			<class name="LuaStatic" Baned="true">
+			</class>
+			<class name="LuaTable" Baned="true">
+			</class>
+			<class name="LuaArrayTable" Baned="true">
+			</class>
+			<class name="LuaDictTable" Baned="true">
+			</class>
+			<class name="LuaDictTable`2" Baned="true">
+			</class>
+			<class name="LuaThread" Baned="true">
+			</class>
+			<class name="LuaUnityLibs" Baned="true">
+			</class>
+			<class name="LuaValueTypeName" Baned="true">
+			</class>
+			<class name="LuaObjectPool" Baned="true">
+			</class>
+			<class name="ObjectTranslator" Baned="true">
+			</class>
+			<class name="ToLua" Baned="true">
+			</class>
+			<class name="ToLua.LuaTableToVar" Baned="true">
+			</class>
+			<class name="ToLua.LuaPushVarObject" Baned="true">
+			</class>
+			<class name="TypeChecker" Baned="true">
+			</class>
+			<class name="TypeTraits`1" Baned="true">
+			</class>
+			<class name="StackTraits`1" Baned="true">
+			</class>
+			<class name="LuaConstructor" Baned="true">
+			</class>
+			<class name="LuaField" Baned="true">
+			</class>
+			<class name="LuaMethod" Baned="true">
+			</class>
+			<class name="LuaProperty" Baned="true">
+			</class>
+			<class name="LuaReflection" Baned="true">
+			</class>
+		</namespace>
+	</assembly>
+</meta>

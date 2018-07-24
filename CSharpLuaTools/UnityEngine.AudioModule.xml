@@ -1,0 +1,171 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<meta>
+	<assembly>
+		<namespace name="UnityEngine">
+			<class name="AudioSource">
+				<method name="Play" GenericArgCount="0" Template="{this}:Play0()">
+				</method>
+				<method name="Play" GenericArgCount="0" Template="{this}:Play1({0})">
+					<arg type="System.UInt64"/>
+				</method>
+				<method name="PlayDelayed" GenericArgCount="0" Template="{this}:PlayDelayed({0})">
+					<arg type="System.Single"/>
+				</method>
+				<method name="PlayScheduled" GenericArgCount="0" Template="{this}:PlayScheduled({0})">
+					<arg type="System.Double"/>
+				</method>
+				<method name="SetScheduledStartTime" GenericArgCount="0" Template="{this}:SetScheduledStartTime({0})">
+					<arg type="System.Double"/>
+				</method>
+				<method name="SetScheduledEndTime" GenericArgCount="0" Template="{this}:SetScheduledEndTime({0})">
+					<arg type="System.Double"/>
+				</method>
+				<method name="Stop" GenericArgCount="0" Template="{this}:Stop()">
+				</method>
+				<method name="Pause" GenericArgCount="0" Template="{this}:Pause()">
+				</method>
+				<method name="UnPause" GenericArgCount="0" Template="{this}:UnPause()">
+				</method>
+				<method name="PlayOneShot" GenericArgCount="0" Template="{this}:PlayOneShot0({0})">
+					<arg type="UnityEngine.AudioClip"/>
+				</method>
+				<method name="PlayOneShot" GenericArgCount="0" Template="{this}:PlayOneShot1({0}, {1})">
+					<arg type="UnityEngine.AudioClip"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="PlayClipAtPoint" GenericArgCount="0" Template="UnityEngine.AudioSource.PlayClipAtPoint0({0}, {1})">
+					<arg type="UnityEngine.AudioClip"/>
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="PlayClipAtPoint" GenericArgCount="0" Template="UnityEngine.AudioSource.PlayClipAtPoint1({0}, {1}, {2})">
+					<arg type="UnityEngine.AudioClip"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="SetCustomCurve" GenericArgCount="0" Template="{this}:SetCustomCurve({0}, {1})">
+					<arg type="UnityEngine.AudioSourceCurveType"/>
+					<arg type="UnityEngine.AnimationCurve"/>
+				</method>
+				<method name="GetCustomCurve" GenericArgCount="0" Template="{this}:GetCustomCurve({0})">
+					<arg type="UnityEngine.AudioSourceCurveType"/>
+				</method>
+				<method name="GetOutputData" GenericArgCount="0" Template="{this}:GetOutputData({0}, {1})">
+					<arg type="System.Single[]"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="GetSpectrumData" GenericArgCount="0" Template="{this}:GetSpectrumData({0}, {1}, {2})">
+					<arg type="System.Single[]"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.FFTWindow"/>
+				</method>
+				<method name="SetSpatializerFloat" GenericArgCount="0" Template="{this}:SetSpatializerFloat({0}, {1})">
+					<arg type="System.Int32"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="GetSpatializerFloat" GenericArgCount="0" Template="{this}:GetSpatializerFloat({0}, {1})">
+					<arg type="System.Int32"/>
+					<arg type="System.Single&amp;amp;"/>
+				</method>
+				<method name="SetAmbisonicDecoderFloat" GenericArgCount="0" Template="{this}:SetAmbisonicDecoderFloat({0}, {1})">
+					<arg type="System.Int32"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="GetAmbisonicDecoderFloat" GenericArgCount="0" Template="{this}:GetAmbisonicDecoderFloat({0}, {1})">
+					<arg type="System.Int32"/>
+					<arg type="System.Single&amp;amp;"/>
+				</method>
+			</class>
+			<class name="AudioClip">
+				<method name="LoadAudioData" GenericArgCount="0" Template="{this}:LoadAudioData()">
+				</method>
+				<method name="UnloadAudioData" GenericArgCount="0" Template="{this}:UnloadAudioData()">
+				</method>
+				<method name="GetData" GenericArgCount="0" Template="{this}:GetData({0}, {1})">
+					<arg type="System.Single[]"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="SetData" GenericArgCount="0" Template="{this}:SetData({0}, {1})">
+					<arg type="System.Single[]"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="Create" GenericArgCount="0" Template="UnityEngine.AudioClip.Create0({0}, {1}, {2}, {3}, {4})">
+					<arg type="System.String"/>
+					<arg type="System.Int32"/>
+					<arg type="System.Int32"/>
+					<arg type="System.Int32"/>
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="Create" GenericArgCount="0" Template="UnityEngine.AudioClip.Create1({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="System.String"/>
+					<arg type="System.Int32"/>
+					<arg type="System.Int32"/>
+					<arg type="System.Int32"/>
+					<arg type="System.Boolean"/>
+					<arg type="UnityEngine.AudioClip+PCMReaderCallback"/>
+				</method>
+				<method name="Create" GenericArgCount="0" Template="UnityEngine.AudioClip.Create2({0}, {1}, {2}, {3}, {4}, {5}, {6})">
+					<arg type="System.String"/>
+					<arg type="System.Int32"/>
+					<arg type="System.Int32"/>
+					<arg type="System.Int32"/>
+					<arg type="System.Boolean"/>
+					<arg type="UnityEngine.AudioClip+PCMReaderCallback"/>
+					<arg type="UnityEngine.AudioClip+PCMSetPositionCallback"/>
+				</method>
+			</class>
+			<class name="AudioListener">
+				<method name="GetOutputData" GenericArgCount="0" Template="UnityEngine.AudioListener.GetOutputData({0}, {1})">
+					<arg type="System.Single[]"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="GetSpectrumData" GenericArgCount="0" Template="UnityEngine.AudioListener.GetSpectrumData({0}, {1}, {2})">
+					<arg type="System.Single[]"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.FFTWindow"/>
+				</method>
+			</class>
+		</namespace>
+		<namespace name="UnityEngine">
+			<class name="AudioSettings" Baned="true">
+			</class>
+			<class name="AudioSettings.AudioConfigurationChangeHandler" Baned="true">
+			</class>
+			<class name="AudioClip.PCMReaderCallback" Baned="true">
+			</class>
+			<class name="AudioClip.PCMSetPositionCallback" Baned="true">
+			</class>
+			<class name="AudioBehaviour" Baned="true">
+			</class>
+			<class name="AudioReverbZone" Baned="true">
+			</class>
+			<class name="AudioLowPassFilter" Baned="true">
+			</class>
+			<class name="AudioHighPassFilter" Baned="true">
+			</class>
+			<class name="AudioDistortionFilter" Baned="true">
+			</class>
+			<class name="AudioEchoFilter" Baned="true">
+			</class>
+			<class name="AudioChorusFilter" Baned="true">
+			</class>
+			<class name="AudioReverbFilter" Baned="true">
+			</class>
+			<class name="Microphone" Baned="true">
+			</class>
+			<class name="MovieTexture" Baned="true">
+			</class>
+			<class name="WebCamTexture" Baned="true">
+			</class>
+			<class name="AudioRenderer" Baned="true">
+			</class>
+		</namespace>
+		<namespace name="UnityEngine.Audio">
+			<class name="AudioMixer" Baned="true">
+			</class>
+			<class name="AudioMixerSnapshot" Baned="true">
+			</class>
+			<class name="AudioMixerGroup" Baned="true">
+			</class>
+		</namespace>
+	</assembly>
+</meta>

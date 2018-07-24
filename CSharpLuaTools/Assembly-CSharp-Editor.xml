@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<meta>
+	<assembly>
+		<namespace name="">
+			<class name="ToLua_UnityEngine_Input">
+				<method name="GetTouch" GenericArgCount="0" Template="ToLua_UnityEngine_Input.GetTouch({0}, {1})">
+					<arg type="System.Int32"/>
+					<arg type="System.Int32"/>
+				</method>
+			</class>
+			<class name="ToLua_UnityEngine_RectTransform">
+				<method name="GetLocalCorners" GenericArgCount="0" Template="{this}:GetLocalCorners0()">
+				</method>
+				<method name="GetWorldCorners" GenericArgCount="0" Template="{this}:GetWorldCorners0()">
+				</method>
+			</class>
+		</namespace>
+		<namespace name="CSharpLua">
+			<class name="Compiler" Baned="true">
+			</class>
+		</namespace>
+		<namespace name="">
+			<class name="CustomSettings" Baned="true">
+			</class>
+			<class name="ToLua_LuaInterface_EventObject" Baned="true">
+			</class>
+			<class name="ToLua_LuaInterface_LuaConstructor" Baned="true">
+			</class>
+			<class name="ToLua_LuaInterface_LuaField" Baned="true">
+			</class>
+			<class name="ToLua_LuaInterface_LuaMethod" Baned="true">
+			</class>
+			<class name="ToLua_LuaInterface_LuaProperty" Baned="true">
+			</class>
+			<class name="ToLua_System_Delegate" Baned="true">
+			</class>
+			<class name="ToLua_System_Enum" Baned="true">
+			</class>
+			<class name="ToLua_System_Object" Baned="true">
+			</class>
+			<class name="ToLua_System_String" Baned="true">
+			</class>
+			<class name="ToLua_System_Type" Baned="true">
+			</class>
+			<class name="MetaMethodInfo" Baned="true">
+			</class>
+			<class name="MetaXmlGenerator" Baned="true">
+			</class>
+			<class name="DelegateType" Baned="true">
+			</class>
+			<class name="ToLuaExport" Baned="true">
+			</class>
+			<class name="ToLuaMenu" Baned="true">
+			</class>
+			<class name="ToLuaMenu.BindType" Baned="true">
+			</class>
+			<class name="ToLuaNode`1" Baned="true">
+			</class>
+			<class name="ToLuaTree`1" Baned="true">
+			</class>
+		</namespace>
+	</assembly>
+</meta>

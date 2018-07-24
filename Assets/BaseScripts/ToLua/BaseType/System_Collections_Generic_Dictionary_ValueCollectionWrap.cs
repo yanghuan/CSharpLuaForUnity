@@ -13,6 +13,7 @@ public class System_Collections_Generic_Dictionary_ValueCollectionWrap
         L.RegFunction("New", _CreateSystem_Collections_Generic_Dictionary_ValueCollection);
         L.RegFunction("__tostring", ToLua.op_ToString);
         L.RegVar("Count", get_Count, null);
+        L.RegFunction("__len", get_Count);
         L.EndClass();
     }
 

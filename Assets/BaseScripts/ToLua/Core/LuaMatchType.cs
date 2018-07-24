@@ -299,7 +299,16 @@ namespace LuaInterface
                 return LuaDLL.tolua_getvaluetype(L, pos) == LuaValueType.Color;
             }
 
-            return false;            
+            return false;
+        }
+        public bool CheckColor32(IntPtr L, int pos)
+        {
+            if (LuaDLL.lua_type(L, pos) == LuaTypes.LUA_TTABLE)
+            {
+                return LuaDLL.tolua_getvaluetype(L, pos) == LuaValueType.Color32;
+            }
+
+            return false;
         }
 
         public bool CheckVec4(IntPtr L, int pos)
@@ -421,6 +430,20 @@ namespace LuaInterface
                     return false;
             }
         }
+        public bool CheckNullColor32(IntPtr L, int pos)
+        {
+            LuaTypes luaType = LuaDLL.lua_type(L, pos);
+
+            switch (luaType)
+            {
+                case LuaTypes.LUA_TNIL:
+                    return true;
+                case LuaTypes.LUA_TTABLE:
+                    return LuaDLL.tolua_getvaluetype(L, pos) == LuaValueType.Color32;
+                default:
+                    return false;
+            }
+        }
 
         public bool CheckNullVec4(IntPtr L, int pos)
         {
@@ -535,6 +558,11 @@ namespace LuaInterface
         public bool CheckColorArray(IntPtr L, int pos)
         {
             return CheckArray(typeof(Color[]), L, pos);
+        }
+
+        public bool CheckColor32Array(IntPtr L, int pos)
+        {
+            return CheckArray(typeof(Color32[]), L, pos);
         }
 
         public bool CheckPtr(IntPtr L, int pos)

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<meta>
+  <assembly>
+    <namespace name="LuaInterface">
+      <class name="LuaByteBuffer">
+        <method name=".ctor" ArgCount="0" Template="''" />
+        <method name=".ctor" ArgCount="1" Baned="true" />
+        <method name=".ctor" ArgCount="2" Baned="true" />
+        <method name="Get" Template="{this}:byte({0} + 1)" />
+        <method name="Set" Template="{this}[{0} + 1] = string.char({1})[0]" />
+        <method name="Sub" ArgCount="1" Template="{this}:sub({0} + 1)" />
+        <method name="Sub" ArgCount="2" Template="{this}:sub({0} + 1, {1} + 1)" />
+        <method name="__clone__" Template="" />
+
+        <field name="buffer" Baned="true"/>
+
+        <property name="Length">
+          <get Template="#{this}" />
+        </property>
+        <method name="ToString" Template="{this}"/>
+      </class>
+
+    </namespace>
+  </assembly>
+</meta>

@@ -1,0 +1,1099 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<meta>
+	<assembly>
+		<namespace name="UnityEngine">
+			<class name="Rigidbody">
+				<method name="SetDensity" GenericArgCount="0" Template="{this}:SetDensity({0})">
+					<arg type="System.Single"/>
+				</method>
+				<method name="AddForce" GenericArgCount="0" Template="{this}:AddForce0({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="AddForce" GenericArgCount="0" Template="{this}:AddForce1({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.ForceMode"/>
+				</method>
+				<method name="AddForce" GenericArgCount="0" Template="{this}:AddForce2({0}, {1}, {2})">
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="AddForce" GenericArgCount="0" Template="{this}:AddForce3({0}, {1}, {2}, {3})">
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.ForceMode"/>
+				</method>
+				<method name="AddRelativeForce" GenericArgCount="0" Template="{this}:AddRelativeForce0({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="AddRelativeForce" GenericArgCount="0" Template="{this}:AddRelativeForce1({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.ForceMode"/>
+				</method>
+				<method name="AddRelativeForce" GenericArgCount="0" Template="{this}:AddRelativeForce2({0}, {1}, {2})">
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="AddRelativeForce" GenericArgCount="0" Template="{this}:AddRelativeForce3({0}, {1}, {2}, {3})">
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.ForceMode"/>
+				</method>
+				<method name="AddTorque" GenericArgCount="0" Template="{this}:AddTorque0({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="AddTorque" GenericArgCount="0" Template="{this}:AddTorque1({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.ForceMode"/>
+				</method>
+				<method name="AddTorque" GenericArgCount="0" Template="{this}:AddTorque2({0}, {1}, {2})">
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="AddTorque" GenericArgCount="0" Template="{this}:AddTorque3({0}, {1}, {2}, {3})">
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.ForceMode"/>
+				</method>
+				<method name="AddRelativeTorque" GenericArgCount="0" Template="{this}:AddRelativeTorque0({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="AddRelativeTorque" GenericArgCount="0" Template="{this}:AddRelativeTorque1({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.ForceMode"/>
+				</method>
+				<method name="AddRelativeTorque" GenericArgCount="0" Template="{this}:AddRelativeTorque2({0}, {1}, {2})">
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="AddRelativeTorque" GenericArgCount="0" Template="{this}:AddRelativeTorque3({0}, {1}, {2}, {3})">
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.ForceMode"/>
+				</method>
+				<method name="AddForceAtPosition" GenericArgCount="0" Template="{this}:AddForceAtPosition0({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="AddForceAtPosition" GenericArgCount="0" Template="{this}:AddForceAtPosition1({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.ForceMode"/>
+				</method>
+				<method name="AddExplosionForce" GenericArgCount="0" Template="{this}:AddExplosionForce0({0}, {1}, {2})">
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="AddExplosionForce" GenericArgCount="0" Template="{this}:AddExplosionForce1({0}, {1}, {2}, {3})">
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="AddExplosionForce" GenericArgCount="0" Template="{this}:AddExplosionForce2({0}, {1}, {2}, {3}, {4})">
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.ForceMode"/>
+				</method>
+				<method name="ClosestPointOnBounds" GenericArgCount="0" Template="{this}:ClosestPointOnBounds({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="GetRelativePointVelocity" GenericArgCount="0" Template="{this}:GetRelativePointVelocity({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="GetPointVelocity" GenericArgCount="0" Template="{this}:GetPointVelocity({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="MovePosition" GenericArgCount="0" Template="{this}:MovePosition({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="MoveRotation" GenericArgCount="0" Template="{this}:MoveRotation({0})">
+					<arg type="UnityEngine.Quaternion"/>
+				</method>
+				<method name="Sleep" GenericArgCount="0" Template="{this}:Sleep()">
+				</method>
+				<method name="IsSleeping" GenericArgCount="0" Template="{this}:IsSleeping()">
+				</method>
+				<method name="WakeUp" GenericArgCount="0" Template="{this}:WakeUp()">
+				</method>
+				<method name="ResetCenterOfMass" GenericArgCount="0" Template="{this}:ResetCenterOfMass()">
+				</method>
+				<method name="ResetInertiaTensor" GenericArgCount="0" Template="{this}:ResetInertiaTensor()">
+				</method>
+				<method name="SweepTest" GenericArgCount="0" Template="{this}:SweepTest0({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+				</method>
+				<method name="SweepTest" GenericArgCount="0" Template="{this}:SweepTest1({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="SweepTest" GenericArgCount="0" Template="{this}:SweepTest2({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="SweepTestAll" GenericArgCount="0" Template="{this}:SweepTestAll0({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="SweepTestAll" GenericArgCount="0" Template="{this}:SweepTestAll1({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="SweepTestAll" GenericArgCount="0" Template="{this}:SweepTestAll2({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+			</class>
+			<class name="Physics">
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast0({0})">
+					<arg type="UnityEngine.Ray"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast1({0}, {1})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast2({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast3({0}, {1})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast4({0}, {1}, {2})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast5({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast6({0}, {1}, {2})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast7({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast8({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast9({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast10({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast11({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast12({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast13({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast14({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast15({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll0({0})">
+					<arg type="UnityEngine.Ray"/>
+				</method>
+				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll1({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll2({0}, {1})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll3({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll4({0}, {1}, {2})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll5({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll6({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll7({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc0({0}, {1})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+				</method>
+				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc1({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+				</method>
+				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc2({0}, {1}, {2})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc3({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc4({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc5({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc6({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc7({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="Linecast" GenericArgCount="0" Template="UnityEngine.Physics.Linecast0({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="Linecast" GenericArgCount="0" Template="UnityEngine.Physics.Linecast1({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="Linecast" GenericArgCount="0" Template="UnityEngine.Physics.Linecast2({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+				</method>
+				<method name="Linecast" GenericArgCount="0" Template="UnityEngine.Physics.Linecast3({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="Linecast" GenericArgCount="0" Template="UnityEngine.Physics.Linecast4({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="Linecast" GenericArgCount="0" Template="UnityEngine.Physics.Linecast5({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="OverlapSphere" GenericArgCount="0" Template="UnityEngine.Physics.OverlapSphere0({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="OverlapSphere" GenericArgCount="0" Template="UnityEngine.Physics.OverlapSphere1({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="OverlapSphere" GenericArgCount="0" Template="UnityEngine.Physics.OverlapSphere2({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="OverlapSphereNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.OverlapSphereNonAlloc0({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Collider[]"/>
+				</method>
+				<method name="OverlapSphereNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.OverlapSphereNonAlloc1({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Collider[]"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="OverlapSphereNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.OverlapSphereNonAlloc2({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Collider[]"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="OverlapCapsule" GenericArgCount="0" Template="UnityEngine.Physics.OverlapCapsule0({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="OverlapCapsule" GenericArgCount="0" Template="UnityEngine.Physics.OverlapCapsule1({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="OverlapCapsule" GenericArgCount="0" Template="UnityEngine.Physics.OverlapCapsule2({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="OverlapCapsuleNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.OverlapCapsuleNonAlloc0({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Collider[]"/>
+				</method>
+				<method name="OverlapCapsuleNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.OverlapCapsuleNonAlloc1({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Collider[]"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="OverlapCapsuleNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.OverlapCapsuleNonAlloc2({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Collider[]"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="CapsuleCast" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCast0({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="CapsuleCast" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCast1({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="CapsuleCast" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCast2({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+				</method>
+				<method name="CapsuleCast" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCast3({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="CapsuleCast" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCast4({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="CapsuleCast" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCast5({0}, {1}, {2}, {3}, {4}, {5}, {6})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="CapsuleCast" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCast6({0}, {1}, {2}, {3}, {4}, {5}, {6})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="CapsuleCast" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCast7({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast0({0}, {1})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast1({0}, {1}, {2})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast2({0}, {1}, {2})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+				</method>
+				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast3({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast4({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast5({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+				</method>
+				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast6({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast7({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast8({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast9({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast10({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast11({0}, {1}, {2}, {3}, {4}, {5}, {6})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="CapsuleCastAll" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCastAll0({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="CapsuleCastAll" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCastAll1({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="CapsuleCastAll" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCastAll2({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="CapsuleCastAll" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCastAll3({0}, {1}, {2}, {3}, {4}, {5}, {6})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="CapsuleCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCastNonAlloc0({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+				</method>
+				<method name="CapsuleCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCastNonAlloc1({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="CapsuleCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCastNonAlloc2({0}, {1}, {2}, {3}, {4}, {5}, {6})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="CapsuleCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCastNonAlloc3({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="SphereCastAll" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastAll0({0}, {1})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="SphereCastAll" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastAll1({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="SphereCastAll" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastAll2({0}, {1}, {2})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="SphereCastAll" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastAll3({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="SphereCastAll" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastAll4({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="SphereCastAll" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastAll5({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="SphereCastAll" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastAll6({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="SphereCastAll" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastAll7({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="SphereCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastNonAlloc0({0}, {1}, {2})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+				</method>
+				<method name="SphereCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastNonAlloc1({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+				</method>
+				<method name="SphereCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastNonAlloc2({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="SphereCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastNonAlloc3({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="SphereCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastNonAlloc4({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="SphereCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastNonAlloc5({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="SphereCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastNonAlloc6({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="SphereCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.SphereCastNonAlloc7({0}, {1}, {2}, {3}, {4}, {5}, {6})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="CheckSphere" GenericArgCount="0" Template="UnityEngine.Physics.CheckSphere0({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="CheckSphere" GenericArgCount="0" Template="UnityEngine.Physics.CheckSphere1({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="CheckSphere" GenericArgCount="0" Template="UnityEngine.Physics.CheckSphere2({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="CheckCapsule" GenericArgCount="0" Template="UnityEngine.Physics.CheckCapsule0({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="CheckCapsule" GenericArgCount="0" Template="UnityEngine.Physics.CheckCapsule1({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="CheckCapsule" GenericArgCount="0" Template="UnityEngine.Physics.CheckCapsule2({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="CheckBox" GenericArgCount="0" Template="UnityEngine.Physics.CheckBox0({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="CheckBox" GenericArgCount="0" Template="UnityEngine.Physics.CheckBox1({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+				</method>
+				<method name="CheckBox" GenericArgCount="0" Template="UnityEngine.Physics.CheckBox2({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="CheckBox" GenericArgCount="0" Template="UnityEngine.Physics.CheckBox3({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="OverlapBox" GenericArgCount="0" Template="UnityEngine.Physics.OverlapBox0({0}, {1})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="OverlapBox" GenericArgCount="0" Template="UnityEngine.Physics.OverlapBox1({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+				</method>
+				<method name="OverlapBox" GenericArgCount="0" Template="UnityEngine.Physics.OverlapBox2({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="OverlapBox" GenericArgCount="0" Template="UnityEngine.Physics.OverlapBox3({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="OverlapBoxNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.OverlapBoxNonAlloc0({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Collider[]"/>
+				</method>
+				<method name="OverlapBoxNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.OverlapBoxNonAlloc1({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Collider[]"/>
+					<arg type="UnityEngine.Quaternion"/>
+				</method>
+				<method name="OverlapBoxNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.OverlapBoxNonAlloc2({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Collider[]"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="OverlapBoxNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.OverlapBoxNonAlloc3({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Collider[]"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="BoxCastAll" GenericArgCount="0" Template="UnityEngine.Physics.BoxCastAll0({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="BoxCastAll" GenericArgCount="0" Template="UnityEngine.Physics.BoxCastAll1({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+				</method>
+				<method name="BoxCastAll" GenericArgCount="0" Template="UnityEngine.Physics.BoxCastAll2({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="BoxCastAll" GenericArgCount="0" Template="UnityEngine.Physics.BoxCastAll3({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="BoxCastAll" GenericArgCount="0" Template="UnityEngine.Physics.BoxCastAll4({0}, {1}, {2}, {3}, {4}, {5}, {6})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="BoxCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.BoxCastNonAlloc0({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+				</method>
+				<method name="BoxCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.BoxCastNonAlloc1({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="UnityEngine.Quaternion"/>
+				</method>
+				<method name="BoxCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.BoxCastNonAlloc2({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="BoxCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.BoxCastNonAlloc3({0}, {1}, {2}, {3}, {4}, {5}, {6})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="BoxCastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.BoxCastNonAlloc4({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="BoxCast" GenericArgCount="0" Template="UnityEngine.Physics.BoxCast0({0}, {1}, {2})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="BoxCast" GenericArgCount="0" Template="UnityEngine.Physics.BoxCast1({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+				</method>
+				<method name="BoxCast" GenericArgCount="0" Template="UnityEngine.Physics.BoxCast2({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+				</method>
+				<method name="BoxCast" GenericArgCount="0" Template="UnityEngine.Physics.BoxCast3({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="BoxCast" GenericArgCount="0" Template="UnityEngine.Physics.BoxCast4({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="UnityEngine.Quaternion"/>
+				</method>
+				<method name="BoxCast" GenericArgCount="0" Template="UnityEngine.Physics.BoxCast5({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="BoxCast" GenericArgCount="0" Template="UnityEngine.Physics.BoxCast6({0}, {1}, {2}, {3}, {4}, {5})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="BoxCast" GenericArgCount="0" Template="UnityEngine.Physics.BoxCast7({0}, {1}, {2}, {3}, {4}, {5}, {6})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="BoxCast" GenericArgCount="0" Template="UnityEngine.Physics.BoxCast8({0}, {1}, {2}, {3}, {4}, {5}, {6})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="BoxCast" GenericArgCount="0" Template="UnityEngine.Physics.BoxCast9({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="IgnoreCollision" GenericArgCount="0" Template="UnityEngine.Physics.IgnoreCollision0({0}, {1})">
+					<arg type="UnityEngine.Collider"/>
+					<arg type="UnityEngine.Collider"/>
+				</method>
+				<method name="IgnoreCollision" GenericArgCount="0" Template="UnityEngine.Physics.IgnoreCollision1({0}, {1}, {2})">
+					<arg type="UnityEngine.Collider"/>
+					<arg type="UnityEngine.Collider"/>
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="IgnoreLayerCollision" GenericArgCount="0" Template="UnityEngine.Physics.IgnoreLayerCollision0({0}, {1})">
+					<arg type="System.Int32"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="IgnoreLayerCollision" GenericArgCount="0" Template="UnityEngine.Physics.IgnoreLayerCollision1({0}, {1}, {2})">
+					<arg type="System.Int32"/>
+					<arg type="System.Int32"/>
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="GetIgnoreLayerCollision" GenericArgCount="0" Template="UnityEngine.Physics.GetIgnoreLayerCollision({0}, {1})">
+					<arg type="System.Int32"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="ComputePenetration" GenericArgCount="0" Template="UnityEngine.Physics.ComputePenetration({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7})">
+					<arg type="UnityEngine.Collider"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="UnityEngine.Collider"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="UnityEngine.Vector3&amp;amp;"/>
+					<arg type="System.Single&amp;amp;"/>
+				</method>
+				<method name="ClosestPoint" GenericArgCount="0" Template="UnityEngine.Physics.ClosestPoint({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Collider"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+				</method>
+				<method name="Simulate" GenericArgCount="0" Template="UnityEngine.Physics.Simulate({0})">
+					<arg type="System.Single"/>
+				</method>
+				<method name="SyncTransforms" GenericArgCount="0" Template="UnityEngine.Physics.SyncTransforms()">
+				</method>
+				<method name="RebuildBroadphaseRegions" GenericArgCount="0" Template="UnityEngine.Physics.RebuildBroadphaseRegions({0}, {1})">
+					<arg type="UnityEngine.Bounds"/>
+					<arg type="System.Int32"/>
+				</method>
+			</class>
+			<class name="Collider">
+				<method name="ClosestPointOnBounds" GenericArgCount="0" Template="{this}:ClosestPointOnBounds({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="ClosestPoint" GenericArgCount="0" Template="{this}:ClosestPoint({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="{this}:Raycast({0}, {1}, {2})">
+					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+				</method>
+			</class>
+			<class name="CharacterController">
+				<method name="SimpleMove" GenericArgCount="0" Template="{this}:SimpleMove({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+				<method name="Move" GenericArgCount="0" Template="{this}:Move({0})">
+					<arg type="UnityEngine.Vector3"/>
+				</method>
+			</class>
+		</namespace>
+		<namespace name="UnityEngine">
+			<class name="Joint" Baned="true">
+			</class>
+			<class name="HingeJoint" Baned="true">
+			</class>
+			<class name="SpringJoint" Baned="true">
+			</class>
+			<class name="FixedJoint" Baned="true">
+			</class>
+			<class name="CharacterJoint" Baned="true">
+			</class>
+			<class name="ConfigurableJoint" Baned="true">
+			</class>
+			<class name="ConstantForce" Baned="true">
+			</class>
+			<class name="PhysicMaterial" Baned="true">
+			</class>
+			<class name="ControllerColliderHit" Baned="true">
+			</class>
+			<class name="Collision" Baned="true">
+			</class>
+		</namespace>
+	</assembly>
+</meta>

@@ -10,6 +10,8 @@ public class System_Collections_Generic_KeyValuePairWrap
         L.RegFunction("__tostring", ToLua.op_ToString);
         L.RegVar("Key", get_Key, null);
         L.RegVar("Value", get_Value, null);
+        L.RegVar("key", get_Key, null);
+        L.RegVar("value", get_Value, null);
         L.EndClass();
     }
 

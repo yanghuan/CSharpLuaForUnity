@@ -121,14 +121,13 @@ public class PassStruct : LuaClient
 #endif                  
     }
 
-    new void Awake()
+     void Awake()
     {
 #if UNITY_5 || UNITY_2017 || UNITY_2018
         Application.logMessageReceived += ShowTips;
 #else
         Application.RegisterLogCallback(ShowTips);
 #endif
-        base.Awake();
     }
 
     protected override void OnLoadFinished()

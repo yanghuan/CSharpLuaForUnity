@@ -42,10 +42,9 @@ namespace LuaInterface
 
     //让byte[] 压入成为lua string 而不是数组 userdata
     //也可以使用LuaByteBufferAttribute来标记byte[]
-    public struct LuaByteBuffer
+    public class LuaByteBuffer
     {        
         public LuaByteBuffer(IntPtr source, int len)
-            : this()            
         {
             buffer = new byte[len];
             Length = len;
@@ -53,21 +52,18 @@ namespace LuaInterface
         }
         
         public LuaByteBuffer(byte[] buf)
-            : this()
         {
             buffer = buf;
             Length = buf.Length;            
         }
 
         public LuaByteBuffer(byte[] buf, int len)
-            : this()
         {            
             buffer = buf;
             Length = len;
         }
 
         public LuaByteBuffer(System.IO.MemoryStream stream)   
-            : this()         
         {
             buffer = stream.GetBuffer();
             Length = (int)stream.Length;            
@@ -84,7 +80,34 @@ namespace LuaInterface
         {
             get;
             private set;
-        }    
+        }
+        public byte Get(int index)
+        {
+            return buffer[index];
+        }
+        public void Set(int index , byte value)
+        {
+            buffer[index] = value;
+        }
+        public LuaByteBuffer Sub(int startIndex, int endIndex)
+        {
+            var targetSize = endIndex - startIndex;
+            var dest = new byte[targetSize];
+            Array.Copy(buffer, dest, targetSize);
+            return new LuaByteBuffer(dest);
+        }
+        public LuaByteBuffer Sub(int startIndex)
+        {
+            var targetSize = Length;
+            var dest = new byte[targetSize];
+            Array.Copy(buffer, dest, targetSize);
+            return new LuaByteBuffer(dest);
+        }
+
+        public override string ToString()
+        {
+            return System.Text.Encoding.Default.GetString(buffer, 0 , Length);
+        }
     }   
 
     public class LuaOut<T> { }
