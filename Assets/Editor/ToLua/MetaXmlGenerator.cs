@@ -15,7 +15,7 @@ public class MetaMethodInfo
 
 public class MetaXmlGenerator
 {
-    List<MetaMethodInfo> _methods = new List<MetaMethodInfo>();
+    Dictionary<MethodBase, MetaMethodInfo> _methods = new Dictionary<MethodBase, MetaMethodInfo>();
     HashSet<Type> _skipClass = new HashSet<Type>();
     HashSet<Type> _includeClass = new HashSet<Type>();
     public void Clear()
@@ -36,8 +36,11 @@ public class MetaXmlGenerator
 
     public void AddMethod(MethodBase method, string name)
     {
-        var cls = method.ReflectedType;
-        _methods.Add(new MetaMethodInfo() { method = method, name = name});
+        if (!_methods.ContainsKey(method))
+        {
+            var cls = method.ReflectedType;
+            _methods.Add(method, new MetaMethodInfo() { method = method, name = name });
+        }
     }
     StringBuilder sb;
 
@@ -61,7 +64,7 @@ public class MetaXmlGenerator
         }
         else
         {
-            return string.Format("{0}<arg type=\"{1}\"/>\n", head, ReplayXmlString(type.FullName));
+            return string.Format("{0}<arg type=\"{1}\"/>\n", head, type.FullName == null ? string.Empty : ReplayXmlString(type.FullName));
         }
     }
 
@@ -365,7 +368,7 @@ public class MetaXmlGenerator
         types.RemoveAll(v => _skipClass.Contains(v));
 
         // 所有需要生成的类
-        var gens = _methods.GroupBy(v => v.method.ReflectedType.IsGenericType && !v.method.ReflectedType.IsGenericTypeDefinition ? v.method.ReflectedType.GetGenericTypeDefinition() : v.method.ReflectedType).Select(v=>v.Key).Concat(_includeClass).GroupBy(v=>v).ToDictionary(v=>v.Key);
+        var gens = _methods.Values.GroupBy(v => v.method.ReflectedType.IsGenericType && !v.method.ReflectedType.IsGenericTypeDefinition ? v.method.ReflectedType.GetGenericTypeDefinition() : v.method.ReflectedType).Select(v=>v.Key).Concat(_includeClass).GroupBy(v=>v).ToDictionary(v=>v.Key);
 
         // 找到不需要生成的类
         types.RemoveAll(v => gens.ContainsKey(v) || !v.IsClass);
@@ -402,7 +405,7 @@ public class MetaXmlGenerator
     public void Generate(string metaXmlDir)
     {
         // 根据Assembly分组
-        foreach (var assemblyPair in _methods.GroupBy(v => v.method.ReflectedType.Assembly))
+        foreach (var assemblyPair in _methods.Values.GroupBy(v => v.method.ReflectedType.Assembly))
         {
             GenerateAssembly(assemblyPair, metaXmlDir);
         }
