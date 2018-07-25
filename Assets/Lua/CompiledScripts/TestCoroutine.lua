@@ -6,13 +6,22 @@ System.namespace("CSLua", function (namespace)
     local Awake, OnTick, Test
     Awake = function (this)
       UnityEngine.Debug.Log0("TestCoroutine")
-      MonoManager.getInstance():StartCoroutine0(OnTick(this))
+      this._iter = OnTick(this)
+      this._coroutine = MonoManager.getInstance():StartCoroutine0(this._iter)
     end
     OnTick = function (this)
       return System.yieldIEnumerator(function (this)
+        local count = 0
         while true do
           System.yieldReturn(UnityEngine.WaitForSeconds(1))
           UnityEngine.Debug.Log0("TestCoroutine.OnTick")
+          local default = count
+          count = default + 1
+          if default > 10 then
+            UnityEngine.Debug.Log0("TestCoroutine Stop!")
+            --MonoManager.Instance.StopCoroutine(_coroutine);
+            MonoManager.getInstance():StopCoroutine1(this._iter)
+          end
         end
       end, System.Object, this)
     end

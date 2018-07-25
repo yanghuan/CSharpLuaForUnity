@@ -1078,6 +1078,19 @@ namespace LuaInterface
             return null;
         }
 
+
+        public static IEnumerator CheckIEnumerator(IntPtr L, int stackPos)
+        {
+            var luaTable = ToLuaTable(L, stackPos);
+
+            if (luaTable != null)
+            {
+                return CSharpLua.LuaIEnumerator.Create(luaTable);
+            }
+
+            LuaDLL.luaL_typerror(L, stackPos, "Type");
+            return null;
+        }
         public static object CheckObject(IntPtr L, int stackPos)
         {
             int udata = LuaDLL.tolua_rawnetobj(L, stackPos);
@@ -2481,6 +2494,23 @@ namespace LuaInterface
         public static void PushLayerMask(IntPtr L, LayerMask l)
         {
             LuaDLL.tolua_pushlayermask(L, l.value);
+        }
+        public static void PushIEnumerator(IntPtr L, IEnumerator iter)
+        {
+            if (iter == null)
+            {
+                LuaDLL.lua_pushnil(L);
+                return;
+            }
+            if(iter.GetType() == typeof(CSharpLua.LuaIEnumerator))
+            {
+                var luaIter = iter as CSharpLua.LuaIEnumerator;
+                luaIter.Push(L);
+            }
+            else
+            {
+                Push(L, iter);
+            }
         }
 
         public static void Push(IntPtr L, LuaByteBuffer bb)

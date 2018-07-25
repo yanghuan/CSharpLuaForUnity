@@ -20,7 +20,7 @@ namespace CSLua
 
         void Start()
         {
-            //_testCoroutine.Awake();
+            _testCoroutine.Awake();
             _testHangingScript.Awake();
         }
 

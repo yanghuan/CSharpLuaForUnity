@@ -17,7 +17,7 @@ System.namespace("CSLua", function (namespace)
       this._testHangingScript = CSLua.TestHangingScript()
     end
     Start = function (this)
-      --_testCoroutine.Awake();
+      this._testCoroutine:Awake()
       this._testHangingScript:Awake()
     end
     Startup = function ()
