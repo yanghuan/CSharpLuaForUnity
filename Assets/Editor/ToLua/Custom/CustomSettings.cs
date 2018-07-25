@@ -89,6 +89,7 @@ public static class CustomSettings
         _GT(typeof(WaitForFixedUpdate)),
         _GT(typeof(WaitForSeconds)),
 
+        _GT(typeof(UnityEngine.Object)),
         _GT(typeof(Behaviour)),
         _GT(typeof(MonoBehaviour)),
         _GT(typeof(GameObject)),
@@ -155,6 +156,7 @@ public static class CustomSettings
         #endregion
 
         #region Generic
+        _GT(typeof(Generic.ObjectExternions)),
         _GT(typeof(Generic.GameObjectExternions)),
         _GT(typeof(Generic.ComponentExternions)),
         _GT(typeof(Generic.ResourcesExternions)),
