@@ -172,7 +172,7 @@ public static partial class ToLuaExport
         }
         else if (IsIEnumerator(type))
         {
-            sb.AppendFormat("{0}var obj = ToLua.CheckIter(L, {2});\r\n", head, className, pos);
+            sb.AppendFormat("{0}var obj = ToLua.CheckIEnumerator(L, {2});\r\n", head, className, pos);
         }
         else
         {

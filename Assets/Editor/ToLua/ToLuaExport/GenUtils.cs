@@ -450,14 +450,15 @@ public static partial class ToLuaExport
         }
         else if (IsIEnumerator(varType))
         {
-            if (beCheckTypes)
-            {
-                sb.AppendFormat("{0}System.Collections.IEnumerator {1} = (System.Collections.IEnumerator)ToLua.ToObject(L, {2});\r\n", head, arg, stackPos);
-            }
-            else
-            {
-                sb.AppendFormat("{0}System.Collections.IEnumerator {1} = ToLua.CheckIter(L, {2});\r\n", head, arg, stackPos);
-            }
+            //if (beCheckTypes)
+            //{
+            //    sb.AppendFormat("{0}System.Collections.IEnumerator {1} = (System.Collections.IEnumerator)ToLua.ToObject(L, {2});\r\n", head, arg, stackPos);
+            //}
+            //else
+            //{
+            //    sb.AppendFormat("{0}System.Collections.IEnumerator {1} = ToLua.CheckIter(L, {2});\r\n", head, arg, stackPos);
+            //}
+            sb.AppendFormat("{0}System.Collections.IEnumerator {1} = ToLua.CheckIEnumerator(L, {2});\r\n", head, arg, stackPos);
         }
         else if (varType.IsArray && varType.GetArrayRank() == 1)
         {

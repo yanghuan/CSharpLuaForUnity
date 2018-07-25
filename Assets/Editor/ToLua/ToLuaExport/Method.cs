@@ -97,7 +97,7 @@ public static partial class ToLuaExport
         }
         else if (IsIEnumerator(t))
         {
-            return "Push";
+            return "PushIEnumerator";
         }
         else if (t == typeof(LayerMask))
         {
