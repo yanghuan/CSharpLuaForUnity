@@ -88,14 +88,11 @@
 			</class>
 		</namespace>
 		<namespace name="">
-			<class name="ConstStringTable" Baned="true">
-			</class>
+			<class name="ConstStringTable" Baned="true"/>
 		</namespace>
 		<namespace name="LuaInterface">
-			<class name="ExtensionMethods" Baned="true">
-			</class>
-			<class name="StringBuilderCache" Baned="true">
-			</class>
+			<class name="ExtensionMethods" Baned="true"/>
+			<class name="StringBuilderCache" Baned="true"/>
 		</namespace>
 	</assembly>
 </meta>

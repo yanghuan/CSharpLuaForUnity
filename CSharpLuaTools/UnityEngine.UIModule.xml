@@ -18,16 +18,10 @@
 			</class>
 		</namespace>
 		<namespace name="UnityEngine">
-			<class name="Canvas.WillRenderCanvases" Baned="true">
-			</class>
-			<class name="UISystemProfilerApi" Baned="true">
-			</class>
-			<class name="CanvasRenderer" Baned="true">
-			</class>
-			<class name="CanvasRenderer.OnRequestRebuild" Baned="true">
-			</class>
-			<class name="RectTransformUtility" Baned="true">
-			</class>
+			<class name="UISystemProfilerApi" Baned="true"/>
+			<class name="CanvasRenderer" Baned="true"/>
+			<class name="CanvasRenderer.OnRequestRebuild" Baned="true"/>
+			<class name="RectTransformUtility" Baned="true"/>
 		</namespace>
 	</assembly>
 </meta>

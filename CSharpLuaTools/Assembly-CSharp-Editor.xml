@@ -16,48 +16,28 @@
 			</class>
 		</namespace>
 		<namespace name="CSharpLua">
-			<class name="Compiler" Baned="true">
-			</class>
+			<class name="Compiler" Baned="true"/>
 		</namespace>
 		<namespace name="">
-			<class name="CustomSettings" Baned="true">
-			</class>
-			<class name="ToLua_LuaInterface_EventObject" Baned="true">
-			</class>
-			<class name="ToLua_LuaInterface_LuaConstructor" Baned="true">
-			</class>
-			<class name="ToLua_LuaInterface_LuaField" Baned="true">
-			</class>
-			<class name="ToLua_LuaInterface_LuaMethod" Baned="true">
-			</class>
-			<class name="ToLua_LuaInterface_LuaProperty" Baned="true">
-			</class>
-			<class name="ToLua_System_Delegate" Baned="true">
-			</class>
-			<class name="ToLua_System_Enum" Baned="true">
-			</class>
-			<class name="ToLua_System_Object" Baned="true">
-			</class>
-			<class name="ToLua_System_String" Baned="true">
-			</class>
-			<class name="ToLua_System_Type" Baned="true">
-			</class>
-			<class name="MetaMethodInfo" Baned="true">
-			</class>
-			<class name="MetaXmlGenerator" Baned="true">
-			</class>
-			<class name="DelegateType" Baned="true">
-			</class>
-			<class name="ToLuaExport" Baned="true">
-			</class>
-			<class name="ToLuaMenu" Baned="true">
-			</class>
-			<class name="ToLuaMenu.BindType" Baned="true">
-			</class>
-			<class name="ToLuaNode`1" Baned="true">
-			</class>
-			<class name="ToLuaTree`1" Baned="true">
-			</class>
+			<class name="CustomSettings" Baned="true"/>
+			<class name="ToLua_LuaInterface_EventObject" Baned="true"/>
+			<class name="ToLua_LuaInterface_LuaConstructor" Baned="true"/>
+			<class name="ToLua_LuaInterface_LuaField" Baned="true"/>
+			<class name="ToLua_LuaInterface_LuaMethod" Baned="true"/>
+			<class name="ToLua_LuaInterface_LuaProperty" Baned="true"/>
+			<class name="ToLua_System_Delegate" Baned="true"/>
+			<class name="ToLua_System_Enum" Baned="true"/>
+			<class name="ToLua_System_Object" Baned="true"/>
+			<class name="ToLua_System_String" Baned="true"/>
+			<class name="ToLua_System_Type" Baned="true"/>
+			<class name="MetaMethodInfo" Baned="true"/>
+			<class name="MetaXmlGenerator" Baned="true"/>
+			<class name="DelegateType" Baned="true"/>
+			<class name="ToLuaExport" Baned="true"/>
+			<class name="ToLuaMenu" Baned="true"/>
+			<class name="ToLuaMenu.BindType" Baned="true"/>
+			<class name="ToLuaNode`1" Baned="true"/>
+			<class name="ToLuaTree`1" Baned="true"/>
 		</namespace>
 	</assembly>
 </meta>

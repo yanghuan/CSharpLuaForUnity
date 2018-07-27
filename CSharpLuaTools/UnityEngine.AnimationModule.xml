@@ -151,8 +151,6 @@
 				</method>
 				<method name="GetBehaviour" GenericArgCount="1" Baned="true" NotImplementMethod="Generic.AnimatorExternions.GetBehaviour(this UnityEngine.Animator self, System.Type T)">
 				</method>
-				<method name="GetBehaviour" GenericArgCount="1" Baned="true" NotImplementMethod="Generic.AnimatorExternions.GetBehaviour0T(this UnityEngine.Animator self, System.Type T)">
-				</method>
 				<method name="GetBehaviours" GenericArgCount="0" Template="{this}:GetBehaviours({0}, {1})">
 					<arg type="System.Int32"/>
 					<arg type="System.Int32"/>
@@ -550,58 +548,35 @@
 			</class>
 		</namespace>
 		<namespace name="UnityEngine">
-			<class name="AnimationEvent" Baned="true">
-			</class>
-			<class name="AnimatorControllerParameter" Baned="true">
-			</class>
-			<class name="AnimationClipPair" Baned="true">
-			</class>
-			<class name="AnimatorOverrideController" Baned="true">
-			</class>
-			<class name="AnimatorUtility" Baned="true">
-			</class>
-			<class name="Avatar" Baned="true">
-			</class>
-			<class name="HumanTrait" Baned="true">
-			</class>
-			<class name="AvatarBuilder" Baned="true">
-			</class>
-			<class name="AvatarMask" Baned="true">
-			</class>
-			<class name="HumanPoseHandler" Baned="true">
-			</class>
-			<class name="Motion" Baned="true">
-			</class>
-			<class name="RuntimeAnimatorController" Baned="true">
-			</class>
-			<class name="SharedBetweenAnimatorsAttribute" Baned="true">
-			</class>
-			<class name="StateMachineBehaviour" Baned="true">
-			</class>
+			<class name="AnimationEvent" Baned="true"/>
+			<class name="AnimatorControllerParameter" Baned="true"/>
+			<class name="AnimationClipPair" Baned="true"/>
+			<class name="AnimatorOverrideController" Baned="true"/>
+			<class name="AnimatorUtility" Baned="true"/>
+			<class name="Avatar" Baned="true"/>
+			<class name="HumanTrait" Baned="true"/>
+			<class name="AvatarBuilder" Baned="true"/>
+			<class name="AvatarMask" Baned="true"/>
+			<class name="HumanPoseHandler" Baned="true"/>
+			<class name="Motion" Baned="true"/>
+			<class name="RuntimeAnimatorController" Baned="true"/>
+			<class name="SharedBetweenAnimatorsAttribute" Baned="true"/>
+			<class name="StateMachineBehaviour" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEditorInternal">
-			<class name="Transition" Baned="true">
-			</class>
-			<class name="StateMachine" Baned="true">
-			</class>
-			<class name="State" Baned="true">
-			</class>
-			<class name="AnimatorController" Baned="true">
-			</class>
-			<class name="BlendTree" Baned="true">
-			</class>
-			<class name="AnimatorControllerLayer" Baned="true">
-			</class>
-			<class name="AnimatorControllerParameter" Baned="true">
-			</class>
+			<class name="Transition" Baned="true"/>
+			<class name="StateMachine" Baned="true"/>
+			<class name="State" Baned="true"/>
+			<class name="AnimatorController" Baned="true"/>
+			<class name="BlendTree" Baned="true"/>
+			<class name="AnimatorControllerLayer" Baned="true"/>
+			<class name="AnimatorControllerParameter" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Playables">
-			<class name="AnimationPlayableUtilities" Baned="true">
-			</class>
+			<class name="AnimationPlayableUtilities" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Animations">
-			<class name="AnimationPlayableExtensions" Baned="true">
-			</class>
+			<class name="AnimationPlayableExtensions" Baned="true"/>
 		</namespace>
 	</assembly>
 </meta>

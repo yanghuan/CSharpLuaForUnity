@@ -1074,26 +1074,16 @@
 			</class>
 		</namespace>
 		<namespace name="UnityEngine">
-			<class name="Joint" Baned="true">
-			</class>
-			<class name="HingeJoint" Baned="true">
-			</class>
-			<class name="SpringJoint" Baned="true">
-			</class>
-			<class name="FixedJoint" Baned="true">
-			</class>
-			<class name="CharacterJoint" Baned="true">
-			</class>
-			<class name="ConfigurableJoint" Baned="true">
-			</class>
-			<class name="ConstantForce" Baned="true">
-			</class>
-			<class name="PhysicMaterial" Baned="true">
-			</class>
-			<class name="ControllerColliderHit" Baned="true">
-			</class>
-			<class name="Collision" Baned="true">
-			</class>
+			<class name="Joint" Baned="true"/>
+			<class name="HingeJoint" Baned="true"/>
+			<class name="SpringJoint" Baned="true"/>
+			<class name="FixedJoint" Baned="true"/>
+			<class name="CharacterJoint" Baned="true"/>
+			<class name="ConfigurableJoint" Baned="true"/>
+			<class name="ConstantForce" Baned="true"/>
+			<class name="PhysicMaterial" Baned="true"/>
+			<class name="ControllerColliderHit" Baned="true"/>
+			<class name="Collision" Baned="true"/>
 		</namespace>
 	</assembly>
 </meta>
