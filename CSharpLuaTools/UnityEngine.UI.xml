@@ -457,110 +457,57 @@
 			</class>
 		</namespace>
 		<namespace name="UnityEngine.EventSystems">
-			<class name="EventTrigger" Baned="true">
-			</class>
-			<class name="EventTrigger.TriggerEvent" Baned="true">
-			</class>
-			<class name="EventTrigger.Entry" Baned="true">
-			</class>
-			<class name="ExecuteEvents" Baned="true">
-			</class>
-			<class name="ExecuteEvents.EventFunction`1" Baned="true">
-			</class>
-			<class name="AxisEventData" Baned="true">
-			</class>
-			<class name="AbstractEventData" Baned="true">
-			</class>
-			<class name="BaseEventData" Baned="true">
-			</class>
-			<class name="PointerEventData" Baned="true">
-			</class>
-			<class name="BaseInput" Baned="true">
-			</class>
-			<class name="PointerInputModule.MouseButtonEventData" Baned="true">
-			</class>
-			<class name="TouchInputModule" Baned="true">
-			</class>
-			<class name="Physics2DRaycaster" Baned="true">
-			</class>
-			<class name="PhysicsRaycaster" Baned="true">
-			</class>
+			<class name="EventTrigger" Baned="true"/>
+			<class name="EventTrigger.TriggerEvent" Baned="true"/>
+			<class name="EventTrigger.Entry" Baned="true"/>
+			<class name="ExecuteEvents" Baned="true"/>
+			<class name="AxisEventData" Baned="true"/>
+			<class name="AbstractEventData" Baned="true"/>
+			<class name="BaseEventData" Baned="true"/>
+			<class name="PointerEventData" Baned="true"/>
+			<class name="BaseInput" Baned="true"/>
+			<class name="PointerInputModule.MouseButtonEventData" Baned="true"/>
+			<class name="TouchInputModule" Baned="true"/>
+			<class name="Physics2DRaycaster" Baned="true"/>
+			<class name="PhysicsRaycaster" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.UI">
-			<class name="AnimationTriggers" Baned="true">
-			</class>
-			<class name="Button.ButtonClickedEvent" Baned="true">
-			</class>
-			<class name="CanvasUpdateRegistry" Baned="true">
-			</class>
-			<class name="DefaultControls" Baned="true">
-			</class>
-			<class name="Dropdown.OptionDataList" Baned="true">
-			</class>
-			<class name="FontData" Baned="true">
-			</class>
-			<class name="FontUpdateTracker" Baned="true">
-			</class>
-			<class name="GraphicRebuildTracker" Baned="true">
-			</class>
-			<class name="GraphicRegistry" Baned="true">
-			</class>
-			<class name="InputField.OnValidateInput" Baned="true">
-			</class>
-			<class name="InputField.SubmitEvent" Baned="true">
-			</class>
-			<class name="MaskableGraphic.CullStateChangedEvent" Baned="true">
-			</class>
-			<class name="MaskUtilities" Baned="true">
-			</class>
-			<class name="RectMask2D" Baned="true">
-			</class>
-			<class name="Scrollbar.ScrollEvent" Baned="true">
-			</class>
-			<class name="ScrollRect" Baned="true">
-			</class>
-			<class name="ScrollRect.ScrollRectEvent" Baned="true">
-			</class>
-			<class name="Slider.SliderEvent" Baned="true">
-			</class>
-			<class name="StencilMaterial" Baned="true">
-			</class>
-			<class name="ClipperRegistry" Baned="true">
-			</class>
-			<class name="Clipping" Baned="true">
-			</class>
-			<class name="AspectRatioFitter" Baned="true">
-			</class>
-			<class name="ContentSizeFitter" Baned="true">
-			</class>
-			<class name="GridLayoutGroup" Baned="true">
-			</class>
-			<class name="HorizontalLayoutGroup" Baned="true">
-			</class>
-			<class name="HorizontalOrVerticalLayoutGroup" Baned="true">
-			</class>
-			<class name="LayoutElement" Baned="true">
-			</class>
-			<class name="LayoutGroup" Baned="true">
-			</class>
-			<class name="LayoutRebuilder" Baned="true">
-			</class>
-			<class name="LayoutUtility" Baned="true">
-			</class>
-			<class name="VerticalLayoutGroup" Baned="true">
-			</class>
-			<class name="VertexHelper" Baned="true">
-			</class>
-			<class name="BaseVertexEffect" Baned="true">
-			</class>
-			<class name="BaseMeshEffect" Baned="true">
-			</class>
-			<class name="Outline" Baned="true">
-			</class>
-			<class name="PositionAsUV1" Baned="true">
-			</class>
-			<class name="Shadow" Baned="true">
-			</class>
+			<class name="AnimationTriggers" Baned="true"/>
+			<class name="Button.ButtonClickedEvent" Baned="true"/>
+			<class name="CanvasUpdateRegistry" Baned="true"/>
+			<class name="DefaultControls" Baned="true"/>
+			<class name="Dropdown.OptionDataList" Baned="true"/>
+			<class name="FontData" Baned="true"/>
+			<class name="FontUpdateTracker" Baned="true"/>
+			<class name="GraphicRebuildTracker" Baned="true"/>
+			<class name="GraphicRegistry" Baned="true"/>
+			<class name="InputField.SubmitEvent" Baned="true"/>
+			<class name="MaskableGraphic.CullStateChangedEvent" Baned="true"/>
+			<class name="MaskUtilities" Baned="true"/>
+			<class name="RectMask2D" Baned="true"/>
+			<class name="Scrollbar.ScrollEvent" Baned="true"/>
+			<class name="ScrollRect" Baned="true"/>
+			<class name="ScrollRect.ScrollRectEvent" Baned="true"/>
+			<class name="Slider.SliderEvent" Baned="true"/>
+			<class name="StencilMaterial" Baned="true"/>
+			<class name="ClipperRegistry" Baned="true"/>
+			<class name="Clipping" Baned="true"/>
+			<class name="AspectRatioFitter" Baned="true"/>
+			<class name="ContentSizeFitter" Baned="true"/>
+			<class name="GridLayoutGroup" Baned="true"/>
+			<class name="HorizontalLayoutGroup" Baned="true"/>
+			<class name="HorizontalOrVerticalLayoutGroup" Baned="true"/>
+			<class name="LayoutElement" Baned="true"/>
+			<class name="LayoutGroup" Baned="true"/>
+			<class name="LayoutRebuilder" Baned="true"/>
+			<class name="LayoutUtility" Baned="true"/>
+			<class name="VerticalLayoutGroup" Baned="true"/>
+			<class name="VertexHelper" Baned="true"/>
+			<class name="BaseVertexEffect" Baned="true"/>
+			<class name="BaseMeshEffect" Baned="true"/>
+			<class name="Outline" Baned="true"/>
+			<class name="PositionAsUV1" Baned="true"/>
+			<class name="Shadow" Baned="true"/>
 		</namespace>
 	</assembly>
 </meta>

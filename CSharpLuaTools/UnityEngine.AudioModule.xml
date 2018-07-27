@@ -126,46 +126,24 @@
 			</class>
 		</namespace>
 		<namespace name="UnityEngine">
-			<class name="AudioSettings" Baned="true">
-			</class>
-			<class name="AudioSettings.AudioConfigurationChangeHandler" Baned="true">
-			</class>
-			<class name="AudioClip.PCMReaderCallback" Baned="true">
-			</class>
-			<class name="AudioClip.PCMSetPositionCallback" Baned="true">
-			</class>
-			<class name="AudioBehaviour" Baned="true">
-			</class>
-			<class name="AudioReverbZone" Baned="true">
-			</class>
-			<class name="AudioLowPassFilter" Baned="true">
-			</class>
-			<class name="AudioHighPassFilter" Baned="true">
-			</class>
-			<class name="AudioDistortionFilter" Baned="true">
-			</class>
-			<class name="AudioEchoFilter" Baned="true">
-			</class>
-			<class name="AudioChorusFilter" Baned="true">
-			</class>
-			<class name="AudioReverbFilter" Baned="true">
-			</class>
-			<class name="Microphone" Baned="true">
-			</class>
-			<class name="MovieTexture" Baned="true">
-			</class>
-			<class name="WebCamTexture" Baned="true">
-			</class>
-			<class name="AudioRenderer" Baned="true">
-			</class>
+			<class name="AudioSettings" Baned="true"/>
+			<class name="AudioBehaviour" Baned="true"/>
+			<class name="AudioReverbZone" Baned="true"/>
+			<class name="AudioLowPassFilter" Baned="true"/>
+			<class name="AudioHighPassFilter" Baned="true"/>
+			<class name="AudioDistortionFilter" Baned="true"/>
+			<class name="AudioEchoFilter" Baned="true"/>
+			<class name="AudioChorusFilter" Baned="true"/>
+			<class name="AudioReverbFilter" Baned="true"/>
+			<class name="Microphone" Baned="true"/>
+			<class name="MovieTexture" Baned="true"/>
+			<class name="WebCamTexture" Baned="true"/>
+			<class name="AudioRenderer" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Audio">
-			<class name="AudioMixer" Baned="true">
-			</class>
-			<class name="AudioMixerSnapshot" Baned="true">
-			</class>
-			<class name="AudioMixerGroup" Baned="true">
-			</class>
+			<class name="AudioMixer" Baned="true"/>
+			<class name="AudioMixerSnapshot" Baned="true"/>
+			<class name="AudioMixerGroup" Baned="true"/>
 		</namespace>
 	</assembly>
 </meta>

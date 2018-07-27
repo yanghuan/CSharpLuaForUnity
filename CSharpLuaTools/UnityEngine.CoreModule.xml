@@ -138,241 +138,94 @@
 					<arg type="UnityEngine.Object"/>
 					<arg type="UnityEngine.Object"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
+				<method name="Destroy" GenericArgCount="0" Template="UnityEngine.Object.Destroy0({0})">
 					<arg type="UnityEngine.Object"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
+				<method name="Destroy" GenericArgCount="0" Template="UnityEngine.Object.Destroy1({0}, {1})">
 					<arg type="UnityEngine.Object"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="DestroyImmediate" GenericArgCount="0" Template="UnityEngine.Object.DestroyImmediate0({0})">
 					<arg type="UnityEngine.Object"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
+				<method name="DestroyImmediate" GenericArgCount="0" Template="UnityEngine.Object.DestroyImmediate1({0}, {1})">
 					<arg type="UnityEngine.Object"/>
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="FindObjectsOfType" GenericArgCount="0" Template="UnityEngine.Object.FindObjectsOfType({0})">
+					<arg type="System.Type"/>
+				</method>
+				<method name="FindObjectsOfType" GenericArgCount="1" Template="Generic.ObjectExternions.FindObjectsOfType0T(System.TypeOfTolua({^0}))">
+				</method>
+				<method name="DontDestroyOnLoad" GenericArgCount="0" Template="UnityEngine.Object.DontDestroyOnLoad({0})">
 					<arg type="UnityEngine.Object"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
+				<method name="DestroyObject" GenericArgCount="0" Template="UnityEngine.Object.DestroyObject0({0})">
 					<arg type="UnityEngine.Object"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
+				<method name="DestroyObject" GenericArgCount="0" Template="UnityEngine.Object.DestroyObject1({0}, {1})">
 					<arg type="UnityEngine.Object"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="ToString" GenericArgCount="0" Template="{this}:ToString()">
+				</method>
+				<method name="GetInstanceID" GenericArgCount="0" Template="{this}:GetInstanceID()">
+				</method>
+				<method name="GetHashCode" GenericArgCount="0" Template="{this}:GetHashCode()">
+				</method>
+				<method name="Equals" GenericArgCount="0" Template="{this}:Equals({0})">
+					<arg type="System.Object"/>
+				</method>
+				<method name="Instantiate" GenericArgCount="0" Template="UnityEngine.Object.Instantiate0({0})">
 					<arg type="UnityEngine.Object"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
+				<method name="Instantiate" GenericArgCount="1" Template="Generic.ObjectExternions.Instantiate1({0}, System.TypeOfTolua({^0}))">
+					<arg type=""/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
+				<method name="Instantiate" GenericArgCount="1" Baned="true" NotImplementMethod="Generic.ObjectExternions.Instantiate2( original, UnityEngine.Transform parent, System.Type T)">
+					<arg type=""/>
+					<arg type="UnityEngine.Transform"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
+				<method name="Instantiate" GenericArgCount="0" Template="UnityEngine.Object.Instantiate3({0}, {1})">
 					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
+					<arg type="UnityEngine.Transform"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
+				<method name="Instantiate" GenericArgCount="0" Template="UnityEngine.Object.Instantiate4({0}, {1}, {2})">
 					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
+				<method name="Instantiate" GenericArgCount="1" Template="Generic.ObjectExternions.Instantiate5({0}, {1}, {2}, System.TypeOfTolua({^0}))">
+					<arg type=""/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
+				<method name="Instantiate" GenericArgCount="0" Template="UnityEngine.Object.Instantiate6({0}, {1}, {2})">
 					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
+					<arg type="UnityEngine.Transform"/>
+					<arg type="System.Boolean"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
+				<method name="Instantiate" GenericArgCount="1" Baned="true" NotImplementMethod="Generic.ObjectExternions.Instantiate7( original, UnityEngine.Transform parent, System.Boolean worldPositionStays, System.Type T)">
+					<arg type=""/>
+					<arg type="UnityEngine.Transform"/>
+					<arg type="System.Boolean"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
+				<method name="Instantiate" GenericArgCount="1" Baned="true" NotImplementMethod="Generic.ObjectExternions.Instantiate8( original, UnityEngine.Vector3 position, UnityEngine.Quaternion rotation, UnityEngine.Transform parent, System.Type T)">
+					<arg type=""/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="UnityEngine.Transform"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
+				<method name="Instantiate" GenericArgCount="0" Template="UnityEngine.Object.Instantiate9({0}, {1}, {2}, {3})">
 					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Quaternion"/>
+					<arg type="UnityEngine.Transform"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
+				<method name="FindObjectOfType" GenericArgCount="0" Template="UnityEngine.Object.FindObjectOfType({0})">
+					<arg type="System.Type"/>
 				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.Object.op_Equality({0}, {1})">
-					<arg type="UnityEngine.Object"/>
-					<arg type="UnityEngine.Object"/>
+				<method name="FindObjectOfType" GenericArgCount="1" Template="Generic.ObjectExternions.FindObjectOfType0T(System.TypeOfTolua({^0}))">
 				</method>
 			</class>
 			<class name="Transform">
@@ -1223,10 +1076,6 @@
 					<arg type="System.Object"/>
 				</method>
 				<method name="GetHashCode" GenericArgCount="0" Template="{this}:GetHashCode()">
-				</method>
-				<method name="op_Equality" GenericArgCount="0" Template="UnityEngine.TrackedReference.op_Equality({0}, {1})">
-					<arg type="UnityEngine.TrackedReference"/>
-					<arg type="UnityEngine.TrackedReference"/>
 				</method>
 			</class>
 			<class name="Application">
@@ -2438,600 +2287,296 @@
 			</class>
 		</namespace>
 		<namespace name="UnityEngine">
-			<class name="AndroidInput" Baned="true">
-			</class>
-			<class name="AndroidJavaObject" Baned="true">
-			</class>
-			<class name="AndroidJavaClass" Baned="true">
-			</class>
-			<class name="AndroidJNIHelper" Baned="true">
-			</class>
-			<class name="AndroidJNI" Baned="true">
-			</class>
-			<class name="Application.AdvertisingIdentifierCallback" Baned="true">
-			</class>
-			<class name="Application.LowMemoryCallback" Baned="true">
-			</class>
-			<class name="Application.LogCallback" Baned="true">
-			</class>
-			<class name="AssetBundleCreateRequest" Baned="true">
-			</class>
-			<class name="AssetBundleRequest" Baned="true">
-			</class>
-			<class name="AssetBundleManifest" Baned="true">
-			</class>
-			<class name="CustomYieldInstruction" Baned="true">
-			</class>
-			<class name="WaitWhile" Baned="true">
-			</class>
-			<class name="WaitUntil" Baned="true">
-			</class>
-			<class name="Coroutine" Baned="true">
-			</class>
-			<class name="ScriptableObject" Baned="true">
-			</class>
-			<class name="BillboardAsset" Baned="true">
-			</class>
-			<class name="BillboardRenderer" Baned="true">
-			</class>
-			<class name="Caching" Baned="true">
-			</class>
-			<class name="Camera.CameraCallback" Baned="true">
-			</class>
-			<class name="ColorUtility" Baned="true">
-			</class>
-			<class name="ComputeShader" Baned="true">
-			</class>
-			<class name="ComputeBuffer" Baned="true">
-			</class>
-			<class name="CrashReport" Baned="true">
-			</class>
-			<class name="CullingGroup" Baned="true">
-			</class>
-			<class name="CullingGroup.StateChanged" Baned="true">
-			</class>
-			<class name="Cursor" Baned="true">
-			</class>
-			<class name="Display" Baned="true">
-			</class>
-			<class name="Display.DisplaysUpdatedDelegate" Baned="true">
-			</class>
-			<class name="EventProvider" Baned="true">
-			</class>
-			<class name="FlareLayer" Baned="true">
-			</class>
-			<class name="Gizmos" Baned="true">
-			</class>
-			<class name="Gradient" Baned="true">
-			</class>
-			<class name="RendererExtensions" Baned="true">
-			</class>
-			<class name="TrailRenderer" Baned="true">
-			</class>
-			<class name="LineRenderer" Baned="true">
-			</class>
-			<class name="MaterialPropertyBlock" Baned="true">
-			</class>
-			<class name="Graphics" Baned="true">
-			</class>
-			<class name="LightProbes" Baned="true">
-			</class>
-			<class name="LightmapSettings" Baned="true">
-			</class>
-			<class name="RectOffset" Baned="true">
-			</class>
-			<class name="GUIElement" Baned="true">
-			</class>
-			<class name="GUITexture" Baned="true">
-			</class>
-			<class name="GUILayer" Baned="true">
-			</class>
-			<class name="Handheld" Baned="true">
-			</class>
-			<class name="TouchScreenKeyboard" Baned="true">
-			</class>
-			<class name="Gyroscope" Baned="true">
-			</class>
-			<class name="LocationService" Baned="true">
-			</class>
-			<class name="Compass" Baned="true">
-			</class>
-			<class name="LightProbeGroup" Baned="true">
-			</class>
-			<class name="LightProbeProxyVolume" Baned="true">
-			</class>
-			<class name="LineUtility" Baned="true">
-			</class>
-			<class name="LODGroup" Baned="true">
-			</class>
-			<class name="AnimationCurve" Baned="true">
-			</class>
-			<class name="NetworkView" Baned="true">
-			</class>
-			<class name="Network" Baned="true">
-			</class>
-			<class name="BitStream" Baned="true">
-			</class>
-			<class name="RPC" Baned="true">
-			</class>
-			<class name="HostData" Baned="true">
-			</class>
-			<class name="MasterServer" Baned="true">
-			</class>
-			<class name="Ping" Baned="true">
-			</class>
-			<class name="PlayerPrefsException" Baned="true">
-			</class>
-			<class name="PlayerPrefs" Baned="true">
-			</class>
-			<class name="ReflectionProbe" Baned="true">
-			</class>
-			<class name="ResourceRequest" Baned="true">
-			</class>
-			<class name="Security" Baned="true">
-			</class>
-			<class name="ShaderVariantCollection" Baned="true">
-			</class>
-			<class name="Sprite" Baned="true">
-			</class>
-			<class name="ProceduralPropertyDescription" Baned="true">
-			</class>
-			<class name="ProceduralMaterial" Baned="true">
-			</class>
-			<class name="ProceduralTexture" Baned="true">
-			</class>
-			<class name="Cubemap" Baned="true">
-			</class>
-			<class name="Texture3D" Baned="true">
-			</class>
-			<class name="Texture2DArray" Baned="true">
-			</class>
-			<class name="CubemapArray" Baned="true">
-			</class>
-			<class name="SparseTexture" Baned="true">
-			</class>
-			<class name="CustomRenderTexture" Baned="true">
-			</class>
-			<class name="UnityEventQueueSystem" Baned="true">
-			</class>
-			<class name="DynamicGI" Baned="true">
-			</class>
-			<class name="RectTransform.ReapplyDrivenProperties" Baned="true">
-			</class>
-			<class name="AndroidJavaRunnable" Baned="true">
-			</class>
-			<class name="AndroidJavaException" Baned="true">
-			</class>
-			<class name="AndroidJavaProxy" Baned="true">
-			</class>
-			<class name="DisallowMultipleComponent" Baned="true">
-			</class>
-			<class name="RequireComponent" Baned="true">
-			</class>
-			<class name="AddComponentMenu" Baned="true">
-			</class>
-			<class name="CreateAssetMenuAttribute" Baned="true">
-			</class>
-			<class name="ContextMenu" Baned="true">
-			</class>
-			<class name="ExecuteInEditMode" Baned="true">
-			</class>
-			<class name="HideInInspector" Baned="true">
-			</class>
-			<class name="HelpURLAttribute" Baned="true">
-			</class>
-			<class name="DefaultExecutionOrder" Baned="true">
-			</class>
-			<class name="NativeClassAttribute" Baned="true">
-			</class>
-			<class name="AssemblyIsEditorAssembly" Baned="true">
-			</class>
-			<class name="BeforeRenderOrderAttribute" Baned="true">
-			</class>
-			<class name="GeometryUtility" Baned="true">
-			</class>
-			<class name="GL" Baned="true">
-			</class>
-			<class name="ScalableBufferManager" Baned="true">
-			</class>
-			<class name="FrameTimingManager" Baned="true">
-			</class>
-			<class name="LightmapData" Baned="true">
-			</class>
-			<class name="ImageEffectTransformsToLDR" Baned="true">
-			</class>
-			<class name="ImageEffectAllowedInSceneView" Baned="true">
-			</class>
-			<class name="ImageEffectOpaque" Baned="true">
-			</class>
-			<class name="ImageEffectAfterScale" Baned="true">
-			</class>
-			<class name="Mesh" Baned="true">
-			</class>
-			<class name="Projector" Baned="true">
-			</class>
-			<class name="OcclusionPortal" Baned="true">
-			</class>
-			<class name="OcclusionArea" Baned="true">
-			</class>
-			<class name="Flare" Baned="true">
-			</class>
-			<class name="LensFlare" Baned="true">
-			</class>
-			<class name="Skybox" Baned="true">
-			</class>
-			<class name="MeshFilter" Baned="true">
-			</class>
-			<class name="PropertyAttribute" Baned="true">
-			</class>
-			<class name="ContextMenuItemAttribute" Baned="true">
-			</class>
-			<class name="TooltipAttribute" Baned="true">
-			</class>
-			<class name="SpaceAttribute" Baned="true">
-			</class>
-			<class name="HeaderAttribute" Baned="true">
-			</class>
-			<class name="RangeAttribute" Baned="true">
-			</class>
-			<class name="MultilineAttribute" Baned="true">
-			</class>
-			<class name="TextAreaAttribute" Baned="true">
-			</class>
-			<class name="ColorUsageAttribute" Baned="true">
-			</class>
-			<class name="DelayedAttribute" Baned="true">
-			</class>
-			<class name="RuntimeInitializeOnLoadMethodAttribute" Baned="true">
-			</class>
-			<class name="Types" Baned="true">
-			</class>
-			<class name="SelectionBaseAttribute" Baned="true">
-			</class>
-			<class name="SerializePrivateVariables" Baned="true">
-			</class>
-			<class name="SerializeField" Baned="true">
-			</class>
-			<class name="PreferBinarySerialization" Baned="true">
-			</class>
-			<class name="StackTraceUtility" Baned="true">
-			</class>
-			<class name="UnityException" Baned="true">
-			</class>
-			<class name="MissingComponentException" Baned="true">
-			</class>
-			<class name="UnassignedReferenceException" Baned="true">
-			</class>
-			<class name="MissingReferenceException" Baned="true">
-			</class>
-			<class name="UnityAPICompatibilityVersionAttribute" Baned="true">
-			</class>
-			<class name="WaitForSecondsRealtime" Baned="true">
-			</class>
-			<class name="iPhoneSettings" Baned="true">
-			</class>
-			<class name="iPhoneUtils" Baned="true">
-			</class>
-			<class name="iPhoneKeyboard" Baned="true">
-			</class>
-			<class name="iPhoneInput" Baned="true">
-			</class>
-			<class name="iPhone" Baned="true">
-			</class>
-			<class name="LocalNotification" Baned="true">
-			</class>
-			<class name="RemoteNotification" Baned="true">
-			</class>
-			<class name="NotificationServices" Baned="true">
-			</class>
-			<class name="ADBannerView" Baned="true">
-			</class>
-			<class name="ADBannerView.BannerWasClickedDelegate" Baned="true">
-			</class>
-			<class name="ADBannerView.BannerWasLoadedDelegate" Baned="true">
-			</class>
-			<class name="ADInterstitialAd" Baned="true">
-			</class>
-			<class name="ADInterstitialAd.InterstitialWasLoadedDelegate" Baned="true">
-			</class>
-			<class name="Logger" Baned="true">
-			</class>
-			<class name="StaticBatchingUtility" Baned="true">
-			</class>
+			<class name="AndroidInput" Baned="true"/>
+			<class name="AndroidJavaObject" Baned="true"/>
+			<class name="AndroidJavaClass" Baned="true"/>
+			<class name="AndroidJNIHelper" Baned="true"/>
+			<class name="AndroidJNI" Baned="true"/>
+			<class name="AssetBundleCreateRequest" Baned="true"/>
+			<class name="AssetBundleRequest" Baned="true"/>
+			<class name="AssetBundleManifest" Baned="true"/>
+			<class name="CustomYieldInstruction" Baned="true"/>
+			<class name="WaitWhile" Baned="true"/>
+			<class name="WaitUntil" Baned="true"/>
+			<class name="Coroutine" Baned="true"/>
+			<class name="ScriptableObject" Baned="true"/>
+			<class name="BillboardAsset" Baned="true"/>
+			<class name="BillboardRenderer" Baned="true"/>
+			<class name="Caching" Baned="true"/>
+			<class name="ColorUtility" Baned="true"/>
+			<class name="ComputeShader" Baned="true"/>
+			<class name="ComputeBuffer" Baned="true"/>
+			<class name="CrashReport" Baned="true"/>
+			<class name="CullingGroup" Baned="true"/>
+			<class name="Cursor" Baned="true"/>
+			<class name="Display" Baned="true"/>
+			<class name="EventProvider" Baned="true"/>
+			<class name="FlareLayer" Baned="true"/>
+			<class name="Gizmos" Baned="true"/>
+			<class name="Gradient" Baned="true"/>
+			<class name="RendererExtensions" Baned="true"/>
+			<class name="TrailRenderer" Baned="true"/>
+			<class name="LineRenderer" Baned="true"/>
+			<class name="MaterialPropertyBlock" Baned="true"/>
+			<class name="Graphics" Baned="true"/>
+			<class name="LightProbes" Baned="true"/>
+			<class name="LightmapSettings" Baned="true"/>
+			<class name="RectOffset" Baned="true"/>
+			<class name="GUIElement" Baned="true"/>
+			<class name="GUITexture" Baned="true"/>
+			<class name="GUILayer" Baned="true"/>
+			<class name="Handheld" Baned="true"/>
+			<class name="TouchScreenKeyboard" Baned="true"/>
+			<class name="Gyroscope" Baned="true"/>
+			<class name="LocationService" Baned="true"/>
+			<class name="Compass" Baned="true"/>
+			<class name="LightProbeGroup" Baned="true"/>
+			<class name="LightProbeProxyVolume" Baned="true"/>
+			<class name="LineUtility" Baned="true"/>
+			<class name="LODGroup" Baned="true"/>
+			<class name="AnimationCurve" Baned="true"/>
+			<class name="NetworkView" Baned="true"/>
+			<class name="Network" Baned="true"/>
+			<class name="BitStream" Baned="true"/>
+			<class name="RPC" Baned="true"/>
+			<class name="HostData" Baned="true"/>
+			<class name="MasterServer" Baned="true"/>
+			<class name="Ping" Baned="true"/>
+			<class name="PlayerPrefsException" Baned="true"/>
+			<class name="PlayerPrefs" Baned="true"/>
+			<class name="ReflectionProbe" Baned="true"/>
+			<class name="ResourceRequest" Baned="true"/>
+			<class name="Security" Baned="true"/>
+			<class name="ShaderVariantCollection" Baned="true"/>
+			<class name="Sprite" Baned="true"/>
+			<class name="ProceduralPropertyDescription" Baned="true"/>
+			<class name="ProceduralMaterial" Baned="true"/>
+			<class name="ProceduralTexture" Baned="true"/>
+			<class name="Cubemap" Baned="true"/>
+			<class name="Texture3D" Baned="true"/>
+			<class name="Texture2DArray" Baned="true"/>
+			<class name="CubemapArray" Baned="true"/>
+			<class name="SparseTexture" Baned="true"/>
+			<class name="CustomRenderTexture" Baned="true"/>
+			<class name="UnityEventQueueSystem" Baned="true"/>
+			<class name="DynamicGI" Baned="true"/>
+			<class name="AndroidJavaException" Baned="true"/>
+			<class name="AndroidJavaProxy" Baned="true"/>
+			<class name="DisallowMultipleComponent" Baned="true"/>
+			<class name="RequireComponent" Baned="true"/>
+			<class name="AddComponentMenu" Baned="true"/>
+			<class name="CreateAssetMenuAttribute" Baned="true"/>
+			<class name="ContextMenu" Baned="true"/>
+			<class name="ExecuteInEditMode" Baned="true"/>
+			<class name="HideInInspector" Baned="true"/>
+			<class name="HelpURLAttribute" Baned="true"/>
+			<class name="DefaultExecutionOrder" Baned="true"/>
+			<class name="NativeClassAttribute" Baned="true"/>
+			<class name="AssemblyIsEditorAssembly" Baned="true"/>
+			<class name="BeforeRenderOrderAttribute" Baned="true"/>
+			<class name="GeometryUtility" Baned="true"/>
+			<class name="GL" Baned="true"/>
+			<class name="ScalableBufferManager" Baned="true"/>
+			<class name="FrameTimingManager" Baned="true"/>
+			<class name="LightmapData" Baned="true"/>
+			<class name="ImageEffectTransformsToLDR" Baned="true"/>
+			<class name="ImageEffectAllowedInSceneView" Baned="true"/>
+			<class name="ImageEffectOpaque" Baned="true"/>
+			<class name="ImageEffectAfterScale" Baned="true"/>
+			<class name="Mesh" Baned="true"/>
+			<class name="Projector" Baned="true"/>
+			<class name="OcclusionPortal" Baned="true"/>
+			<class name="OcclusionArea" Baned="true"/>
+			<class name="Flare" Baned="true"/>
+			<class name="LensFlare" Baned="true"/>
+			<class name="Skybox" Baned="true"/>
+			<class name="MeshFilter" Baned="true"/>
+			<class name="PropertyAttribute" Baned="true"/>
+			<class name="ContextMenuItemAttribute" Baned="true"/>
+			<class name="TooltipAttribute" Baned="true"/>
+			<class name="SpaceAttribute" Baned="true"/>
+			<class name="HeaderAttribute" Baned="true"/>
+			<class name="RangeAttribute" Baned="true"/>
+			<class name="MultilineAttribute" Baned="true"/>
+			<class name="TextAreaAttribute" Baned="true"/>
+			<class name="ColorUsageAttribute" Baned="true"/>
+			<class name="DelayedAttribute" Baned="true"/>
+			<class name="RuntimeInitializeOnLoadMethodAttribute" Baned="true"/>
+			<class name="Types" Baned="true"/>
+			<class name="SelectionBaseAttribute" Baned="true"/>
+			<class name="SerializePrivateVariables" Baned="true"/>
+			<class name="SerializeField" Baned="true"/>
+			<class name="PreferBinarySerialization" Baned="true"/>
+			<class name="StackTraceUtility" Baned="true"/>
+			<class name="UnityException" Baned="true"/>
+			<class name="MissingComponentException" Baned="true"/>
+			<class name="UnassignedReferenceException" Baned="true"/>
+			<class name="MissingReferenceException" Baned="true"/>
+			<class name="UnityAPICompatibilityVersionAttribute" Baned="true"/>
+			<class name="WaitForSecondsRealtime" Baned="true"/>
+			<class name="iPhoneSettings" Baned="true"/>
+			<class name="iPhoneUtils" Baned="true"/>
+			<class name="iPhoneKeyboard" Baned="true"/>
+			<class name="iPhoneInput" Baned="true"/>
+			<class name="iPhone" Baned="true"/>
+			<class name="LocalNotification" Baned="true"/>
+			<class name="RemoteNotification" Baned="true"/>
+			<class name="NotificationServices" Baned="true"/>
+			<class name="ADBannerView" Baned="true"/>
+			<class name="ADInterstitialAd" Baned="true"/>
+			<class name="Logger" Baned="true"/>
+			<class name="StaticBatchingUtility" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Diagnostics">
-			<class name="PlayerConnection" Baned="true">
-			</class>
+			<class name="PlayerConnection" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Rendering">
-			<class name="GraphicsSettings" Baned="true">
-			</class>
-			<class name="CommandBuffer" Baned="true">
-			</class>
-			<class name="SplashScreen" Baned="true">
-			</class>
-			<class name="SortingGroup" Baned="true">
-			</class>
+			<class name="GraphicsSettings" Baned="true"/>
+			<class name="CommandBuffer" Baned="true"/>
+			<class name="SplashScreen" Baned="true"/>
+			<class name="SortingGroup" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Sprites">
-			<class name="DataUtility" Baned="true">
-			</class>
+			<class name="DataUtility" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngineInternal">
-			<class name="GIDebugVisualisation" Baned="true">
-			</class>
-			<class name="FastCallExceptionHandler" Baned="true">
-			</class>
-			<class name="GetMethodDelegate" Baned="true">
-			</class>
-			<class name="ScriptingUtils" Baned="true">
-			</class>
-			<class name="APIUpdaterRuntimeServices" Baned="true">
-			</class>
-			<class name="TypeInferenceRuleAttribute" Baned="true">
-			</class>
-			<class name="GenericStack" Baned="true">
-			</class>
+			<class name="GIDebugVisualisation" Baned="true"/>
+			<class name="ScriptingUtils" Baned="true"/>
+			<class name="APIUpdaterRuntimeServices" Baned="true"/>
+			<class name="TypeInferenceRuleAttribute" Baned="true"/>
+			<class name="GenericStack" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.SceneManagement">
-			<class name="SceneUtility" Baned="true">
-			</class>
+			<class name="SceneUtility" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Tizen">
-			<class name="Window" Baned="true">
-			</class>
+			<class name="Window" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Windows.Speech">
-			<class name="PhraseRecognitionSystem" Baned="true">
-			</class>
-			<class name="PhraseRecognitionSystem.ErrorDelegate" Baned="true">
-			</class>
-			<class name="PhraseRecognitionSystem.StatusDelegate" Baned="true">
-			</class>
-			<class name="PhraseRecognizer" Baned="true">
-			</class>
-			<class name="PhraseRecognizer.PhraseRecognizedDelegate" Baned="true">
-			</class>
-			<class name="DictationRecognizer" Baned="true">
-			</class>
-			<class name="DictationRecognizer.DictationHypothesisDelegate" Baned="true">
-			</class>
-			<class name="DictationRecognizer.DictationResultDelegate" Baned="true">
-			</class>
-			<class name="DictationRecognizer.DictationCompletedDelegate" Baned="true">
-			</class>
-			<class name="DictationRecognizer.DictationErrorHandler" Baned="true">
-			</class>
-			<class name="KeywordRecognizer" Baned="true">
-			</class>
-			<class name="GrammarRecognizer" Baned="true">
-			</class>
+			<class name="PhraseRecognitionSystem" Baned="true"/>
+			<class name="PhraseRecognizer" Baned="true"/>
+			<class name="DictationRecognizer" Baned="true"/>
+			<class name="KeywordRecognizer" Baned="true"/>
+			<class name="GrammarRecognizer" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Windows">
-			<class name="CrashReporting" Baned="true">
-			</class>
+			<class name="CrashReporting" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.WSA">
-			<class name="AppCallbackItem" Baned="true">
-			</class>
-			<class name="WindowSizeChanged" Baned="true">
-			</class>
-			<class name="WindowActivated" Baned="true">
-			</class>
-			<class name="Application" Baned="true">
-			</class>
-			<class name="Cursor" Baned="true">
-			</class>
-			<class name="Launcher" Baned="true">
-			</class>
-			<class name="Tile" Baned="true">
-			</class>
-			<class name="Toast" Baned="true">
-			</class>
+			<class name="Application" Baned="true"/>
+			<class name="Cursor" Baned="true"/>
+			<class name="Launcher" Baned="true"/>
+			<class name="Tile" Baned="true"/>
+			<class name="Toast" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Profiling">
-			<class name="Profiler" Baned="true">
-			</class>
-			<class name="Recorder" Baned="true">
-			</class>
-			<class name="Sampler" Baned="true">
-			</class>
-			<class name="CustomSampler" Baned="true">
-			</class>
+			<class name="Profiler" Baned="true"/>
+			<class name="Recorder" Baned="true"/>
+			<class name="Sampler" Baned="true"/>
+			<class name="CustomSampler" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.U2D">
-			<class name="SpriteAtlasManager" Baned="true">
-			</class>
-			<class name="SpriteAtlasManager.RequestAtlasCallback" Baned="true">
-			</class>
-			<class name="SpriteAtlas" Baned="true">
-			</class>
+			<class name="SpriteAtlasManager" Baned="true"/>
+			<class name="SpriteAtlas" Baned="true"/>
 		</namespace>
 		<namespace name="AOT">
-			<class name="MonoPInvokeCallbackAttribute" Baned="true">
-			</class>
+			<class name="MonoPInvokeCallbackAttribute" Baned="true"/>
 		</namespace>
 		<namespace name="JetBrains.Annotations">
-			<class name="CanBeNullAttribute" Baned="true">
-			</class>
-			<class name="NotNullAttribute" Baned="true">
-			</class>
-			<class name="StringFormatMethodAttribute" Baned="true">
-			</class>
-			<class name="InvokerParameterNameAttribute" Baned="true">
-			</class>
-			<class name="NotifyPropertyChangedInvocatorAttribute" Baned="true">
-			</class>
-			<class name="ContractAnnotationAttribute" Baned="true">
-			</class>
-			<class name="LocalizationRequiredAttribute" Baned="true">
-			</class>
-			<class name="CannotApplyEqualityOperatorAttribute" Baned="true">
-			</class>
-			<class name="BaseTypeRequiredAttribute" Baned="true">
-			</class>
-			<class name="UsedImplicitlyAttribute" Baned="true">
-			</class>
-			<class name="MeansImplicitUseAttribute" Baned="true">
-			</class>
-			<class name="PublicAPIAttribute" Baned="true">
-			</class>
-			<class name="InstantHandleAttribute" Baned="true">
-			</class>
-			<class name="PureAttribute" Baned="true">
-			</class>
-			<class name="PathReferenceAttribute" Baned="true">
-			</class>
-			<class name="NoEnumerationAttribute" Baned="true">
-			</class>
-			<class name="AssertionMethodAttribute" Baned="true">
-			</class>
-			<class name="LinqTunnelAttribute" Baned="true">
-			</class>
+			<class name="CanBeNullAttribute" Baned="true"/>
+			<class name="NotNullAttribute" Baned="true"/>
+			<class name="StringFormatMethodAttribute" Baned="true"/>
+			<class name="InvokerParameterNameAttribute" Baned="true"/>
+			<class name="NotifyPropertyChangedInvocatorAttribute" Baned="true"/>
+			<class name="ContractAnnotationAttribute" Baned="true"/>
+			<class name="LocalizationRequiredAttribute" Baned="true"/>
+			<class name="CannotApplyEqualityOperatorAttribute" Baned="true"/>
+			<class name="BaseTypeRequiredAttribute" Baned="true"/>
+			<class name="UsedImplicitlyAttribute" Baned="true"/>
+			<class name="MeansImplicitUseAttribute" Baned="true"/>
+			<class name="PublicAPIAttribute" Baned="true"/>
+			<class name="InstantHandleAttribute" Baned="true"/>
+			<class name="PureAttribute" Baned="true"/>
+			<class name="PathReferenceAttribute" Baned="true"/>
+			<class name="NoEnumerationAttribute" Baned="true"/>
+			<class name="AssertionMethodAttribute" Baned="true"/>
+			<class name="LinqTunnelAttribute" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Events">
-			<class name="UnityAction" Baned="true">
-			</class>
-			<class name="UnityAction`1" Baned="true">
-			</class>
-			<class name="UnityAction`2" Baned="true">
-			</class>
-			<class name="UnityEvent`2" Baned="true">
-			</class>
-			<class name="UnityAction`3" Baned="true">
-			</class>
-			<class name="UnityEvent`3" Baned="true">
-			</class>
-			<class name="UnityAction`4" Baned="true">
-			</class>
-			<class name="UnityEvent`4" Baned="true">
-			</class>
+			<class name="UnityEvent`2" Baned="true"/>
+			<class name="UnityEvent`3" Baned="true"/>
+			<class name="UnityEvent`4" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Assertions">
-			<class name="Assert" Baned="true">
-			</class>
-			<class name="AssertionException" Baned="true">
-			</class>
+			<class name="Assert" Baned="true"/>
+			<class name="AssertionException" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Assertions.Comparers">
-			<class name="FloatComparer" Baned="true">
-			</class>
+			<class name="FloatComparer" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Assertions.Must">
-			<class name="MustExtensions" Baned="true">
-			</class>
+			<class name="MustExtensions" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Collections">
-			<class name="ReadOnlyAttribute" Baned="true">
-			</class>
-			<class name="WriteOnlyAttribute" Baned="true">
-			</class>
-			<class name="DeallocateOnJobCompletionAttribute" Baned="true">
-			</class>
-			<class name="NativeFixedLengthAttribute" Baned="true">
-			</class>
-			<class name="NativeMatchesParallelForLengthAttribute" Baned="true">
-			</class>
-			<class name="NativeContainerAttribute" Baned="true">
-			</class>
-			<class name="NativeContainerIsAtomicWriteOnlyAttribute" Baned="true">
-			</class>
-			<class name="NativeContainerSupportsMinMaxWriteRestrictionAttribute" Baned="true">
-			</class>
-			<class name="NativeContainerSupportsDeallocateOnJobCompletionAttribute" Baned="true">
-			</class>
-			<class name="NativeLeakDetection" Baned="true">
-			</class>
-			<class name="NativeSliceExtensions" Baned="true">
-			</class>
+			<class name="ReadOnlyAttribute" Baned="true"/>
+			<class name="WriteOnlyAttribute" Baned="true"/>
+			<class name="DeallocateOnJobCompletionAttribute" Baned="true"/>
+			<class name="NativeFixedLengthAttribute" Baned="true"/>
+			<class name="NativeMatchesParallelForLengthAttribute" Baned="true"/>
+			<class name="NativeContainerAttribute" Baned="true"/>
+			<class name="NativeContainerIsAtomicWriteOnlyAttribute" Baned="true"/>
+			<class name="NativeContainerSupportsMinMaxWriteRestrictionAttribute" Baned="true"/>
+			<class name="NativeContainerSupportsDeallocateOnJobCompletionAttribute" Baned="true"/>
+			<class name="NativeLeakDetection" Baned="true"/>
+			<class name="NativeSliceExtensions" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Playables">
-			<class name="PlayableAsset" Baned="true">
-			</class>
-			<class name="PlayableBehaviour" Baned="true">
-			</class>
-			<class name="PlayableExtensions" Baned="true">
-			</class>
-			<class name="PlayableOutputExtensions" Baned="true">
-			</class>
+			<class name="PlayableAsset" Baned="true"/>
+			<class name="PlayableBehaviour" Baned="true"/>
+			<class name="PlayableExtensions" Baned="true"/>
+			<class name="PlayableOutputExtensions" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Internal">
-			<class name="DefaultValueAttribute" Baned="true">
-			</class>
-			<class name="ExcludeFromDocsAttribute" Baned="true">
-			</class>
+			<class name="DefaultValueAttribute" Baned="true"/>
+			<class name="ExcludeFromDocsAttribute" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.iOS">
-			<class name="ADBannerView" Baned="true">
-			</class>
-			<class name="ADBannerView.BannerWasClickedDelegate" Baned="true">
-			</class>
-			<class name="ADBannerView.BannerWasLoadedDelegate" Baned="true">
-			</class>
-			<class name="ADBannerView.BannerFailedToLoadDelegate" Baned="true">
-			</class>
-			<class name="ADInterstitialAd" Baned="true">
-			</class>
-			<class name="ADInterstitialAd.InterstitialWasLoadedDelegate" Baned="true">
-			</class>
-			<class name="ADInterstitialAd.InterstitialWasViewedDelegate" Baned="true">
-			</class>
-			<class name="Device" Baned="true">
-			</class>
-			<class name="LocalNotification" Baned="true">
-			</class>
-			<class name="RemoteNotification" Baned="true">
-			</class>
-			<class name="NotificationServices" Baned="true">
-			</class>
-			<class name="OnDemandResourcesRequest" Baned="true">
-			</class>
-			<class name="OnDemandResources" Baned="true">
-			</class>
+			<class name="ADBannerView" Baned="true"/>
+			<class name="ADInterstitialAd" Baned="true"/>
+			<class name="Device" Baned="true"/>
+			<class name="LocalNotification" Baned="true"/>
+			<class name="RemoteNotification" Baned="true"/>
+			<class name="NotificationServices" Baned="true"/>
+			<class name="OnDemandResourcesRequest" Baned="true"/>
+			<class name="OnDemandResources" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Apple.ReplayKit">
-			<class name="ReplayKit" Baned="true">
-			</class>
-			<class name="ReplayKit.BroadcastStatusCallback" Baned="true">
-			</class>
+			<class name="ReplayKit" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Apple.TV">
-			<class name="Remote" Baned="true">
-			</class>
+			<class name="Remote" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Networking.PlayerConnection">
-			<class name="MessageEventArgs" Baned="true">
-			</class>
-			<class name="PlayerConnection" Baned="true">
-			</class>
+			<class name="MessageEventArgs" Baned="true"/>
+			<class name="PlayerConnection" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Experimental.Rendering">
-			<class name="RenderPipeline" Baned="true">
-			</class>
-			<class name="RenderPipelineAsset" Baned="true">
-			</class>
-			<class name="RenderPipelineManager" Baned="true">
-			</class>
-			<class name="RenderPass" Baned="true">
-			</class>
-			<class name="RenderPass.SubPass" Baned="true">
-			</class>
-			<class name="RenderPassAttachment" Baned="true">
-			</class>
+			<class name="RenderPipeline" Baned="true"/>
+			<class name="RenderPipelineAsset" Baned="true"/>
+			<class name="RenderPipelineManager" Baned="true"/>
+			<class name="RenderPass" Baned="true"/>
+			<class name="RenderPass.SubPass" Baned="true"/>
+			<class name="RenderPassAttachment" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Scripting">
-			<class name="PreserveAttribute" Baned="true">
-			</class>
+			<class name="PreserveAttribute" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Scripting.APIUpdating">
-			<class name="MovedFromAttribute" Baned="true">
-			</class>
+			<class name="MovedFromAttribute" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Serialization">
-			<class name="FormerlySerializedAsAttribute" Baned="true">
-			</class>
-			<class name="UnitySurrogateSelector" Baned="true">
-			</class>
+			<class name="FormerlySerializedAsAttribute" Baned="true"/>
+			<class name="UnitySurrogateSelector" Baned="true"/>
 		</namespace>
 	</assembly>
 </meta>

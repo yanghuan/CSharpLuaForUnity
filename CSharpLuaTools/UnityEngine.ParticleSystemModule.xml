@@ -79,10 +79,8 @@
 			</class>
 		</namespace>
 		<namespace name="UnityEngine">
-			<class name="ParticleSystemRenderer" Baned="true">
-			</class>
-			<class name="ParticlePhysicsExtensions" Baned="true">
-			</class>
+			<class name="ParticleSystemRenderer" Baned="true"/>
+			<class name="ParticlePhysicsExtensions" Baned="true"/>
 		</namespace>
 	</assembly>
 </meta>

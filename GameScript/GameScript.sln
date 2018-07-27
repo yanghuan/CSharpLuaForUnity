@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2000
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GameScript", "CSLua\GameScript.csproj", "{0E162BB0-C06C-472B-AEEA-8CA1D0701C28}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LuaBridge", "LuaBridge\LuaBridge.csproj", "{B6B98FCF-78F3-4E78-A8EC-201FFEB9F234}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		CSharp|Any CPU = CSharp|Any CPU
+		CSharp|x64 = CSharp|x64
+		CSharp|x86 = CSharp|x86
+		Lua|Any CPU = Lua|Any CPU
+		Lua|x64 = Lua|x64
+		Lua|x86 = Lua|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0E162BB0-C06C-472B-AEEA-8CA1D0701C28}.CSharp|Any CPU.ActiveCfg = CSharp|Any CPU
+		{0E162BB0-C06C-472B-AEEA-8CA1D0701C28}.CSharp|Any CPU.Build.0 = CSharp|Any CPU
+		{0E162BB0-C06C-472B-AEEA-8CA1D0701C28}.CSharp|x64.ActiveCfg = CSharp|Any CPU
+		{0E162BB0-C06C-472B-AEEA-8CA1D0701C28}.CSharp|x64.Build.0 = CSharp|Any CPU
+		{0E162BB0-C06C-472B-AEEA-8CA1D0701C28}.CSharp|x86.ActiveCfg = CSharp|Any CPU
+		{0E162BB0-C06C-472B-AEEA-8CA1D0701C28}.CSharp|x86.Build.0 = CSharp|Any CPU
+		{0E162BB0-C06C-472B-AEEA-8CA1D0701C28}.Lua|Any CPU.ActiveCfg = Lua|Any CPU
+		{0E162BB0-C06C-472B-AEEA-8CA1D0701C28}.Lua|Any CPU.Build.0 = Lua|Any CPU
+		{0E162BB0-C06C-472B-AEEA-8CA1D0701C28}.Lua|x64.ActiveCfg = Lua|Any CPU
+		{0E162BB0-C06C-472B-AEEA-8CA1D0701C28}.Lua|x64.Build.0 = Lua|Any CPU
+		{0E162BB0-C06C-472B-AEEA-8CA1D0701C28}.Lua|x86.ActiveCfg = Lua|Any CPU
+		{0E162BB0-C06C-472B-AEEA-8CA1D0701C28}.Lua|x86.Build.0 = Lua|Any CPU
+		{B6B98FCF-78F3-4E78-A8EC-201FFEB9F234}.CSharp|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B98FCF-78F3-4E78-A8EC-201FFEB9F234}.CSharp|Any CPU.Build.0 = Debug|Any CPU
+		{B6B98FCF-78F3-4E78-A8EC-201FFEB9F234}.CSharp|x64.ActiveCfg = Release|Any CPU
+		{B6B98FCF-78F3-4E78-A8EC-201FFEB9F234}.CSharp|x64.Build.0 = Release|Any CPU
+		{B6B98FCF-78F3-4E78-A8EC-201FFEB9F234}.CSharp|x86.ActiveCfg = Release|Any CPU
+		{B6B98FCF-78F3-4E78-A8EC-201FFEB9F234}.CSharp|x86.Build.0 = Release|Any CPU
+		{B6B98FCF-78F3-4E78-A8EC-201FFEB9F234}.Lua|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6B98FCF-78F3-4E78-A8EC-201FFEB9F234}.Lua|Any CPU.Build.0 = Debug|Any CPU
+		{B6B98FCF-78F3-4E78-A8EC-201FFEB9F234}.Lua|x64.ActiveCfg = Debug|Any CPU
+		{B6B98FCF-78F3-4E78-A8EC-201FFEB9F234}.Lua|x64.Build.0 = Debug|Any CPU
+		{B6B98FCF-78F3-4E78-A8EC-201FFEB9F234}.Lua|x86.ActiveCfg = Debug|Any CPU
+		{B6B98FCF-78F3-4E78-A8EC-201FFEB9F234}.Lua|x86.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {0EE39DE6-4005-4732-A358-4105C826EF31}
+	EndGlobalSection
+EndGlobal
