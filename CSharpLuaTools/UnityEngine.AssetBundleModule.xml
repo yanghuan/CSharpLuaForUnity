@@ -1,0 +1,145 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<meta>
+	<assembly>
+		<namespace name="UnityEngine">
+			<class name="AssetBundle">
+				<method name="UnloadAllAssetBundles" GenericArgCount="0" Template="UnityEngine.AssetBundle.UnloadAllAssetBundles({0})">
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="GetAllLoadedAssetBundles" GenericArgCount="0" Template="UnityEngine.AssetBundle.GetAllLoadedAssetBundles()">
+				</method>
+				<method name="LoadFromFileAsync" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromFileAsync0({0})">
+					<arg type="System.String"/>
+				</method>
+				<method name="LoadFromFileAsync" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromFileAsync1({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="System.UInt32"/>
+				</method>
+				<method name="LoadFromFileAsync" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromFileAsync2({0}, {1}, {2})">
+					<arg type="System.String"/>
+					<arg type="System.UInt32"/>
+					<arg type="System.UInt64"/>
+				</method>
+				<method name="LoadFromFile" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromFile0({0})">
+					<arg type="System.String"/>
+				</method>
+				<method name="LoadFromFile" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromFile1({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="System.UInt32"/>
+				</method>
+				<method name="LoadFromFile" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromFile2({0}, {1}, {2})">
+					<arg type="System.String"/>
+					<arg type="System.UInt32"/>
+					<arg type="System.UInt64"/>
+				</method>
+				<method name="LoadFromMemoryAsync" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromMemoryAsync0({0})">
+					<arg type="System.Byte[]"/>
+				</method>
+				<method name="LoadFromMemoryAsync" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromMemoryAsync1({0}, {1})">
+					<arg type="System.Byte[]"/>
+					<arg type="System.UInt32"/>
+				</method>
+				<method name="LoadFromMemory" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromMemory0({0})">
+					<arg type="System.Byte[]"/>
+				</method>
+				<method name="LoadFromMemory" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromMemory1({0}, {1})">
+					<arg type="System.Byte[]"/>
+					<arg type="System.UInt32"/>
+				</method>
+				<method name="LoadFromStreamAsync" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromStreamAsync0({0})">
+					<arg type="System.IO.Stream"/>
+				</method>
+				<method name="LoadFromStreamAsync" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromStreamAsync1({0}, {1})">
+					<arg type="System.IO.Stream"/>
+					<arg type="System.UInt32"/>
+				</method>
+				<method name="LoadFromStreamAsync" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromStreamAsync2({0}, {1}, {2})">
+					<arg type="System.IO.Stream"/>
+					<arg type="System.UInt32"/>
+					<arg type="System.UInt32"/>
+				</method>
+				<method name="LoadFromStream" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromStream0({0})">
+					<arg type="System.IO.Stream"/>
+				</method>
+				<method name="LoadFromStream" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromStream1({0}, {1})">
+					<arg type="System.IO.Stream"/>
+					<arg type="System.UInt32"/>
+				</method>
+				<method name="LoadFromStream" GenericArgCount="0" Template="UnityEngine.AssetBundle.LoadFromStream2({0}, {1}, {2})">
+					<arg type="System.IO.Stream"/>
+					<arg type="System.UInt32"/>
+					<arg type="System.UInt32"/>
+				</method>
+				<method name="Contains" GenericArgCount="0" Template="{this}:Contains({0})">
+					<arg type="System.String"/>
+				</method>
+				<method name="LoadAsset" GenericArgCount="0" Template="{this}:LoadAsset0({0})">
+					<arg type="System.String"/>
+				</method>
+				<method name="LoadAsset" GenericArgCount="0" Template="{this}:LoadAsset1({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="LoadAsset" GenericArgCount="1" Baned="true" NotImplementMethod="Generic.AssetBundleExternions.LoadAsset0T(this UnityEngine.AssetBundle self, System.String name, System.Type T)">
+					<arg type="System.String"/>
+				</method>
+				<method name="LoadAssetAsync" GenericArgCount="0" Template="{this}:LoadAssetAsync0({0})">
+					<arg type="System.String"/>
+				</method>
+				<method name="LoadAssetAsync" GenericArgCount="0" Template="{this}:LoadAssetAsync1({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="LoadAssetAsync" GenericArgCount="1" Baned="true" NotImplementMethod="Generic.AssetBundleExternions.LoadAssetAsync0T(this UnityEngine.AssetBundle self, System.String name, System.Type T)">
+					<arg type="System.String"/>
+				</method>
+				<method name="LoadAssetWithSubAssets" GenericArgCount="0" Template="{this}:LoadAssetWithSubAssets0({0})">
+					<arg type="System.String"/>
+				</method>
+				<method name="LoadAssetWithSubAssets" GenericArgCount="0" Template="{this}:LoadAssetWithSubAssets1({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="LoadAssetWithSubAssets" GenericArgCount="1" Baned="true" NotImplementMethod="Generic.AssetBundleExternions.LoadAssetWithSubAssets0T(this UnityEngine.AssetBundle self, System.String name, System.Type T)">
+					<arg type="System.String"/>
+				</method>
+				<method name="LoadAssetWithSubAssetsAsync" GenericArgCount="0" Template="{this}:LoadAssetWithSubAssetsAsync0({0})">
+					<arg type="System.String"/>
+				</method>
+				<method name="LoadAssetWithSubAssetsAsync" GenericArgCount="0" Template="{this}:LoadAssetWithSubAssetsAsync1({0}, {1})">
+					<arg type="System.String"/>
+					<arg type="System.Type"/>
+				</method>
+				<method name="LoadAssetWithSubAssetsAsync" GenericArgCount="1" Baned="true" NotImplementMethod="Generic.AssetBundleExternions.LoadAssetWithSubAssetsAsync0T(this UnityEngine.AssetBundle self, System.String name, System.Type T)">
+					<arg type="System.String"/>
+				</method>
+				<method name="LoadAllAssets" GenericArgCount="0" Template="{this}:LoadAllAssets0()">
+				</method>
+				<method name="LoadAllAssets" GenericArgCount="0" Template="{this}:LoadAllAssets1({0})">
+					<arg type="System.Type"/>
+				</method>
+				<method name="LoadAllAssets" GenericArgCount="1" Baned="true" NotImplementMethod="Generic.AssetBundleExternions.LoadAllAssets0T(this UnityEngine.AssetBundle self, System.Type T)">
+				</method>
+				<method name="LoadAllAssetsAsync" GenericArgCount="0" Template="{this}:LoadAllAssetsAsync0()">
+				</method>
+				<method name="LoadAllAssetsAsync" GenericArgCount="0" Template="{this}:LoadAllAssetsAsync1({0})">
+					<arg type="System.Type"/>
+				</method>
+				<method name="LoadAllAssetsAsync" GenericArgCount="1" Baned="true" NotImplementMethod="Generic.AssetBundleExternions.LoadAllAssetsAsync0T(this UnityEngine.AssetBundle self, System.Type T)">
+				</method>
+				<method name="Unload" GenericArgCount="0" Template="{this}:Unload({0})">
+					<arg type="System.Boolean"/>
+				</method>
+				<method name="GetAllAssetNames" GenericArgCount="0" Template="{this}:GetAllAssetNames()">
+				</method>
+				<method name="GetAllScenePaths" GenericArgCount="0" Template="{this}:GetAllScenePaths()">
+				</method>
+			</class>
+		</namespace>
+		<namespace name="UnityEngine">
+			<class name="AssetBundleManifest" Baned="true"/>
+			<class name="AssetBundleCreateRequest" Baned="true"/>
+			<class name="AssetBundleRequest" Baned="true"/>
+		</namespace>
+	</assembly>
+</meta>

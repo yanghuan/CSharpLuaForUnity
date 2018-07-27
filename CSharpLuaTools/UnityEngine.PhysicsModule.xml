@@ -163,20 +163,20 @@
 					<arg type="UnityEngine.Ray"/>
 				</method>
 				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast1({0}, {1})">
-					<arg type="UnityEngine.Ray"/>
-					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
 				</method>
 				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast2({0}, {1})">
-					<arg type="UnityEngine.Vector3"/>
-					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
 				</method>
 				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast3({0}, {1})">
 					<arg type="UnityEngine.Ray"/>
 					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
 				</method>
 				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast4({0}, {1}, {2})">
-					<arg type="UnityEngine.Ray"/>
-					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
 					<arg type="System.Single"/>
 				</method>
 				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast5({0}, {1}, {2})">
@@ -190,8 +190,8 @@
 					<arg type="System.Int32"/>
 				</method>
 				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast7({0}, {1}, {2})">
-					<arg type="UnityEngine.Vector3"/>
-					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
 					<arg type="System.Single"/>
 				</method>
 				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast8({0}, {1}, {2}, {3})">
@@ -201,26 +201,26 @@
 					<arg type="System.Int32"/>
 				</method>
 				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast9({0}, {1}, {2}, {3})">
-					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
 					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
 					<arg type="System.Single"/>
-					<arg type="System.Int32"/>
 				</method>
 				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast10({0}, {1}, {2}, {3})">
-					<arg type="UnityEngine.Vector3"/>
-					<arg type="UnityEngine.Vector3"/>
-					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
-					<arg type="System.Single"/>
-				</method>
-				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast11({0}, {1}, {2}, {3})">
 					<arg type="UnityEngine.Ray"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
 					<arg type="UnityEngine.QueryTriggerInteraction"/>
 				</method>
-				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast12({0}, {1}, {2}, {3}, {4})">
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast11({0}, {1}, {2}, {3})">
 					<arg type="UnityEngine.Ray"/>
 					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+				</method>
+				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast12({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
 					<arg type="UnityEngine.QueryTriggerInteraction"/>
@@ -233,8 +233,8 @@
 					<arg type="System.Int32"/>
 				</method>
 				<method name="Raycast" GenericArgCount="0" Template="UnityEngine.Physics.Raycast14({0}, {1}, {2}, {3}, {4})">
-					<arg type="UnityEngine.Vector3"/>
-					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
 					<arg type="UnityEngine.QueryTriggerInteraction"/>
@@ -251,34 +251,34 @@
 					<arg type="UnityEngine.Ray"/>
 				</method>
 				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll1({0}, {1})">
-					<arg type="UnityEngine.Vector3"/>
-					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Ray"/>
+					<arg type="System.Single"/>
 				</method>
 				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll2({0}, {1})">
-					<arg type="UnityEngine.Ray"/>
-					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
 				</method>
 				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll3({0}, {1}, {2})">
-					<arg type="UnityEngine.Vector3"/>
-					<arg type="UnityEngine.Vector3"/>
-					<arg type="System.Single"/>
-				</method>
-				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll4({0}, {1}, {2})">
 					<arg type="UnityEngine.Ray"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
 				</method>
-				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll5({0}, {1}, {2}, {3})">
+				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll4({0}, {1}, {2})">
 					<arg type="UnityEngine.Vector3"/>
 					<arg type="UnityEngine.Vector3"/>
 					<arg type="System.Single"/>
-					<arg type="System.Int32"/>
 				</method>
-				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll6({0}, {1}, {2}, {3})">
+				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll5({0}, {1}, {2}, {3})">
 					<arg type="UnityEngine.Ray"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
 					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll6({0}, {1}, {2}, {3})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
 				</method>
 				<method name="RaycastAll" GenericArgCount="0" Template="UnityEngine.Physics.RaycastAll7({0}, {1}, {2}, {3}, {4})">
 					<arg type="UnityEngine.Vector3"/>
@@ -292,40 +292,40 @@
 					<arg type="UnityEngine.RaycastHit[]"/>
 				</method>
 				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc1({0}, {1}, {2})">
-					<arg type="UnityEngine.Vector3"/>
-					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Ray"/>
 					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
 				</method>
 				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc2({0}, {1}, {2})">
-					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
 					<arg type="UnityEngine.RaycastHit[]"/>
-					<arg type="System.Single"/>
 				</method>
 				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc3({0}, {1}, {2}, {3})">
-					<arg type="UnityEngine.Vector3"/>
-					<arg type="UnityEngine.Vector3"/>
-					<arg type="UnityEngine.RaycastHit[]"/>
-					<arg type="System.Single"/>
-				</method>
-				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc4({0}, {1}, {2}, {3})">
 					<arg type="UnityEngine.Ray"/>
 					<arg type="UnityEngine.RaycastHit[]"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
 				</method>
-				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc5({0}, {1}, {2}, {3}, {4})">
+				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc4({0}, {1}, {2}, {3})">
 					<arg type="UnityEngine.Vector3"/>
 					<arg type="UnityEngine.Vector3"/>
 					<arg type="UnityEngine.RaycastHit[]"/>
 					<arg type="System.Single"/>
-					<arg type="System.Int32"/>
 				</method>
-				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc6({0}, {1}, {2}, {3}, {4})">
+				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc5({0}, {1}, {2}, {3}, {4})">
 					<arg type="UnityEngine.Ray"/>
 					<arg type="UnityEngine.RaycastHit[]"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
 					<arg type="UnityEngine.QueryTriggerInteraction"/>
+				</method>
+				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc6({0}, {1}, {2}, {3}, {4})">
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit[]"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
 				</method>
 				<method name="RaycastNonAlloc" GenericArgCount="0" Template="UnityEngine.Physics.RaycastNonAlloc7({0}, {1}, {2}, {3}, {4}, {5})">
 					<arg type="UnityEngine.Vector3"/>
@@ -481,18 +481,18 @@
 					<arg type="UnityEngine.Vector3"/>
 					<arg type="System.Single"/>
 					<arg type="UnityEngine.Vector3"/>
-					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
 				</method>
 				<method name="CapsuleCast" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCast6({0}, {1}, {2}, {3}, {4}, {5}, {6})">
 					<arg type="UnityEngine.Vector3"/>
 					<arg type="UnityEngine.Vector3"/>
 					<arg type="System.Single"/>
 					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
-					<arg type="UnityEngine.QueryTriggerInteraction"/>
 				</method>
 				<method name="CapsuleCast" GenericArgCount="0" Template="UnityEngine.Physics.CapsuleCast7({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7})">
 					<arg type="UnityEngine.Vector3"/>
@@ -519,10 +519,10 @@
 					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
 				</method>
 				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast3({0}, {1}, {2}, {3})">
-					<arg type="UnityEngine.Ray"/>
+					<arg type="UnityEngine.Vector3"/>
 					<arg type="System.Single"/>
+					<arg type="UnityEngine.Vector3"/>
 					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
-					<arg type="System.Single"/>
 				</method>
 				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast4({0}, {1}, {2}, {3})">
 					<arg type="UnityEngine.Ray"/>
@@ -531,10 +531,10 @@
 					<arg type="System.Int32"/>
 				</method>
 				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast5({0}, {1}, {2}, {3})">
-					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.Ray"/>
 					<arg type="System.Single"/>
-					<arg type="UnityEngine.Vector3"/>
 					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
+					<arg type="System.Single"/>
 				</method>
 				<method name="SphereCast" GenericArgCount="0" Template="UnityEngine.Physics.SphereCast6({0}, {1}, {2}, {3}, {4})">
 					<arg type="UnityEngine.Vector3"/>
@@ -979,19 +979,19 @@
 					<arg type="UnityEngine.Vector3"/>
 					<arg type="UnityEngine.Vector3"/>
 					<arg type="UnityEngine.Vector3"/>
-					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
 					<arg type="UnityEngine.Quaternion"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
+					<arg type="UnityEngine.QueryTriggerInteraction"/>
 				</method>
 				<method name="BoxCast" GenericArgCount="0" Template="UnityEngine.Physics.BoxCast8({0}, {1}, {2}, {3}, {4}, {5}, {6})">
 					<arg type="UnityEngine.Vector3"/>
 					<arg type="UnityEngine.Vector3"/>
 					<arg type="UnityEngine.Vector3"/>
+					<arg type="UnityEngine.RaycastHit&amp;amp;"/>
 					<arg type="UnityEngine.Quaternion"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
-					<arg type="UnityEngine.QueryTriggerInteraction"/>
 				</method>
 				<method name="BoxCast" GenericArgCount="0" Template="UnityEngine.Physics.BoxCast9({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7})">
 					<arg type="UnityEngine.Vector3"/>

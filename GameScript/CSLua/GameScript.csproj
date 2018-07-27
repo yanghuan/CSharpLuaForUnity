@@ -37,9 +37,6 @@
     <Reference Include="Assembly-CSharp">
       <HintPath>..\..\Library\ScriptAssemblies\Assembly-CSharp.dll</HintPath>
     </Reference>
-    <Reference Include="Attributes">
-      <HintPath>..\..\Library\ScriptAssemblies\Attributes.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="UnityEngine">
@@ -211,21 +208,21 @@
 IF "$(ConfigurationName)" == "CSharp" goto CSharp
 
 :Lua
-del  /s/q "..\..\..\..\Assets\Lua\CompiledScripts\*.lua"
+del  /s/q "$(SolutionDir)..\Assets\Lua\CompiledScripts\*.lua"
 
 dotnet $(SolutionDir)../CSharpLuaTools/CSharp.lua/CSharp.lua.Launcher.dll  -s "$(SolutionDir)/CSLua" -d "$(SolutionDir)../Assets/Lua/CompiledScripts" -l "$(SolutionDir)\LuaBridge\bin\Debug\LuaBridge.dll;$(SolutionDir)\UnityEngine\UnityEngine.CoreModule.dll;$(SolutionDir)\UnityEngine\UnityEngine.dll;$(SolutionDir)\UnityEngine\UnityEngine.AudioModule.dll;$(SolutionDir)\GUISystem\UnityEngine.UI.dll;$(SolutionDir)\UnityEngine\UnityEngine.UIModule.dll;$(SolutionDir)\UnityEngine\UnityEngine.JSONSerializeModule.dll;$(SolutionDir)\UnityEngine\UnityEngine.UnityWebRequestWWWModule.dll;$(SolutionDir)..\Library\ScriptAssemblies\Assembly-CSharp.dll" -m "$(SolutionDir)/../CSharpLuaTools/UnityEngine.xml;$(SolutionDir)/../CSharpLuaTools/Assembly-CSharp.xml;$(SolutionDir)/../CSharpLuaTools/Assembly-CSharp-Editor.xml;$(SolutionDir)/../CSharpLuaTools/Debugger.xml;$(SolutionDir)/../CSharpLuaTools/LuaBridge.xml;$(SolutionDir)/../CSharpLuaTools/LuaByteBuffer.xml;$(SolutionDir)/../CSharpLuaTools/UnityEngine.AnimationModule.xml;$(SolutionDir)/../CSharpLuaTools/UnityEngine.AudioModule.xml;$(SolutionDir)/../CSharpLuaTools/UnityEngine.CoreModule.xml;$(SolutionDir)/../CSharpLuaTools/UnityEngine.ParticleSystemModule.xml;$(SolutionDir)/../CSharpLuaTools/UnityEngine.PhysicsModule.xml;$(SolutionDir)/../CSharpLuaTools/UnityEngine.UI.xml;$(SolutionDir)/../CSharpLuaTools/UnityEngine.UIModule.xml;$(SolutionDir)/../CSharpLuaTools/UnityEngine.UnityWebRequestWWWModule.xml;$(SolutionDir)/../CSharpLuaTools/UnityEngine.UI.xml" -c -a "CSLua.DepAttribute;CSLua.RpcCallAttribute;CSLua.RpcRecvAttribute"
 
-copy /y $(SolutionDir)RunFromLua.cs "..\..\..\..\Assets\BaseScripts\CSharpLua\SettingRuntimeType.cs"
+copy /y $(SolutionDir)RunFromLua.cs "$(SolutionDir)..\Assets\BaseScripts\CSharpLua\SettingRuntimeType.cs"
 echo Compile All GameScript to Lua Completed
 goto Exit
 
 :CSharp
 
-copy /y $(SolutionDir)RunFromCSharp.cs ..\..\..\..\Assets\BaseScripts\CSharpLua\SettingRuntimeType.cs
-del ..\..\..\..\Assets\CSharp\*.* /f/q
-del ..\..\..\..\Assets\CSharp\*.* /f/q/a:h
-copy /y $(SolutionDir)CSLua\bin\CSharp\GameScript.* ..\..\..\..\Assets\CSharp
-copy /y $(SolutionDir)CSLua\bin\CSharp\LuaBridge.* ..\..\..\..\Assets\CSharp
+copy /y $(SolutionDir)RunFromCSharp.cs $(SolutionDir)..\Assets\BaseScripts\CSharpLua\SettingRuntimeType.cs
+del $(SolutionDir)..\Assets\CSharp\*.* /f/q
+del $(SolutionDir)..\Assets\CSharp\*.* /f/q/a:h
+copy /y $(SolutionDir)CSLua\bin\CSharp\GameScript.*  $(SolutionDir)..\Assets\CSharp
+copy /y $(SolutionDir)CSLua\bin\CSharp\LuaBridge.*  $(SolutionDir)..\Assets\CSharp
 
 echo Compile All GameScript to CSharp Completed
 goto Exit

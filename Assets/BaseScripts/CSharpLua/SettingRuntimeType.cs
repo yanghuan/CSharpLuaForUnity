@@ -7,7 +7,7 @@ namespace CSharpLua
 {
     public static partial class Settings
     {
-        public const bool kIsRunFromLua = true;
+        public const bool kIsRunFromLua = false;
     }
 }
 

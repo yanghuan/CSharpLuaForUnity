@@ -208,8 +208,8 @@ public static class CustomSettings
     // 需要强制禁用的类成员
     public static HashSet<MemberInfo> banedMetaList = new HashSet<MemberInfo>()
     {
-        ReflectionTools.RTGetMethod(typeof(MonoBehaviour), "StartCoroutine", new Type[]{typeof(System.String) }),
-        ReflectionTools.RTGetMethod(typeof(MonoBehaviour), "StartCoroutine", new Type[]{typeof(System.String),typeof(System.Object) }),
+        typeof(MonoBehaviour).GetMethod("StartCoroutine", new Type[]{typeof(System.String) }),
+        typeof(MonoBehaviour).GetMethod("StartCoroutine", new Type[]{typeof(System.String),typeof(System.Object) }),
     };
 
     public static List<Type> dynamicList = new List<Type>()

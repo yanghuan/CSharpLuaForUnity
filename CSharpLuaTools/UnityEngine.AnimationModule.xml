@@ -182,6 +182,9 @@
 				<method name="GetCurrentAnimatorClipInfoCount" GenericArgCount="0" Template="{this}:GetCurrentAnimatorClipInfoCount({0})">
 					<arg type="System.Int32"/>
 				</method>
+				<method name="GetNextAnimatorClipInfoCount" GenericArgCount="0" Template="{this}:GetNextAnimatorClipInfoCount({0})">
+					<arg type="System.Int32"/>
+				</method>
 				<method name="GetCurrentAnimatorClipInfo" GenericArgCount="0" Template="{this}:GetCurrentAnimatorClipInfo0({0})">
 					<arg type="System.Int32"/>
 				</method>
@@ -190,9 +193,6 @@
 					<arg type="System.Collections.Generic.List^1">
 						<arg type="UnityEngine.AnimatorClipInfo"/>
 					</arg>
-				</method>
-				<method name="GetNextAnimatorClipInfoCount" GenericArgCount="0" Template="{this}:GetNextAnimatorClipInfoCount({0})">
-					<arg type="System.Int32"/>
 				</method>
 				<method name="GetNextAnimatorClipInfo" GenericArgCount="0" Template="{this}:GetNextAnimatorClipInfo0({0})">
 					<arg type="System.Int32"/>
@@ -230,11 +230,11 @@
 					<arg type="System.Boolean"/>
 				</method>
 				<method name="CrossFadeInFixedTime" GenericArgCount="0" Template="{this}:CrossFadeInFixedTime0({0}, {1})">
-					<arg type="System.Int32"/>
+					<arg type="System.String"/>
 					<arg type="System.Single"/>
 				</method>
 				<method name="CrossFadeInFixedTime" GenericArgCount="0" Template="{this}:CrossFadeInFixedTime1({0}, {1})">
-					<arg type="System.String"/>
+					<arg type="System.Int32"/>
 					<arg type="System.Single"/>
 				</method>
 				<method name="CrossFadeInFixedTime" GenericArgCount="0" Template="{this}:CrossFadeInFixedTime2({0}, {1}, {2})">
@@ -248,37 +248,37 @@
 					<arg type="System.Int32"/>
 				</method>
 				<method name="CrossFadeInFixedTime" GenericArgCount="0" Template="{this}:CrossFadeInFixedTime4({0}, {1}, {2}, {3})">
-					<arg type="System.Int32"/>
-					<arg type="System.Single"/>
-					<arg type="System.Int32"/>
-					<arg type="System.Single"/>
-				</method>
-				<method name="CrossFadeInFixedTime" GenericArgCount="0" Template="{this}:CrossFadeInFixedTime5({0}, {1}, {2}, {3})">
 					<arg type="System.String"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
 					<arg type="System.Single"/>
 				</method>
-				<method name="CrossFadeInFixedTime" GenericArgCount="0" Template="{this}:CrossFadeInFixedTime6({0}, {1}, {2}, {3}, {4})">
+				<method name="CrossFadeInFixedTime" GenericArgCount="0" Template="{this}:CrossFadeInFixedTime5({0}, {1}, {2}, {3})">
 					<arg type="System.Int32"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="CrossFadeInFixedTime" GenericArgCount="0" Template="{this}:CrossFadeInFixedTime6({0}, {1}, {2}, {3}, {4})">
+					<arg type="System.String"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
 					<arg type="System.Single"/>
 					<arg type="System.Single"/>
 				</method>
 				<method name="CrossFadeInFixedTime" GenericArgCount="0" Template="{this}:CrossFadeInFixedTime7({0}, {1}, {2}, {3}, {4})">
-					<arg type="System.String"/>
+					<arg type="System.Int32"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
 					<arg type="System.Single"/>
 					<arg type="System.Single"/>
 				</method>
 				<method name="CrossFade" GenericArgCount="0" Template="{this}:CrossFade0({0}, {1})">
-					<arg type="System.Int32"/>
+					<arg type="System.String"/>
 					<arg type="System.Single"/>
 				</method>
 				<method name="CrossFade" GenericArgCount="0" Template="{this}:CrossFade1({0}, {1})">
-					<arg type="System.String"/>
+					<arg type="System.Int32"/>
 					<arg type="System.Single"/>
 				</method>
 				<method name="CrossFade" GenericArgCount="0" Template="{this}:CrossFade2({0}, {1}, {2})">
@@ -292,26 +292,26 @@
 					<arg type="System.Int32"/>
 				</method>
 				<method name="CrossFade" GenericArgCount="0" Template="{this}:CrossFade4({0}, {1}, {2}, {3})">
-					<arg type="System.Int32"/>
-					<arg type="System.Single"/>
-					<arg type="System.Int32"/>
-					<arg type="System.Single"/>
-				</method>
-				<method name="CrossFade" GenericArgCount="0" Template="{this}:CrossFade5({0}, {1}, {2}, {3})">
 					<arg type="System.String"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
 					<arg type="System.Single"/>
 				</method>
-				<method name="CrossFade" GenericArgCount="0" Template="{this}:CrossFade6({0}, {1}, {2}, {3}, {4})">
+				<method name="CrossFade" GenericArgCount="0" Template="{this}:CrossFade5({0}, {1}, {2}, {3})">
 					<arg type="System.Int32"/>
+					<arg type="System.Single"/>
+					<arg type="System.Int32"/>
+					<arg type="System.Single"/>
+				</method>
+				<method name="CrossFade" GenericArgCount="0" Template="{this}:CrossFade6({0}, {1}, {2}, {3}, {4})">
+					<arg type="System.String"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
 					<arg type="System.Single"/>
 					<arg type="System.Single"/>
 				</method>
 				<method name="CrossFade" GenericArgCount="0" Template="{this}:CrossFade7({0}, {1}, {2}, {3}, {4})">
-					<arg type="System.String"/>
+					<arg type="System.Int32"/>
 					<arg type="System.Single"/>
 					<arg type="System.Int32"/>
 					<arg type="System.Single"/>
@@ -516,6 +516,9 @@
 				</method>
 			</class>
 			<class name="AnimationClip">
+				<method name="AddEvent" GenericArgCount="0" Template="{this}:AddEvent({0})">
+					<arg type="UnityEngine.AnimationEvent"/>
+				</method>
 				<method name="SampleAnimation" GenericArgCount="0" Template="{this}:SampleAnimation({0}, {1})">
 					<arg type="UnityEngine.GameObject"/>
 					<arg type="System.Single"/>
@@ -529,9 +532,6 @@
 				<method name="EnsureQuaternionContinuity" GenericArgCount="0" Template="{this}:EnsureQuaternionContinuity()">
 				</method>
 				<method name="ClearCurves" GenericArgCount="0" Template="{this}:ClearCurves()">
-				</method>
-				<method name="AddEvent" GenericArgCount="0" Template="{this}:AddEvent({0})">
-					<arg type="UnityEngine.AnimationEvent"/>
 				</method>
 			</class>
 			<class name="AnimationState">
@@ -549,19 +549,19 @@
 		</namespace>
 		<namespace name="UnityEngine">
 			<class name="AnimationEvent" Baned="true"/>
+			<class name="SharedBetweenAnimatorsAttribute" Baned="true"/>
+			<class name="StateMachineBehaviour" Baned="true"/>
 			<class name="AnimatorControllerParameter" Baned="true"/>
 			<class name="AnimationClipPair" Baned="true"/>
 			<class name="AnimatorOverrideController" Baned="true"/>
 			<class name="AnimatorUtility" Baned="true"/>
 			<class name="Avatar" Baned="true"/>
-			<class name="HumanTrait" Baned="true"/>
 			<class name="AvatarBuilder" Baned="true"/>
 			<class name="AvatarMask" Baned="true"/>
 			<class name="HumanPoseHandler" Baned="true"/>
+			<class name="HumanTrait" Baned="true"/>
 			<class name="Motion" Baned="true"/>
 			<class name="RuntimeAnimatorController" Baned="true"/>
-			<class name="SharedBetweenAnimatorsAttribute" Baned="true"/>
-			<class name="StateMachineBehaviour" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEditorInternal">
 			<class name="Transition" Baned="true"/>
@@ -576,7 +576,12 @@
 			<class name="AnimationPlayableUtilities" Baned="true"/>
 		</namespace>
 		<namespace name="UnityEngine.Animations">
+			<class name="AimConstraint" Baned="true"/>
 			<class name="AnimationPlayableExtensions" Baned="true"/>
+			<class name="PositionConstraint" Baned="true"/>
+			<class name="RotationConstraint" Baned="true"/>
+			<class name="ScaleConstraint" Baned="true"/>
+			<class name="ParentConstraint" Baned="true"/>
 		</namespace>
 	</assembly>
 </meta>

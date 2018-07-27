@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-public class LuaInterface_LuaMethodWrap
+internal class LuaInterface_LuaMethodWrap
 {
 	public static void Register(LuaState L)
 	{

@@ -320,6 +320,8 @@
 				</method>
 				<method name="SetMaterialDirty" GenericArgCount="0" Template="{this}:SetMaterialDirty()">
 				</method>
+				<method name="OnCullingChanged" GenericArgCount="0" Template="{this}:OnCullingChanged()">
+				</method>
 				<method name="Rebuild" GenericArgCount="0" Template="{this}:Rebuild({0})">
 					<arg type="UnityEngine.UI.CanvasUpdate"/>
 				</method>

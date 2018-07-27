@@ -65,7 +65,7 @@ namespace CSharpLua
                 var dot = funcName.LastIndexOf('.');
                 var methodName = funcName.Substring(dot + 1);
                 var className = funcName.Substring(0, dot);
-                var t = ReflectionTools.GetType(className);
+                var t = Type.GetType(className + ",GameScript");
                 if (t != null)
                 {
                     var method = t.GetMethod(methodName);

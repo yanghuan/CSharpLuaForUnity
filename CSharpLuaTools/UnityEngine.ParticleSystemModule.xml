@@ -76,6 +76,19 @@
 					<arg type="UnityEngine.ParticleSystem+EmitParams"/>
 					<arg type="System.Int32"/>
 				</method>
+				<method name="TriggerSubEmitter" GenericArgCount="0" Template="{this}:TriggerSubEmitter0({0})">
+					<arg type="System.Int32"/>
+				</method>
+				<method name="TriggerSubEmitter" GenericArgCount="0" Template="{this}:TriggerSubEmitter1({0}, {1})">
+					<arg type="System.Int32"/>
+					<arg type="UnityEngine.ParticleSystem+Particle&amp;amp;"/>
+				</method>
+				<method name="TriggerSubEmitter" GenericArgCount="0" Template="{this}:TriggerSubEmitter2({0}, {1})">
+					<arg type="System.Int32"/>
+					<arg type="System.Collections.Generic.List^1">
+						<arg type="UnityEngine.ParticleSystem+Particle"/>
+					</arg>
+				</method>
 			</class>
 		</namespace>
 		<namespace name="UnityEngine">

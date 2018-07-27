@@ -181,12 +181,7 @@
 			<class name="ReflectionTools" Baned="true"/>
 			<class name="LuaBinder" Baned="true"/>
 			<class name="LuaConst" Baned="true"/>
-			<class name="LuaInterface_EventObjectWrap" Baned="true"/>
-			<class name="LuaInterface_LuaConstructorWrap" Baned="true"/>
-			<class name="LuaInterface_LuaFieldWrap" Baned="true"/>
-			<class name="LuaInterface_LuaMethodWrap" Baned="true"/>
 			<class name="LuaInterface_LuaOutWrap" Baned="true"/>
-			<class name="LuaInterface_LuaPropertyWrap" Baned="true"/>
 			<class name="System_ArrayWrap" Baned="true"/>
 			<class name="System_Collections_Generic_Dictionary_KeyCollectionWrap" Baned="true"/>
 			<class name="System_Collections_Generic_Dictionary_ValueCollectionWrap" Baned="true"/>

@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-public class LuaInterface_LuaFieldWrap
+internal class LuaInterface_LuaFieldWrap
 {
 	public static void Register(LuaState L)
 	{

@@ -17,6 +17,7 @@
 		</namespace>
 		<namespace name="CSharpLua">
 			<class name="Compiler" Baned="true"/>
+			<class name="EditorQuitHandler" Baned="true"/>
 		</namespace>
 		<namespace name="">
 			<class name="CustomSettings" Baned="true"/>

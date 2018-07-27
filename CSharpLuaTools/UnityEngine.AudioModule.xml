@@ -127,7 +127,6 @@
 		</namespace>
 		<namespace name="UnityEngine">
 			<class name="AudioSettings" Baned="true"/>
-			<class name="AudioBehaviour" Baned="true"/>
 			<class name="AudioReverbZone" Baned="true"/>
 			<class name="AudioLowPassFilter" Baned="true"/>
 			<class name="AudioHighPassFilter" Baned="true"/>
@@ -144,6 +143,9 @@
 			<class name="AudioMixer" Baned="true"/>
 			<class name="AudioMixerSnapshot" Baned="true"/>
 			<class name="AudioMixerGroup" Baned="true"/>
+		</namespace>
+		<namespace name="UnityEngine.Experimental.Audio">
+			<class name="AudioSampleProvider" Baned="true"/>
 		</namespace>
 	</assembly>
 </meta>

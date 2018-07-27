@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace CSLua
 {
-    public sealed class TestCoroutine
+    public sealed class TestCoroutine 
     {
         IEnumerator _iter;
         Coroutine _coroutine;
