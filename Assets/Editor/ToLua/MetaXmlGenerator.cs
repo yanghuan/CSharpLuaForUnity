@@ -371,7 +371,7 @@ public class MetaXmlGenerator
         var gens = _methods.Values.GroupBy(v => v.method.ReflectedType.IsGenericType && !v.method.ReflectedType.IsGenericTypeDefinition ? v.method.ReflectedType.GetGenericTypeDefinition() : v.method.ReflectedType).Select(v=>v.Key).Concat(_includeClass).GroupBy(v=>v).ToDictionary(v=>v.Key);
 
         // 找到不需要生成的类
-        types.RemoveAll(v => gens.ContainsKey(v) || !v.IsClass);
+        types.RemoveAll(v => gens.ContainsKey(v) || !v.IsClass || ToLuaExport.IsDelegateType(v));
 
         foreach (var namespacePair in types.GroupBy(t => t.Namespace))
         {
@@ -397,9 +397,7 @@ public class MetaXmlGenerator
     }
     void GenerateBanedClass(Type classType)
     {
-        sb.AppendFormat("\t\t\t<class name=\"{0}\" Baned=\"true\">\n", GenClassName(classType));
-
-        sb.AppendFormat("\t\t\t</class>\n");
+        sb.AppendFormat("\t\t\t<class name=\"{0}\" Baned=\"true\"/>\n", GenClassName(classType));
     }
 
     public void Generate(string metaXmlDir)
