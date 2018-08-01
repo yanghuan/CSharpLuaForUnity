@@ -64,7 +64,7 @@ public class MetaXmlGenerator
         }
         else
         {
-            return string.Format("{0}<arg type=\"{1}\"/>\n", head, type.FullName == null ? string.Empty : ReplayXmlString(type.FullName));
+            return string.Format("{0}<arg type=\"{1}\"/>\n", head, type.FullName == null ? ReplayXmlString(type.Name) : ReplayXmlString(type.FullName));
         }
     }
 
@@ -361,6 +361,11 @@ public class MetaXmlGenerator
         File.WriteAllText(metaXmlDir + assembly.GetName().Name + ".xml", sb.ToString(), Encoding.UTF8);
     }
 
+    static bool IsStruct(Type type)
+    {
+        return type.IsValueType && !type.IsEnum && !type.IsPrimitive;
+    }
+
     void GenerateClassSkip(Assembly assembly)
     {
         // 所有public的类
@@ -368,16 +373,18 @@ public class MetaXmlGenerator
         types.RemoveAll(v => _skipClass.Contains(v));
 
         // 所有需要生成的类
-        var gens = _methods.Values.GroupBy(v => v.method.ReflectedType.IsGenericType && !v.method.ReflectedType.IsGenericTypeDefinition ? v.method.ReflectedType.GetGenericTypeDefinition() : v.method.ReflectedType).Select(v=>v.Key).Concat(_includeClass).GroupBy(v=>v).ToDictionary(v=>v.Key);
+        var gens = _methods.Values.GroupBy(v => v.method.ReflectedType.IsGenericType && !v.method.ReflectedType.IsGenericTypeDefinition ? v.method.ReflectedType.GetGenericTypeDefinition() : v.method.ReflectedType).Select(v => v.Key).Concat(_includeClass).GroupBy(v => v).ToDictionary(v => v.Key);
+
+        var impls = CustomSettings.luaImplementList.ToDictionary(v => v);
 
         // 找到不需要生成的类
-        types.RemoveAll(v => gens.ContainsKey(v) || !v.IsClass || ToLuaExport.IsDelegateType(v));
+        types.RemoveAll(v => impls.ContainsKey(v) || gens.ContainsKey(v) || !(v.IsClass || IsStruct(v)) || ToLuaExport.IsDelegateType(v));
 
         foreach (var namespacePair in types.GroupBy(t => t.Namespace))
         {
             var ns = namespacePair.Key;
             sb.AppendFormat("\t\t<namespace name=\"{0}\">\n", ns);
-            foreach(var classTypePair in namespacePair)
+            foreach (var classTypePair in namespacePair)
             {
                 var classType = classTypePair;
                 GenerateBanedClass(classType);
@@ -389,7 +396,7 @@ public class MetaXmlGenerator
     string GenClassName(Type classType)
     {
         var className = classType.Name;
-        if(classType.ReflectedType != null)
+        if (classType.ReflectedType != null)
         {
             return GenClassName(classType.ReflectedType) + "." + className;
         }
@@ -397,7 +404,11 @@ public class MetaXmlGenerator
     }
     void GenerateBanedClass(Type classType)
     {
-        sb.AppendFormat("\t\t\t<class name=\"{0}\" Baned=\"true\"/>\n", GenClassName(classType));
+        var name = GenClassName(classType);
+        if (!name.Contains('<'))
+        {
+            sb.AppendFormat("\t\t\t<class name=\"{0}\" Baned=\"true\"/>\n", name);
+        }
     }
 
     public void Generate(string metaXmlDir)

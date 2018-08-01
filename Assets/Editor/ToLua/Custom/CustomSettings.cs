@@ -200,9 +200,30 @@ public static class CustomSettings
         
     };
 
+
+    // 需要忽略从而不baned的类
     public static List<Type> skipMetaClassList = new List<Type>()
     {
         typeof(LuaByteBuffer),
+    };
+
+    // 在lua里已实现的类型
+    public static List<Type> luaImplementList = new List<Type>()
+    {
+        typeof(UnityEngine.Mathf),
+        typeof(Plane),
+        typeof(LayerMask),
+        typeof(Vector3),
+        typeof(Vector4),
+        typeof(Vector2),
+        typeof(Quaternion),
+        typeof(Ray),
+        typeof(Bounds),
+        typeof(Color),
+        typeof(Color32),
+        typeof(Touch),
+        typeof(RaycastHit),
+        typeof(TouchPhase),
     };
 
     // 需要强制禁用的类成员
