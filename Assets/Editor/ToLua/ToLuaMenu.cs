@@ -37,7 +37,6 @@ using Object = UnityEngine.Object;
 using Debug = UnityEngine.Debug;
 using Debugger = LuaInterface.Debugger;
 using System.Threading;
-using UnityEngine.Events;
 
 [InitializeOnLoad]
 public static class ToLuaMenu
@@ -69,8 +68,7 @@ public static class ToLuaMenu
         typeof(Quaternion),
         typeof(Ray),
         typeof(Bounds),
-        typeof(Color),
-        typeof(Color32),
+        typeof(Color),                                    
         typeof(Touch),
         typeof(RaycastHit),                                 
         typeof(TouchPhase),     
@@ -84,7 +82,7 @@ public static class ToLuaMenu
         typeof(LuaInterface.LuaTable),
         typeof(LuaInterface.LuaThread),
         typeof(LuaInterface.LuaByteBuffer),                 //只是类型标识符
-        //typeof(DelegateFactory),                            //无需导出，导出类支持lua函数转换为委托。如UIEventListener.OnClick(luafunc)
+        typeof(DelegateFactory),                            //无需导出，导出类支持lua函数转换为委托。如UIEventListener.OnClick(luafunc)
     };
 
     //可以导出的内部支持类型
@@ -96,6 +94,7 @@ public static class ToLuaMenu
         typeof(System.Enum),
         typeof(System.Type),
         typeof(System.Collections.IEnumerator),
+        typeof(UnityEngine.Object),
         typeof(LuaInterface.EventObject),
         typeof(LuaInterface.LuaMethod),
         typeof(LuaInterface.LuaProperty),
@@ -104,7 +103,7 @@ public static class ToLuaMenu
     };
 
     private static bool beAutoGen = false;
-    private static bool beCheck = false;        
+    private static bool beCheck = true;        
     static List<BindType> allTypes = new List<BindType>();
 
     static ToLuaMenu()
@@ -356,8 +355,6 @@ public static class ToLuaMenu
             Directory.CreateDirectory(CustomSettings.saveDir);
         }
 
-        MetaXmlGenerator metaXml = new MetaXmlGenerator();
-
         allTypes.Clear();
         BindType[] typeList = CustomSettings.customTypeList;
 
@@ -372,7 +369,6 @@ public static class ToLuaMenu
         for (int i = 0; i < list.Length; i++)
         {
             ToLuaExport.Clear();
-            ToLuaExport.metaXml = metaXml;
             ToLuaExport.className = list[i].name;
             ToLuaExport.type = list[i].type;
             ToLuaExport.isStaticClass = list[i].IsStatic;            
@@ -382,13 +378,6 @@ public static class ToLuaMenu
             ToLuaExport.extendList = list[i].extendList;
             ToLuaExport.Generate(CustomSettings.saveDir);
         }
-
-        foreach(var item in CustomSettings.skipMetaClassList)
-        {
-            metaXml.AddSkipClass(item);
-        }
-
-        metaXml.Generate(CustomSettings.metaXmlDir);
 
         Debug.Log("Generate lua binding files over");
         ToLuaExport.allTypes.Clear();
@@ -418,18 +407,24 @@ public static class ToLuaMenu
                 methods = type.GetMethods(BindingFlags.Instance | binding);
             }
 
-            var argTypes = new List<Type>();
-
             for (int j = 0; j < fields.Length; j++)
             {
                 Type t = fields[j].FieldType;
-                argTypes.Add(t);
+
+                if (ToLuaExport.IsDelegateType(t))
+                {
+                    set.Add(t);
+                }
             }
 
             for (int j = 0; j < props.Length; j++)
             {
                 Type t = props[j].PropertyType;
-                argTypes.Add(t);
+
+                if (ToLuaExport.IsDelegateType(t))
+                {
+                    set.Add(t);
+                }
             }
 
             for (int j = 0; j < methods.Length; j++)
@@ -443,22 +438,18 @@ public static class ToLuaMenu
 
                 ParameterInfo[] pifs = m.GetParameters();
 
-                argTypes.Add(m.ReturnType); 
-
                 for (int k = 0; k < pifs.Length; k++)
                 {
                     Type t = pifs[k].ParameterType;
                     if (t.IsByRef) t = t.GetElementType();
-                    argTypes.Add(t);
+
+                    if (ToLuaExport.IsDelegateType(t))
+                    {
+                        set.Add(t);
+                    }
                 }
             }
-            foreach (var t in argTypes)
-            {
-                if (ToLuaExport.IsDelegateType(t))
-                {
-                    set.Add(t);
-                }
-            }
+
         }
 
         return set;

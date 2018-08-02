@@ -39,7 +39,6 @@ namespace LuaInterface
         public const int RaycastHit = 10;
         public const int Int64 = 11;
         public const int UInt64 = 12;
-        public const int Color32 = 13;
         public const int Max = 64;
 
         private int type;
@@ -76,7 +75,6 @@ namespace LuaInterface
             names[LuaValueType.Quaternion] = "Quaternion";
             names[LuaValueType.Vector2] = "Vector2";
             names[LuaValueType.Color] = "Color";
-            names[LuaValueType.Color32] = "Color32";
             names[LuaValueType.Vector4] = "Vector4";
             names[LuaValueType.Ray] = "Ray";
             names[LuaValueType.Bounds] = "Bounds";

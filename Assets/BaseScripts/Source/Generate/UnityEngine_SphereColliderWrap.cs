@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_SphereColliderWrap
+public class UnityEngine_SphereColliderWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -28,7 +28,7 @@ internal class UnityEngine_SphereColliderWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.SphereCollider();
+				UnityEngine.SphereCollider obj = new UnityEngine.SphereCollider();
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}

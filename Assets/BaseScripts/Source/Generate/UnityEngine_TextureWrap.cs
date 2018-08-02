@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_TextureWrap
+public class UnityEngine_TextureWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -16,10 +16,10 @@ internal class UnityEngine_TextureWrap
 		L.RegFunction("getupdateCount", get_updateCount);
 		L.RegVar("masterTextureLimit", get_masterTextureLimit, set_masterTextureLimit);
 		L.RegFunction("getmasterTextureLimit", get_masterTextureLimit);
-		L.RegFunction("setmasterTextureLimit", set_masterTextureLimitter);
+		L.RegFunction("setmasterTextureLimit", set_masterTextureLimit);
 		L.RegVar("anisotropicFiltering", get_anisotropicFiltering, set_anisotropicFiltering);
 		L.RegFunction("getanisotropicFiltering", get_anisotropicFiltering);
-		L.RegFunction("setanisotropicFiltering", set_anisotropicFilteringter);
+		L.RegFunction("setanisotropicFiltering", set_anisotropicFiltering);
 		L.RegVar("width", get_width, set_width);
 		L.RegFunction("getwidth", get_width);
 		L.RegFunction("setwidth", set_width);
@@ -61,7 +61,7 @@ internal class UnityEngine_TextureWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Texture)ToLua.CheckObject<UnityEngine.Texture>(L, 1);
+			UnityEngine.Texture obj = (UnityEngine.Texture)ToLua.CheckObject<UnityEngine.Texture>(L, 1);
 			obj.IncrementUpdateCount();
 			return 0;
 		}
@@ -94,8 +94,8 @@ internal class UnityEngine_TextureWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Texture)ToLua.CheckObject<UnityEngine.Texture>(L, 1);
-			var o = obj.GetNativeTexturePtr();
+			UnityEngine.Texture obj = (UnityEngine.Texture)ToLua.CheckObject<UnityEngine.Texture>(L, 1);
+			System.IntPtr o = obj.GetNativeTexturePtr();
 			LuaDLL.lua_pushlightuserdata(L, o);
 			return 1;
 		}
@@ -395,41 +395,11 @@ internal class UnityEngine_TextureWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_masterTextureLimitter(IntPtr L)
-	{
-		try
-		{
-			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
-			UnityEngine.Texture.masterTextureLimit = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_anisotropicFiltering(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.AnisotropicFiltering arg0 = (UnityEngine.AnisotropicFiltering)LuaDLL.luaL_checknumber(L, 2);
-			UnityEngine.Texture.anisotropicFiltering = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_anisotropicFilteringter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.AnisotropicFiltering arg0 = (UnityEngine.AnisotropicFiltering)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.Texture.anisotropicFiltering = arg0;
 			return 0;
 		}

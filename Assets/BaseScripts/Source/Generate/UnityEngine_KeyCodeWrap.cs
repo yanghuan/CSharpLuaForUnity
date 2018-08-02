@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_KeyCodeWrap
+public class UnityEngine_KeyCodeWrap
 {
 	public static void Register(LuaState L)
 	{

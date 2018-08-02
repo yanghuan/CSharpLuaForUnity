@@ -2,35 +2,15 @@
 using System;
 using LuaInterface;
 
-internal class LuaInterface_DebuggerWrap
+public class LuaInterface_DebuggerWrap
 {
 	public static void Register(LuaState L)
 	{
 		L.BeginStaticLibs("Debugger");
 		L.RegFunction("Log", Log);
-		L.RegFunction("Log0", Log0);
-		L.RegFunction("Log1", Log1);
-		L.RegFunction("Log2", Log2);
-		L.RegFunction("Log3", Log3);
-		L.RegFunction("Log4", Log4);
-		L.RegFunction("Log5", Log5);
 		L.RegFunction("LogWarning", LogWarning);
-		L.RegFunction("LogWarning0", LogWarning0);
-		L.RegFunction("LogWarning1", LogWarning1);
-		L.RegFunction("LogWarning2", LogWarning2);
-		L.RegFunction("LogWarning3", LogWarning3);
-		L.RegFunction("LogWarning4", LogWarning4);
-		L.RegFunction("LogWarning5", LogWarning5);
 		L.RegFunction("LogError", LogError);
-		L.RegFunction("LogError0", LogError0);
-		L.RegFunction("LogError1", LogError1);
-		L.RegFunction("LogError2", LogError2);
-		L.RegFunction("LogError3", LogError3);
-		L.RegFunction("LogError4", LogError4);
-		L.RegFunction("LogError5", LogError5);
 		L.RegFunction("LogException", LogException);
-		L.RegFunction("LogException0", LogException0);
-		L.RegFunction("LogException1", LogException1);
 		L.RegVar("useLog", get_useLog, set_useLog);
 		L.RegVar("threadStack", get_threadStack, set_threadStack);
 		L.RegVar("logger", get_logger, set_logger);
@@ -46,141 +26,51 @@ internal class LuaInterface_DebuggerWrap
 
 			if (count == 1 && TypeChecker.CheckTypes<string>(L, 1))
 			{
-				return Log0(L);
+				string arg0 = ToLua.ToString(L, 1);
+				LuaInterface.Debugger.Log(arg0);
+				return 0;
 			}
 			else if (count == 1 && TypeChecker.CheckTypes<object>(L, 1))
 			{
-				return Log1(L);
+				object arg0 = ToLua.ToVarObject(L, 1);
+				LuaInterface.Debugger.Log(arg0);
+				return 0;
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<string, object>(L, 1))
 			{
-				return Log2(L);
+				string arg0 = ToLua.ToString(L, 1);
+				object arg1 = ToLua.ToVarObject(L, 2);
+				LuaInterface.Debugger.Log(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<string, object, object>(L, 1))
 			{
-				return Log3(L);
+				string arg0 = ToLua.ToString(L, 1);
+				object arg1 = ToLua.ToVarObject(L, 2);
+				object arg2 = ToLua.ToVarObject(L, 3);
+				LuaInterface.Debugger.Log(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 4 && TypeChecker.CheckTypes<string, object, object, object>(L, 1))
 			{
-				return Log4(L);
+				string arg0 = ToLua.ToString(L, 1);
+				object arg1 = ToLua.ToVarObject(L, 2);
+				object arg2 = ToLua.ToVarObject(L, 3);
+				object arg3 = ToLua.ToVarObject(L, 4);
+				LuaInterface.Debugger.Log(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else if (TypeChecker.CheckTypes<string>(L, 1) && TypeChecker.CheckParamsType<object>(L, 2, count - 1))
 			{
-				return Log5(L);
+				string arg0 = ToLua.ToString(L, 1);
+				object[] arg1 = ToLua.ToParamsObject(L, 2, count - 1);
+				LuaInterface.Debugger.Log(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaInterface.Debugger.Log");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Log0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			LuaInterface.Debugger.Log(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Log1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			object arg0 = ToLua.ToVarObject(L, 1);
-			LuaInterface.Debugger.Log(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Log2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			object arg1 = ToLua.ToVarObject(L, 2);
-			LuaInterface.Debugger.Log(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Log3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			object arg1 = ToLua.ToVarObject(L, 2);
-			object arg2 = ToLua.ToVarObject(L, 3);
-			LuaInterface.Debugger.Log(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Log4(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			object arg1 = ToLua.ToVarObject(L, 2);
-			object arg2 = ToLua.ToVarObject(L, 3);
-			object arg3 = ToLua.ToVarObject(L, 4);
-			LuaInterface.Debugger.Log(arg0, arg1, arg2, arg3);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Log5(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			object[] arg1 = ToLua.ToParamsObject(L, 2, count - 1);
-			LuaInterface.Debugger.Log(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -197,141 +87,51 @@ internal class LuaInterface_DebuggerWrap
 
 			if (count == 1 && TypeChecker.CheckTypes<string>(L, 1))
 			{
-				return LogWarning0(L);
+				string arg0 = ToLua.ToString(L, 1);
+				LuaInterface.Debugger.LogWarning(arg0);
+				return 0;
 			}
 			else if (count == 1 && TypeChecker.CheckTypes<object>(L, 1))
 			{
-				return LogWarning1(L);
+				object arg0 = ToLua.ToVarObject(L, 1);
+				LuaInterface.Debugger.LogWarning(arg0);
+				return 0;
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<string, object>(L, 1))
 			{
-				return LogWarning2(L);
+				string arg0 = ToLua.ToString(L, 1);
+				object arg1 = ToLua.ToVarObject(L, 2);
+				LuaInterface.Debugger.LogWarning(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<string, object, object>(L, 1))
 			{
-				return LogWarning3(L);
+				string arg0 = ToLua.ToString(L, 1);
+				object arg1 = ToLua.ToVarObject(L, 2);
+				object arg2 = ToLua.ToVarObject(L, 3);
+				LuaInterface.Debugger.LogWarning(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 4 && TypeChecker.CheckTypes<string, object, object, object>(L, 1))
 			{
-				return LogWarning4(L);
+				string arg0 = ToLua.ToString(L, 1);
+				object arg1 = ToLua.ToVarObject(L, 2);
+				object arg2 = ToLua.ToVarObject(L, 3);
+				object arg3 = ToLua.ToVarObject(L, 4);
+				LuaInterface.Debugger.LogWarning(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else if (TypeChecker.CheckTypes<string>(L, 1) && TypeChecker.CheckParamsType<object>(L, 2, count - 1))
 			{
-				return LogWarning5(L);
+				string arg0 = ToLua.ToString(L, 1);
+				object[] arg1 = ToLua.ToParamsObject(L, 2, count - 1);
+				LuaInterface.Debugger.LogWarning(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaInterface.Debugger.LogWarning");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogWarning0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			LuaInterface.Debugger.LogWarning(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogWarning1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			object arg0 = ToLua.ToVarObject(L, 1);
-			LuaInterface.Debugger.LogWarning(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogWarning2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			object arg1 = ToLua.ToVarObject(L, 2);
-			LuaInterface.Debugger.LogWarning(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogWarning3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			object arg1 = ToLua.ToVarObject(L, 2);
-			object arg2 = ToLua.ToVarObject(L, 3);
-			LuaInterface.Debugger.LogWarning(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogWarning4(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			object arg1 = ToLua.ToVarObject(L, 2);
-			object arg2 = ToLua.ToVarObject(L, 3);
-			object arg3 = ToLua.ToVarObject(L, 4);
-			LuaInterface.Debugger.LogWarning(arg0, arg1, arg2, arg3);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogWarning5(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			object[] arg1 = ToLua.ToParamsObject(L, 2, count - 1);
-			LuaInterface.Debugger.LogWarning(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -348,141 +148,51 @@ internal class LuaInterface_DebuggerWrap
 
 			if (count == 1 && TypeChecker.CheckTypes<string>(L, 1))
 			{
-				return LogError0(L);
+				string arg0 = ToLua.ToString(L, 1);
+				LuaInterface.Debugger.LogError(arg0);
+				return 0;
 			}
 			else if (count == 1 && TypeChecker.CheckTypes<object>(L, 1))
 			{
-				return LogError1(L);
+				object arg0 = ToLua.ToVarObject(L, 1);
+				LuaInterface.Debugger.LogError(arg0);
+				return 0;
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<string, object>(L, 1))
 			{
-				return LogError2(L);
+				string arg0 = ToLua.ToString(L, 1);
+				object arg1 = ToLua.ToVarObject(L, 2);
+				LuaInterface.Debugger.LogError(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<string, object, object>(L, 1))
 			{
-				return LogError3(L);
+				string arg0 = ToLua.ToString(L, 1);
+				object arg1 = ToLua.ToVarObject(L, 2);
+				object arg2 = ToLua.ToVarObject(L, 3);
+				LuaInterface.Debugger.LogError(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 4 && TypeChecker.CheckTypes<string, object, object, object>(L, 1))
 			{
-				return LogError4(L);
+				string arg0 = ToLua.ToString(L, 1);
+				object arg1 = ToLua.ToVarObject(L, 2);
+				object arg2 = ToLua.ToVarObject(L, 3);
+				object arg3 = ToLua.ToVarObject(L, 4);
+				LuaInterface.Debugger.LogError(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else if (TypeChecker.CheckTypes<string>(L, 1) && TypeChecker.CheckParamsType<object>(L, 2, count - 1))
 			{
-				return LogError5(L);
+				string arg0 = ToLua.ToString(L, 1);
+				object[] arg1 = ToLua.ToParamsObject(L, 2, count - 1);
+				LuaInterface.Debugger.LogError(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaInterface.Debugger.LogError");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogError0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			LuaInterface.Debugger.LogError(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogError1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			object arg0 = ToLua.ToVarObject(L, 1);
-			LuaInterface.Debugger.LogError(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogError2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			object arg1 = ToLua.ToVarObject(L, 2);
-			LuaInterface.Debugger.LogError(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogError3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			object arg1 = ToLua.ToVarObject(L, 2);
-			object arg2 = ToLua.ToVarObject(L, 3);
-			LuaInterface.Debugger.LogError(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogError4(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			object arg1 = ToLua.ToVarObject(L, 2);
-			object arg2 = ToLua.ToVarObject(L, 3);
-			object arg3 = ToLua.ToVarObject(L, 4);
-			LuaInterface.Debugger.LogError(arg0, arg1, arg2, arg3);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogError5(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			object[] arg1 = ToLua.ToParamsObject(L, 2, count - 1);
-			LuaInterface.Debugger.LogError(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -499,51 +209,21 @@ internal class LuaInterface_DebuggerWrap
 
 			if (count == 1)
 			{
-				return LogException0(L);
+				System.Exception arg0 = (System.Exception)ToLua.CheckObject<System.Exception>(L, 1);
+				LuaInterface.Debugger.LogException(arg0);
+				return 0;
 			}
 			else if (count == 2)
 			{
-				return LogException1(L);
+				string arg0 = ToLua.CheckString(L, 1);
+				System.Exception arg1 = (System.Exception)ToLua.CheckObject<System.Exception>(L, 2);
+				LuaInterface.Debugger.LogException(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: LuaInterface.Debugger.LogException");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogException0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			System.Exception arg0 = (System.Exception)ToLua.ToObject(L, 1);
-			LuaInterface.Debugger.LogException(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LogException1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			System.Exception arg1 = (System.Exception)ToLua.ToObject(L, 2);
-			LuaInterface.Debugger.LogException(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{

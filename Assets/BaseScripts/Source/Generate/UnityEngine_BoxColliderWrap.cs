@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_BoxColliderWrap
+public class UnityEngine_BoxColliderWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -28,7 +28,7 @@ internal class UnityEngine_BoxColliderWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.BoxCollider();
+				UnityEngine.BoxCollider obj = new UnityEngine.BoxCollider();
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}

@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_AsyncOperationWrap
+public class UnityEngine_AsyncOperationWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -32,7 +32,7 @@ internal class UnityEngine_AsyncOperationWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.AsyncOperation();
+				UnityEngine.AsyncOperation obj = new UnityEngine.AsyncOperation();
 				ToLua.PushObject(L, obj);
 				return 1;
 			}

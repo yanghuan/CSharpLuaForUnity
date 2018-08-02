@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_WaitForEndOfFrameWrap
+public class UnityEngine_WaitForEndOfFrameWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -21,7 +21,7 @@ internal class UnityEngine_WaitForEndOfFrameWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.WaitForEndOfFrame();
+				UnityEngine.WaitForEndOfFrame obj = new UnityEngine.WaitForEndOfFrame();
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}

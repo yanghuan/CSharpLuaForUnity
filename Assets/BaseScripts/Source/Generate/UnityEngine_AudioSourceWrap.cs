@@ -2,14 +2,12 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_AudioSourceWrap
+public class UnityEngine_AudioSourceWrap
 {
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(UnityEngine.AudioSource), typeof(UnityEngine.AudioBehaviour));
 		L.RegFunction("Play", Play);
-		L.RegFunction("Play0", Play0);
-		L.RegFunction("Play1", Play1);
 		L.RegFunction("PlayDelayed", PlayDelayed);
 		L.RegFunction("PlayScheduled", PlayScheduled);
 		L.RegFunction("SetScheduledStartTime", SetScheduledStartTime);
@@ -18,11 +16,7 @@ internal class UnityEngine_AudioSourceWrap
 		L.RegFunction("Pause", Pause);
 		L.RegFunction("UnPause", UnPause);
 		L.RegFunction("PlayOneShot", PlayOneShot);
-		L.RegFunction("PlayOneShot0", PlayOneShot0);
-		L.RegFunction("PlayOneShot1", PlayOneShot1);
 		L.RegFunction("PlayClipAtPoint", PlayClipAtPoint);
-		L.RegFunction("PlayClipAtPoint0", PlayClipAtPoint0);
-		L.RegFunction("PlayClipAtPoint1", PlayClipAtPoint1);
 		L.RegFunction("SetCustomCurve", SetCustomCurve);
 		L.RegFunction("GetCustomCurve", GetCustomCurve);
 		L.RegFunction("GetOutputData", GetOutputData);
@@ -128,7 +122,7 @@ internal class UnityEngine_AudioSourceWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.AudioSource();
+				UnityEngine.AudioSource obj = new UnityEngine.AudioSource();
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}
@@ -152,11 +146,16 @@ internal class UnityEngine_AudioSourceWrap
 
 			if (count == 1)
 			{
-				return Play0(L);
+				UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+				obj.Play();
+				return 0;
 			}
 			else if (count == 2)
 			{
-				return Play1(L);
+				UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+				ulong arg0 = LuaDLL.tolua_checkuint64(L, 2);
+				obj.Play(arg0);
+				return 0;
 			}
 			else
 			{
@@ -170,47 +169,12 @@ internal class UnityEngine_AudioSourceWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Play0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.AudioSource)ToLua.ToObject(L, 1);
-			obj.Play();
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Play1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.AudioSource)ToLua.ToObject(L, 1);
-			ulong arg0 = LuaDLL.tolua_touint64(L, 2);
-			obj.Play(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int PlayDelayed(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 			obj.PlayDelayed(arg0);
 			return 0;
@@ -227,7 +191,7 @@ internal class UnityEngine_AudioSourceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			double arg0 = (double)LuaDLL.luaL_checknumber(L, 2);
 			obj.PlayScheduled(arg0);
 			return 0;
@@ -244,7 +208,7 @@ internal class UnityEngine_AudioSourceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			double arg0 = (double)LuaDLL.luaL_checknumber(L, 2);
 			obj.SetScheduledStartTime(arg0);
 			return 0;
@@ -261,7 +225,7 @@ internal class UnityEngine_AudioSourceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			double arg0 = (double)LuaDLL.luaL_checknumber(L, 2);
 			obj.SetScheduledEndTime(arg0);
 			return 0;
@@ -278,7 +242,7 @@ internal class UnityEngine_AudioSourceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			obj.Stop();
 			return 0;
 		}
@@ -294,7 +258,7 @@ internal class UnityEngine_AudioSourceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			obj.Pause();
 			return 0;
 		}
@@ -310,7 +274,7 @@ internal class UnityEngine_AudioSourceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			obj.UnPause();
 			return 0;
 		}
@@ -329,53 +293,23 @@ internal class UnityEngine_AudioSourceWrap
 
 			if (count == 2)
 			{
-				return PlayOneShot0(L);
+				UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+				UnityEngine.AudioClip arg0 = (UnityEngine.AudioClip)ToLua.CheckObject(L, 2, typeof(UnityEngine.AudioClip));
+				obj.PlayOneShot(arg0);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return PlayOneShot1(L);
+				UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+				UnityEngine.AudioClip arg0 = (UnityEngine.AudioClip)ToLua.CheckObject(L, 2, typeof(UnityEngine.AudioClip));
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				obj.PlayOneShot(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.AudioSource.PlayOneShot");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int PlayOneShot0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.AudioSource)ToLua.ToObject(L, 1);
-			UnityEngine.AudioClip arg0 = (UnityEngine.AudioClip)ToLua.ToObject(L, 2);
-			obj.PlayOneShot(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int PlayOneShot1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.AudioSource)ToLua.ToObject(L, 1);
-			UnityEngine.AudioClip arg0 = (UnityEngine.AudioClip)ToLua.ToObject(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			obj.PlayOneShot(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -392,11 +326,18 @@ internal class UnityEngine_AudioSourceWrap
 
 			if (count == 2)
 			{
-				return PlayClipAtPoint0(L);
+				UnityEngine.AudioClip arg0 = (UnityEngine.AudioClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioClip));
+				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
+				UnityEngine.AudioSource.PlayClipAtPoint(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return PlayClipAtPoint1(L);
+				UnityEngine.AudioClip arg0 = (UnityEngine.AudioClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioClip));
+				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 3);
+				UnityEngine.AudioSource.PlayClipAtPoint(arg0, arg1, arg2);
+				return 0;
 			}
 			else
 			{
@@ -410,49 +351,12 @@ internal class UnityEngine_AudioSourceWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int PlayClipAtPoint0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			UnityEngine.AudioClip arg0 = (UnityEngine.AudioClip)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
-			UnityEngine.AudioSource.PlayClipAtPoint(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int PlayClipAtPoint1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			UnityEngine.AudioClip arg0 = (UnityEngine.AudioClip)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 2);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 3);
-			UnityEngine.AudioSource.PlayClipAtPoint(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int SetCustomCurve(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			UnityEngine.AudioSourceCurveType arg0 = (UnityEngine.AudioSourceCurveType)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.AnimationCurve arg1 = (UnityEngine.AnimationCurve)ToLua.CheckObject(L, 3, typeof(UnityEngine.AnimationCurve));
 			obj.SetCustomCurve(arg0, arg1);
@@ -470,9 +374,9 @@ internal class UnityEngine_AudioSourceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			UnityEngine.AudioSourceCurveType arg0 = (UnityEngine.AudioSourceCurveType)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetCustomCurve(arg0);
+			UnityEngine.AnimationCurve o = obj.GetCustomCurve(arg0);
 			ToLua.PushSealed(L, o);
 			return 1;
 		}
@@ -488,7 +392,7 @@ internal class UnityEngine_AudioSourceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			float[] arg0 = ToLua.CheckNumberArray<float>(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 			obj.GetOutputData(arg0, arg1);
@@ -506,7 +410,7 @@ internal class UnityEngine_AudioSourceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 4);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			float[] arg0 = ToLua.CheckNumberArray<float>(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 			UnityEngine.FFTWindow arg2 = (UnityEngine.FFTWindow)LuaDLL.luaL_checknumber(L, 4);
@@ -525,10 +429,10 @@ internal class UnityEngine_AudioSourceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
-			var o = obj.SetSpatializerFloat(arg0, arg1);
+			bool o = obj.SetSpatializerFloat(arg0, arg1);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -544,10 +448,10 @@ internal class UnityEngine_AudioSourceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			float arg1;
-			var o = obj.GetSpatializerFloat(arg0, out arg1);
+			bool o = obj.GetSpatializerFloat(arg0, out arg1);
 			LuaDLL.lua_pushboolean(L, o);
 			LuaDLL.lua_pushnumber(L, arg1);
 			return 2;
@@ -564,10 +468,10 @@ internal class UnityEngine_AudioSourceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
-			var o = obj.SetAmbisonicDecoderFloat(arg0, arg1);
+			bool o = obj.SetAmbisonicDecoderFloat(arg0, arg1);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -583,10 +487,10 @@ internal class UnityEngine_AudioSourceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
+			UnityEngine.AudioSource obj = (UnityEngine.AudioSource)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioSource));
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			float arg1;
-			var o = obj.GetAmbisonicDecoderFloat(arg0, out arg1);
+			bool o = obj.GetAmbisonicDecoderFloat(arg0, out arg1);
 			LuaDLL.lua_pushboolean(L, o);
 			LuaDLL.lua_pushnumber(L, arg1);
 			return 2;

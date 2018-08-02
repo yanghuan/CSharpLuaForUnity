@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_ParticleSystemWrap
+public class UnityEngine_ParticleSystemWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -12,33 +12,13 @@ internal class UnityEngine_ParticleSystemWrap
 		L.RegFunction("SetCustomParticleData", SetCustomParticleData);
 		L.RegFunction("GetCustomParticleData", GetCustomParticleData);
 		L.RegFunction("Simulate", Simulate);
-		L.RegFunction("Simulate0", Simulate0);
-		L.RegFunction("Simulate1", Simulate1);
-		L.RegFunction("Simulate2", Simulate2);
-		L.RegFunction("Simulate3", Simulate3);
 		L.RegFunction("Play", Play);
-		L.RegFunction("Play0", Play0);
-		L.RegFunction("Play1", Play1);
 		L.RegFunction("Pause", Pause);
-		L.RegFunction("Pause0", Pause0);
-		L.RegFunction("Pause1", Pause1);
 		L.RegFunction("Stop", Stop);
-		L.RegFunction("Stop0", Stop0);
-		L.RegFunction("Stop1", Stop1);
-		L.RegFunction("Stop2", Stop2);
 		L.RegFunction("Clear", Clear);
-		L.RegFunction("Clear0", Clear0);
-		L.RegFunction("Clear1", Clear1);
 		L.RegFunction("IsAlive", IsAlive);
-		L.RegFunction("IsAlive0", IsAlive0);
-		L.RegFunction("IsAlive1", IsAlive1);
 		L.RegFunction("Emit", Emit);
-		L.RegFunction("Emit0", Emit0);
-		L.RegFunction("Emit1", Emit1);
 		L.RegFunction("TriggerSubEmitter", TriggerSubEmitter);
-		L.RegFunction("TriggerSubEmitter0", TriggerSubEmitter0);
-		L.RegFunction("TriggerSubEmitter1", TriggerSubEmitter1);
-		L.RegFunction("TriggerSubEmitter2", TriggerSubEmitter2);
 		L.RegFunction("New", _CreateUnityEngine_ParticleSystem);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
@@ -119,7 +99,7 @@ internal class UnityEngine_ParticleSystemWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.ParticleSystem();
+				UnityEngine.ParticleSystem obj = new UnityEngine.ParticleSystem();
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}
@@ -140,7 +120,7 @@ internal class UnityEngine_ParticleSystemWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+			UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
 			UnityEngine.ParticleSystem.Particle[] arg0 = ToLua.CheckStructArray<UnityEngine.ParticleSystem.Particle>(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 			obj.SetParticles(arg0, arg1);
@@ -158,9 +138,9 @@ internal class UnityEngine_ParticleSystemWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+			UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
 			UnityEngine.ParticleSystem.Particle[] arg0 = ToLua.CheckStructArray<UnityEngine.ParticleSystem.Particle>(L, 2);
-			var o = obj.GetParticles(arg0);
+			int o = obj.GetParticles(arg0);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
@@ -176,7 +156,7 @@ internal class UnityEngine_ParticleSystemWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+			UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
 			System.Collections.Generic.List<UnityEngine.Vector4> arg0 = (System.Collections.Generic.List<UnityEngine.Vector4>)ToLua.CheckObject(L, 2, typeof(System.Collections.Generic.List<UnityEngine.Vector4>));
 			UnityEngine.ParticleSystemCustomData arg1 = (UnityEngine.ParticleSystemCustomData)LuaDLL.luaL_checknumber(L, 3);
 			obj.SetCustomParticleData(arg0, arg1);
@@ -194,10 +174,10 @@ internal class UnityEngine_ParticleSystemWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+			UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
 			System.Collections.Generic.List<UnityEngine.Vector4> arg0 = (System.Collections.Generic.List<UnityEngine.Vector4>)ToLua.CheckObject(L, 2, typeof(System.Collections.Generic.List<UnityEngine.Vector4>));
 			UnityEngine.ParticleSystemCustomData arg1 = (UnityEngine.ParticleSystemCustomData)LuaDLL.luaL_checknumber(L, 3);
-			var o = obj.GetCustomParticleData(arg0, arg1);
+			int o = obj.GetCustomParticleData(arg0, arg1);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
@@ -216,102 +196,42 @@ internal class UnityEngine_ParticleSystemWrap
 
 			if (count == 2)
 			{
-				return Simulate0(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				obj.Simulate(arg0);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return Simulate1(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
+				obj.Simulate(arg0, arg1);
+				return 0;
 			}
 			else if (count == 4)
 			{
-				return Simulate2(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
+				bool arg2 = LuaDLL.luaL_checkboolean(L, 4);
+				obj.Simulate(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 5)
 			{
-				return Simulate3(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
+				bool arg2 = LuaDLL.luaL_checkboolean(L, 4);
+				bool arg3 = LuaDLL.luaL_checkboolean(L, 5);
+				obj.Simulate(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.ParticleSystem.Simulate");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Simulate0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			obj.Simulate(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Simulate1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			bool arg1 = LuaDLL.lua_toboolean(L, 3);
-			obj.Simulate(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Simulate2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			bool arg1 = LuaDLL.lua_toboolean(L, 3);
-			bool arg2 = LuaDLL.lua_toboolean(L, 4);
-			obj.Simulate(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Simulate3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			bool arg1 = LuaDLL.lua_toboolean(L, 3);
-			bool arg2 = LuaDLL.lua_toboolean(L, 4);
-			bool arg3 = LuaDLL.lua_toboolean(L, 5);
-			obj.Simulate(arg0, arg1, arg2, arg3);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -328,51 +248,21 @@ internal class UnityEngine_ParticleSystemWrap
 
 			if (count == 1)
 			{
-				return Play0(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				obj.Play();
+				return 0;
 			}
 			else if (count == 2)
 			{
-				return Play1(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+				obj.Play(arg0);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.ParticleSystem.Play");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Play0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			obj.Play();
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Play1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			bool arg0 = LuaDLL.lua_toboolean(L, 2);
-			obj.Play(arg0);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -389,51 +279,21 @@ internal class UnityEngine_ParticleSystemWrap
 
 			if (count == 1)
 			{
-				return Pause0(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				obj.Pause();
+				return 0;
 			}
 			else if (count == 2)
 			{
-				return Pause1(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+				obj.Pause(arg0);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.ParticleSystem.Pause");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Pause0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			obj.Pause();
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Pause1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			bool arg0 = LuaDLL.lua_toboolean(L, 2);
-			obj.Pause(arg0);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -450,74 +310,29 @@ internal class UnityEngine_ParticleSystemWrap
 
 			if (count == 1)
 			{
-				return Stop0(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				obj.Stop();
+				return 0;
 			}
 			else if (count == 2)
 			{
-				return Stop1(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+				obj.Stop(arg0);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return Stop2(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+				UnityEngine.ParticleSystemStopBehavior arg1 = (UnityEngine.ParticleSystemStopBehavior)LuaDLL.luaL_checknumber(L, 3);
+				obj.Stop(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.ParticleSystem.Stop");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Stop0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			obj.Stop();
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Stop1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			bool arg0 = LuaDLL.lua_toboolean(L, 2);
-			obj.Stop(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Stop2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			bool arg0 = LuaDLL.lua_toboolean(L, 2);
-			UnityEngine.ParticleSystemStopBehavior arg1 = (UnityEngine.ParticleSystemStopBehavior)LuaDLL.lua_tonumber(L, 3);
-			obj.Stop(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -534,51 +349,21 @@ internal class UnityEngine_ParticleSystemWrap
 
 			if (count == 1)
 			{
-				return Clear0(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				obj.Clear();
+				return 0;
 			}
 			else if (count == 2)
 			{
-				return Clear1(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+				obj.Clear(arg0);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.ParticleSystem.Clear");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Clear0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			obj.Clear();
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Clear1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			bool arg0 = LuaDLL.lua_toboolean(L, 2);
-			obj.Clear(arg0);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -595,53 +380,23 @@ internal class UnityEngine_ParticleSystemWrap
 
 			if (count == 1)
 			{
-				return IsAlive0(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				bool o = obj.IsAlive();
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else if (count == 2)
 			{
-				return IsAlive1(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+				bool o = obj.IsAlive(arg0);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.ParticleSystem.IsAlive");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int IsAlive0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			var o = obj.IsAlive();
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int IsAlive1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			bool arg0 = LuaDLL.lua_toboolean(L, 2);
-			var o = obj.IsAlive(arg0);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -658,53 +413,23 @@ internal class UnityEngine_ParticleSystemWrap
 
 			if (count == 2)
 			{
-				return Emit0(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				obj.Emit(arg0);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return Emit1(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				UnityEngine.ParticleSystem.EmitParams arg0 = StackTraits<UnityEngine.ParticleSystem.EmitParams>.Check(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				obj.Emit(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.ParticleSystem.Emit");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Emit0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			obj.Emit(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Emit1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			UnityEngine.ParticleSystem.EmitParams arg0 = StackTraits<UnityEngine.ParticleSystem.EmitParams>.To(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			obj.Emit(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -721,77 +446,32 @@ internal class UnityEngine_ParticleSystemWrap
 
 			if (count == 2)
 			{
-				return TriggerSubEmitter0(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				obj.TriggerSubEmitter(arg0);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<UnityEngine.ParticleSystem.Particle>(L, 3))
 			{
-				return TriggerSubEmitter1(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				UnityEngine.ParticleSystem.Particle arg1 = StackTraits<UnityEngine.ParticleSystem.Particle>.To(L, 3);
+				obj.TriggerSubEmitter(arg0, ref arg1);
+				ToLua.PushValue(L, arg1);
+				return 1;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<System.Collections.Generic.List<UnityEngine.ParticleSystem.Particle>>(L, 3))
 			{
-				return TriggerSubEmitter2(L);
+				UnityEngine.ParticleSystem obj = (UnityEngine.ParticleSystem)ToLua.CheckObject(L, 1, typeof(UnityEngine.ParticleSystem));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				System.Collections.Generic.List<UnityEngine.ParticleSystem.Particle> arg1 = (System.Collections.Generic.List<UnityEngine.ParticleSystem.Particle>)ToLua.ToObject(L, 3);
+				obj.TriggerSubEmitter(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.ParticleSystem.TriggerSubEmitter");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int TriggerSubEmitter0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			obj.TriggerSubEmitter(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int TriggerSubEmitter1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			UnityEngine.ParticleSystem.Particle arg1 = StackTraits<UnityEngine.ParticleSystem.Particle>.To(L, 3);
-			obj.TriggerSubEmitter(arg0, ref arg1);
-			ToLua.PushValue(L, arg1);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int TriggerSubEmitter2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.ParticleSystem)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			System.Collections.Generic.List<UnityEngine.ParticleSystem.Particle> arg1 = (System.Collections.Generic.List<UnityEngine.ParticleSystem.Particle>)ToLua.ToObject(L, 3);
-			obj.TriggerSubEmitter(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{

@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class LuaProfilerWrap
+public class LuaProfilerWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -37,7 +37,7 @@ internal class LuaProfilerWrap
 		{
 			ToLua.CheckArgsCount(L, 1);
 			string arg0 = ToLua.CheckString(L, 1);
-			var o = LuaProfiler.GetID(arg0);
+			int o = LuaProfiler.GetID(arg0);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}

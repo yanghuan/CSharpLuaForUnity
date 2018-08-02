@@ -2,18 +2,14 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_LightWrap
+public class UnityEngine_LightWrap
 {
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(UnityEngine.Light), typeof(UnityEngine.Behaviour));
 		L.RegFunction("SetLightDirty", SetLightDirty);
 		L.RegFunction("AddCommandBuffer", AddCommandBuffer);
-		L.RegFunction("AddCommandBuffer0", AddCommandBuffer0);
-		L.RegFunction("AddCommandBuffer1", AddCommandBuffer1);
 		L.RegFunction("AddCommandBufferAsync", AddCommandBufferAsync);
-		L.RegFunction("AddCommandBufferAsync0", AddCommandBufferAsync0);
-		L.RegFunction("AddCommandBufferAsync1", AddCommandBufferAsync1);
 		L.RegFunction("RemoveCommandBuffer", RemoveCommandBuffer);
 		L.RegFunction("RemoveCommandBuffers", RemoveCommandBuffers);
 		L.RegFunction("RemoveAllCommandBuffers", RemoveAllCommandBuffers);
@@ -102,7 +98,7 @@ internal class UnityEngine_LightWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.Light();
+				UnityEngine.Light obj = new UnityEngine.Light();
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}
@@ -123,7 +119,7 @@ internal class UnityEngine_LightWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
+			UnityEngine.Light obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
 			obj.SetLightDirty();
 			return 0;
 		}
@@ -142,55 +138,25 @@ internal class UnityEngine_LightWrap
 
 			if (count == 3)
 			{
-				return AddCommandBuffer0(L);
+				UnityEngine.Light obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
+				UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.luaL_checknumber(L, 2);
+				UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.CheckObject(L, 3, typeof(UnityEngine.Rendering.CommandBuffer));
+				obj.AddCommandBuffer(arg0, arg1);
+				return 0;
 			}
 			else if (count == 4)
 			{
-				return AddCommandBuffer1(L);
+				UnityEngine.Light obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
+				UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.luaL_checknumber(L, 2);
+				UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.CheckObject(L, 3, typeof(UnityEngine.Rendering.CommandBuffer));
+				UnityEngine.Rendering.ShadowMapPass arg2 = (UnityEngine.Rendering.ShadowMapPass)LuaDLL.luaL_checknumber(L, 4);
+				obj.AddCommandBuffer(arg0, arg1, arg2);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Light.AddCommandBuffer");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int AddCommandBuffer0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Light)ToLua.ToObject(L, 1);
-			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.lua_tonumber(L, 2);
-			UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.ToObject(L, 3);
-			obj.AddCommandBuffer(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int AddCommandBuffer1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Light)ToLua.ToObject(L, 1);
-			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.lua_tonumber(L, 2);
-			UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.ToObject(L, 3);
-			UnityEngine.Rendering.ShadowMapPass arg2 = (UnityEngine.Rendering.ShadowMapPass)LuaDLL.lua_tonumber(L, 4);
-			obj.AddCommandBuffer(arg0, arg1, arg2);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -207,11 +173,22 @@ internal class UnityEngine_LightWrap
 
 			if (count == 4)
 			{
-				return AddCommandBufferAsync0(L);
+				UnityEngine.Light obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
+				UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.luaL_checknumber(L, 2);
+				UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.CheckObject(L, 3, typeof(UnityEngine.Rendering.CommandBuffer));
+				UnityEngine.Rendering.ComputeQueueType arg2 = (UnityEngine.Rendering.ComputeQueueType)LuaDLL.luaL_checknumber(L, 4);
+				obj.AddCommandBufferAsync(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 5)
 			{
-				return AddCommandBufferAsync1(L);
+				UnityEngine.Light obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
+				UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.luaL_checknumber(L, 2);
+				UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.CheckObject(L, 3, typeof(UnityEngine.Rendering.CommandBuffer));
+				UnityEngine.Rendering.ShadowMapPass arg2 = (UnityEngine.Rendering.ShadowMapPass)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.Rendering.ComputeQueueType arg3 = (UnityEngine.Rendering.ComputeQueueType)LuaDLL.luaL_checknumber(L, 5);
+				obj.AddCommandBufferAsync(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else
 			{
@@ -225,53 +202,12 @@ internal class UnityEngine_LightWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int AddCommandBufferAsync0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Light)ToLua.ToObject(L, 1);
-			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.lua_tonumber(L, 2);
-			UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.ToObject(L, 3);
-			UnityEngine.Rendering.ComputeQueueType arg2 = (UnityEngine.Rendering.ComputeQueueType)LuaDLL.lua_tonumber(L, 4);
-			obj.AddCommandBufferAsync(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int AddCommandBufferAsync1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Light)ToLua.ToObject(L, 1);
-			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.lua_tonumber(L, 2);
-			UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.ToObject(L, 3);
-			UnityEngine.Rendering.ShadowMapPass arg2 = (UnityEngine.Rendering.ShadowMapPass)LuaDLL.lua_tonumber(L, 4);
-			UnityEngine.Rendering.ComputeQueueType arg3 = (UnityEngine.Rendering.ComputeQueueType)LuaDLL.lua_tonumber(L, 5);
-			obj.AddCommandBufferAsync(arg0, arg1, arg2, arg3);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int RemoveCommandBuffer(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
+			UnityEngine.Light obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
 			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.CheckObject(L, 3, typeof(UnityEngine.Rendering.CommandBuffer));
 			obj.RemoveCommandBuffer(arg0, arg1);
@@ -289,7 +225,7 @@ internal class UnityEngine_LightWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
+			UnityEngine.Light obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
 			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.luaL_checknumber(L, 2);
 			obj.RemoveCommandBuffers(arg0);
 			return 0;
@@ -306,7 +242,7 @@ internal class UnityEngine_LightWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
+			UnityEngine.Light obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
 			obj.RemoveAllCommandBuffers();
 			return 0;
 		}
@@ -322,9 +258,9 @@ internal class UnityEngine_LightWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
+			UnityEngine.Light obj = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
 			UnityEngine.Rendering.LightEvent arg0 = (UnityEngine.Rendering.LightEvent)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetCommandBuffers(arg0);
+			UnityEngine.Rendering.CommandBuffer[] o = obj.GetCommandBuffers(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -342,7 +278,7 @@ internal class UnityEngine_LightWrap
 			ToLua.CheckArgsCount(L, 2);
 			UnityEngine.LightType arg0 = (UnityEngine.LightType)LuaDLL.luaL_checknumber(L, 1);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
-			var o = UnityEngine.Light.GetLights(arg0, arg1);
+			UnityEngine.Light[] o = UnityEngine.Light.GetLights(arg0, arg1);
 			ToLua.Push(L, o);
 			return 1;
 		}

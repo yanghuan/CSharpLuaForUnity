@@ -23,14 +23,14 @@ namespace CSharpLua {
     private static readonly string csharpLua_ = toolsDir_ + "/CSharp.lua/CSharp.lua.Launcher.dll";
     private static readonly string settingFilePath_ = Settings.Paths.SettingFilePath;
 
-    //[MenuItem(Settings.Menus.kCompile)]
+    [MenuItem(Settings.Menus.kCompile)]
     public static void Compile() {
       if (!CheckDotnetInstall()) {
         return;
       }
 
       if (!File.Exists(csharpLua_)) {
-        throw new InvalidProgramException(string.Format("{0} not found", csharpLua_));
+        throw new InvalidProgramException($"{csharpLua_} not found");
       }
 
       if (Directory.Exists(outDir_)) {
@@ -53,7 +53,7 @@ namespace CSharpLua {
       string[] metas = new string[] { toolsDir_ + "/UnityEngine.xml" };
       string lib = string.Join(";", libs.ToArray());
       string meta = string.Join(";", metas);
-      string args = string.Format("{0}  -s \"{1}\" -d \"{2}\" -l \"{3}\" -m {4} -c", csharpLua_, compiledScriptDir_, outDir_, lib, meta);
+      string args = $"{csharpLua_}  -s \"{compiledScriptDir_}\" -d \"{outDir_}\" -l \"{lib}\" -m {meta} -c";
       var info = new ProcessStartInfo() {
         FileName = kDotnet,
         Arguments = args,
@@ -70,7 +70,7 @@ namespace CSharpLua {
         } else {
           string outString = p.StandardOutput.ReadToEnd();
           string errorString = p.StandardError.ReadToEnd();
-          throw new CompiledFail(string.Format("Compile fail, {0}\n{1}\n{2} {3}", errorString, outString, kDotnet, args));
+          throw new CompiledFail($"Compile fail, {errorString}\n{outString}\n{kDotnet} {args}");
         }
       }
     }
@@ -114,7 +114,11 @@ namespace CSharpLua {
 
     [MenuItem(Settings.kIsRunFromLua ? Settings.Menus.kRunFromCSharp : Settings.Menus.kRunFromLua)]
     public static void Switch() {
+#if UNITY_2017 || UNITY_2018
+      const string kFieldName = nameof(Settings.kIsRunFromLua);
+#else
       const string kFieldName = "kIsRunFromLua";
+#endif
 
       string text = File.ReadAllText(settingFilePath_);
       int begin = text.IndexOf(kFieldName);
@@ -129,10 +133,10 @@ namespace CSharpLua {
           File.WriteAllText(settingFilePath_, text);
           AssetDatabase.Refresh();
         } else {
-          throw new InvalidProgramException(string.Format("field {0} not found end symbol in {1}", kFieldName, settingFilePath_));
+          throw new InvalidProgramException($"field {kFieldName} not found end symbol in {settingFilePath_}");
         }
       } else {
-        throw new InvalidProgramException(string.Format("not found field {0} in {1}", kFieldName, settingFilePath_));
+        throw new InvalidProgramException($"not found field {kFieldName} in {settingFilePath_}");
       }
     }
   }

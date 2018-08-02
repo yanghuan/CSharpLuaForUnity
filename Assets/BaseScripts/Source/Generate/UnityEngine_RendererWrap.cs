@@ -2,18 +2,14 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_RendererWrap
+public class UnityEngine_RendererWrap
 {
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(UnityEngine.Renderer), typeof(UnityEngine.Component));
 		L.RegFunction("HasPropertyBlock", HasPropertyBlock);
 		L.RegFunction("SetPropertyBlock", SetPropertyBlock);
-		L.RegFunction("SetPropertyBlock0", SetPropertyBlock0);
-		L.RegFunction("SetPropertyBlock1", SetPropertyBlock1);
 		L.RegFunction("GetPropertyBlock", GetPropertyBlock);
-		L.RegFunction("GetPropertyBlock0", GetPropertyBlock0);
-		L.RegFunction("GetPropertyBlock1", GetPropertyBlock1);
 		L.RegFunction("GetClosestReflectionProbes", GetClosestReflectionProbes);
 		L.RegFunction("New", _CreateUnityEngine_Renderer);
 		L.RegFunction("__eq", op_Equality);
@@ -103,7 +99,7 @@ internal class UnityEngine_RendererWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.Renderer();
+				UnityEngine.Renderer obj = new UnityEngine.Renderer();
 				ToLua.Push(L, obj);
 				return 1;
 			}
@@ -124,8 +120,8 @@ internal class UnityEngine_RendererWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Renderer)ToLua.CheckObject<UnityEngine.Renderer>(L, 1);
-			var o = obj.HasPropertyBlock();
+			UnityEngine.Renderer obj = (UnityEngine.Renderer)ToLua.CheckObject<UnityEngine.Renderer>(L, 1);
+			bool o = obj.HasPropertyBlock();
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -144,53 +140,23 @@ internal class UnityEngine_RendererWrap
 
 			if (count == 2)
 			{
-				return SetPropertyBlock0(L);
+				UnityEngine.Renderer obj = (UnityEngine.Renderer)ToLua.CheckObject<UnityEngine.Renderer>(L, 1);
+				UnityEngine.MaterialPropertyBlock arg0 = (UnityEngine.MaterialPropertyBlock)ToLua.CheckObject(L, 2, typeof(UnityEngine.MaterialPropertyBlock));
+				obj.SetPropertyBlock(arg0);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return SetPropertyBlock1(L);
+				UnityEngine.Renderer obj = (UnityEngine.Renderer)ToLua.CheckObject<UnityEngine.Renderer>(L, 1);
+				UnityEngine.MaterialPropertyBlock arg0 = (UnityEngine.MaterialPropertyBlock)ToLua.CheckObject(L, 2, typeof(UnityEngine.MaterialPropertyBlock));
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				obj.SetPropertyBlock(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Renderer.SetPropertyBlock");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetPropertyBlock0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Renderer)ToLua.ToObject(L, 1);
-			UnityEngine.MaterialPropertyBlock arg0 = (UnityEngine.MaterialPropertyBlock)ToLua.ToObject(L, 2);
-			obj.SetPropertyBlock(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetPropertyBlock1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Renderer)ToLua.ToObject(L, 1);
-			UnityEngine.MaterialPropertyBlock arg0 = (UnityEngine.MaterialPropertyBlock)ToLua.ToObject(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			obj.SetPropertyBlock(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -207,11 +173,18 @@ internal class UnityEngine_RendererWrap
 
 			if (count == 2)
 			{
-				return GetPropertyBlock0(L);
+				UnityEngine.Renderer obj = (UnityEngine.Renderer)ToLua.CheckObject<UnityEngine.Renderer>(L, 1);
+				UnityEngine.MaterialPropertyBlock arg0 = (UnityEngine.MaterialPropertyBlock)ToLua.CheckObject(L, 2, typeof(UnityEngine.MaterialPropertyBlock));
+				obj.GetPropertyBlock(arg0);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return GetPropertyBlock1(L);
+				UnityEngine.Renderer obj = (UnityEngine.Renderer)ToLua.CheckObject<UnityEngine.Renderer>(L, 1);
+				UnityEngine.MaterialPropertyBlock arg0 = (UnityEngine.MaterialPropertyBlock)ToLua.CheckObject(L, 2, typeof(UnityEngine.MaterialPropertyBlock));
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				obj.GetPropertyBlock(arg0, arg1);
+				return 0;
 			}
 			else
 			{
@@ -225,49 +198,12 @@ internal class UnityEngine_RendererWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetPropertyBlock0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Renderer)ToLua.ToObject(L, 1);
-			UnityEngine.MaterialPropertyBlock arg0 = (UnityEngine.MaterialPropertyBlock)ToLua.ToObject(L, 2);
-			obj.GetPropertyBlock(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetPropertyBlock1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Renderer)ToLua.ToObject(L, 1);
-			UnityEngine.MaterialPropertyBlock arg0 = (UnityEngine.MaterialPropertyBlock)ToLua.ToObject(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			obj.GetPropertyBlock(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetClosestReflectionProbes(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Renderer)ToLua.CheckObject<UnityEngine.Renderer>(L, 1);
+			UnityEngine.Renderer obj = (UnityEngine.Renderer)ToLua.CheckObject<UnityEngine.Renderer>(L, 1);
 			System.Collections.Generic.List<UnityEngine.Rendering.ReflectionProbeBlendInfo> arg0 = (System.Collections.Generic.List<UnityEngine.Rendering.ReflectionProbeBlendInfo>)ToLua.CheckObject(L, 2, typeof(System.Collections.Generic.List<UnityEngine.Rendering.ReflectionProbeBlendInfo>));
 			obj.GetClosestReflectionProbes(arg0);
 			return 0;

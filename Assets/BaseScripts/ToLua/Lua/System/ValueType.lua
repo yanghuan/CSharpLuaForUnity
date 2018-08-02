@@ -17,7 +17,6 @@ ValueType[LayerMask]	= 9
 ValueType[RaycastHit]	= 10
 ValueType[int64]		= 11
 ValueType[uint64]		= 12
-ValueType[Color32]		= 13
 
 local function GetValueType()	
 	local getmetatable = getmetatable

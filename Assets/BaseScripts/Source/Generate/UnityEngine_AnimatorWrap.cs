@@ -2,40 +2,20 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_AnimatorWrap
+public class UnityEngine_AnimatorWrap
 {
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(UnityEngine.Animator), typeof(UnityEngine.Behaviour));
 		L.RegFunction("GetFloat", GetFloat);
-		L.RegFunction("GetFloat0", GetFloat0);
-		L.RegFunction("GetFloat1", GetFloat1);
 		L.RegFunction("SetFloat", SetFloat);
-		L.RegFunction("SetFloat0", SetFloat0);
-		L.RegFunction("SetFloat1", SetFloat1);
-		L.RegFunction("SetFloat2", SetFloat2);
-		L.RegFunction("SetFloat3", SetFloat3);
 		L.RegFunction("GetBool", GetBool);
-		L.RegFunction("GetBool0", GetBool0);
-		L.RegFunction("GetBool1", GetBool1);
 		L.RegFunction("SetBool", SetBool);
-		L.RegFunction("SetBool0", SetBool0);
-		L.RegFunction("SetBool1", SetBool1);
 		L.RegFunction("GetInteger", GetInteger);
-		L.RegFunction("GetInteger0", GetInteger0);
-		L.RegFunction("GetInteger1", GetInteger1);
 		L.RegFunction("SetInteger", SetInteger);
-		L.RegFunction("SetInteger0", SetInteger0);
-		L.RegFunction("SetInteger1", SetInteger1);
 		L.RegFunction("SetTrigger", SetTrigger);
-		L.RegFunction("SetTrigger0", SetTrigger0);
-		L.RegFunction("SetTrigger1", SetTrigger1);
 		L.RegFunction("ResetTrigger", ResetTrigger);
-		L.RegFunction("ResetTrigger0", ResetTrigger0);
-		L.RegFunction("ResetTrigger1", ResetTrigger1);
 		L.RegFunction("IsParameterControlledByCurve", IsParameterControlledByCurve);
-		L.RegFunction("IsParameterControlledByCurve0", IsParameterControlledByCurve0);
-		L.RegFunction("IsParameterControlledByCurve1", IsParameterControlledByCurve1);
 		L.RegFunction("GetIKPosition", GetIKPosition);
 		L.RegFunction("SetIKPosition", SetIKPosition);
 		L.RegFunction("GetIKRotation", GetIKRotation);
@@ -50,11 +30,6 @@ internal class UnityEngine_AnimatorWrap
 		L.RegFunction("SetIKHintPositionWeight", SetIKHintPositionWeight);
 		L.RegFunction("SetLookAtPosition", SetLookAtPosition);
 		L.RegFunction("SetLookAtWeight", SetLookAtWeight);
-		L.RegFunction("SetLookAtWeight0", SetLookAtWeight0);
-		L.RegFunction("SetLookAtWeight1", SetLookAtWeight1);
-		L.RegFunction("SetLookAtWeight2", SetLookAtWeight2);
-		L.RegFunction("SetLookAtWeight3", SetLookAtWeight3);
-		L.RegFunction("SetLookAtWeight4", SetLookAtWeight4);
 		L.RegFunction("SetBoneLocalRotation", SetBoneLocalRotation);
 		L.RegFunction("GetBehaviours", GetBehaviours);
 		L.RegFunction("GetLayerName", GetLayerName);
@@ -67,51 +42,15 @@ internal class UnityEngine_AnimatorWrap
 		L.RegFunction("GetCurrentAnimatorClipInfoCount", GetCurrentAnimatorClipInfoCount);
 		L.RegFunction("GetNextAnimatorClipInfoCount", GetNextAnimatorClipInfoCount);
 		L.RegFunction("GetCurrentAnimatorClipInfo", GetCurrentAnimatorClipInfo);
-		L.RegFunction("GetCurrentAnimatorClipInfo0", GetCurrentAnimatorClipInfo0);
-		L.RegFunction("GetCurrentAnimatorClipInfo1", GetCurrentAnimatorClipInfo1);
 		L.RegFunction("GetNextAnimatorClipInfo", GetNextAnimatorClipInfo);
-		L.RegFunction("GetNextAnimatorClipInfo0", GetNextAnimatorClipInfo0);
-		L.RegFunction("GetNextAnimatorClipInfo1", GetNextAnimatorClipInfo1);
 		L.RegFunction("IsInTransition", IsInTransition);
 		L.RegFunction("GetParameter", GetParameter);
 		L.RegFunction("MatchTarget", MatchTarget);
-		L.RegFunction("MatchTarget0", MatchTarget0);
-		L.RegFunction("MatchTarget1", MatchTarget1);
 		L.RegFunction("InterruptMatchTarget", InterruptMatchTarget);
-		L.RegFunction("InterruptMatchTarget0", InterruptMatchTarget0);
-		L.RegFunction("InterruptMatchTarget1", InterruptMatchTarget1);
 		L.RegFunction("CrossFadeInFixedTime", CrossFadeInFixedTime);
-		L.RegFunction("CrossFadeInFixedTime0", CrossFadeInFixedTime0);
-		L.RegFunction("CrossFadeInFixedTime1", CrossFadeInFixedTime1);
-		L.RegFunction("CrossFadeInFixedTime2", CrossFadeInFixedTime2);
-		L.RegFunction("CrossFadeInFixedTime3", CrossFadeInFixedTime3);
-		L.RegFunction("CrossFadeInFixedTime4", CrossFadeInFixedTime4);
-		L.RegFunction("CrossFadeInFixedTime5", CrossFadeInFixedTime5);
-		L.RegFunction("CrossFadeInFixedTime6", CrossFadeInFixedTime6);
-		L.RegFunction("CrossFadeInFixedTime7", CrossFadeInFixedTime7);
 		L.RegFunction("CrossFade", CrossFade);
-		L.RegFunction("CrossFade0", CrossFade0);
-		L.RegFunction("CrossFade1", CrossFade1);
-		L.RegFunction("CrossFade2", CrossFade2);
-		L.RegFunction("CrossFade3", CrossFade3);
-		L.RegFunction("CrossFade4", CrossFade4);
-		L.RegFunction("CrossFade5", CrossFade5);
-		L.RegFunction("CrossFade6", CrossFade6);
-		L.RegFunction("CrossFade7", CrossFade7);
 		L.RegFunction("PlayInFixedTime", PlayInFixedTime);
-		L.RegFunction("PlayInFixedTime0", PlayInFixedTime0);
-		L.RegFunction("PlayInFixedTime1", PlayInFixedTime1);
-		L.RegFunction("PlayInFixedTime2", PlayInFixedTime2);
-		L.RegFunction("PlayInFixedTime3", PlayInFixedTime3);
-		L.RegFunction("PlayInFixedTime4", PlayInFixedTime4);
-		L.RegFunction("PlayInFixedTime5", PlayInFixedTime5);
 		L.RegFunction("Play", Play);
-		L.RegFunction("Play0", Play0);
-		L.RegFunction("Play1", Play1);
-		L.RegFunction("Play2", Play2);
-		L.RegFunction("Play3", Play3);
-		L.RegFunction("Play4", Play4);
-		L.RegFunction("Play5", Play5);
 		L.RegFunction("SetTarget", SetTarget);
 		L.RegFunction("GetBoneTransform", GetBoneTransform);
 		L.RegFunction("StartPlayback", StartPlayback);
@@ -246,7 +185,7 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.Animator();
+				UnityEngine.Animator obj = new UnityEngine.Animator();
 				ToLua.Push(L, obj);
 				return 1;
 			}
@@ -270,54 +209,24 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 2 && TypeChecker.CheckTypes<string>(L, 2))
 			{
-				return GetFloat0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				float o = obj.GetFloat(arg0);
+				LuaDLL.lua_pushnumber(L, o);
+				return 1;
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<int>(L, 2))
 			{
-				return GetFloat1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				float o = obj.GetFloat(arg0);
+				LuaDLL.lua_pushnumber(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.GetFloat");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetFloat0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			var o = obj.GetFloat(arg0);
-			LuaDLL.lua_pushnumber(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetFloat1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			var o = obj.GetFloat(arg0);
-			LuaDLL.lua_pushnumber(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -334,104 +243,44 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 3 && TypeChecker.CheckTypes<string, float>(L, 2))
 			{
-				return SetFloat0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				obj.SetFloat(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<int, float>(L, 2))
 			{
-				return SetFloat1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				obj.SetFloat(arg0, arg1);
+				return 0;
 			}
 			else if (count == 5 && TypeChecker.CheckTypes<string, float, float, float>(L, 2))
 			{
-				return SetFloat2(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
+				float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
+				obj.SetFloat(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else if (count == 5 && TypeChecker.CheckTypes<int, float, float, float>(L, 2))
 			{
-				return SetFloat3(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
+				float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
+				obj.SetFloat(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.SetFloat");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetFloat0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			obj.SetFloat(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetFloat1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			obj.SetFloat(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetFloat2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
-			obj.SetFloat(arg0, arg1, arg2, arg3);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetFloat3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
-			obj.SetFloat(arg0, arg1, arg2, arg3);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -448,54 +297,24 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 2 && TypeChecker.CheckTypes<string>(L, 2))
 			{
-				return GetBool0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				bool o = obj.GetBool(arg0);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<int>(L, 2))
 			{
-				return GetBool1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				bool o = obj.GetBool(arg0);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.GetBool");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetBool0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			var o = obj.GetBool(arg0);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetBool1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			var o = obj.GetBool(arg0);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -512,54 +331,24 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 3 && TypeChecker.CheckTypes<string, bool>(L, 2))
 			{
-				return SetBool0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				bool arg1 = LuaDLL.lua_toboolean(L, 3);
+				obj.SetBool(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<int, bool>(L, 2))
 			{
-				return SetBool1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				bool arg1 = LuaDLL.lua_toboolean(L, 3);
+				obj.SetBool(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.SetBool");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetBool0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			bool arg1 = LuaDLL.lua_toboolean(L, 3);
-			obj.SetBool(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetBool1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			bool arg1 = LuaDLL.lua_toboolean(L, 3);
-			obj.SetBool(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -576,54 +365,24 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 2 && TypeChecker.CheckTypes<string>(L, 2))
 			{
-				return GetInteger0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				int o = obj.GetInteger(arg0);
+				LuaDLL.lua_pushinteger(L, o);
+				return 1;
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<int>(L, 2))
 			{
-				return GetInteger1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				int o = obj.GetInteger(arg0);
+				LuaDLL.lua_pushinteger(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.GetInteger");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetInteger0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			var o = obj.GetInteger(arg0);
-			LuaDLL.lua_pushinteger(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetInteger1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			var o = obj.GetInteger(arg0);
-			LuaDLL.lua_pushinteger(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -640,54 +399,24 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 3 && TypeChecker.CheckTypes<string, int>(L, 2))
 			{
-				return SetInteger0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				obj.SetInteger(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<int, int>(L, 2))
 			{
-				return SetInteger1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				obj.SetInteger(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.SetInteger");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetInteger0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			obj.SetInteger(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetInteger1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			obj.SetInteger(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -704,52 +433,22 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 2 && TypeChecker.CheckTypes<string>(L, 2))
 			{
-				return SetTrigger0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				obj.SetTrigger(arg0);
+				return 0;
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<int>(L, 2))
 			{
-				return SetTrigger1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				obj.SetTrigger(arg0);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.SetTrigger");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetTrigger0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			obj.SetTrigger(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetTrigger1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			obj.SetTrigger(arg0);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -766,52 +465,22 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 2 && TypeChecker.CheckTypes<string>(L, 2))
 			{
-				return ResetTrigger0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				obj.ResetTrigger(arg0);
+				return 0;
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<int>(L, 2))
 			{
-				return ResetTrigger1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				obj.ResetTrigger(arg0);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.ResetTrigger");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int ResetTrigger0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			obj.ResetTrigger(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int ResetTrigger1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			obj.ResetTrigger(arg0);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -828,11 +497,19 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 2 && TypeChecker.CheckTypes<string>(L, 2))
 			{
-				return IsParameterControlledByCurve0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				bool o = obj.IsParameterControlledByCurve(arg0);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<int>(L, 2))
 			{
-				return IsParameterControlledByCurve1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				bool o = obj.IsParameterControlledByCurve(arg0);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else
 			{
@@ -846,52 +523,14 @@ internal class UnityEngine_AnimatorWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int IsParameterControlledByCurve0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			var o = obj.IsParameterControlledByCurve(arg0);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int IsParameterControlledByCurve1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			var o = obj.IsParameterControlledByCurve(arg0);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetIKPosition(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetIKPosition(arg0);
+			UnityEngine.Vector3 o = obj.GetIKPosition(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -907,7 +546,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 3);
 			obj.SetIKPosition(arg0, arg1);
@@ -925,9 +564,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetIKRotation(arg0);
+			UnityEngine.Quaternion o = obj.GetIKRotation(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -943,7 +582,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Quaternion arg1 = ToLua.ToQuaternion(L, 3);
 			obj.SetIKRotation(arg0, arg1);
@@ -961,9 +600,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetIKPositionWeight(arg0);
+			float o = obj.GetIKPositionWeight(arg0);
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
 		}
@@ -979,7 +618,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 			obj.SetIKPositionWeight(arg0, arg1);
@@ -997,9 +636,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetIKRotationWeight(arg0);
+			float o = obj.GetIKRotationWeight(arg0);
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
 		}
@@ -1015,7 +654,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.AvatarIKGoal arg0 = (UnityEngine.AvatarIKGoal)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 			obj.SetIKRotationWeight(arg0, arg1);
@@ -1033,9 +672,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.AvatarIKHint arg0 = (UnityEngine.AvatarIKHint)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetIKHintPosition(arg0);
+			UnityEngine.Vector3 o = obj.GetIKHintPosition(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -1051,7 +690,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.AvatarIKHint arg0 = (UnityEngine.AvatarIKHint)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 3);
 			obj.SetIKHintPosition(arg0, arg1);
@@ -1069,9 +708,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.AvatarIKHint arg0 = (UnityEngine.AvatarIKHint)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetIKHintPositionWeight(arg0);
+			float o = obj.GetIKHintPositionWeight(arg0);
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
 		}
@@ -1087,7 +726,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.AvatarIKHint arg0 = (UnityEngine.AvatarIKHint)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 			obj.SetIKHintPositionWeight(arg0, arg1);
@@ -1105,7 +744,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
 			obj.SetLookAtPosition(arg0);
 			return 0;
@@ -1125,23 +764,48 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 2)
 			{
-				return SetLookAtWeight0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				obj.SetLookAtWeight(arg0);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return SetLookAtWeight1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				obj.SetLookAtWeight(arg0, arg1);
+				return 0;
 			}
 			else if (count == 4)
 			{
-				return SetLookAtWeight2(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
+				obj.SetLookAtWeight(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 5)
 			{
-				return SetLookAtWeight3(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
+				float arg3 = (float)LuaDLL.luaL_checknumber(L, 5);
+				obj.SetLookAtWeight(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else if (count == 6)
 			{
-				return SetLookAtWeight4(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
+				float arg3 = (float)LuaDLL.luaL_checknumber(L, 5);
+				float arg4 = (float)LuaDLL.luaL_checknumber(L, 6);
+				obj.SetLookAtWeight(arg0, arg1, arg2, arg3, arg4);
+				return 0;
 			}
 			else
 			{
@@ -1155,112 +819,12 @@ internal class UnityEngine_AnimatorWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetLookAtWeight0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			obj.SetLookAtWeight(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetLookAtWeight1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			obj.SetLookAtWeight(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetLookAtWeight2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			obj.SetLookAtWeight(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetLookAtWeight3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
-			obj.SetLookAtWeight(arg0, arg1, arg2, arg3);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetLookAtWeight4(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
-			float arg4 = (float)LuaDLL.lua_tonumber(L, 6);
-			obj.SetLookAtWeight(arg0, arg1, arg2, arg3, arg4);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int SetBoneLocalRotation(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.HumanBodyBones arg0 = (UnityEngine.HumanBodyBones)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Quaternion arg1 = ToLua.ToQuaternion(L, 3);
 			obj.SetBoneLocalRotation(arg0, arg1);
@@ -1278,10 +842,10 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
-			var o = obj.GetBehaviours(arg0, arg1);
+			UnityEngine.StateMachineBehaviour[] o = obj.GetBehaviours(arg0, arg1);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -1297,9 +861,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetLayerName(arg0);
+			string o = obj.GetLayerName(arg0);
 			LuaDLL.lua_pushstring(L, o);
 			return 1;
 		}
@@ -1315,9 +879,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
-			var o = obj.GetLayerIndex(arg0);
+			int o = obj.GetLayerIndex(arg0);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
@@ -1333,9 +897,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetLayerWeight(arg0);
+			float o = obj.GetLayerWeight(arg0);
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
 		}
@@ -1351,7 +915,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 			obj.SetLayerWeight(arg0, arg1);
@@ -1369,9 +933,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetCurrentAnimatorStateInfo(arg0);
+			UnityEngine.AnimatorStateInfo o = obj.GetCurrentAnimatorStateInfo(arg0);
 			ToLua.PushValue(L, o);
 			return 1;
 		}
@@ -1387,9 +951,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetNextAnimatorStateInfo(arg0);
+			UnityEngine.AnimatorStateInfo o = obj.GetNextAnimatorStateInfo(arg0);
 			ToLua.PushValue(L, o);
 			return 1;
 		}
@@ -1405,9 +969,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetAnimatorTransitionInfo(arg0);
+			UnityEngine.AnimatorTransitionInfo o = obj.GetAnimatorTransitionInfo(arg0);
 			ToLua.PushValue(L, o);
 			return 1;
 		}
@@ -1423,9 +987,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetCurrentAnimatorClipInfoCount(arg0);
+			int o = obj.GetCurrentAnimatorClipInfoCount(arg0);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
@@ -1441,9 +1005,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetNextAnimatorClipInfoCount(arg0);
+			int o = obj.GetNextAnimatorClipInfoCount(arg0);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
@@ -1462,54 +1026,24 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 2)
 			{
-				return GetCurrentAnimatorClipInfo0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				UnityEngine.AnimatorClipInfo[] o = obj.GetCurrentAnimatorClipInfo(arg0);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 3)
 			{
-				return GetCurrentAnimatorClipInfo1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				System.Collections.Generic.List<UnityEngine.AnimatorClipInfo> arg1 = (System.Collections.Generic.List<UnityEngine.AnimatorClipInfo>)ToLua.CheckObject(L, 3, typeof(System.Collections.Generic.List<UnityEngine.AnimatorClipInfo>));
+				obj.GetCurrentAnimatorClipInfo(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.GetCurrentAnimatorClipInfo");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetCurrentAnimatorClipInfo0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			var o = obj.GetCurrentAnimatorClipInfo(arg0);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetCurrentAnimatorClipInfo1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			System.Collections.Generic.List<UnityEngine.AnimatorClipInfo> arg1 = (System.Collections.Generic.List<UnityEngine.AnimatorClipInfo>)ToLua.ToObject(L, 3);
-			obj.GetCurrentAnimatorClipInfo(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -1526,11 +1060,19 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 2)
 			{
-				return GetNextAnimatorClipInfo0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				UnityEngine.AnimatorClipInfo[] o = obj.GetNextAnimatorClipInfo(arg0);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 3)
 			{
-				return GetNextAnimatorClipInfo1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				System.Collections.Generic.List<UnityEngine.AnimatorClipInfo> arg1 = (System.Collections.Generic.List<UnityEngine.AnimatorClipInfo>)ToLua.CheckObject(L, 3, typeof(System.Collections.Generic.List<UnityEngine.AnimatorClipInfo>));
+				obj.GetNextAnimatorClipInfo(arg0, arg1);
+				return 0;
 			}
 			else
 			{
@@ -1544,52 +1086,14 @@ internal class UnityEngine_AnimatorWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetNextAnimatorClipInfo0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			var o = obj.GetNextAnimatorClipInfo(arg0);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetNextAnimatorClipInfo1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			System.Collections.Generic.List<UnityEngine.AnimatorClipInfo> arg1 = (System.Collections.Generic.List<UnityEngine.AnimatorClipInfo>)ToLua.ToObject(L, 3);
-			obj.GetNextAnimatorClipInfo(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int IsInTransition(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.IsInTransition(arg0);
+			bool o = obj.IsInTransition(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -1605,9 +1109,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetParameter(arg0);
+			UnityEngine.AnimatorControllerParameter o = obj.GetParameter(arg0);
 			ToLua.PushObject(L, o);
 			return 1;
 		}
@@ -1626,61 +1130,31 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 6)
 			{
-				return MatchTarget0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				UnityEngine.Quaternion arg1 = ToLua.ToQuaternion(L, 3);
+				UnityEngine.AvatarTarget arg2 = (UnityEngine.AvatarTarget)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.MatchTargetWeightMask arg3 = StackTraits<UnityEngine.MatchTargetWeightMask>.Check(L, 5);
+				float arg4 = (float)LuaDLL.luaL_checknumber(L, 6);
+				obj.MatchTarget(arg0, arg1, arg2, arg3, arg4);
+				return 0;
 			}
 			else if (count == 7)
 			{
-				return MatchTarget1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				UnityEngine.Quaternion arg1 = ToLua.ToQuaternion(L, 3);
+				UnityEngine.AvatarTarget arg2 = (UnityEngine.AvatarTarget)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.MatchTargetWeightMask arg3 = StackTraits<UnityEngine.MatchTargetWeightMask>.Check(L, 5);
+				float arg4 = (float)LuaDLL.luaL_checknumber(L, 6);
+				float arg5 = (float)LuaDLL.luaL_checknumber(L, 7);
+				obj.MatchTarget(arg0, arg1, arg2, arg3, arg4, arg5);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.MatchTarget");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int MatchTarget0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			UnityEngine.Quaternion arg1 = ToLua.ToQuaternion(L, 3);
-			UnityEngine.AvatarTarget arg2 = (UnityEngine.AvatarTarget)LuaDLL.lua_tonumber(L, 4);
-			UnityEngine.MatchTargetWeightMask arg3 = StackTraits<UnityEngine.MatchTargetWeightMask>.To(L, 5);
-			float arg4 = (float)LuaDLL.lua_tonumber(L, 6);
-			obj.MatchTarget(arg0, arg1, arg2, arg3, arg4);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int MatchTarget1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			UnityEngine.Quaternion arg1 = ToLua.ToQuaternion(L, 3);
-			UnityEngine.AvatarTarget arg2 = (UnityEngine.AvatarTarget)LuaDLL.lua_tonumber(L, 4);
-			UnityEngine.MatchTargetWeightMask arg3 = StackTraits<UnityEngine.MatchTargetWeightMask>.To(L, 5);
-			float arg4 = (float)LuaDLL.lua_tonumber(L, 6);
-			float arg5 = (float)LuaDLL.lua_tonumber(L, 7);
-			obj.MatchTarget(arg0, arg1, arg2, arg3, arg4, arg5);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -1697,51 +1171,21 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 1)
 			{
-				return InterruptMatchTarget0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				obj.InterruptMatchTarget();
+				return 0;
 			}
 			else if (count == 2)
 			{
-				return InterruptMatchTarget1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+				obj.InterruptMatchTarget(arg0);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.InterruptMatchTarget");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int InterruptMatchTarget0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			obj.InterruptMatchTarget();
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int InterruptMatchTarget1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			bool arg0 = LuaDLL.lua_toboolean(L, 2);
-			obj.InterruptMatchTarget(arg0);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -1758,204 +1202,84 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 3 && TypeChecker.CheckTypes<string, float>(L, 2))
 			{
-				return CrossFadeInFixedTime0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				obj.CrossFadeInFixedTime(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<int, float>(L, 2))
 			{
-				return CrossFadeInFixedTime1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				obj.CrossFadeInFixedTime(arg0, arg1);
+				return 0;
 			}
 			else if (count == 4 && TypeChecker.CheckTypes<string, float, int>(L, 2))
 			{
-				return CrossFadeInFixedTime2(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				obj.CrossFadeInFixedTime(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 4 && TypeChecker.CheckTypes<int, float, int>(L, 2))
 			{
-				return CrossFadeInFixedTime3(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				obj.CrossFadeInFixedTime(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 5 && TypeChecker.CheckTypes<string, float, int, float>(L, 2))
 			{
-				return CrossFadeInFixedTime4(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
+				obj.CrossFadeInFixedTime(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else if (count == 5 && TypeChecker.CheckTypes<int, float, int, float>(L, 2))
 			{
-				return CrossFadeInFixedTime5(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
+				obj.CrossFadeInFixedTime(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else if (count == 6 && TypeChecker.CheckTypes<string, float, int, float, float>(L, 2))
 			{
-				return CrossFadeInFixedTime6(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
+				float arg4 = (float)LuaDLL.lua_tonumber(L, 6);
+				obj.CrossFadeInFixedTime(arg0, arg1, arg2, arg3, arg4);
+				return 0;
 			}
 			else if (count == 6 && TypeChecker.CheckTypes<int, float, int, float, float>(L, 2))
 			{
-				return CrossFadeInFixedTime7(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
+				float arg4 = (float)LuaDLL.lua_tonumber(L, 6);
+				obj.CrossFadeInFixedTime(arg0, arg1, arg2, arg3, arg4);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.CrossFadeInFixedTime");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFadeInFixedTime0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			obj.CrossFadeInFixedTime(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFadeInFixedTime1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			obj.CrossFadeInFixedTime(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFadeInFixedTime2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			obj.CrossFadeInFixedTime(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFadeInFixedTime3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			obj.CrossFadeInFixedTime(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFadeInFixedTime4(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
-			obj.CrossFadeInFixedTime(arg0, arg1, arg2, arg3);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFadeInFixedTime5(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
-			obj.CrossFadeInFixedTime(arg0, arg1, arg2, arg3);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFadeInFixedTime6(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
-			float arg4 = (float)LuaDLL.lua_tonumber(L, 6);
-			obj.CrossFadeInFixedTime(arg0, arg1, arg2, arg3, arg4);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFadeInFixedTime7(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
-			float arg4 = (float)LuaDLL.lua_tonumber(L, 6);
-			obj.CrossFadeInFixedTime(arg0, arg1, arg2, arg3, arg4);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -1972,204 +1296,84 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 3 && TypeChecker.CheckTypes<string, float>(L, 2))
 			{
-				return CrossFade0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				obj.CrossFade(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<int, float>(L, 2))
 			{
-				return CrossFade1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				obj.CrossFade(arg0, arg1);
+				return 0;
 			}
 			else if (count == 4 && TypeChecker.CheckTypes<string, float, int>(L, 2))
 			{
-				return CrossFade2(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				obj.CrossFade(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 4 && TypeChecker.CheckTypes<int, float, int>(L, 2))
 			{
-				return CrossFade3(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				obj.CrossFade(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 5 && TypeChecker.CheckTypes<string, float, int, float>(L, 2))
 			{
-				return CrossFade4(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
+				obj.CrossFade(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else if (count == 5 && TypeChecker.CheckTypes<int, float, int, float>(L, 2))
 			{
-				return CrossFade5(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
+				obj.CrossFade(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else if (count == 6 && TypeChecker.CheckTypes<string, float, int, float, float>(L, 2))
 			{
-				return CrossFade6(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
+				float arg4 = (float)LuaDLL.lua_tonumber(L, 6);
+				obj.CrossFade(arg0, arg1, arg2, arg3, arg4);
+				return 0;
 			}
 			else if (count == 6 && TypeChecker.CheckTypes<int, float, int, float, float>(L, 2))
 			{
-				return CrossFade7(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
+				float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
+				float arg4 = (float)LuaDLL.lua_tonumber(L, 6);
+				obj.CrossFade(arg0, arg1, arg2, arg3, arg4);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.CrossFade");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFade0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			obj.CrossFade(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFade1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			obj.CrossFade(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFade2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			obj.CrossFade(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFade3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			obj.CrossFade(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFade4(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
-			obj.CrossFade(arg0, arg1, arg2, arg3);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFade5(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
-			obj.CrossFade(arg0, arg1, arg2, arg3);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFade6(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
-			float arg4 = (float)LuaDLL.lua_tonumber(L, 6);
-			obj.CrossFade(arg0, arg1, arg2, arg3, arg4);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CrossFade7(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			float arg3 = (float)LuaDLL.lua_tonumber(L, 5);
-			float arg4 = (float)LuaDLL.lua_tonumber(L, 6);
-			obj.CrossFade(arg0, arg1, arg2, arg3, arg4);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -2186,146 +1390,56 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 2 && TypeChecker.CheckTypes<string>(L, 2))
 			{
-				return PlayInFixedTime0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				obj.PlayInFixedTime(arg0);
+				return 0;
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<int>(L, 2))
 			{
-				return PlayInFixedTime1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				obj.PlayInFixedTime(arg0);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<string, int>(L, 2))
 			{
-				return PlayInFixedTime2(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				obj.PlayInFixedTime(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<int, int>(L, 2))
 			{
-				return PlayInFixedTime3(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				obj.PlayInFixedTime(arg0, arg1);
+				return 0;
 			}
 			else if (count == 4 && TypeChecker.CheckTypes<string, int, float>(L, 2))
 			{
-				return PlayInFixedTime4(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
+				obj.PlayInFixedTime(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 4 && TypeChecker.CheckTypes<int, int, float>(L, 2))
 			{
-				return PlayInFixedTime5(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
+				obj.PlayInFixedTime(arg0, arg1, arg2);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Animator.PlayInFixedTime");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int PlayInFixedTime0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			obj.PlayInFixedTime(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int PlayInFixedTime1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			obj.PlayInFixedTime(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int PlayInFixedTime2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			obj.PlayInFixedTime(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int PlayInFixedTime3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			obj.PlayInFixedTime(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int PlayInFixedTime4(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			obj.PlayInFixedTime(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int PlayInFixedTime5(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			obj.PlayInFixedTime(arg0, arg1, arg2);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -2342,27 +1456,51 @@ internal class UnityEngine_AnimatorWrap
 
 			if (count == 2 && TypeChecker.CheckTypes<string>(L, 2))
 			{
-				return Play0(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				obj.Play(arg0);
+				return 0;
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<int>(L, 2))
 			{
-				return Play1(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				obj.Play(arg0);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<string, int>(L, 2))
 			{
-				return Play2(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				obj.Play(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<int, int>(L, 2))
 			{
-				return Play3(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				obj.Play(arg0, arg1);
+				return 0;
 			}
 			else if (count == 4 && TypeChecker.CheckTypes<string, int, float>(L, 2))
 			{
-				return Play4(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				string arg0 = ToLua.ToString(L, 2);
+				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
+				obj.Play(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 4 && TypeChecker.CheckTypes<int, int, float>(L, 2))
 			{
-				return Play5(L);
+				UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
+				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
+				obj.Play(arg0, arg1, arg2);
+				return 0;
 			}
 			else
 			{
@@ -2376,126 +1514,12 @@ internal class UnityEngine_AnimatorWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Play0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			obj.Play(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Play1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			obj.Play(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Play2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			obj.Play(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Play3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			obj.Play(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Play4(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			string arg0 = ToLua.ToString(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			obj.Play(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Play5(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Animator)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			obj.Play(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int SetTarget(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.AvatarTarget arg0 = (UnityEngine.AvatarTarget)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 			obj.SetTarget(arg0, arg1);
@@ -2513,9 +1537,9 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			UnityEngine.HumanBodyBones arg0 = (UnityEngine.HumanBodyBones)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetBoneTransform(arg0);
+			UnityEngine.Transform o = obj.GetBoneTransform(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -2531,7 +1555,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			obj.StartPlayback();
 			return 0;
 		}
@@ -2547,7 +1571,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			obj.StopPlayback();
 			return 0;
 		}
@@ -2563,7 +1587,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			obj.StartRecording(arg0);
 			return 0;
@@ -2580,7 +1604,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			obj.StopRecording();
 			return 0;
 		}
@@ -2596,10 +1620,10 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
-			var o = obj.HasState(arg0, arg1);
+			bool o = obj.HasState(arg0, arg1);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -2616,7 +1640,7 @@ internal class UnityEngine_AnimatorWrap
 		{
 			ToLua.CheckArgsCount(L, 1);
 			string arg0 = ToLua.CheckString(L, 1);
-			var o = UnityEngine.Animator.StringToHash(arg0);
+			int o = UnityEngine.Animator.StringToHash(arg0);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
@@ -2632,7 +1656,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 			obj.Update(arg0);
 			return 0;
@@ -2649,7 +1673,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			obj.Rebind();
 			return 0;
 		}
@@ -2665,7 +1689,7 @@ internal class UnityEngine_AnimatorWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
+			UnityEngine.Animator obj = (UnityEngine.Animator)ToLua.CheckObject<UnityEngine.Animator>(L, 1);
 			obj.ApplyBuiltinRootMotion();
 			return 0;
 		}

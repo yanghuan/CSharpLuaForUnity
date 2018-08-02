@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_AnimationClipWrap
+public class UnityEngine_AnimationClipWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -48,7 +48,7 @@ internal class UnityEngine_AnimationClipWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.AnimationClip();
+				UnityEngine.AnimationClip obj = new UnityEngine.AnimationClip();
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}
@@ -69,7 +69,7 @@ internal class UnityEngine_AnimationClipWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.AnimationClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationClip));
+			UnityEngine.AnimationClip obj = (UnityEngine.AnimationClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationClip));
 			UnityEngine.AnimationEvent arg0 = (UnityEngine.AnimationEvent)ToLua.CheckObject(L, 2, typeof(UnityEngine.AnimationEvent));
 			obj.AddEvent(arg0);
 			return 0;
@@ -86,7 +86,7 @@ internal class UnityEngine_AnimationClipWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.AnimationClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationClip));
+			UnityEngine.AnimationClip obj = (UnityEngine.AnimationClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationClip));
 			UnityEngine.GameObject arg0 = (UnityEngine.GameObject)ToLua.CheckObject(L, 2, typeof(UnityEngine.GameObject));
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 			obj.SampleAnimation(arg0, arg1);
@@ -104,7 +104,7 @@ internal class UnityEngine_AnimationClipWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 5);
-			var obj = (UnityEngine.AnimationClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationClip));
+			UnityEngine.AnimationClip obj = (UnityEngine.AnimationClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationClip));
 			string arg0 = ToLua.CheckString(L, 2);
 			System.Type arg1 = ToLua.CheckMonoType(L, 3);
 			string arg2 = ToLua.CheckString(L, 4);
@@ -124,7 +124,7 @@ internal class UnityEngine_AnimationClipWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.AnimationClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationClip));
+			UnityEngine.AnimationClip obj = (UnityEngine.AnimationClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationClip));
 			obj.EnsureQuaternionContinuity();
 			return 0;
 		}
@@ -140,7 +140,7 @@ internal class UnityEngine_AnimationClipWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.AnimationClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationClip));
+			UnityEngine.AnimationClip obj = (UnityEngine.AnimationClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationClip));
 			obj.ClearCurves();
 			return 0;
 		}

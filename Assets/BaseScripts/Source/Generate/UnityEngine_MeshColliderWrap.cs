@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_MeshColliderWrap
+public class UnityEngine_MeshColliderWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -37,7 +37,7 @@ internal class UnityEngine_MeshColliderWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.MeshCollider();
+				UnityEngine.MeshCollider obj = new UnityEngine.MeshCollider();
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}

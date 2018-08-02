@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_ColliderWrap
+public class UnityEngine_ColliderWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -44,7 +44,7 @@ internal class UnityEngine_ColliderWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.Collider();
+				UnityEngine.Collider obj = new UnityEngine.Collider();
 				ToLua.Push(L, obj);
 				return 1;
 			}
@@ -65,9 +65,9 @@ internal class UnityEngine_ColliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Collider)ToLua.CheckObject<UnityEngine.Collider>(L, 1);
+			UnityEngine.Collider obj = (UnityEngine.Collider)ToLua.CheckObject<UnityEngine.Collider>(L, 1);
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.ClosestPointOnBounds(arg0);
+			UnityEngine.Vector3 o = obj.ClosestPointOnBounds(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -83,9 +83,9 @@ internal class UnityEngine_ColliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Collider)ToLua.CheckObject<UnityEngine.Collider>(L, 1);
+			UnityEngine.Collider obj = (UnityEngine.Collider)ToLua.CheckObject<UnityEngine.Collider>(L, 1);
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.ClosestPoint(arg0);
+			UnityEngine.Vector3 o = obj.ClosestPoint(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -101,11 +101,11 @@ internal class UnityEngine_ColliderWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 4);
-			var obj = (UnityEngine.Collider)ToLua.CheckObject<UnityEngine.Collider>(L, 1);
+			UnityEngine.Collider obj = (UnityEngine.Collider)ToLua.CheckObject<UnityEngine.Collider>(L, 1);
 			UnityEngine.Ray arg0 = ToLua.ToRay(L, 2);
 			UnityEngine.RaycastHit arg1;
 			float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
-			var o = obj.Raycast(arg0, out arg1, arg2);
+			bool o = obj.Raycast(arg0, out arg1, arg2);
 			LuaDLL.lua_pushboolean(L, o);
 			if (o) ToLua.Push(L, arg1); else LuaDLL.lua_pushnil(L);
 			return 2;

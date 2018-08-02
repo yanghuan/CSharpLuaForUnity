@@ -3,14 +3,14 @@ using System;
 using System.Collections.Generic;
 using LuaInterface;
 using UnityEditor;
+
 using BindType = ToLuaMenu.BindType;
 using System.Reflection;
 
 public static class CustomSettings
 {
-    public static string saveDir = LuaConst.rootDir + CSharpLua.Settings.Paths.kBaseScriptsDir + "/Source/Generate/";    
-    public static string toluaBaseType = LuaConst.rootDir + CSharpLua.Settings.Paths.kBaseScriptsDir + "/ToLua/BaseType/";
-    public static string metaXmlDir = Application.dataPath + "/../CSharpLuaTools/";
+    public static string saveDir = Application.dataPath + CSharpLua.Settings.Paths.kBaseScriptsDir + "/Source/Generate/";    
+    public static string toluaBaseType = Application.dataPath + CSharpLua.Settings.Paths.kBaseScriptsDir + "/ToLua/BaseType/";    
 
     //导出时强制做为静态类的类型(注意customTypeList 还要添加这个类型才能导出)
     //unity 有些类作为sealed class, 其实完全等价于静态类
@@ -32,7 +32,7 @@ public static class CustomSettings
     //附加导出委托类型(在导出委托时, customTypeList 中牵扯的委托类型都会导出， 无需写在这里)
     public static DelegateType[] customDelegateList = 
     {        
-        _DT(typeof(Action)),
+        _DT(typeof(Action)),                
         _DT(typeof(UnityEngine.Events.UnityAction)),
         _DT(typeof(System.Predicate<int>)),
         _DT(typeof(System.Action<int>)),
@@ -40,9 +40,9 @@ public static class CustomSettings
         _DT(typeof(System.Func<int, int>)),
     };
 
-    //在这里添加你要导出注册到lua的类型列表
-    public static BindType[] customTypeList_ =
-    {                
+  //在这里添加你要导出注册到lua的类型列表
+  public static BindType[] customTypeList_ =
+  {                
         //------------------------为例子导出--------------------------------
         //_GT(typeof(TestEventListener)),
         //_GT(typeof(TestProtol)),
@@ -76,42 +76,44 @@ public static class CustomSettings
         //_GT(typeof(LineRenderer)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),
         //_GT(typeof(TrailRenderer)).AddExtendType(typeof(DG.Tweening.ShortcutExtensions)),    
 #else
+                                         
         _GT(typeof(Component)),
-        _GT(typeof(Transform)),
-        _GT(typeof(Material)),
-        _GT(typeof(Light)),
-        _GT(typeof(Rigidbody)),
-        _GT(typeof(Camera)),
-        _GT(typeof(AudioSource)),
+		_GT(typeof(Transform)),
+		_GT(typeof(Material)),
+		_GT(typeof(Light)),
+		_GT(typeof(Rigidbody)),
+		_GT(typeof(Camera)),
+		_GT(typeof(AudioSource)),
+        //_GT(typeof(LineRenderer))
+        //_GT(typeof(TrailRenderer))
 #endif
-        _GT(typeof(YieldInstruction)),
-        _GT(typeof(WaitForEndOfFrame)),
-        _GT(typeof(WaitForFixedUpdate)),
-        _GT(typeof(WaitForSeconds)),
 
-        _GT(typeof(UnityEngine.Object)),
-        _GT(typeof(Behaviour)),
-        _GT(typeof(MonoBehaviour)),
+		_GT(typeof(YieldInstruction)),
+		_GT(typeof(WaitForEndOfFrame)),
+		_GT(typeof(WaitForFixedUpdate)),
+		_GT(typeof(WaitForSeconds)),
+
+		_GT(typeof(Behaviour)),
+        _GT(typeof(MonoBehaviour)),        
         _GT(typeof(GameObject)),
         _GT(typeof(TrackedReference)),
         _GT(typeof(Application)),
         _GT(typeof(Physics)),
         _GT(typeof(Collider)),
-        _GT(typeof(Time)),
+        _GT(typeof(Time)),        
         _GT(typeof(Texture)),
         _GT(typeof(Texture2D)),
-        _GT(typeof(Shader)),
+        _GT(typeof(Shader)),        
         _GT(typeof(Renderer)),
         _GT(typeof(WWW)),
-        _GT(typeof(Screen)),
+        _GT(typeof(Screen)),        
         _GT(typeof(CameraClearFlags)),
-        _GT(typeof(AudioClip)),
+        _GT(typeof(AudioClip)),        
         _GT(typeof(AssetBundle)),
         _GT(typeof(ParticleSystem)),
-        _GT(typeof(AsyncOperation)).SetBaseType(typeof(System.Object)),
+        _GT(typeof(AsyncOperation)).SetBaseType(typeof(System.Object)),        
         _GT(typeof(LightType)),
         _GT(typeof(SleepTimeout)),
-        _GT(typeof(UnityEngine.Random)),
 #if UNITY_5_3_OR_NEWER && !UNITY_5_6_OR_NEWER
         _GT(typeof(UnityEngine.Experimental.Director.DirectorPlayer)),
 #endif
@@ -119,9 +121,8 @@ public static class CustomSettings
         _GT(typeof(Input)),
         _GT(typeof(KeyCode)),
         _GT(typeof(SkinnedMeshRenderer)),
-        _GT(typeof(Space)),
-        _GT(typeof(UnityEngine.SceneManagement.SceneManager)),
-
+        _GT(typeof(Space)),      
+       
 
         _GT(typeof(MeshRenderer)),
 #if !UNITY_5_4_OR_NEWER
@@ -129,108 +130,27 @@ public static class CustomSettings
         _GT(typeof(ParticleRenderer)),
         _GT(typeof(ParticleAnimator)), 
 #endif
-        #region UnitySystem
+
         _GT(typeof(BoxCollider)),
         _GT(typeof(MeshCollider)),
-        _GT(typeof(SphereCollider)),
+        _GT(typeof(SphereCollider)),        
         _GT(typeof(CharacterController)),
         _GT(typeof(CapsuleCollider)),
-        _GT(typeof(Animation)),
-        _GT(typeof(AnimationClip)).SetBaseType(typeof(UnityEngine.Object)),
+        
+        _GT(typeof(Animation)),        
+        _GT(typeof(AnimationClip)).SetBaseType(typeof(UnityEngine.Object)),        
         _GT(typeof(AnimationState)),
         _GT(typeof(AnimationBlendMode)),
-        _GT(typeof(QueueMode)),
+        _GT(typeof(QueueMode)),  
         _GT(typeof(PlayMode)),
         _GT(typeof(WrapMode)),
+
         _GT(typeof(QualitySettings)),
-        _GT(typeof(RenderSettings)),
-        _GT(typeof(BlendWeights)),
+        _GT(typeof(RenderSettings)),                                                   
+        _GT(typeof(BlendWeights)),           
         _GT(typeof(RenderTexture)),
-        _GT(typeof(Resources)),
-        _GT(typeof(TextAsset)),
-        _GT(typeof(Debug)),
-        _GT(typeof(UnityEngine.SpriteRenderer)),
-        _GT(typeof(UnityEngine.UI.GraphicRaycaster)),
-        _GT(typeof(AudioListener)),
-        _GT(typeof(SystemInfo)),
-        #endregion
-
-        #region Generic
-        _GT(typeof(Generic.ObjectExternions)),
-        _GT(typeof(Generic.GameObjectExternions)),
-        _GT(typeof(Generic.ComponentExternions)),
-        _GT(typeof(Generic.ResourcesExternions)),
-        #endregion
-
-
-        #region UGUI
-        _GT(typeof(RectTransform)),
-        _GT(typeof(Canvas)),
-        _GT(typeof(UnityEngine.UI.Button)),
-        _GT(typeof(UnityEngine.UI.Image)),
-        _GT(typeof(UnityEngine.UI.RawImage)),
-        _GT(typeof(UnityEngine.UI.Slider)),
-        _GT(typeof(UnityEngine.UI.InputField)),
-        _GT(typeof(UnityEngine.UI.Scrollbar)),
-        _GT(typeof(UnityEngine.UI.Toggle)),
-        _GT(typeof(UnityEngine.UI.ToggleGroup)),
-        _GT(typeof(UnityEngine.UI.Mask)),
-        _GT(typeof(UnityEngine.UI.Text)),
-        _GT(typeof(UnityEngine.Events.UnityEvent)),
-        _GT(typeof(UnityEngine.UI.Dropdown.DropdownEvent)),
-        _GT(typeof(UnityEngine.UI.Toggle.ToggleEvent)),
-        _GT(typeof(UnityEngine.UI.CanvasScaler)),
-        _GT(typeof(UnityEngine.UI.Dropdown)),
-        _GT(typeof(UnityEngine.EventSystems.EventSystem)),
-        _GT(typeof(UnityEngine.EventSystems.StandaloneInputModule)),
-        _GT(typeof(UnityEngine.UI.Dropdown.OptionData)),
-        _GT(typeof(CanvasGroup)),
-        _GT(typeof(UnityEngine.UI.InputField.OnChangeEvent)),
-        #endregion
-        
-        #region Lua
-        _GT(typeof(MonoManager)),
+        _GT(typeof(Resources)),     
         _GT(typeof(LuaProfiler)),
-        #endregion
-
-
-        #region Logic
-
-        #endregion
-        
-    };
-
-
-    // 需要忽略从而不baned的类
-    public static List<Type> skipMetaClassList = new List<Type>()
-    {
-        typeof(LuaByteBuffer),
-    };
-
-    // 在lua里已实现的类型
-    public static List<Type> luaImplementList = new List<Type>()
-    {
-        typeof(UnityEngine.Mathf),
-        typeof(Plane),
-        typeof(LayerMask),
-        typeof(Vector3),
-        typeof(Vector4),
-        typeof(Vector2),
-        typeof(Quaternion),
-        typeof(Ray),
-        typeof(Bounds),
-        typeof(Color),
-        typeof(Color32),
-        typeof(Touch),
-        typeof(RaycastHit),
-        typeof(TouchPhase),
-    };
-
-    // 需要强制禁用的类成员
-    public static HashSet<MemberInfo> banedMetaList = new HashSet<MemberInfo>()
-    {
-        typeof(MonoBehaviour).GetMethod("StartCoroutine", new Type[]{typeof(System.String) }),
-        typeof(MonoBehaviour).GetMethod("StartCoroutine", new Type[]{typeof(System.String),typeof(System.Object) }),
     };
 
     public static List<Type> dynamicList = new List<Type>()
@@ -344,6 +264,7 @@ public static class CustomSettings
       List<BindType> result = new List<BindType>(customTypeList_);
       AssemblyName[] names = Assembly.GetExecutingAssembly().GetReferencedAssemblies();
       foreach (AssemblyName name in names) {
+        if (name.FullName.Contains(CSharpLua.Settings.Paths.kBaseScripts)) {
           Assembly a = Assembly.Load(name);
           Type[] types = a.GetExportedTypes();
           foreach (Type type in types) {
@@ -351,6 +272,8 @@ public static class CustomSettings
               result.Add(_GT(type));
             }
           }
+          break;
+        }
       }
       return result.ToArray();
     }

@@ -78,13 +78,14 @@ public class TestProtoBuffer : LuaClient
     //读取协议 Socket.PeekMsgPacket() {return MsgPacket}; lua 中，取协议字节流 MsgPack.data 为 LuaStringBuffer类型
     //msg = Socket.PeekMsgPacket() 
     //pb_data = msg.data    
-    void Awake()
+    new void Awake()
     {
 #if UNITY_5 || UNITY_2017 || UNITY_2018
         Application.logMessageReceived += ShowTips;
 #else
         Application.RegisterLogCallback(ShowTips);
-#endif
+#endif  
+        base.Awake();
     }
 
     protected override LuaFileUtils InitLoader()

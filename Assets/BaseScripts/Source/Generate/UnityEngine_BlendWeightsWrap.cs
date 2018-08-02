@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_BlendWeightsWrap
+public class UnityEngine_BlendWeightsWrap
 {
 	public static void Register(LuaState L)
 	{

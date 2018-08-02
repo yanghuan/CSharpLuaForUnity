@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_YieldInstructionWrap
+public class UnityEngine_YieldInstructionWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -21,7 +21,7 @@ internal class UnityEngine_YieldInstructionWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.YieldInstruction();
+				UnityEngine.YieldInstruction obj = new UnityEngine.YieldInstruction();
 				ToLua.PushObject(L, obj);
 				return 1;
 			}

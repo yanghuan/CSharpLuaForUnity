@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_SleepTimeoutWrap
+public class UnityEngine_SleepTimeoutWrap
 {
 	public static void Register(LuaState L)
 	{

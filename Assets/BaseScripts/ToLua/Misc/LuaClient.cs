@@ -25,7 +25,6 @@ using LuaInterface;
 using System.Collections;
 using System.IO;
 using System;
-using CSharpLua;
 #if UNITY_5_4_OR_NEWER
 using UnityEngine.SceneManagement;
 #endif
@@ -167,15 +166,9 @@ public class LuaClient : MonoBehaviour
         LoadLuaFiles();        
     }
 
-    public void StartUp()
+    protected void Awake()
     {
         Instance = this;
-        if (!Settings.kIsRunFromLua)
-        {
-            StartMain();
-            return;
-        }
-
         Init();
 
 #if UNITY_5_4_OR_NEWER

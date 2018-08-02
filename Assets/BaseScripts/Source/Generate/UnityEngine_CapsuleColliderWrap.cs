@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_CapsuleColliderWrap
+public class UnityEngine_CapsuleColliderWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -34,7 +34,7 @@ internal class UnityEngine_CapsuleColliderWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.CapsuleCollider();
+				UnityEngine.CapsuleCollider obj = new UnityEngine.CapsuleCollider();
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}

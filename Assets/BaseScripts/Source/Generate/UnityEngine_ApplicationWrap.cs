@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_ApplicationWrap
+public class UnityEngine_ApplicationWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -10,11 +10,7 @@ internal class UnityEngine_ApplicationWrap
 		L.RegFunction("Quit", Quit);
 		L.RegFunction("Unload", Unload);
 		L.RegFunction("GetStreamProgressForLevel", GetStreamProgressForLevel);
-		L.RegFunction("GetStreamProgressForLevel0", GetStreamProgressForLevel0);
-		L.RegFunction("GetStreamProgressForLevel1", GetStreamProgressForLevel1);
 		L.RegFunction("CanStreamedLevelBeLoaded", CanStreamedLevelBeLoaded);
-		L.RegFunction("CanStreamedLevelBeLoaded0", CanStreamedLevelBeLoaded0);
-		L.RegFunction("CanStreamedLevelBeLoaded1", CanStreamedLevelBeLoaded1);
 		L.RegFunction("GetBuildTags", GetBuildTags);
 		L.RegFunction("SetBuildTags", SetBuildTags);
 		L.RegFunction("HasProLicense", HasProLicense);
@@ -42,7 +38,7 @@ internal class UnityEngine_ApplicationWrap
 		L.RegFunction("getisConsolePlatform", get_isConsolePlatform);
 		L.RegVar("runInBackground", get_runInBackground, set_runInBackground);
 		L.RegFunction("getrunInBackground", get_runInBackground);
-		L.RegFunction("setrunInBackground", set_runInBackgroundter);
+		L.RegFunction("setrunInBackground", set_runInBackground);
 		L.RegVar("dataPath", get_dataPath, null);
 		L.RegFunction("getdataPath", get_dataPath);
 		L.RegVar("streamingAssetsPath", get_streamingAssetsPath, null);
@@ -73,12 +69,12 @@ internal class UnityEngine_ApplicationWrap
 		L.RegFunction("getcloudProjectId", get_cloudProjectId);
 		L.RegVar("targetFrameRate", get_targetFrameRate, set_targetFrameRate);
 		L.RegFunction("gettargetFrameRate", get_targetFrameRate);
-		L.RegFunction("settargetFrameRate", set_targetFrameRateter);
+		L.RegFunction("settargetFrameRate", set_targetFrameRate);
 		L.RegVar("systemLanguage", get_systemLanguage, null);
 		L.RegFunction("getsystemLanguage", get_systemLanguage);
 		L.RegVar("backgroundLoadingPriority", get_backgroundLoadingPriority, set_backgroundLoadingPriority);
 		L.RegFunction("getbackgroundLoadingPriority", get_backgroundLoadingPriority);
-		L.RegFunction("setbackgroundLoadingPriority", set_backgroundLoadingPriorityter);
+		L.RegFunction("setbackgroundLoadingPriority", set_backgroundLoadingPriority);
 		L.RegVar("internetReachability", get_internetReachability, null);
 		L.RegFunction("getinternetReachability", get_internetReachability);
 		L.RegVar("genuine", get_genuine, null);
@@ -136,52 +132,22 @@ internal class UnityEngine_ApplicationWrap
 
 			if (count == 1 && TypeChecker.CheckTypes<int>(L, 1))
 			{
-				return GetStreamProgressForLevel0(L);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
+				float o = UnityEngine.Application.GetStreamProgressForLevel(arg0);
+				LuaDLL.lua_pushnumber(L, o);
+				return 1;
 			}
 			else if (count == 1 && TypeChecker.CheckTypes<string>(L, 1))
 			{
-				return GetStreamProgressForLevel1(L);
+				string arg0 = ToLua.ToString(L, 1);
+				float o = UnityEngine.Application.GetStreamProgressForLevel(arg0);
+				LuaDLL.lua_pushnumber(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Application.GetStreamProgressForLevel");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetStreamProgressForLevel0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
-			var o = UnityEngine.Application.GetStreamProgressForLevel(arg0);
-			LuaDLL.lua_pushnumber(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetStreamProgressForLevel1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			var o = UnityEngine.Application.GetStreamProgressForLevel(arg0);
-			LuaDLL.lua_pushnumber(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -198,11 +164,17 @@ internal class UnityEngine_ApplicationWrap
 
 			if (count == 1 && TypeChecker.CheckTypes<int>(L, 1))
 			{
-				return CanStreamedLevelBeLoaded0(L);
+				int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
+				bool o = UnityEngine.Application.CanStreamedLevelBeLoaded(arg0);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else if (count == 1 && TypeChecker.CheckTypes<string>(L, 1))
 			{
-				return CanStreamedLevelBeLoaded1(L);
+				string arg0 = ToLua.ToString(L, 1);
+				bool o = UnityEngine.Application.CanStreamedLevelBeLoaded(arg0);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else
 			{
@@ -216,48 +188,12 @@ internal class UnityEngine_ApplicationWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CanStreamedLevelBeLoaded0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
-			var o = UnityEngine.Application.CanStreamedLevelBeLoaded(arg0);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int CanStreamedLevelBeLoaded1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			var o = UnityEngine.Application.CanStreamedLevelBeLoaded(arg0);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetBuildTags(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 0);
-			var o = UnityEngine.Application.GetBuildTags();
+			string[] o = UnityEngine.Application.GetBuildTags();
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -289,7 +225,7 @@ internal class UnityEngine_ApplicationWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 0);
-			var o = UnityEngine.Application.HasProLicense();
+			bool o = UnityEngine.Application.HasProLicense();
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -306,7 +242,7 @@ internal class UnityEngine_ApplicationWrap
 		{
 			ToLua.CheckArgsCount(L, 1);
 			UnityEngine.Application.AdvertisingIdentifierCallback arg0 = (UnityEngine.Application.AdvertisingIdentifierCallback)ToLua.CheckDelegate<UnityEngine.Application.AdvertisingIdentifierCallback>(L, 1);
-			var o = UnityEngine.Application.RequestAdvertisingIdentifierAsync(arg0);
+			bool o = UnityEngine.Application.RequestAdvertisingIdentifierAsync(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -339,7 +275,7 @@ internal class UnityEngine_ApplicationWrap
 		{
 			ToLua.CheckArgsCount(L, 1);
 			UnityEngine.LogType arg0 = (UnityEngine.LogType)LuaDLL.luaL_checknumber(L, 1);
-			var o = UnityEngine.Application.GetStackTraceLogType(arg0);
+			UnityEngine.StackTraceLogType o = UnityEngine.Application.GetStackTraceLogType(arg0);
 			LuaDLL.lua_pushinteger(L, (int)o);
 			return 1;
 		}
@@ -373,7 +309,7 @@ internal class UnityEngine_ApplicationWrap
 		{
 			ToLua.CheckArgsCount(L, 1);
 			UnityEngine.UserAuthorization arg0 = (UnityEngine.UserAuthorization)LuaDLL.luaL_checknumber(L, 1);
-			var o = UnityEngine.Application.RequestUserAuthorization(arg0);
+			UnityEngine.AsyncOperation o = UnityEngine.Application.RequestUserAuthorization(arg0);
 			ToLua.PushObject(L, o);
 			return 1;
 		}
@@ -390,7 +326,7 @@ internal class UnityEngine_ApplicationWrap
 		{
 			ToLua.CheckArgsCount(L, 1);
 			UnityEngine.UserAuthorization arg0 = (UnityEngine.UserAuthorization)LuaDLL.luaL_checknumber(L, 1);
-			var o = UnityEngine.Application.HasUserAuthorization(arg0);
+			bool o = UnityEngine.Application.HasUserAuthorization(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -864,21 +800,6 @@ internal class UnityEngine_ApplicationWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_runInBackgroundter(IntPtr L)
-	{
-		try
-		{
-			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
-			UnityEngine.Application.runInBackground = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_targetFrameRate(IntPtr L)
 	{
 		try
@@ -894,41 +815,11 @@ internal class UnityEngine_ApplicationWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_targetFrameRateter(IntPtr L)
-	{
-		try
-		{
-			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
-			UnityEngine.Application.targetFrameRate = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_backgroundLoadingPriority(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.ThreadPriority arg0 = (UnityEngine.ThreadPriority)LuaDLL.luaL_checknumber(L, 2);
-			UnityEngine.Application.backgroundLoadingPriority = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_backgroundLoadingPriorityter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.ThreadPriority arg0 = (UnityEngine.ThreadPriority)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.Application.backgroundLoadingPriority = arg0;
 			return 0;
 		}

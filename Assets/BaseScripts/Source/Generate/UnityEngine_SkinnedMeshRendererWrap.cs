@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_SkinnedMeshRendererWrap
+public class UnityEngine_SkinnedMeshRendererWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -46,7 +46,7 @@ internal class UnityEngine_SkinnedMeshRendererWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.SkinnedMeshRenderer();
+				UnityEngine.SkinnedMeshRenderer obj = new UnityEngine.SkinnedMeshRenderer();
 				ToLua.Push(L, obj);
 				return 1;
 			}
@@ -67,9 +67,9 @@ internal class UnityEngine_SkinnedMeshRendererWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.SkinnedMeshRenderer)ToLua.CheckObject<UnityEngine.SkinnedMeshRenderer>(L, 1);
+			UnityEngine.SkinnedMeshRenderer obj = (UnityEngine.SkinnedMeshRenderer)ToLua.CheckObject<UnityEngine.SkinnedMeshRenderer>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetBlendShapeWeight(arg0);
+			float o = obj.GetBlendShapeWeight(arg0);
 			LuaDLL.lua_pushnumber(L, o);
 			return 1;
 		}
@@ -85,7 +85,7 @@ internal class UnityEngine_SkinnedMeshRendererWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.SkinnedMeshRenderer)ToLua.CheckObject<UnityEngine.SkinnedMeshRenderer>(L, 1);
+			UnityEngine.SkinnedMeshRenderer obj = (UnityEngine.SkinnedMeshRenderer)ToLua.CheckObject<UnityEngine.SkinnedMeshRenderer>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 			obj.SetBlendShapeWeight(arg0, arg1);
@@ -103,7 +103,7 @@ internal class UnityEngine_SkinnedMeshRendererWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.SkinnedMeshRenderer)ToLua.CheckObject<UnityEngine.SkinnedMeshRenderer>(L, 1);
+			UnityEngine.SkinnedMeshRenderer obj = (UnityEngine.SkinnedMeshRenderer)ToLua.CheckObject<UnityEngine.SkinnedMeshRenderer>(L, 1);
 			UnityEngine.Mesh arg0 = (UnityEngine.Mesh)ToLua.CheckObject(L, 2, typeof(UnityEngine.Mesh));
 			obj.BakeMesh(arg0);
 			return 0;

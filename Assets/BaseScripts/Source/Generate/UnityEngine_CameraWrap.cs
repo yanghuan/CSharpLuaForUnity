@@ -2,25 +2,18 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_CameraWrap
+public class UnityEngine_CameraWrap
 {
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(UnityEngine.Camera), typeof(UnityEngine.Behaviour));
 		L.RegFunction("SetTargetBuffers", SetTargetBuffers);
-		L.RegFunction("SetTargetBuffers0", SetTargetBuffers0);
-		L.RegFunction("SetTargetBuffers1", SetTargetBuffers1);
 		L.RegFunction("GetAllCameras", GetAllCameras);
 		L.RegFunction("Render", Render);
 		L.RegFunction("RenderWithShader", RenderWithShader);
 		L.RegFunction("RenderDontRestore", RenderDontRestore);
 		L.RegFunction("SetupCurrent", SetupCurrent);
 		L.RegFunction("RenderToCubemap", RenderToCubemap);
-		L.RegFunction("RenderToCubemap0", RenderToCubemap0);
-		L.RegFunction("RenderToCubemap1", RenderToCubemap1);
-		L.RegFunction("RenderToCubemap2", RenderToCubemap2);
-		L.RegFunction("RenderToCubemap3", RenderToCubemap3);
-		L.RegFunction("RenderToCubemap4", RenderToCubemap4);
 		L.RegFunction("CopyFrom", CopyFrom);
 		L.RegFunction("GetCommandBuffers", GetCommandBuffers);
 		L.RegFunction("ResetTransparencySortSettings", ResetTransparencySortSettings);
@@ -220,7 +213,7 @@ internal class UnityEngine_CameraWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.Camera();
+				UnityEngine.Camera obj = new UnityEngine.Camera();
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}
@@ -244,54 +237,24 @@ internal class UnityEngine_CameraWrap
 
 			if (count == 3 && TypeChecker.CheckTypes<UnityEngine.RenderBuffer, UnityEngine.RenderBuffer>(L, 2))
 			{
-				return SetTargetBuffers0(L);
+				UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+				UnityEngine.RenderBuffer arg0 = StackTraits<UnityEngine.RenderBuffer>.To(L, 2);
+				UnityEngine.RenderBuffer arg1 = StackTraits<UnityEngine.RenderBuffer>.To(L, 3);
+				obj.SetTargetBuffers(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<UnityEngine.RenderBuffer[], UnityEngine.RenderBuffer>(L, 2))
 			{
-				return SetTargetBuffers1(L);
+				UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+				UnityEngine.RenderBuffer[] arg0 = ToLua.ToStructArray<UnityEngine.RenderBuffer>(L, 2);
+				UnityEngine.RenderBuffer arg1 = StackTraits<UnityEngine.RenderBuffer>.To(L, 3);
+				obj.SetTargetBuffers(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Camera.SetTargetBuffers");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetTargetBuffers0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Camera)ToLua.ToObject(L, 1);
-			UnityEngine.RenderBuffer arg0 = StackTraits<UnityEngine.RenderBuffer>.To(L, 2);
-			UnityEngine.RenderBuffer arg1 = StackTraits<UnityEngine.RenderBuffer>.To(L, 3);
-			obj.SetTargetBuffers(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetTargetBuffers1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Camera)ToLua.ToObject(L, 1);
-			UnityEngine.RenderBuffer[] arg0 = ToLua.ToStructArray<UnityEngine.RenderBuffer>(L, 2);
-			UnityEngine.RenderBuffer arg1 = StackTraits<UnityEngine.RenderBuffer>.To(L, 3);
-			obj.SetTargetBuffers(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -306,7 +269,7 @@ internal class UnityEngine_CameraWrap
 		{
 			ToLua.CheckArgsCount(L, 1);
 			UnityEngine.Camera[] arg0 = ToLua.CheckObjectArray<UnityEngine.Camera>(L, 1);
-			var o = UnityEngine.Camera.GetAllCameras(arg0);
+			int o = UnityEngine.Camera.GetAllCameras(arg0);
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
@@ -322,7 +285,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			obj.Render();
 			return 0;
 		}
@@ -338,7 +301,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Shader arg0 = (UnityEngine.Shader)ToLua.CheckObject(L, 2, typeof(UnityEngine.Shader));
 			string arg1 = ToLua.CheckString(L, 3);
 			obj.RenderWithShader(arg0, arg1);
@@ -356,7 +319,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			obj.RenderDontRestore();
 			return 0;
 		}
@@ -391,23 +354,47 @@ internal class UnityEngine_CameraWrap
 
 			if (count == 2 && TypeChecker.CheckTypes<UnityEngine.Cubemap>(L, 2))
 			{
-				return RenderToCubemap0(L);
+				UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+				UnityEngine.Cubemap arg0 = (UnityEngine.Cubemap)ToLua.ToObject(L, 2);
+				bool o = obj.RenderToCubemap(arg0);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<UnityEngine.RenderTexture>(L, 2))
 			{
-				return RenderToCubemap1(L);
+				UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+				UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.ToObject(L, 2);
+				bool o = obj.RenderToCubemap(arg0);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<UnityEngine.Cubemap, int>(L, 2))
 			{
-				return RenderToCubemap2(L);
+				UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+				UnityEngine.Cubemap arg0 = (UnityEngine.Cubemap)ToLua.ToObject(L, 2);
+				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				bool o = obj.RenderToCubemap(arg0, arg1);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<UnityEngine.RenderTexture, int>(L, 2))
 			{
-				return RenderToCubemap3(L);
+				UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+				UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.ToObject(L, 2);
+				int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
+				bool o = obj.RenderToCubemap(arg0, arg1);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else if (count == 4)
 			{
-				return RenderToCubemap4(L);
+				UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+				UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				UnityEngine.Camera.MonoOrStereoscopicEye arg2 = (UnityEngine.Camera.MonoOrStereoscopicEye)LuaDLL.luaL_checknumber(L, 4);
+				bool o = obj.RenderToCubemap(arg0, arg1, arg2);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else
 			{
@@ -421,111 +408,12 @@ internal class UnityEngine_CameraWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int RenderToCubemap0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Camera)ToLua.ToObject(L, 1);
-			UnityEngine.Cubemap arg0 = (UnityEngine.Cubemap)ToLua.ToObject(L, 2);
-			var o = obj.RenderToCubemap(arg0);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int RenderToCubemap1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Camera)ToLua.ToObject(L, 1);
-			UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.ToObject(L, 2);
-			var o = obj.RenderToCubemap(arg0);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int RenderToCubemap2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Camera)ToLua.ToObject(L, 1);
-			UnityEngine.Cubemap arg0 = (UnityEngine.Cubemap)ToLua.ToObject(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			var o = obj.RenderToCubemap(arg0, arg1);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int RenderToCubemap3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Camera)ToLua.ToObject(L, 1);
-			UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.ToObject(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			var o = obj.RenderToCubemap(arg0, arg1);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int RenderToCubemap4(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Camera)ToLua.ToObject(L, 1);
-			UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.ToObject(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			UnityEngine.Camera.MonoOrStereoscopicEye arg2 = (UnityEngine.Camera.MonoOrStereoscopicEye)LuaDLL.lua_tonumber(L, 4);
-			var o = obj.RenderToCubemap(arg0, arg1, arg2);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int CopyFrom(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Camera arg0 = (UnityEngine.Camera)ToLua.CheckObject(L, 2, typeof(UnityEngine.Camera));
 			obj.CopyFrom(arg0);
 			return 0;
@@ -542,9 +430,9 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Rendering.CameraEvent arg0 = (UnityEngine.Rendering.CameraEvent)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetCommandBuffers(arg0);
+			UnityEngine.Rendering.CommandBuffer[] o = obj.GetCommandBuffers(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -560,7 +448,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			obj.ResetTransparencySortSettings();
 			return 0;
 		}
@@ -576,7 +464,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			obj.ResetAspect();
 			return 0;
 		}
@@ -592,7 +480,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			obj.ResetCullingMatrix();
 			return 0;
 		}
@@ -608,7 +496,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Shader arg0 = (UnityEngine.Shader)ToLua.CheckObject(L, 2, typeof(UnityEngine.Shader));
 			string arg1 = ToLua.CheckString(L, 3);
 			obj.SetReplacementShader(arg0, arg1);
@@ -626,7 +514,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			obj.ResetReplacementShader();
 			return 0;
 		}
@@ -642,7 +530,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			obj.ResetWorldToCameraMatrix();
 			return 0;
 		}
@@ -658,7 +546,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			obj.ResetProjectionMatrix();
 			return 0;
 		}
@@ -674,9 +562,9 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Vector4 arg0 = ToLua.ToVector4(L, 2);
-			var o = obj.CalculateObliqueMatrix(arg0);
+			UnityEngine.Matrix4x4 o = obj.CalculateObliqueMatrix(arg0);
 			ToLua.PushValue(L, o);
 			return 1;
 		}
@@ -692,9 +580,9 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.WorldToScreenPoint(arg0);
+			UnityEngine.Vector3 o = obj.WorldToScreenPoint(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -710,9 +598,9 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.WorldToViewportPoint(arg0);
+			UnityEngine.Vector3 o = obj.WorldToViewportPoint(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -728,9 +616,9 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.ViewportToWorldPoint(arg0);
+			UnityEngine.Vector3 o = obj.ViewportToWorldPoint(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -746,9 +634,9 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.ScreenToWorldPoint(arg0);
+			UnityEngine.Vector3 o = obj.ScreenToWorldPoint(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -764,9 +652,9 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.ScreenToViewportPoint(arg0);
+			UnityEngine.Vector3 o = obj.ScreenToViewportPoint(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -782,9 +670,9 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.ViewportToScreenPoint(arg0);
+			UnityEngine.Vector3 o = obj.ViewportToScreenPoint(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -800,9 +688,9 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.ViewportPointToRay(arg0);
+			UnityEngine.Ray o = obj.ViewportPointToRay(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -818,9 +706,9 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.ScreenPointToRay(arg0);
+			UnityEngine.Ray o = obj.ScreenPointToRay(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -836,7 +724,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 5);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Rect arg0 = StackTraits<UnityEngine.Rect>.Check(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
 			UnityEngine.Camera.MonoOrStereoscopicEye arg2 = (UnityEngine.Camera.MonoOrStereoscopicEye)LuaDLL.luaL_checknumber(L, 4);
@@ -856,9 +744,9 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Camera.StereoscopicEye arg0 = (UnityEngine.Camera.StereoscopicEye)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetStereoNonJitteredProjectionMatrix(arg0);
+			UnityEngine.Matrix4x4 o = obj.GetStereoNonJitteredProjectionMatrix(arg0);
 			ToLua.PushValue(L, o);
 			return 1;
 		}
@@ -874,9 +762,9 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Camera.StereoscopicEye arg0 = (UnityEngine.Camera.StereoscopicEye)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetStereoViewMatrix(arg0);
+			UnityEngine.Matrix4x4 o = obj.GetStereoViewMatrix(arg0);
 			ToLua.PushValue(L, o);
 			return 1;
 		}
@@ -892,7 +780,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Camera.StereoscopicEye arg0 = (UnityEngine.Camera.StereoscopicEye)LuaDLL.luaL_checknumber(L, 2);
 			obj.CopyStereoDeviceProjectionMatrixToNonJittered(arg0);
 			return 0;
@@ -909,9 +797,9 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Camera.StereoscopicEye arg0 = (UnityEngine.Camera.StereoscopicEye)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetStereoProjectionMatrix(arg0);
+			UnityEngine.Matrix4x4 o = obj.GetStereoProjectionMatrix(arg0);
 			ToLua.PushValue(L, o);
 			return 1;
 		}
@@ -927,7 +815,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Camera.StereoscopicEye arg0 = (UnityEngine.Camera.StereoscopicEye)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Matrix4x4 arg1 = StackTraits<UnityEngine.Matrix4x4>.Check(L, 3);
 			obj.SetStereoProjectionMatrix(arg0, arg1);
@@ -945,7 +833,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			obj.ResetStereoProjectionMatrices();
 			return 0;
 		}
@@ -961,7 +849,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Camera.StereoscopicEye arg0 = (UnityEngine.Camera.StereoscopicEye)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Matrix4x4 arg1 = StackTraits<UnityEngine.Matrix4x4>.Check(L, 3);
 			obj.SetStereoViewMatrix(arg0, arg1);
@@ -979,7 +867,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			obj.ResetStereoViewMatrices();
 			return 0;
 		}
@@ -995,7 +883,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Rendering.CameraEvent arg0 = (UnityEngine.Rendering.CameraEvent)LuaDLL.luaL_checknumber(L, 2);
 			obj.RemoveCommandBuffers(arg0);
 			return 0;
@@ -1012,7 +900,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			obj.RemoveAllCommandBuffers();
 			return 0;
 		}
@@ -1028,7 +916,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Rendering.CameraEvent arg0 = (UnityEngine.Rendering.CameraEvent)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.CheckObject(L, 3, typeof(UnityEngine.Rendering.CommandBuffer));
 			obj.AddCommandBuffer(arg0, arg1);
@@ -1046,7 +934,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 4);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Rendering.CameraEvent arg0 = (UnityEngine.Rendering.CameraEvent)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.CheckObject(L, 3, typeof(UnityEngine.Rendering.CommandBuffer));
 			UnityEngine.Rendering.ComputeQueueType arg2 = (UnityEngine.Rendering.ComputeQueueType)LuaDLL.luaL_checknumber(L, 4);
@@ -1065,7 +953,7 @@ internal class UnityEngine_CameraWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
+			UnityEngine.Camera obj = (UnityEngine.Camera)ToLua.CheckObject(L, 1, typeof(UnityEngine.Camera));
 			UnityEngine.Rendering.CameraEvent arg0 = (UnityEngine.Rendering.CameraEvent)LuaDLL.luaL_checknumber(L, 2);
 			UnityEngine.Rendering.CommandBuffer arg1 = (UnityEngine.Rendering.CommandBuffer)ToLua.CheckObject(L, 3, typeof(UnityEngine.Rendering.CommandBuffer));
 			obj.RemoveCommandBuffer(arg0, arg1);

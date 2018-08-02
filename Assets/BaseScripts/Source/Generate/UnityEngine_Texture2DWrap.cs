@@ -2,54 +2,28 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_Texture2DWrap
+public class UnityEngine_Texture2DWrap
 {
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(UnityEngine.Texture2D), typeof(UnityEngine.Texture));
 		L.RegFunction("UpdateExternalTexture", UpdateExternalTexture);
 		L.RegFunction("SetPixels32", SetPixels32);
-		L.RegFunction("SetPixels320", SetPixels320);
-		L.RegFunction("SetPixels321", SetPixels321);
-		L.RegFunction("SetPixels322", SetPixels322);
-		L.RegFunction("SetPixels323", SetPixels323);
 		L.RegFunction("GetRawTextureData", GetRawTextureData);
 		L.RegFunction("GetPixels", GetPixels);
-		L.RegFunction("GetPixels0", GetPixels0);
-		L.RegFunction("GetPixels1", GetPixels1);
-		L.RegFunction("GetPixels2", GetPixels2);
-		L.RegFunction("GetPixels3", GetPixels3);
 		L.RegFunction("GetPixels32", GetPixels32);
-		L.RegFunction("GetPixels320", GetPixels320);
-		L.RegFunction("GetPixels321", GetPixels321);
 		L.RegFunction("Resize", Resize);
-		L.RegFunction("Resize0", Resize0);
-		L.RegFunction("Resize1", Resize1);
 		L.RegFunction("PackTextures", PackTextures);
-		L.RegFunction("PackTextures0", PackTextures0);
-		L.RegFunction("PackTextures1", PackTextures1);
-		L.RegFunction("PackTextures2", PackTextures2);
 		L.RegFunction("GenerateAtlas", GenerateAtlas);
 		L.RegFunction("ReadPixels", ReadPixels);
-		L.RegFunction("ReadPixels0", ReadPixels0);
-		L.RegFunction("ReadPixels1", ReadPixels1);
 		L.RegFunction("Compress", Compress);
 		L.RegFunction("CreateExternalTexture", CreateExternalTexture);
 		L.RegFunction("SetPixel", SetPixel);
 		L.RegFunction("SetPixels", SetPixels);
-		L.RegFunction("SetPixels0", SetPixels0);
-		L.RegFunction("SetPixels1", SetPixels1);
-		L.RegFunction("SetPixels2", SetPixels2);
-		L.RegFunction("SetPixels3", SetPixels3);
 		L.RegFunction("GetPixel", GetPixel);
 		L.RegFunction("GetPixelBilinear", GetPixelBilinear);
 		L.RegFunction("LoadRawTextureData", LoadRawTextureData);
-		L.RegFunction("LoadRawTextureData0", LoadRawTextureData0);
-		L.RegFunction("LoadRawTextureData1", LoadRawTextureData1);
 		L.RegFunction("Apply", Apply);
-		L.RegFunction("Apply0", Apply0);
-		L.RegFunction("Apply1", Apply1);
-		L.RegFunction("Apply2", Apply2);
 		L.RegFunction("New", _CreateUnityEngine_Texture2D);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
@@ -75,7 +49,7 @@ internal class UnityEngine_Texture2DWrap
 			{
 				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
-				var obj = new UnityEngine.Texture2D(arg0, arg1);
+				UnityEngine.Texture2D obj = new UnityEngine.Texture2D(arg0, arg1);
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}
@@ -85,7 +59,7 @@ internal class UnityEngine_Texture2DWrap
 				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
 				UnityEngine.TextureFormat arg2 = (UnityEngine.TextureFormat)LuaDLL.luaL_checknumber(L, 3);
 				bool arg3 = LuaDLL.luaL_checkboolean(L, 4);
-				var obj = new UnityEngine.Texture2D(arg0, arg1, arg2, arg3);
+				UnityEngine.Texture2D obj = new UnityEngine.Texture2D(arg0, arg1, arg2, arg3);
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}
@@ -96,7 +70,7 @@ internal class UnityEngine_Texture2DWrap
 				UnityEngine.TextureFormat arg2 = (UnityEngine.TextureFormat)LuaDLL.luaL_checknumber(L, 3);
 				bool arg3 = LuaDLL.luaL_checkboolean(L, 4);
 				bool arg4 = LuaDLL.luaL_checkboolean(L, 5);
-				var obj = new UnityEngine.Texture2D(arg0, arg1, arg2, arg3, arg4);
+				UnityEngine.Texture2D obj = new UnityEngine.Texture2D(arg0, arg1, arg2, arg3, arg4);
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}
@@ -117,7 +91,7 @@ internal class UnityEngine_Texture2DWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+			UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
 			System.IntPtr arg0 = ToLua.CheckIntPtr(L, 2);
 			obj.UpdateExternalTexture(arg0);
 			return 0;
@@ -137,19 +111,41 @@ internal class UnityEngine_Texture2DWrap
 
 			if (count == 2)
 			{
-				return SetPixels320(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Color32[] arg0 = ToLua.CheckStructArray<UnityEngine.Color32>(L, 2);
+				obj.SetPixels32(arg0);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return SetPixels321(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Color32[] arg0 = ToLua.CheckStructArray<UnityEngine.Color32>(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				obj.SetPixels32(arg0, arg1);
+				return 0;
 			}
 			else if (count == 6)
 			{
-				return SetPixels322(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
+				int arg3 = (int)LuaDLL.luaL_checknumber(L, 5);
+				UnityEngine.Color32[] arg4 = ToLua.CheckStructArray<UnityEngine.Color32>(L, 6);
+				obj.SetPixels32(arg0, arg1, arg2, arg3, arg4);
+				return 0;
 			}
 			else if (count == 7)
 			{
-				return SetPixels323(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
+				int arg3 = (int)LuaDLL.luaL_checknumber(L, 5);
+				UnityEngine.Color32[] arg4 = ToLua.CheckStructArray<UnityEngine.Color32>(L, 6);
+				int arg5 = (int)LuaDLL.luaL_checknumber(L, 7);
+				obj.SetPixels32(arg0, arg1, arg2, arg3, arg4, arg5);
+				return 0;
 			}
 			else
 			{
@@ -163,95 +159,13 @@ internal class UnityEngine_Texture2DWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetPixels320(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			UnityEngine.Color32[] arg0 = ToLua.ToStructArray<UnityEngine.Color32>(L, 2);
-			obj.SetPixels32(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetPixels321(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			UnityEngine.Color32[] arg0 = ToLua.ToStructArray<UnityEngine.Color32>(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			obj.SetPixels32(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetPixels322(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			int arg3 = (int)LuaDLL.lua_tonumber(L, 5);
-			UnityEngine.Color32[] arg4 = ToLua.ToStructArray<UnityEngine.Color32>(L, 6);
-			obj.SetPixels32(arg0, arg1, arg2, arg3, arg4);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetPixels323(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			int arg3 = (int)LuaDLL.lua_tonumber(L, 5);
-			UnityEngine.Color32[] arg4 = ToLua.ToStructArray<UnityEngine.Color32>(L, 6);
-			int arg5 = (int)LuaDLL.lua_tonumber(L, 7);
-			obj.SetPixels32(arg0, arg1, arg2, arg3, arg4, arg5);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetRawTextureData(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
-			var o = obj.GetRawTextureData();
+			UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+			byte[] o = obj.GetRawTextureData();
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -270,106 +184,46 @@ internal class UnityEngine_Texture2DWrap
 
 			if (count == 1)
 			{
-				return GetPixels0(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Color[] o = obj.GetPixels();
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 2)
 			{
-				return GetPixels1(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				UnityEngine.Color[] o = obj.GetPixels(arg0);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 5)
 			{
-				return GetPixels2(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
+				int arg3 = (int)LuaDLL.luaL_checknumber(L, 5);
+				UnityEngine.Color[] o = obj.GetPixels(arg0, arg1, arg2, arg3);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 6)
 			{
-				return GetPixels3(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
+				int arg3 = (int)LuaDLL.luaL_checknumber(L, 5);
+				int arg4 = (int)LuaDLL.luaL_checknumber(L, 6);
+				UnityEngine.Color[] o = obj.GetPixels(arg0, arg1, arg2, arg3, arg4);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Texture2D.GetPixels");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetPixels0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			var o = obj.GetPixels();
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetPixels1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			var o = obj.GetPixels(arg0);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetPixels2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			int arg3 = (int)LuaDLL.lua_tonumber(L, 5);
-			var o = obj.GetPixels(arg0, arg1, arg2, arg3);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetPixels3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			int arg3 = (int)LuaDLL.lua_tonumber(L, 5);
-			int arg4 = (int)LuaDLL.lua_tonumber(L, 6);
-			var o = obj.GetPixels(arg0, arg1, arg2, arg3, arg4);
-			ToLua.Push(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -386,53 +240,23 @@ internal class UnityEngine_Texture2DWrap
 
 			if (count == 1)
 			{
-				return GetPixels320(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Color32[] o = obj.GetPixels32();
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 2)
 			{
-				return GetPixels321(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				UnityEngine.Color32[] o = obj.GetPixels32(arg0);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Texture2D.GetPixels32");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetPixels320(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			var o = obj.GetPixels32();
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetPixels321(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			var o = obj.GetPixels32(arg0);
-			ToLua.Push(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -449,58 +273,28 @@ internal class UnityEngine_Texture2DWrap
 
 			if (count == 3)
 			{
-				return Resize0(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				bool o = obj.Resize(arg0, arg1);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else if (count == 5)
 			{
-				return Resize1(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				UnityEngine.TextureFormat arg2 = (UnityEngine.TextureFormat)LuaDLL.luaL_checknumber(L, 4);
+				bool arg3 = LuaDLL.luaL_checkboolean(L, 5);
+				bool o = obj.Resize(arg0, arg1, arg2, arg3);
+				LuaDLL.lua_pushboolean(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Texture2D.Resize");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Resize0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			var o = obj.Resize(arg0, arg1);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Resize1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			UnityEngine.TextureFormat arg2 = (UnityEngine.TextureFormat)LuaDLL.lua_tonumber(L, 4);
-			bool arg3 = LuaDLL.lua_toboolean(L, 5);
-			var o = obj.Resize(arg0, arg1, arg2, arg3);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -517,83 +311,38 @@ internal class UnityEngine_Texture2DWrap
 
 			if (count == 3)
 			{
-				return PackTextures0(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Texture2D[] arg0 = ToLua.CheckObjectArray<UnityEngine.Texture2D>(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				UnityEngine.Rect[] o = obj.PackTextures(arg0, arg1);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 4)
 			{
-				return PackTextures1(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Texture2D[] arg0 = ToLua.CheckObjectArray<UnityEngine.Texture2D>(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.Rect[] o = obj.PackTextures(arg0, arg1, arg2);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 5)
 			{
-				return PackTextures2(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Texture2D[] arg0 = ToLua.CheckObjectArray<UnityEngine.Texture2D>(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
+				bool arg3 = LuaDLL.luaL_checkboolean(L, 5);
+				UnityEngine.Rect[] o = obj.PackTextures(arg0, arg1, arg2, arg3);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Texture2D.PackTextures");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int PackTextures0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			UnityEngine.Texture2D[] arg0 = ToLua.ToObjectArray<UnityEngine.Texture2D>(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			var o = obj.PackTextures(arg0, arg1);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int PackTextures1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			UnityEngine.Texture2D[] arg0 = ToLua.ToObjectArray<UnityEngine.Texture2D>(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			var o = obj.PackTextures(arg0, arg1, arg2);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int PackTextures2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			UnityEngine.Texture2D[] arg0 = ToLua.ToObjectArray<UnityEngine.Texture2D>(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			bool arg3 = LuaDLL.lua_toboolean(L, 5);
-			var o = obj.PackTextures(arg0, arg1, arg2, arg3);
-			ToLua.Push(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -611,7 +360,7 @@ internal class UnityEngine_Texture2DWrap
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
 			int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
 			System.Collections.Generic.List<UnityEngine.Rect> arg3 = (System.Collections.Generic.List<UnityEngine.Rect>)ToLua.CheckObject(L, 4, typeof(System.Collections.Generic.List<UnityEngine.Rect>));
-			var o = UnityEngine.Texture2D.GenerateAtlas(arg0, arg1, arg2, arg3);
+			bool o = UnityEngine.Texture2D.GenerateAtlas(arg0, arg1, arg2, arg3);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -630,11 +379,22 @@ internal class UnityEngine_Texture2DWrap
 
 			if (count == 4)
 			{
-				return ReadPixels0(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Rect arg0 = StackTraits<UnityEngine.Rect>.Check(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
+				obj.ReadPixels(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 5)
 			{
-				return ReadPixels1(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Rect arg0 = StackTraits<UnityEngine.Rect>.Check(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
+				bool arg3 = LuaDLL.luaL_checkboolean(L, 5);
+				obj.ReadPixels(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else
 			{
@@ -648,53 +408,12 @@ internal class UnityEngine_Texture2DWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int ReadPixels0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			UnityEngine.Rect arg0 = StackTraits<UnityEngine.Rect>.To(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			obj.ReadPixels(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int ReadPixels1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			UnityEngine.Rect arg0 = StackTraits<UnityEngine.Rect>.To(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			bool arg3 = LuaDLL.lua_toboolean(L, 5);
-			obj.ReadPixels(arg0, arg1, arg2, arg3);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int Compress(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+			UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 			obj.Compress(arg0);
 			return 0;
@@ -717,7 +436,7 @@ internal class UnityEngine_Texture2DWrap
 			bool arg3 = LuaDLL.luaL_checkboolean(L, 4);
 			bool arg4 = LuaDLL.luaL_checkboolean(L, 5);
 			System.IntPtr arg5 = ToLua.CheckIntPtr(L, 6);
-			var o = UnityEngine.Texture2D.CreateExternalTexture(arg0, arg1, arg2, arg3, arg4, arg5);
+			UnityEngine.Texture2D o = UnityEngine.Texture2D.CreateExternalTexture(arg0, arg1, arg2, arg3, arg4, arg5);
 			ToLua.PushSealed(L, o);
 			return 1;
 		}
@@ -733,7 +452,7 @@ internal class UnityEngine_Texture2DWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 4);
-			var obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+			UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
 			UnityEngine.Color arg2 = ToLua.ToColor(L, 4);
@@ -755,19 +474,41 @@ internal class UnityEngine_Texture2DWrap
 
 			if (count == 2)
 			{
-				return SetPixels0(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Color[] arg0 = ToLua.CheckStructArray<UnityEngine.Color>(L, 2);
+				obj.SetPixels(arg0);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return SetPixels1(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				UnityEngine.Color[] arg0 = ToLua.CheckStructArray<UnityEngine.Color>(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				obj.SetPixels(arg0, arg1);
+				return 0;
 			}
 			else if (count == 6)
 			{
-				return SetPixels2(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
+				int arg3 = (int)LuaDLL.luaL_checknumber(L, 5);
+				UnityEngine.Color[] arg4 = ToLua.CheckStructArray<UnityEngine.Color>(L, 6);
+				obj.SetPixels(arg0, arg1, arg2, arg3, arg4);
+				return 0;
 			}
 			else if (count == 7)
 			{
-				return SetPixels3(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 4);
+				int arg3 = (int)LuaDLL.luaL_checknumber(L, 5);
+				UnityEngine.Color[] arg4 = ToLua.CheckStructArray<UnityEngine.Color>(L, 6);
+				int arg5 = (int)LuaDLL.luaL_checknumber(L, 7);
+				obj.SetPixels(arg0, arg1, arg2, arg3, arg4, arg5);
+				return 0;
 			}
 			else
 			{
@@ -781,97 +522,15 @@ internal class UnityEngine_Texture2DWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetPixels0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			UnityEngine.Color[] arg0 = ToLua.ToStructArray<UnityEngine.Color>(L, 2);
-			obj.SetPixels(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetPixels1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			UnityEngine.Color[] arg0 = ToLua.ToStructArray<UnityEngine.Color>(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			obj.SetPixels(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetPixels2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			int arg3 = (int)LuaDLL.lua_tonumber(L, 5);
-			UnityEngine.Color[] arg4 = ToLua.ToStructArray<UnityEngine.Color>(L, 6);
-			obj.SetPixels(arg0, arg1, arg2, arg3, arg4);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetPixels3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			int arg0 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 4);
-			int arg3 = (int)LuaDLL.lua_tonumber(L, 5);
-			UnityEngine.Color[] arg4 = ToLua.ToStructArray<UnityEngine.Color>(L, 6);
-			int arg5 = (int)LuaDLL.lua_tonumber(L, 7);
-			obj.SetPixels(arg0, arg1, arg2, arg3, arg4, arg5);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int GetPixel(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+			UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
-			var o = obj.GetPixel(arg0, arg1);
+			UnityEngine.Color o = obj.GetPixel(arg0, arg1);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -887,10 +546,10 @@ internal class UnityEngine_Texture2DWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+			UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
 			float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
-			var o = obj.GetPixelBilinear(arg0, arg1);
+			UnityEngine.Color o = obj.GetPixelBilinear(arg0, arg1);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -909,53 +568,23 @@ internal class UnityEngine_Texture2DWrap
 
 			if (count == 2)
 			{
-				return LoadRawTextureData0(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				byte[] arg0 = ToLua.CheckByteBuffer(L, 2);
+				obj.LoadRawTextureData(arg0);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return LoadRawTextureData1(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				System.IntPtr arg0 = ToLua.CheckIntPtr(L, 2);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
+				obj.LoadRawTextureData(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Texture2D.LoadRawTextureData");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LoadRawTextureData0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			byte[] arg0 = ToLua.CheckByteBuffer(L, 2);
-			obj.LoadRawTextureData(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LoadRawTextureData1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			System.IntPtr arg0 = ToLua.CheckIntPtr(L, 2);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 3);
-			obj.LoadRawTextureData(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -972,74 +601,29 @@ internal class UnityEngine_Texture2DWrap
 
 			if (count == 1)
 			{
-				return Apply0(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				obj.Apply();
+				return 0;
 			}
 			else if (count == 2)
 			{
-				return Apply1(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+				obj.Apply(arg0);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return Apply2(L);
+				UnityEngine.Texture2D obj = (UnityEngine.Texture2D)ToLua.CheckObject(L, 1, typeof(UnityEngine.Texture2D));
+				bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+				bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
+				obj.Apply(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Texture2D.Apply");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Apply0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			obj.Apply();
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Apply1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			bool arg0 = LuaDLL.lua_toboolean(L, 2);
-			obj.Apply(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Apply2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Texture2D)ToLua.ToObject(L, 1);
-			bool arg0 = LuaDLL.lua_toboolean(L, 2);
-			bool arg1 = LuaDLL.lua_toboolean(L, 3);
-			obj.Apply(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{

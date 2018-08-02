@@ -25,7 +25,6 @@ public class System_Collections_Generic_DictionaryWrap
         L.RegVar("this", _this, null);
         L.RegFunction("__tostring", ToLua.op_ToString);
         L.RegVar("Count", get_Count, null);
-        L.RegFunction("__len", get_Count);
         L.RegVar("Comparer", get_Comparer, null);
         L.RegVar("Keys", get_Keys, null);
         L.RegVar("Values", get_Values, null);
@@ -309,7 +308,7 @@ public class System_Collections_Generic_DictionaryWrap
     {
         try
         {
-            ToLua.CheckArgsCount(L, 2);
+            ToLua.CheckArgsCount(L, 3);
             Type kt;
             object obj = ToLua.CheckGenericObject(L, 1, typeof(Dictionary<,>), out kt);
             object arg0 = ToLua.CheckVarObject(L, 2, kt);

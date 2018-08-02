@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_AnimationBlendModeWrap
+public class UnityEngine_AnimationBlendModeWrap
 {
 	public static void Register(LuaState L)
 	{

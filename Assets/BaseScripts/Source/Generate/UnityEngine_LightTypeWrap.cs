@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_LightTypeWrap
+public class UnityEngine_LightTypeWrap
 {
 	public static void Register(LuaState L)
 	{

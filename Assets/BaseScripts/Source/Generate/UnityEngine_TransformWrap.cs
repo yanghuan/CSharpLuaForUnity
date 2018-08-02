@@ -2,53 +2,23 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_TransformWrap
+public class UnityEngine_TransformWrap
 {
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(UnityEngine.Transform), typeof(UnityEngine.Component));
 		L.RegFunction("SetParent", SetParent);
-		L.RegFunction("SetParent0", SetParent0);
-		L.RegFunction("SetParent1", SetParent1);
 		L.RegFunction("SetPositionAndRotation", SetPositionAndRotation);
 		L.RegFunction("Translate", Translate);
-		L.RegFunction("Translate0", Translate0);
-		L.RegFunction("Translate1", Translate1);
-		L.RegFunction("Translate2", Translate2);
-		L.RegFunction("Translate3", Translate3);
-		L.RegFunction("Translate4", Translate4);
-		L.RegFunction("Translate5", Translate5);
 		L.RegFunction("Rotate", Rotate);
-		L.RegFunction("Rotate0", Rotate0);
-		L.RegFunction("Rotate1", Rotate1);
-		L.RegFunction("Rotate2", Rotate2);
-		L.RegFunction("Rotate3", Rotate3);
-		L.RegFunction("Rotate4", Rotate4);
-		L.RegFunction("Rotate5", Rotate5);
 		L.RegFunction("RotateAround", RotateAround);
 		L.RegFunction("LookAt", LookAt);
-		L.RegFunction("LookAt0", LookAt0);
-		L.RegFunction("LookAt1", LookAt1);
-		L.RegFunction("LookAt2", LookAt2);
-		L.RegFunction("LookAt3", LookAt3);
 		L.RegFunction("TransformDirection", TransformDirection);
-		L.RegFunction("TransformDirection0", TransformDirection0);
-		L.RegFunction("TransformDirection1", TransformDirection1);
 		L.RegFunction("InverseTransformDirection", InverseTransformDirection);
-		L.RegFunction("InverseTransformDirection0", InverseTransformDirection0);
-		L.RegFunction("InverseTransformDirection1", InverseTransformDirection1);
 		L.RegFunction("TransformVector", TransformVector);
-		L.RegFunction("TransformVector0", TransformVector0);
-		L.RegFunction("TransformVector1", TransformVector1);
 		L.RegFunction("InverseTransformVector", InverseTransformVector);
-		L.RegFunction("InverseTransformVector0", InverseTransformVector0);
-		L.RegFunction("InverseTransformVector1", InverseTransformVector1);
 		L.RegFunction("TransformPoint", TransformPoint);
-		L.RegFunction("TransformPoint0", TransformPoint0);
-		L.RegFunction("TransformPoint1", TransformPoint1);
 		L.RegFunction("InverseTransformPoint", InverseTransformPoint);
-		L.RegFunction("InverseTransformPoint0", InverseTransformPoint0);
-		L.RegFunction("InverseTransformPoint1", InverseTransformPoint1);
 		L.RegFunction("DetachChildren", DetachChildren);
 		L.RegFunction("SetAsFirstSibling", SetAsFirstSibling);
 		L.RegFunction("SetAsLastSibling", SetAsLastSibling);
@@ -123,11 +93,18 @@ internal class UnityEngine_TransformWrap
 
 			if (count == 2)
 			{
-				return SetParent0(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 2);
+				obj.SetParent(arg0);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return SetParent1(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 2);
+				bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
+				obj.SetParent(arg0, arg1);
+				return 0;
 			}
 			else
 			{
@@ -141,49 +118,12 @@ internal class UnityEngine_TransformWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetParent0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.ToObject(L, 2);
-			obj.SetParent(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SetParent1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.ToObject(L, 2);
-			bool arg1 = LuaDLL.lua_toboolean(L, 3);
-			obj.SetParent(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int SetPositionAndRotation(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+			UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
 			UnityEngine.Quaternion arg1 = ToLua.ToQuaternion(L, 3);
 			obj.SetPositionAndRotation(arg0, arg1);
@@ -204,150 +144,60 @@ internal class UnityEngine_TransformWrap
 
 			if (count == 2)
 			{
-				return Translate0(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				obj.Translate(arg0);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<uint>(L, 3))
 			{
-				return Translate1(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				UnityEngine.Space arg1 = (UnityEngine.Space)LuaDLL.lua_tonumber(L, 3);
+				obj.Translate(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<UnityEngine.Transform>(L, 3))
 			{
-				return Translate2(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				UnityEngine.Transform arg1 = (UnityEngine.Transform)ToLua.ToObject(L, 3);
+				obj.Translate(arg0, arg1);
+				return 0;
 			}
 			else if (count == 4)
 			{
-				return Translate3(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
+				obj.Translate(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 5 && TypeChecker.CheckTypes<uint>(L, 5))
 			{
-				return Translate4(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.Space arg3 = (UnityEngine.Space)LuaDLL.lua_tonumber(L, 5);
+				obj.Translate(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else if (count == 5 && TypeChecker.CheckTypes<UnityEngine.Transform>(L, 5))
 			{
-				return Translate5(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.Transform arg3 = (UnityEngine.Transform)ToLua.ToObject(L, 5);
+				obj.Translate(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Transform.Translate");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Translate0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			obj.Translate(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Translate1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			UnityEngine.Space arg1 = (UnityEngine.Space)LuaDLL.lua_tonumber(L, 3);
-			obj.Translate(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Translate2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			UnityEngine.Transform arg1 = (UnityEngine.Transform)ToLua.ToObject(L, 3);
-			obj.Translate(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Translate3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			obj.Translate(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Translate4(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			UnityEngine.Space arg3 = (UnityEngine.Space)LuaDLL.lua_tonumber(L, 5);
-			obj.Translate(arg0, arg1, arg2, arg3);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Translate5(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			UnityEngine.Transform arg3 = (UnityEngine.Transform)ToLua.ToObject(L, 5);
-			obj.Translate(arg0, arg1, arg2, arg3);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -364,27 +214,54 @@ internal class UnityEngine_TransformWrap
 
 			if (count == 2)
 			{
-				return Rotate0(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				obj.Rotate(arg0);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<uint>(L, 3))
 			{
-				return Rotate1(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				UnityEngine.Space arg1 = (UnityEngine.Space)LuaDLL.lua_tonumber(L, 3);
+				obj.Rotate(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<float>(L, 3))
 			{
-				return Rotate2(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				obj.Rotate(arg0, arg1);
+				return 0;
 			}
 			else if (count == 4 && TypeChecker.CheckTypes<float, float, float>(L, 2))
 			{
-				return Rotate3(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
+				obj.Rotate(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 4 && TypeChecker.CheckTypes<UnityEngine.Vector3, float, uint>(L, 2))
 			{
-				return Rotate4(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
+				UnityEngine.Space arg2 = (UnityEngine.Space)LuaDLL.lua_tonumber(L, 4);
+				obj.Rotate(arg0, arg1, arg2);
+				return 0;
 			}
 			else if (count == 5)
 			{
-				return Rotate5(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.Space arg3 = (UnityEngine.Space)LuaDLL.luaL_checknumber(L, 5);
+				obj.Rotate(arg0, arg1, arg2, arg3);
+				return 0;
 			}
 			else
 			{
@@ -398,129 +275,12 @@ internal class UnityEngine_TransformWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Rotate0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			obj.Rotate(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Rotate1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			UnityEngine.Space arg1 = (UnityEngine.Space)LuaDLL.lua_tonumber(L, 3);
-			obj.Rotate(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Rotate2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			obj.Rotate(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Rotate3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			obj.Rotate(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Rotate4(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			UnityEngine.Space arg2 = (UnityEngine.Space)LuaDLL.lua_tonumber(L, 4);
-			obj.Rotate(arg0, arg1, arg2);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Rotate5(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			UnityEngine.Space arg3 = (UnityEngine.Space)LuaDLL.lua_tonumber(L, 5);
-			obj.Rotate(arg0, arg1, arg2, arg3);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int RotateAround(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 4);
-			var obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+			UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
 			UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 3);
 			float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
@@ -542,98 +302,38 @@ internal class UnityEngine_TransformWrap
 
 			if (count == 2 && TypeChecker.CheckTypes<UnityEngine.Transform>(L, 2))
 			{
-				return LookAt0(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.ToObject(L, 2);
+				obj.LookAt(arg0);
+				return 0;
 			}
 			else if (count == 2 && TypeChecker.CheckTypes<UnityEngine.Vector3>(L, 2))
 			{
-				return LookAt1(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				obj.LookAt(arg0);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<UnityEngine.Transform, UnityEngine.Vector3>(L, 2))
 			{
-				return LookAt2(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.ToObject(L, 2);
+				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 3);
+				obj.LookAt(arg0, arg1);
+				return 0;
 			}
 			else if (count == 3 && TypeChecker.CheckTypes<UnityEngine.Vector3, UnityEngine.Vector3>(L, 2))
 			{
-				return LookAt3(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 3);
+				obj.LookAt(arg0, arg1);
+				return 0;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Transform.LookAt");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LookAt0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.ToObject(L, 2);
-			obj.LookAt(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LookAt1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			obj.LookAt(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LookAt2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.ToObject(L, 2);
-			UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 3);
-			obj.LookAt(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LookAt3(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			UnityEngine.Vector3 arg1 = ToLua.ToVector3(L, 3);
-			obj.LookAt(arg0, arg1);
-			return 0;
 		}
 		catch (Exception e)
 		{
@@ -650,56 +350,26 @@ internal class UnityEngine_TransformWrap
 
 			if (count == 2)
 			{
-				return TransformDirection0(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				UnityEngine.Vector3 o = obj.TransformDirection(arg0);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 4)
 			{
-				return TransformDirection1(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.Vector3 o = obj.TransformDirection(arg0, arg1, arg2);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Transform.TransformDirection");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int TransformDirection0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.TransformDirection(arg0);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int TransformDirection1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			var o = obj.TransformDirection(arg0, arg1, arg2);
-			ToLua.Push(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -716,56 +386,26 @@ internal class UnityEngine_TransformWrap
 
 			if (count == 2)
 			{
-				return InverseTransformDirection0(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				UnityEngine.Vector3 o = obj.InverseTransformDirection(arg0);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 4)
 			{
-				return InverseTransformDirection1(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.Vector3 o = obj.InverseTransformDirection(arg0, arg1, arg2);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Transform.InverseTransformDirection");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int InverseTransformDirection0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.InverseTransformDirection(arg0);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int InverseTransformDirection1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			var o = obj.InverseTransformDirection(arg0, arg1, arg2);
-			ToLua.Push(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -782,56 +422,26 @@ internal class UnityEngine_TransformWrap
 
 			if (count == 2)
 			{
-				return TransformVector0(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				UnityEngine.Vector3 o = obj.TransformVector(arg0);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 4)
 			{
-				return TransformVector1(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.Vector3 o = obj.TransformVector(arg0, arg1, arg2);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Transform.TransformVector");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int TransformVector0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.TransformVector(arg0);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int TransformVector1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			var o = obj.TransformVector(arg0, arg1, arg2);
-			ToLua.Push(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -848,56 +458,26 @@ internal class UnityEngine_TransformWrap
 
 			if (count == 2)
 			{
-				return InverseTransformVector0(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				UnityEngine.Vector3 o = obj.InverseTransformVector(arg0);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 4)
 			{
-				return InverseTransformVector1(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.Vector3 o = obj.InverseTransformVector(arg0, arg1, arg2);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Transform.InverseTransformVector");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int InverseTransformVector0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.InverseTransformVector(arg0);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int InverseTransformVector1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			var o = obj.InverseTransformVector(arg0, arg1, arg2);
-			ToLua.Push(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -914,56 +494,26 @@ internal class UnityEngine_TransformWrap
 
 			if (count == 2)
 			{
-				return TransformPoint0(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				UnityEngine.Vector3 o = obj.TransformPoint(arg0);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 4)
 			{
-				return TransformPoint1(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.Vector3 o = obj.TransformPoint(arg0, arg1, arg2);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Transform.TransformPoint");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int TransformPoint0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.TransformPoint(arg0);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int TransformPoint1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			var o = obj.TransformPoint(arg0, arg1, arg2);
-			ToLua.Push(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -980,11 +530,21 @@ internal class UnityEngine_TransformWrap
 
 			if (count == 2)
 			{
-				return InverseTransformPoint0(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+				UnityEngine.Vector3 o = obj.InverseTransformPoint(arg0);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 4)
 			{
-				return InverseTransformPoint1(L);
+				UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+				float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+				float arg1 = (float)LuaDLL.luaL_checknumber(L, 3);
+				float arg2 = (float)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.Vector3 o = obj.InverseTransformPoint(arg0, arg1, arg2);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else
 			{
@@ -998,52 +558,12 @@ internal class UnityEngine_TransformWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int InverseTransformPoint0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.InverseTransformPoint(arg0);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int InverseTransformPoint1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.Transform)ToLua.ToObject(L, 1);
-			float arg0 = (float)LuaDLL.lua_tonumber(L, 2);
-			float arg1 = (float)LuaDLL.lua_tonumber(L, 3);
-			float arg2 = (float)LuaDLL.lua_tonumber(L, 4);
-			var o = obj.InverseTransformPoint(arg0, arg1, arg2);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int DetachChildren(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+			UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 			obj.DetachChildren();
 			return 0;
 		}
@@ -1059,7 +579,7 @@ internal class UnityEngine_TransformWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+			UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 			obj.SetAsFirstSibling();
 			return 0;
 		}
@@ -1075,7 +595,7 @@ internal class UnityEngine_TransformWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+			UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 			obj.SetAsLastSibling();
 			return 0;
 		}
@@ -1091,7 +611,7 @@ internal class UnityEngine_TransformWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+			UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
 			obj.SetSiblingIndex(arg0);
 			return 0;
@@ -1108,8 +628,8 @@ internal class UnityEngine_TransformWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
-			var o = obj.GetSiblingIndex();
+			UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+			int o = obj.GetSiblingIndex();
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}
@@ -1125,9 +645,9 @@ internal class UnityEngine_TransformWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+			UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
-			var o = obj.Find(arg0);
+			UnityEngine.Transform o = obj.Find(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -1143,9 +663,9 @@ internal class UnityEngine_TransformWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+			UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 			UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 2);
-			var o = obj.IsChildOf(arg0);
+			bool o = obj.IsChildOf(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -1161,9 +681,9 @@ internal class UnityEngine_TransformWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
-			var o = obj.GetEnumerator();
-			ToLua.PushIEnumerator(L, o);
+			UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+			System.Collections.IEnumerator o = obj.GetEnumerator();
+			ToLua.Push(L, o);
 			return 1;
 		}
 		catch (Exception e)
@@ -1178,9 +698,9 @@ internal class UnityEngine_TransformWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
+			UnityEngine.Transform obj = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 1);
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
-			var o = obj.GetChild(arg0);
+			UnityEngine.Transform o = obj.GetChild(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}

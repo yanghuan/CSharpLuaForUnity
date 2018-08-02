@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_TrackedReferenceWrap
+public class UnityEngine_TrackedReferenceWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -38,9 +38,9 @@ internal class UnityEngine_TrackedReferenceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.TrackedReference)ToLua.CheckObject<UnityEngine.TrackedReference>(L, 1);
+			UnityEngine.TrackedReference obj = (UnityEngine.TrackedReference)ToLua.CheckObject<UnityEngine.TrackedReference>(L, 1);
 			object arg0 = ToLua.ToVarObject(L, 2);
-			var o = obj != null ? obj.Equals(arg0) : arg0 == null;
+			bool o = obj != null ? obj.Equals(arg0) : arg0 == null;
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -56,8 +56,8 @@ internal class UnityEngine_TrackedReferenceWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.TrackedReference)ToLua.CheckObject<UnityEngine.TrackedReference>(L, 1);
-			var o = obj.GetHashCode();
+			UnityEngine.TrackedReference obj = (UnityEngine.TrackedReference)ToLua.CheckObject<UnityEngine.TrackedReference>(L, 1);
+			int o = obj.GetHashCode();
 			LuaDLL.lua_pushinteger(L, o);
 			return 1;
 		}

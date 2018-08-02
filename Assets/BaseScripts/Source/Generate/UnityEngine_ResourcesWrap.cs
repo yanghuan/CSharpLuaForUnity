@@ -2,21 +2,15 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_ResourcesWrap
+public class UnityEngine_ResourcesWrap
 {
 	public static void Register(LuaState L)
 	{
 		L.BeginStaticLibs("Resources");
 		L.RegFunction("FindObjectsOfTypeAll", FindObjectsOfTypeAll);
 		L.RegFunction("Load", Load);
-		L.RegFunction("Load0", Load0);
-		L.RegFunction("Load1", Load1);
 		L.RegFunction("LoadAsync", LoadAsync);
-		L.RegFunction("LoadAsync0", LoadAsync0);
-		L.RegFunction("LoadAsync1", LoadAsync1);
 		L.RegFunction("LoadAll", LoadAll);
-		L.RegFunction("LoadAll0", LoadAll0);
-		L.RegFunction("LoadAll1", LoadAll1);
 		L.RegFunction("GetBuiltinResource", GetBuiltinResource);
 		L.RegFunction("UnloadAsset", UnloadAsset);
 		L.RegFunction("UnloadUnusedAssets", UnloadUnusedAssets);
@@ -30,7 +24,7 @@ internal class UnityEngine_ResourcesWrap
 		{
 			ToLua.CheckArgsCount(L, 1);
 			System.Type arg0 = ToLua.CheckMonoType(L, 1);
-			var o = UnityEngine.Resources.FindObjectsOfTypeAll(arg0);
+			UnityEngine.Object[] o = UnityEngine.Resources.FindObjectsOfTypeAll(arg0);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -49,53 +43,23 @@ internal class UnityEngine_ResourcesWrap
 
 			if (count == 1)
 			{
-				return Load0(L);
+				string arg0 = ToLua.CheckString(L, 1);
+				UnityEngine.Object o = UnityEngine.Resources.Load(arg0);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 2)
 			{
-				return Load1(L);
+				string arg0 = ToLua.CheckString(L, 1);
+				System.Type arg1 = ToLua.CheckMonoType(L, 2);
+				UnityEngine.Object o = UnityEngine.Resources.Load(arg0, arg1);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Resources.Load");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Load0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			var o = UnityEngine.Resources.Load(arg0);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Load1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			System.Type arg1 = (System.Type)ToLua.ToObject(L, 2);
-			var o = UnityEngine.Resources.Load(arg0, arg1);
-			ToLua.Push(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -112,53 +76,23 @@ internal class UnityEngine_ResourcesWrap
 
 			if (count == 1)
 			{
-				return LoadAsync0(L);
+				string arg0 = ToLua.CheckString(L, 1);
+				UnityEngine.ResourceRequest o = UnityEngine.Resources.LoadAsync(arg0);
+				ToLua.PushObject(L, o);
+				return 1;
 			}
 			else if (count == 2)
 			{
-				return LoadAsync1(L);
+				string arg0 = ToLua.CheckString(L, 1);
+				System.Type arg1 = ToLua.CheckMonoType(L, 2);
+				UnityEngine.ResourceRequest o = UnityEngine.Resources.LoadAsync(arg0, arg1);
+				ToLua.PushObject(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Resources.LoadAsync");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LoadAsync0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			var o = UnityEngine.Resources.LoadAsync(arg0);
-			ToLua.PushObject(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LoadAsync1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			System.Type arg1 = (System.Type)ToLua.ToObject(L, 2);
-			var o = UnityEngine.Resources.LoadAsync(arg0, arg1);
-			ToLua.PushObject(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -175,53 +109,23 @@ internal class UnityEngine_ResourcesWrap
 
 			if (count == 1)
 			{
-				return LoadAll0(L);
+				string arg0 = ToLua.CheckString(L, 1);
+				UnityEngine.Object[] o = UnityEngine.Resources.LoadAll(arg0);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else if (count == 2)
 			{
-				return LoadAll1(L);
+				string arg0 = ToLua.CheckString(L, 1);
+				System.Type arg1 = ToLua.CheckMonoType(L, 2);
+				UnityEngine.Object[] o = UnityEngine.Resources.LoadAll(arg0, arg1);
+				ToLua.Push(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Resources.LoadAll");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LoadAll0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			var o = UnityEngine.Resources.LoadAll(arg0);
-			ToLua.Push(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int LoadAll1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			System.Type arg1 = (System.Type)ToLua.ToObject(L, 2);
-			var o = UnityEngine.Resources.LoadAll(arg0, arg1);
-			ToLua.Push(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -237,7 +141,7 @@ internal class UnityEngine_ResourcesWrap
 			ToLua.CheckArgsCount(L, 2);
 			System.Type arg0 = ToLua.CheckMonoType(L, 1);
 			string arg1 = ToLua.CheckString(L, 2);
-			var o = UnityEngine.Resources.GetBuiltinResource(arg0, arg1);
+			UnityEngine.Object o = UnityEngine.Resources.GetBuiltinResource(arg0, arg1);
 			ToLua.Push(L, o);
 			return 1;
 		}
@@ -269,7 +173,7 @@ internal class UnityEngine_ResourcesWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 0);
-			var o = UnityEngine.Resources.UnloadUnusedAssets();
+			UnityEngine.AsyncOperation o = UnityEngine.Resources.UnloadUnusedAssets();
 			ToLua.PushObject(L, o);
 			return 1;
 		}

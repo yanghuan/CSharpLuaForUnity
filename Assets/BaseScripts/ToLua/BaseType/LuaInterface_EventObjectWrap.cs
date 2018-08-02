@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class LuaInterface_EventObjectWrap
+public class LuaInterface_EventObjectWrap
 {
 	public static void Register(LuaState L)
 	{

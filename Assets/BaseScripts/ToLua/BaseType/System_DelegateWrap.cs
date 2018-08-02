@@ -63,20 +63,20 @@ public class System_DelegateWrap
 				ToLua.Push(L, o);
 				return 1;
 			}
-			else if (count == 3 && TypeChecker.CheckTypes<object, string>(L, 2))
-			{
-				System.Type arg0 = ToLua.CheckMonoType(L, 1);
-				object arg1 = ToLua.ToVarObject(L, 2);
-				string arg2 = ToLua.ToString(L, 3);
-				System.Delegate o = System.Delegate.CreateDelegate(arg0, arg1, arg2);
-				ToLua.Push(L, o);
-				return 1;
-			}
 			else if (count == 3 && TypeChecker.CheckTypes<object, System.Reflection.MethodInfo>(L, 2))
 			{
 				System.Type arg0 = ToLua.CheckMonoType(L, 1);
 				object arg1 = ToLua.ToVarObject(L, 2);
 				System.Reflection.MethodInfo arg2 = (System.Reflection.MethodInfo)ToLua.ToObject(L, 3);
+				System.Delegate o = System.Delegate.CreateDelegate(arg0, arg1, arg2);
+				ToLua.Push(L, o);
+				return 1;
+			}
+			else if (count == 3 && TypeChecker.CheckTypes<object, string>(L, 2))
+			{
+				System.Type arg0 = ToLua.CheckMonoType(L, 1);
+				object arg1 = ToLua.ToVarObject(L, 2);
+				string arg2 = ToLua.ToString(L, 3);
 				System.Delegate o = System.Delegate.CreateDelegate(arg0, arg1, arg2);
 				ToLua.Push(L, o);
 				return 1;
@@ -91,21 +91,21 @@ public class System_DelegateWrap
 				ToLua.Push(L, o);
 				return 1;
 			}
-			else if (count == 4 && TypeChecker.CheckTypes<object, string, bool>(L, 2))
-			{
-				System.Type arg0 = ToLua.CheckMonoType(L, 1);
-				object arg1 = ToLua.ToVarObject(L, 2);
-				string arg2 = ToLua.ToString(L, 3);
-				bool arg3 = LuaDLL.lua_toboolean(L, 4);
-				System.Delegate o = System.Delegate.CreateDelegate(arg0, arg1, arg2, arg3);
-				ToLua.Push(L, o);
-				return 1;
-			}
 			else if (count == 4 && TypeChecker.CheckTypes<object, System.Reflection.MethodInfo, bool>(L, 2))
 			{
 				System.Type arg0 = ToLua.CheckMonoType(L, 1);
 				object arg1 = ToLua.ToVarObject(L, 2);
 				System.Reflection.MethodInfo arg2 = (System.Reflection.MethodInfo)ToLua.ToObject(L, 3);
+				bool arg3 = LuaDLL.lua_toboolean(L, 4);
+				System.Delegate o = System.Delegate.CreateDelegate(arg0, arg1, arg2, arg3);
+				ToLua.Push(L, o);
+				return 1;
+			}
+			else if (count == 4 && TypeChecker.CheckTypes<object, string, bool>(L, 2))
+			{
+				System.Type arg0 = ToLua.CheckMonoType(L, 1);
+				object arg1 = ToLua.ToVarObject(L, 2);
+				string arg2 = ToLua.ToString(L, 3);
 				bool arg3 = LuaDLL.lua_toboolean(L, 4);
 				System.Delegate o = System.Delegate.CreateDelegate(arg0, arg1, arg2, arg3);
 				ToLua.Push(L, o);

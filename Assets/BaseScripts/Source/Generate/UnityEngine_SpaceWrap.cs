@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_SpaceWrap
+public class UnityEngine_SpaceWrap
 {
 	public static void Register(LuaState L)
 	{

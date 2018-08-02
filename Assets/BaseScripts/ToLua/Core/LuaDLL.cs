@@ -1019,47 +1019,49 @@ namespace LuaInterface
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void tolua_pushlayermask(IntPtr luaState, int mask);
 
-        public static bool tolua_isint64(IntPtr luaState, int stackPos)
-        {
-            return lua_isnumber(luaState, stackPos) != 0;
-        }
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool tolua_isint64(IntPtr luaState, int stackPos);
 
-        public static long tolua_toint64(IntPtr luaState, int stackPos)
-        {
-            return (long)lua_tonumber(luaState, stackPos);
-        }
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern long tolua_toint64(IntPtr luaState, int stackPos);
 
         public static long tolua_checkint64(IntPtr L, int stackPos)
         {
-            return (long)luaL_checknumber(L, stackPos);
+            long d = tolua_toint64(L, stackPos);
+
+            if (d == 0 && !tolua_isint64(L, stackPos))
+            {
+                luaL_typerror(L, stackPos, "long");
+                return 0;
+            }
+
+            return d;
         }
 
-        public static void tolua_pushint64(IntPtr luaState, long n)
-        {
-            lua_pushnumber(luaState, n);
-        }
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void tolua_pushint64(IntPtr luaState, long n);
 
-        public static bool tolua_isuint64(IntPtr luaState, int stackPos)
-        {
-            return lua_isnumber(luaState, stackPos) != 0;
-        }
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern bool tolua_isuint64(IntPtr luaState, int stackPos);
 
-
-        public static ulong tolua_touint64(IntPtr luaState, int stackPos)
-        {
-            return (ulong)lua_tonumber(luaState, stackPos);
-        }
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern ulong tolua_touint64(IntPtr luaState, int stackPos);
 
         public static ulong tolua_checkuint64(IntPtr L, int stackPos)
         {
-            return (ulong)luaL_checknumber(L, stackPos);
+            ulong d = tolua_touint64(L, stackPos);
+
+            if (d == 0 && !tolua_isuint64(L, stackPos))
+            {
+                luaL_typerror(L, stackPos, "ulong");
+                return 0;
+            }
+
+            return d;
         }
 
-        public static void tolua_pushuint64(IntPtr luaState, ulong n)
-        {
-            lua_pushnumber(luaState, n);
-        }
-
+        [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
+        public static extern void tolua_pushuint64(IntPtr luaState, ulong n);
 
         [DllImport(LUADLL, CallingConvention = CallingConvention.Cdecl)]
         public static extern void tolua_setindex(IntPtr L);

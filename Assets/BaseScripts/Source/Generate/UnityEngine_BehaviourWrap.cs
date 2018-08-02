@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_BehaviourWrap
+public class UnityEngine_BehaviourWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -27,7 +27,7 @@ internal class UnityEngine_BehaviourWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.Behaviour();
+				UnityEngine.Behaviour obj = new UnityEngine.Behaviour();
 				ToLua.Push(L, obj);
 				return 1;
 			}

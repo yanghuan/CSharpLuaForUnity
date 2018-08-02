@@ -103,10 +103,6 @@ namespace LuaInterface
         {
             luaState.Push(this);
         }
-        public void Push(IntPtr L)
-        {
-            luaState.Push(this);
-        }
 
         public override int GetHashCode()
         {

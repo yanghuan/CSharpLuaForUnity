@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_QueueModeWrap
+public class UnityEngine_QueueModeWrap
 {
 	public static void Register(LuaState L)
 	{

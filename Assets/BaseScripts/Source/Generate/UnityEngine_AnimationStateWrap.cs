@@ -2,14 +2,12 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_AnimationStateWrap
+public class UnityEngine_AnimationStateWrap
 {
 	public static void Register(LuaState L)
 	{
 		L.BeginClass(typeof(UnityEngine.AnimationState), typeof(UnityEngine.TrackedReference));
 		L.RegFunction("AddMixingTransform", AddMixingTransform);
-		L.RegFunction("AddMixingTransform0", AddMixingTransform0);
-		L.RegFunction("AddMixingTransform1", AddMixingTransform1);
 		L.RegFunction("RemoveMixingTransform", RemoveMixingTransform);
 		L.RegFunction("New", _CreateUnityEngine_AnimationState);
 		L.RegFunction("__eq", op_Equality);
@@ -60,7 +58,7 @@ internal class UnityEngine_AnimationStateWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.AnimationState();
+				UnityEngine.AnimationState obj = new UnityEngine.AnimationState();
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}
@@ -84,11 +82,18 @@ internal class UnityEngine_AnimationStateWrap
 
 			if (count == 2)
 			{
-				return AddMixingTransform0(L);
+				UnityEngine.AnimationState obj = (UnityEngine.AnimationState)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationState));
+				UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 2);
+				obj.AddMixingTransform(arg0);
+				return 0;
 			}
 			else if (count == 3)
 			{
-				return AddMixingTransform1(L);
+				UnityEngine.AnimationState obj = (UnityEngine.AnimationState)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationState));
+				UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 2);
+				bool arg1 = LuaDLL.luaL_checkboolean(L, 3);
+				obj.AddMixingTransform(arg0, arg1);
+				return 0;
 			}
 			else
 			{
@@ -102,49 +107,12 @@ internal class UnityEngine_AnimationStateWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int AddMixingTransform0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.AnimationState)ToLua.ToObject(L, 1);
-			UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.ToObject(L, 2);
-			obj.AddMixingTransform(arg0);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int AddMixingTransform1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			var obj = (UnityEngine.AnimationState)ToLua.ToObject(L, 1);
-			UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.ToObject(L, 2);
-			bool arg1 = LuaDLL.lua_toboolean(L, 3);
-			obj.AddMixingTransform(arg0, arg1);
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int RemoveMixingTransform(IntPtr L)
 	{
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.AnimationState)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationState));
+			UnityEngine.AnimationState obj = (UnityEngine.AnimationState)ToLua.CheckObject(L, 1, typeof(UnityEngine.AnimationState));
 			UnityEngine.Transform arg0 = (UnityEngine.Transform)ToLua.CheckObject<UnityEngine.Transform>(L, 2);
 			obj.RemoveMixingTransform(arg0);
 			return 0;

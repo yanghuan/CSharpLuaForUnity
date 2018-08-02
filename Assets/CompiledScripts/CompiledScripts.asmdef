@@ -1,0 +1,10 @@
+{
+    "name": "CompiledScripts",
+    "references": [
+        "BaseScripts"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}

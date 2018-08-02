@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_WaitForSecondsWrap
+public class UnityEngine_WaitForSecondsWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -22,7 +22,7 @@ internal class UnityEngine_WaitForSecondsWrap
 			if (count == 1)
 			{
 				float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
-				var obj = new UnityEngine.WaitForSeconds(arg0);
+				UnityEngine.WaitForSeconds obj = new UnityEngine.WaitForSeconds(arg0);
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}

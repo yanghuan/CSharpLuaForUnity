@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_PlayModeWrap
+public class UnityEngine_PlayModeWrap
 {
 	public static void Register(LuaState L)
 	{

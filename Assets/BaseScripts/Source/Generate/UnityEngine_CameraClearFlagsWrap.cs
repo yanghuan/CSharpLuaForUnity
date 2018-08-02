@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_CameraClearFlagsWrap
+public class UnityEngine_CameraClearFlagsWrap
 {
 	public static void Register(LuaState L)
 	{

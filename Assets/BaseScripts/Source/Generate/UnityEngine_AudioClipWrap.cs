@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_AudioClipWrap
+public class UnityEngine_AudioClipWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -12,9 +12,6 @@ internal class UnityEngine_AudioClipWrap
 		L.RegFunction("GetData", GetData);
 		L.RegFunction("SetData", SetData);
 		L.RegFunction("Create", Create);
-		L.RegFunction("Create0", Create0);
-		L.RegFunction("Create1", Create1);
-		L.RegFunction("Create2", Create2);
 		L.RegFunction("__eq", op_Equality);
 		L.RegFunction("__tostring", ToLua.op_ToString);
 		L.RegVar("length", get_length, null);
@@ -46,8 +43,8 @@ internal class UnityEngine_AudioClipWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.AudioClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioClip));
-			var o = obj.LoadAudioData();
+			UnityEngine.AudioClip obj = (UnityEngine.AudioClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioClip));
+			bool o = obj.LoadAudioData();
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -63,8 +60,8 @@ internal class UnityEngine_AudioClipWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			var obj = (UnityEngine.AudioClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioClip));
-			var o = obj.UnloadAudioData();
+			UnityEngine.AudioClip obj = (UnityEngine.AudioClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioClip));
+			bool o = obj.UnloadAudioData();
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -80,10 +77,10 @@ internal class UnityEngine_AudioClipWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.AudioClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioClip));
+			UnityEngine.AudioClip obj = (UnityEngine.AudioClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioClip));
 			float[] arg0 = ToLua.CheckNumberArray<float>(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
-			var o = obj.GetData(arg0, arg1);
+			bool o = obj.GetData(arg0, arg1);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -99,10 +96,10 @@ internal class UnityEngine_AudioClipWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 3);
-			var obj = (UnityEngine.AudioClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioClip));
+			UnityEngine.AudioClip obj = (UnityEngine.AudioClip)ToLua.CheckObject(L, 1, typeof(UnityEngine.AudioClip));
 			float[] arg0 = ToLua.CheckNumberArray<float>(L, 2);
 			int arg1 = (int)LuaDLL.luaL_checknumber(L, 3);
-			var o = obj.SetData(arg0, arg1);
+			bool o = obj.SetData(arg0, arg1);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -121,89 +118,44 @@ internal class UnityEngine_AudioClipWrap
 
 			if (count == 5)
 			{
-				return Create0(L);
+				string arg0 = ToLua.CheckString(L, 1);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
+				bool arg4 = LuaDLL.luaL_checkboolean(L, 5);
+				UnityEngine.AudioClip o = UnityEngine.AudioClip.Create(arg0, arg1, arg2, arg3, arg4);
+				ToLua.PushSealed(L, o);
+				return 1;
 			}
 			else if (count == 6)
 			{
-				return Create1(L);
+				string arg0 = ToLua.CheckString(L, 1);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
+				bool arg4 = LuaDLL.luaL_checkboolean(L, 5);
+				UnityEngine.AudioClip.PCMReaderCallback arg5 = (UnityEngine.AudioClip.PCMReaderCallback)ToLua.CheckDelegate<UnityEngine.AudioClip.PCMReaderCallback>(L, 6);
+				UnityEngine.AudioClip o = UnityEngine.AudioClip.Create(arg0, arg1, arg2, arg3, arg4, arg5);
+				ToLua.PushSealed(L, o);
+				return 1;
 			}
 			else if (count == 7)
 			{
-				return Create2(L);
+				string arg0 = ToLua.CheckString(L, 1);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
+				int arg3 = (int)LuaDLL.luaL_checknumber(L, 4);
+				bool arg4 = LuaDLL.luaL_checkboolean(L, 5);
+				UnityEngine.AudioClip.PCMReaderCallback arg5 = (UnityEngine.AudioClip.PCMReaderCallback)ToLua.CheckDelegate<UnityEngine.AudioClip.PCMReaderCallback>(L, 6);
+				UnityEngine.AudioClip.PCMSetPositionCallback arg6 = (UnityEngine.AudioClip.PCMSetPositionCallback)ToLua.CheckDelegate<UnityEngine.AudioClip.PCMSetPositionCallback>(L, 7);
+				UnityEngine.AudioClip o = UnityEngine.AudioClip.Create(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
+				ToLua.PushSealed(L, o);
+				return 1;
 			}
 			else
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.AudioClip.Create");
 			}
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Create0(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 3);
-			int arg3 = (int)LuaDLL.lua_tonumber(L, 4);
-			bool arg4 = LuaDLL.lua_toboolean(L, 5);
-			var o = UnityEngine.AudioClip.Create(arg0, arg1, arg2, arg3, arg4);
-			ToLua.PushSealed(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Create1(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 3);
-			int arg3 = (int)LuaDLL.lua_tonumber(L, 4);
-			bool arg4 = LuaDLL.lua_toboolean(L, 5);
-			UnityEngine.AudioClip.PCMReaderCallback arg5 = (UnityEngine.AudioClip.PCMReaderCallback)ToLua.CheckDelegate<UnityEngine.AudioClip.PCMReaderCallback>(L, 6);
-			var o = UnityEngine.AudioClip.Create(arg0, arg1, arg2, arg3, arg4, arg5);
-			ToLua.PushSealed(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int Create2(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			string arg0 = ToLua.ToString(L, 1);
-			int arg1 = (int)LuaDLL.lua_tonumber(L, 2);
-			int arg2 = (int)LuaDLL.lua_tonumber(L, 3);
-			int arg3 = (int)LuaDLL.lua_tonumber(L, 4);
-			bool arg4 = LuaDLL.lua_toboolean(L, 5);
-			UnityEngine.AudioClip.PCMReaderCallback arg5 = (UnityEngine.AudioClip.PCMReaderCallback)ToLua.CheckDelegate<UnityEngine.AudioClip.PCMReaderCallback>(L, 6);
-			UnityEngine.AudioClip.PCMSetPositionCallback arg6 = (UnityEngine.AudioClip.PCMSetPositionCallback)ToLua.CheckDelegate<UnityEngine.AudioClip.PCMSetPositionCallback>(L, 7);
-			var o = UnityEngine.AudioClip.Create(arg0, arg1, arg2, arg3, arg4, arg5, arg6);
-			ToLua.PushSealed(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{

@@ -160,9 +160,9 @@ namespace LuaInterface
 
             return false;
         }
-    }
+    }    
 
-    internal static class DelegateTraits<T>
+    public static class DelegateTraits<T>
     {        
         static DelegateFactory.DelegateCreate _Create = null;        
 

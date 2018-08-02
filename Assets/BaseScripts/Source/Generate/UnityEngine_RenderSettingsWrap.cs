@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_RenderSettingsWrap
+public class UnityEngine_RenderSettingsWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -10,76 +10,76 @@ internal class UnityEngine_RenderSettingsWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegVar("fog", get_fog, set_fog);
 		L.RegFunction("getfog", get_fog);
-		L.RegFunction("setfog", set_fogter);
+		L.RegFunction("setfog", set_fog);
 		L.RegVar("fogStartDistance", get_fogStartDistance, set_fogStartDistance);
 		L.RegFunction("getfogStartDistance", get_fogStartDistance);
-		L.RegFunction("setfogStartDistance", set_fogStartDistanceter);
+		L.RegFunction("setfogStartDistance", set_fogStartDistance);
 		L.RegVar("fogEndDistance", get_fogEndDistance, set_fogEndDistance);
 		L.RegFunction("getfogEndDistance", get_fogEndDistance);
-		L.RegFunction("setfogEndDistance", set_fogEndDistanceter);
+		L.RegFunction("setfogEndDistance", set_fogEndDistance);
 		L.RegVar("fogMode", get_fogMode, set_fogMode);
 		L.RegFunction("getfogMode", get_fogMode);
-		L.RegFunction("setfogMode", set_fogModeter);
+		L.RegFunction("setfogMode", set_fogMode);
 		L.RegVar("fogColor", get_fogColor, set_fogColor);
 		L.RegFunction("getfogColor", get_fogColor);
-		L.RegFunction("setfogColor", set_fogColorter);
+		L.RegFunction("setfogColor", set_fogColor);
 		L.RegVar("fogDensity", get_fogDensity, set_fogDensity);
 		L.RegFunction("getfogDensity", get_fogDensity);
-		L.RegFunction("setfogDensity", set_fogDensityter);
+		L.RegFunction("setfogDensity", set_fogDensity);
 		L.RegVar("ambientMode", get_ambientMode, set_ambientMode);
 		L.RegFunction("getambientMode", get_ambientMode);
-		L.RegFunction("setambientMode", set_ambientModeter);
+		L.RegFunction("setambientMode", set_ambientMode);
 		L.RegVar("ambientSkyColor", get_ambientSkyColor, set_ambientSkyColor);
 		L.RegFunction("getambientSkyColor", get_ambientSkyColor);
-		L.RegFunction("setambientSkyColor", set_ambientSkyColorter);
+		L.RegFunction("setambientSkyColor", set_ambientSkyColor);
 		L.RegVar("ambientEquatorColor", get_ambientEquatorColor, set_ambientEquatorColor);
 		L.RegFunction("getambientEquatorColor", get_ambientEquatorColor);
-		L.RegFunction("setambientEquatorColor", set_ambientEquatorColorter);
+		L.RegFunction("setambientEquatorColor", set_ambientEquatorColor);
 		L.RegVar("ambientGroundColor", get_ambientGroundColor, set_ambientGroundColor);
 		L.RegFunction("getambientGroundColor", get_ambientGroundColor);
-		L.RegFunction("setambientGroundColor", set_ambientGroundColorter);
+		L.RegFunction("setambientGroundColor", set_ambientGroundColor);
 		L.RegVar("ambientIntensity", get_ambientIntensity, set_ambientIntensity);
 		L.RegFunction("getambientIntensity", get_ambientIntensity);
-		L.RegFunction("setambientIntensity", set_ambientIntensityter);
+		L.RegFunction("setambientIntensity", set_ambientIntensity);
 		L.RegVar("ambientLight", get_ambientLight, set_ambientLight);
 		L.RegFunction("getambientLight", get_ambientLight);
-		L.RegFunction("setambientLight", set_ambientLightter);
+		L.RegFunction("setambientLight", set_ambientLight);
 		L.RegVar("subtractiveShadowColor", get_subtractiveShadowColor, set_subtractiveShadowColor);
 		L.RegFunction("getsubtractiveShadowColor", get_subtractiveShadowColor);
-		L.RegFunction("setsubtractiveShadowColor", set_subtractiveShadowColorter);
+		L.RegFunction("setsubtractiveShadowColor", set_subtractiveShadowColor);
 		L.RegVar("skybox", get_skybox, set_skybox);
 		L.RegFunction("getskybox", get_skybox);
-		L.RegFunction("setskybox", set_skyboxter);
+		L.RegFunction("setskybox", set_skybox);
 		L.RegVar("sun", get_sun, set_sun);
 		L.RegFunction("getsun", get_sun);
-		L.RegFunction("setsun", set_sunter);
+		L.RegFunction("setsun", set_sun);
 		L.RegVar("ambientProbe", get_ambientProbe, set_ambientProbe);
 		L.RegFunction("getambientProbe", get_ambientProbe);
-		L.RegFunction("setambientProbe", set_ambientProbeter);
+		L.RegFunction("setambientProbe", set_ambientProbe);
 		L.RegVar("customReflection", get_customReflection, set_customReflection);
 		L.RegFunction("getcustomReflection", get_customReflection);
-		L.RegFunction("setcustomReflection", set_customReflectionter);
+		L.RegFunction("setcustomReflection", set_customReflection);
 		L.RegVar("reflectionIntensity", get_reflectionIntensity, set_reflectionIntensity);
 		L.RegFunction("getreflectionIntensity", get_reflectionIntensity);
-		L.RegFunction("setreflectionIntensity", set_reflectionIntensityter);
+		L.RegFunction("setreflectionIntensity", set_reflectionIntensity);
 		L.RegVar("reflectionBounces", get_reflectionBounces, set_reflectionBounces);
 		L.RegFunction("getreflectionBounces", get_reflectionBounces);
-		L.RegFunction("setreflectionBounces", set_reflectionBouncester);
+		L.RegFunction("setreflectionBounces", set_reflectionBounces);
 		L.RegVar("defaultReflectionMode", get_defaultReflectionMode, set_defaultReflectionMode);
 		L.RegFunction("getdefaultReflectionMode", get_defaultReflectionMode);
-		L.RegFunction("setdefaultReflectionMode", set_defaultReflectionModeter);
+		L.RegFunction("setdefaultReflectionMode", set_defaultReflectionMode);
 		L.RegVar("defaultReflectionResolution", get_defaultReflectionResolution, set_defaultReflectionResolution);
 		L.RegFunction("getdefaultReflectionResolution", get_defaultReflectionResolution);
-		L.RegFunction("setdefaultReflectionResolution", set_defaultReflectionResolutionter);
+		L.RegFunction("setdefaultReflectionResolution", set_defaultReflectionResolution);
 		L.RegVar("haloStrength", get_haloStrength, set_haloStrength);
 		L.RegFunction("gethaloStrength", get_haloStrength);
-		L.RegFunction("sethaloStrength", set_haloStrengthter);
+		L.RegFunction("sethaloStrength", set_haloStrength);
 		L.RegVar("flareStrength", get_flareStrength, set_flareStrength);
 		L.RegFunction("getflareStrength", get_flareStrength);
-		L.RegFunction("setflareStrength", set_flareStrengthter);
+		L.RegFunction("setflareStrength", set_flareStrength);
 		L.RegVar("flareFadeSpeed", get_flareFadeSpeed, set_flareFadeSpeed);
 		L.RegFunction("getflareFadeSpeed", get_flareFadeSpeed);
-		L.RegFunction("setflareFadeSpeed", set_flareFadeSpeedter);
+		L.RegFunction("setflareFadeSpeed", set_flareFadeSpeed);
 		L.EndStaticLibs();
 	}
 
@@ -453,41 +453,11 @@ internal class UnityEngine_RenderSettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_fogter(IntPtr L)
-	{
-		try
-		{
-			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
-			UnityEngine.RenderSettings.fog = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_fogStartDistance(IntPtr L)
 	{
 		try
 		{
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
-			UnityEngine.RenderSettings.fogStartDistance = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_fogStartDistanceter(IntPtr L)
-	{
-		try
-		{
-			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.RenderSettings.fogStartDistance = arg0;
 			return 0;
 		}
@@ -513,41 +483,11 @@ internal class UnityEngine_RenderSettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_fogEndDistanceter(IntPtr L)
-	{
-		try
-		{
-			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
-			UnityEngine.RenderSettings.fogEndDistance = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_fogMode(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.FogMode arg0 = (UnityEngine.FogMode)LuaDLL.luaL_checknumber(L, 2);
-			UnityEngine.RenderSettings.fogMode = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_fogModeter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.FogMode arg0 = (UnityEngine.FogMode)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.RenderSettings.fogMode = arg0;
 			return 0;
 		}
@@ -573,41 +513,11 @@ internal class UnityEngine_RenderSettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_fogColorter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.Color arg0 = ToLua.ToColor(L, 1);
-			UnityEngine.RenderSettings.fogColor = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_fogDensity(IntPtr L)
 	{
 		try
 		{
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
-			UnityEngine.RenderSettings.fogDensity = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_fogDensityter(IntPtr L)
-	{
-		try
-		{
-			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.RenderSettings.fogDensity = arg0;
 			return 0;
 		}
@@ -633,41 +543,11 @@ internal class UnityEngine_RenderSettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_ambientModeter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.Rendering.AmbientMode arg0 = (UnityEngine.Rendering.AmbientMode)LuaDLL.luaL_checknumber(L, 1);
-			UnityEngine.RenderSettings.ambientMode = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_ambientSkyColor(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.Color arg0 = ToLua.ToColor(L, 2);
-			UnityEngine.RenderSettings.ambientSkyColor = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_ambientSkyColorter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.Color arg0 = ToLua.ToColor(L, 1);
 			UnityEngine.RenderSettings.ambientSkyColor = arg0;
 			return 0;
 		}
@@ -693,41 +573,11 @@ internal class UnityEngine_RenderSettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_ambientEquatorColorter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.Color arg0 = ToLua.ToColor(L, 1);
-			UnityEngine.RenderSettings.ambientEquatorColor = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_ambientGroundColor(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.Color arg0 = ToLua.ToColor(L, 2);
-			UnityEngine.RenderSettings.ambientGroundColor = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_ambientGroundColorter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.Color arg0 = ToLua.ToColor(L, 1);
 			UnityEngine.RenderSettings.ambientGroundColor = arg0;
 			return 0;
 		}
@@ -753,41 +603,11 @@ internal class UnityEngine_RenderSettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_ambientIntensityter(IntPtr L)
-	{
-		try
-		{
-			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
-			UnityEngine.RenderSettings.ambientIntensity = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_ambientLight(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.Color arg0 = ToLua.ToColor(L, 2);
-			UnityEngine.RenderSettings.ambientLight = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_ambientLightter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.Color arg0 = ToLua.ToColor(L, 1);
 			UnityEngine.RenderSettings.ambientLight = arg0;
 			return 0;
 		}
@@ -813,41 +633,11 @@ internal class UnityEngine_RenderSettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_subtractiveShadowColorter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.Color arg0 = ToLua.ToColor(L, 1);
-			UnityEngine.RenderSettings.subtractiveShadowColor = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_skybox(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.Material arg0 = (UnityEngine.Material)ToLua.CheckObject<UnityEngine.Material>(L, 2);
-			UnityEngine.RenderSettings.skybox = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_skyboxter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.Material arg0 = (UnityEngine.Material)ToLua.CheckObject<UnityEngine.Material>(L, 1);
 			UnityEngine.RenderSettings.skybox = arg0;
 			return 0;
 		}
@@ -873,41 +663,11 @@ internal class UnityEngine_RenderSettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_sunter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.Light arg0 = (UnityEngine.Light)ToLua.CheckObject(L, 1, typeof(UnityEngine.Light));
-			UnityEngine.RenderSettings.sun = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_ambientProbe(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.Rendering.SphericalHarmonicsL2 arg0 = StackTraits<UnityEngine.Rendering.SphericalHarmonicsL2>.Check(L, 2);
-			UnityEngine.RenderSettings.ambientProbe = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_ambientProbeter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.Rendering.SphericalHarmonicsL2 arg0 = StackTraits<UnityEngine.Rendering.SphericalHarmonicsL2>.Check(L, 1);
 			UnityEngine.RenderSettings.ambientProbe = arg0;
 			return 0;
 		}
@@ -933,41 +693,11 @@ internal class UnityEngine_RenderSettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_customReflectionter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.Cubemap arg0 = (UnityEngine.Cubemap)ToLua.CheckObject(L, 1, typeof(UnityEngine.Cubemap));
-			UnityEngine.RenderSettings.customReflection = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_reflectionIntensity(IntPtr L)
 	{
 		try
 		{
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
-			UnityEngine.RenderSettings.reflectionIntensity = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_reflectionIntensityter(IntPtr L)
-	{
-		try
-		{
-			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.RenderSettings.reflectionIntensity = arg0;
 			return 0;
 		}
@@ -993,41 +723,11 @@ internal class UnityEngine_RenderSettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_reflectionBouncester(IntPtr L)
-	{
-		try
-		{
-			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
-			UnityEngine.RenderSettings.reflectionBounces = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_defaultReflectionMode(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.Rendering.DefaultReflectionMode arg0 = (UnityEngine.Rendering.DefaultReflectionMode)LuaDLL.luaL_checknumber(L, 2);
-			UnityEngine.RenderSettings.defaultReflectionMode = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_defaultReflectionModeter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.Rendering.DefaultReflectionMode arg0 = (UnityEngine.Rendering.DefaultReflectionMode)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.RenderSettings.defaultReflectionMode = arg0;
 			return 0;
 		}
@@ -1053,41 +753,11 @@ internal class UnityEngine_RenderSettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_defaultReflectionResolutionter(IntPtr L)
-	{
-		try
-		{
-			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
-			UnityEngine.RenderSettings.defaultReflectionResolution = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_haloStrength(IntPtr L)
 	{
 		try
 		{
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
-			UnityEngine.RenderSettings.haloStrength = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_haloStrengthter(IntPtr L)
-	{
-		try
-		{
-			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.RenderSettings.haloStrength = arg0;
 			return 0;
 		}
@@ -1113,41 +783,11 @@ internal class UnityEngine_RenderSettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_flareStrengthter(IntPtr L)
-	{
-		try
-		{
-			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
-			UnityEngine.RenderSettings.flareStrength = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_flareFadeSpeed(IntPtr L)
 	{
 		try
 		{
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
-			UnityEngine.RenderSettings.flareFadeSpeed = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_flareFadeSpeedter(IntPtr L)
-	{
-		try
-		{
-			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.RenderSettings.flareFadeSpeed = arg0;
 			return 0;
 		}

@@ -46,7 +46,6 @@ namespace LuaInterface
             SetOutMethods(L, "Vector2", GetOutVector2);
             SetOutMethods(L, "Vector4", GetOutVector4);
             SetOutMethods(L, "Color", GetOutColor);
-            SetOutMethods(L, "Color32", GetOutColor32);
             SetOutMethods(L, "Quaternion", GetOutQuaternion);
             SetOutMethods(L, "Ray", GetOutRay);
             SetOutMethods(L, "Bounds", GetOutBounds);
@@ -134,12 +133,6 @@ namespace LuaInterface
         static int GetOutColor(IntPtr L)
         {            
             ToLua.PushOut<Color>(L, new LuaOut<Color>());
-            return 1;
-        }
-        [MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-        static int GetOutColor32(IntPtr L)
-        {
-            ToLua.PushOut<Color32>(L, new LuaOut<Color32>());
             return 1;
         }
 

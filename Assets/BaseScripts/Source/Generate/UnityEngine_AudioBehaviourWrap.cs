@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_AudioBehaviourWrap
+public class UnityEngine_AudioBehaviourWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -22,7 +22,7 @@ internal class UnityEngine_AudioBehaviourWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.AudioBehaviour();
+				UnityEngine.AudioBehaviour obj = new UnityEngine.AudioBehaviour();
 				ToLua.Push(L, obj);
 				return 1;
 			}

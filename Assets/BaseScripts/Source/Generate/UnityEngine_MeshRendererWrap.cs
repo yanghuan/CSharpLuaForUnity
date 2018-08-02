@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_MeshRendererWrap
+public class UnityEngine_MeshRendererWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -27,7 +27,7 @@ internal class UnityEngine_MeshRendererWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.MeshRenderer();
+				UnityEngine.MeshRenderer obj = new UnityEngine.MeshRenderer();
 				ToLua.Push(L, obj);
 				return 1;
 			}

@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_CharacterControllerWrap
+public class UnityEngine_CharacterControllerWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -57,7 +57,7 @@ internal class UnityEngine_CharacterControllerWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.CharacterController();
+				UnityEngine.CharacterController obj = new UnityEngine.CharacterController();
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}
@@ -78,9 +78,9 @@ internal class UnityEngine_CharacterControllerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.CharacterController)ToLua.CheckObject(L, 1, typeof(UnityEngine.CharacterController));
+			UnityEngine.CharacterController obj = (UnityEngine.CharacterController)ToLua.CheckObject(L, 1, typeof(UnityEngine.CharacterController));
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.SimpleMove(arg0);
+			bool o = obj.SimpleMove(arg0);
 			LuaDLL.lua_pushboolean(L, o);
 			return 1;
 		}
@@ -96,9 +96,9 @@ internal class UnityEngine_CharacterControllerWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			var obj = (UnityEngine.CharacterController)ToLua.CheckObject(L, 1, typeof(UnityEngine.CharacterController));
+			UnityEngine.CharacterController obj = (UnityEngine.CharacterController)ToLua.CheckObject(L, 1, typeof(UnityEngine.CharacterController));
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
-			var o = obj.Move(arg0);
+			UnityEngine.CollisionFlags o = obj.Move(arg0);
 			LuaDLL.lua_pushinteger(L, (int)o);
 			return 1;
 		}

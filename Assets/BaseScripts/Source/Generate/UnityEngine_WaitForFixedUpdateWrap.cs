@@ -2,7 +2,7 @@
 using System;
 using LuaInterface;
 
-internal class UnityEngine_WaitForFixedUpdateWrap
+public class UnityEngine_WaitForFixedUpdateWrap
 {
 	public static void Register(LuaState L)
 	{
@@ -21,7 +21,7 @@ internal class UnityEngine_WaitForFixedUpdateWrap
 
 			if (count == 0)
 			{
-				var obj = new UnityEngine.WaitForFixedUpdate();
+				UnityEngine.WaitForFixedUpdate obj = new UnityEngine.WaitForFixedUpdate();
 				ToLua.PushSealed(L, obj);
 				return 1;
 			}

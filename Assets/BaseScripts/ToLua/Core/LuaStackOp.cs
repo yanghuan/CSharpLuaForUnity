@@ -556,19 +556,7 @@ namespace LuaInterface
             float r, g, b, a;
             LuaDLL.tolua_getclr(L, stackPos, out r, out g, out b, out a);
             return new Color(r, g, b, a);
-        }
-
-        public Nullable<Color32> ToNullColor32(IntPtr L, int stackPos)
-        {
-            if (LuaDLL.lua_type(L, stackPos) == LuaTypes.LUA_TNIL)
-            {
-                return null;
-            }
-
-            float r, g, b, a;
-            LuaDLL.tolua_getclr(L, stackPos, out r, out g, out b, out a);
-            return new Color32((byte)r, (byte)g, (byte)b, (byte)a);
-        }
+        }      
 
         public Nullable<Vector4> ToNullVec4(IntPtr L, int stackPos)
         {
@@ -630,10 +618,6 @@ namespace LuaInterface
         public Color[] ToColorArray(IntPtr L, int stackPos)
         {
             return ToLua.ToStructArray<Color>(L, stackPos);
-        }
-        public Color32[] ToColor32Array(IntPtr L, int stackPos)
-        {
-            return ToLua.ToStructArray<Color32>(L, stackPos);
         }
 
         public Vector4[] ToVec4Array(IntPtr L, int stackPos)
@@ -873,18 +857,7 @@ namespace LuaInterface
             }
 
             return ToLua.CheckColor(L, stackPos);
-        }
-
-
-        public Nullable<Color32> CheckNullColor32(IntPtr L, int stackPos)
-        {
-            if (LuaDLL.lua_type(L, stackPos) == LuaTypes.LUA_TNIL)
-            {
-                return null;
-            }
-
-            return ToLua.CheckColor32(L, stackPos);
-        }
+        }    
 
         public Nullable<Vector4> CheckNullVec4(IntPtr L, int stackPos)
         {
@@ -944,10 +917,6 @@ namespace LuaInterface
         public Color[] CheckColorArray(IntPtr L, int stackPos)
         {
             return ToLua.CheckStructArray<Color>(L, stackPos);
-        }
-        public Color32[] CheckColor32Array(IntPtr L, int stackPos)
-        {
-            return ToLua.CheckStructArray<Color32>(L, stackPos);
         }
 
         public Vector4[] CheckVec4Array(IntPtr L, int stackPos)
@@ -1165,19 +1134,6 @@ namespace LuaInterface
             else
             {
                 Color clr = n.Value;
-                LuaDLL.tolua_pushclr(L, clr.r, clr.g, clr.b, clr.a);
-            }
-        }
-
-        public void Push(IntPtr L, Nullable<Color32> n)
-        {
-            if (n == null)
-            {
-                LuaDLL.lua_pushnil(L);
-            }
-            else
-            {
-                Color32 clr = n.Value;
                 LuaDLL.tolua_pushclr(L, clr.r, clr.g, clr.b, clr.a);
             }
         }
