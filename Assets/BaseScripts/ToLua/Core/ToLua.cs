@@ -1313,6 +1313,30 @@ namespace LuaInterface
                 return null;
             }
 
+            TypeCode code = Type.GetTypeCode(t);
+            switch (code) {
+                case TypeCode.Boolean: {
+                        return LuaDLL.luaL_checkboolean(L, stackPos);
+                    }
+                case TypeCode.Char:
+                case TypeCode.SByte:
+                case TypeCode.Byte:
+                case TypeCode.Int16:
+                case TypeCode.UInt16:
+                case TypeCode.Int32:
+                case TypeCode.UInt32:
+                case TypeCode.Int64:
+                case TypeCode.UInt64:
+                case TypeCode.Single:
+                case TypeCode.Double: {
+                        double d = LuaDLL.luaL_checknumber(L, stackPos);
+                        return Convert.ChangeType(d, t);
+                    }
+                case TypeCode.String: {
+                        return CheckString(L, stackPos);
+                    }
+            }
+
             if (beValue)
             {
                 if (TypeChecker.IsNullable(t))
@@ -1326,24 +1350,7 @@ namespace LuaInterface
                     t = ts[0];
                 }
 
-                if (t == typeof(bool))
-                {
-                    return LuaDLL.luaL_checkboolean(L, stackPos);
-                }
-                else if (t == typeof(long))
-                {
-                    return LuaDLL.tolua_checkint64(L, stackPos);
-                }
-                else if (t == typeof(ulong))
-                {
-                    return LuaDLL.tolua_checkuint64(L, stackPos);
-                }
-                else if (t.IsPrimitive)
-                {
-                    double d = LuaDLL.luaL_checknumber(L, stackPos);
-                    return Convert.ChangeType(d, t);
-                }
-                else if (t == typeof(LuaByteBuffer))
+                if (t == typeof(LuaByteBuffer))
                 {
                     int len = 0;
                     IntPtr source = LuaDLL.tolua_tolstring(L, stackPos, out len);
@@ -1408,11 +1415,7 @@ namespace LuaInterface
             {
                 if (t.IsEnum)
                 {
-                    return ToLua.CheckObject(L, stackPos, t);
-                }
-                else if ( t == typeof(string))
-                {
-                    return CheckString(L, stackPos);
+                    return LuaDLL.lua_isnumber(L, stackPos);
                 }
                 else
                 {
@@ -2722,6 +2725,64 @@ namespace LuaInterface
             }
 
             Type t = obj.GetType();
+            TypeCode code = Type.GetTypeCode(t);
+            switch (code) {
+                case TypeCode.Boolean: {
+                        bool b = (bool)obj;
+                        LuaDLL.lua_pushboolean(L, b);
+                        return;
+                    }
+                case TypeCode.Char: {
+                        char ch = (char)obj;
+                        LuaDLL.lua_pushnumber(L, ch);
+                        return;
+                    }
+                case TypeCode.SByte: {
+                        LuaDLL.lua_pushnumber(L, (sbyte)obj);
+                        return;
+                    }
+                case TypeCode.Byte: {
+                        LuaDLL.lua_pushnumber(L, (byte)obj);
+                        return;
+                    }
+                case TypeCode.Int16: {
+                        LuaDLL.lua_pushnumber(L, (Int16)obj);
+                        return;
+                    }
+                case TypeCode.UInt16: {
+                        LuaDLL.lua_pushnumber(L, (UInt16)obj);
+                        return;
+                    }
+                case TypeCode.Int32: {
+                        LuaDLL.lua_pushnumber(L, (Int32)obj);
+                        return;
+                    }
+                case TypeCode.UInt32: {
+                        LuaDLL.lua_pushnumber(L, (UInt32)obj);
+                        return;
+                    }
+                case TypeCode.Int64: {
+                        LuaDLL.lua_pushnumber(L, (Int64)obj);
+                        return;
+                    }
+                case TypeCode.UInt64: {
+                        LuaDLL.lua_pushnumber(L, (UInt64)obj);
+                        return;
+                    }
+                case TypeCode.Single: {
+                        LuaDLL.lua_pushnumber(L, (Single)obj);
+                        return; ;
+                    }
+                case TypeCode.Double: {
+                        LuaDLL.lua_pushnumber(L, (double)obj);
+                        return;
+                    }
+                case TypeCode.String: {
+                        LuaDLL.lua_pushstring(L, (string)obj);
+                        return;
+                    }
+            }
+
 
             if (t.IsValueType)
             {
@@ -2731,27 +2792,9 @@ namespace LuaInterface
                     t = ts[0];
                 }
 
-                if (t == typeof(bool))
-                {
-                    bool b = (bool)obj;
-                    LuaDLL.lua_pushboolean(L, b);
-                }
-                else if (obj is Enum)
+                if (obj is Enum)
                 {
                     Push(L, (System.Enum)obj);
-                }
-                else if (t == typeof(long))
-                {
-                    LuaDLL.tolua_pushint64(L, (long)obj);
-                }
-                else if (t == typeof(ulong))
-                {
-                    LuaDLL.tolua_pushuint64(L, (ulong)obj);
-                }
-                else if (t.IsPrimitive)
-                {
-                    double d = LuaMisc.ToDouble(obj);
-                    LuaDLL.lua_pushnumber(L, d);
                 }
                 else if (t == typeof(LuaByteBuffer))
                 {
@@ -2821,10 +2864,6 @@ namespace LuaInterface
                 if (t.IsArray)
                 {
                     Push(L, (Array)obj);
-                }
-                else if(t == typeof(string))
-                {
-                    LuaDLL.lua_pushstring(L, (string)obj);
                 }
                 else if (obj is LuaBaseRef)
                 {
