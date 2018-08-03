@@ -1211,6 +1211,11 @@ namespace LuaInterface
             LuaDLL.tolua_pushclr(L, clr.r, clr.g, clr.b, clr.a);
         }
 
+        public void Push(Color32 clr)
+        {
+            LuaDLL.tolua_pushclr(L, clr.r, clr.g, clr.b, clr.a);
+        }
+
         public void Push(Quaternion q)
         {
             LuaDLL.tolua_pushquat(L, q.x, q.y, q.z, q.w);
@@ -1337,15 +1342,7 @@ namespace LuaInterface
 
         public void Push(Enum e)
         {
-            if (e == null)
-            {                
-                LuaPushNil();
-            }
-            else
-            {
-                object o = GetEnumObj(e);
-                PushUserData(o, EnumMetatable);
-            }
+            ToLua.Push(L, e);
         }
 
         public void Push(IEnumerator iter)
@@ -1474,6 +1471,22 @@ namespace LuaInterface
             stackPos = LuaDLL.abs_index(L, stackPos);
             LuaDLL.tolua_getclr(L, stackPos, out r, out g, out b, out a);
             return new Color(r, g, b, a);
+        }
+
+        public Color32 CheckColor32(int stackPos)
+        {
+            int type = LuaDLL.tolua_getvaluetype(L, stackPos);
+
+            if (type != LuaValueType.Color32)
+            {
+                LuaTypeError(stackPos, "Color32", LuaValueTypeName.Get(type));
+                return new Color32();
+            }
+
+            float r, g, b, a;
+            stackPos = LuaDLL.abs_index(L, stackPos);
+            LuaDLL.tolua_getclr(L, stackPos, out r, out g, out b, out a);
+            return new Color32((byte)r, (byte)g, (byte)b, (byte)a);
         }
 
         public Ray CheckRay(int stackPos)
@@ -2191,7 +2204,7 @@ namespace LuaInterface
                 LuaDLL.lua_settop(L, top);
                 if (beLogMiss)
                 {
-                    Debugger.Log("Lua function {0} not exists", name);
+                    Debugger.LogError("Lua function {0} not exists", name);
                 }
                 
                 return false;
@@ -2594,6 +2607,7 @@ namespace LuaInterface
             TypeTraits<Quaternion>.Init(_ck.CheckQuat);
             TypeTraits<Vector2>.Init(_ck.CheckVec2);
             TypeTraits<Color>.Init(_ck.CheckColor);
+            TypeTraits<Color32>.Init(_ck.CheckColor32);
             TypeTraits<Vector4>.Init(_ck.CheckVec4);
             TypeTraits<Ray>.Init(_ck.CheckRay);
             TypeTraits<Bounds>.Init(_ck.CheckBounds);
@@ -2605,6 +2619,7 @@ namespace LuaInterface
             TypeTraits<Nullable<Quaternion>>.Init(_ck.CheckNullQuat);
             TypeTraits<Nullable<Vector2>>.Init(_ck.CheckNullVec2);
             TypeTraits<Nullable<Color>>.Init(_ck.CheckNullColor);
+            TypeTraits<Nullable<Color32>>.Init(_ck.CheckNullColor32);
             TypeTraits<Nullable<Vector4>>.Init(_ck.CheckNullVec4);
             TypeTraits<Nullable<Ray>>.Init(_ck.CheckNullRay);
             TypeTraits<Nullable<Bounds>>.Init(_ck.CheckNullBounds);
@@ -2616,6 +2631,7 @@ namespace LuaInterface
             TypeTraits<Quaternion[]>.Init(_ck.CheckQuatArray);
             TypeTraits<Vector2[]>.Init(_ck.CheckVec2Array);
             TypeTraits<Color[]>.Init(_ck.CheckColorArray);
+            TypeTraits<Color32[]>.Init(_ck.CheckColor32Array);
             TypeTraits<Vector4[]>.Init(_ck.CheckVec4Array);
 
             TypeTraits<IntPtr>.Init(_ck.CheckPtr);
@@ -2687,6 +2703,7 @@ namespace LuaInterface
             StackTraits<Quaternion>.Init(ToLua.Push, ToLua.CheckQuaternion, ToLua.ToQuaternion);
             StackTraits<Vector2>.Init(ToLua.Push, ToLua.CheckVector2, ToLua.ToVector2);
             StackTraits<Color>.Init(ToLua.Push, ToLua.CheckColor, ToLua.ToColor);
+            StackTraits<Color32>.Init(ToLua.Push, ToLua.CheckColor32, ToLua.ToColor32);
             StackTraits<Vector4>.Init(ToLua.Push, ToLua.CheckVector4, ToLua.ToVector4);
             StackTraits<Ray>.Init(ToLua.Push, ToLua.CheckRay, ToLua.ToRay);
             StackTraits<Touch>.Init(ToLua.Push, null, null);
@@ -2698,6 +2715,7 @@ namespace LuaInterface
             StackTraits<Nullable<Quaternion>>.Init(op.Push, op.CheckNullQuat, op.ToNullQuat);
             StackTraits<Nullable<Vector2>>.Init(op.Push, op.CheckNullVec2, op.ToNullVec2);
             StackTraits<Nullable<Color>>.Init(op.Push, op.CheckNullColor, op.ToNullColor);
+            StackTraits<Nullable<Color32>>.Init(op.Push, op.CheckNullColor32, op.ToNullColor32);
             StackTraits<Nullable<Vector4>>.Init(op.Push, op.CheckNullVec4, op.ToNullVec4);
             StackTraits<Nullable<Ray>>.Init(op.Push, op.CheckNullRay, op.ToNullRay);
             StackTraits<Nullable<Touch>>.Init(op.Push, null, null);
@@ -2709,6 +2727,7 @@ namespace LuaInterface
             StackTraits<Quaternion[]>.Init(ToLua.Push, op.CheckQuatArray, op.ToQuatArray);
             StackTraits<Vector2[]>.Init(ToLua.Push, op.CheckVec2Array, op.ToVec2Array);
             StackTraits<Color[]>.Init(ToLua.Push, op.CheckColorArray, op.ToColorArray);
+            StackTraits<Color32[]>.Init(ToLua.Push, op.CheckColor32Array, op.ToColor32Array);
             StackTraits<Vector4[]>.Init(ToLua.Push, op.CheckVec4Array, op.ToVec4Array);
 
             StackTraits<UIntPtr>.Init(op.Push, op.CheckUIntPtr, op.CheckUIntPtr); //"NYI"

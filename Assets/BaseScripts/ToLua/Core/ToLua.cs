@@ -61,6 +61,7 @@ namespace LuaInterface
             ToVarMap[LuaValueType.Quaternion] = ToObjectQuat;
             ToVarMap[LuaValueType.Vector2] = ToObjectVec2;
             ToVarMap[LuaValueType.Color] = ToObjectColor;
+            ToVarMap[LuaValueType.Color32] = ToObjectColor32;
             ToVarMap[LuaValueType.Vector4] = ToObjectVec4;
             ToVarMap[LuaValueType.Ray] = ToObjectRay;
             ToVarMap[LuaValueType.LayerMask] = ToObjectLayerMask;
@@ -691,6 +692,13 @@ namespace LuaInterface
             return new Color(r, g, b, a);
         }
 
+        public static Color32 ToColor32(IntPtr L, int stackPos)
+        {
+            float r, g, b, a;
+            LuaDLL.tolua_getclr(L, stackPos, out r, out g, out b, out a);
+            return new Color32((byte)r, (byte)g, (byte)b, (byte)a);
+        }
+
         public static Ray ToRay(IntPtr L, int stackPos)
         {
             int top = LuaDLL.lua_gettop(L);
@@ -837,6 +845,10 @@ namespace LuaInterface
         static object ToObjectColor(IntPtr L, int stackPos)
         {
             return ToColor(L, stackPos);
+        }
+        static object ToObjectColor32(IntPtr L, int stackPos)
+        {
+            return ToColor32(L, stackPos);
         }
 
         static object ToObjectVec4(IntPtr L, int stackPos)
@@ -1223,6 +1235,20 @@ namespace LuaInterface
             return new Color(r, g, b, a);
         }
 
+        static public Color32 CheckColor32(IntPtr L, int stackPos)
+        {
+            int type = LuaDLL.tolua_getvaluetype(L, stackPos);
+
+            if (type != LuaValueType.Color32)
+            {
+                LuaDLL.luaL_typerror(L, stackPos, "Color32", LuaValueTypeName.Get(type));
+                return new Color32();
+            }
+
+            float r, g, b, a;
+            LuaDLL.tolua_getclr(L, stackPos, out r, out g, out b, out a);
+            return new Color32((byte)r, (byte)g, (byte)b, (byte)a);
+        }
         static public Ray CheckRay(IntPtr L, int stackPos)
         {            
             int type = LuaDLL.tolua_getvaluetype(L, stackPos);
@@ -1342,6 +1368,10 @@ namespace LuaInterface
                 else if (t == typeof(Color))
                 {
                     return CheckColor(L, stackPos);
+                }
+                else if (t == typeof(Color32))
+                {
+                    return CheckColor32(L, stackPos);
                 }
                 else if (t == typeof(Ray))
                 {
@@ -2227,6 +2257,12 @@ namespace LuaInterface
             LuaDLL.tolua_pushclr(L, clr.r, clr.g, clr.b, clr.a);
         }
 
+        public static void Push(IntPtr L, Color32 clr)
+        {
+            LuaDLL.tolua_pushclr(L, clr.r, clr.g, clr.b, clr.a);
+        }
+
+
         public static void Push(IntPtr L, Ray ray)
         {
             LuaStatic.GetPackRay(L);
@@ -2479,9 +2515,7 @@ namespace LuaInterface
 
         public static void Push(IntPtr L, System.Enum e)
         {
-            object obj = null;
-            int enumMetatable = LuaStatic.GetEnumObject(L, e, out obj);
-            PushUserData(L, obj, enumMetatable);
+            LuaDLL.lua_pushinteger(L, (int)(ValueType)e);
         }
 
         //基础类型获取需要一个函数
@@ -2744,6 +2778,10 @@ namespace LuaInterface
                 {
                     Push(L, (Color)obj);
                 }
+                else if (t == typeof(Color32))
+                {
+                    Push(L, (Color32)obj);
+                }
                 else if (t == typeof(RaycastHit))
                 {
                     Push(L, (RaycastHit)obj);
@@ -2871,6 +2909,7 @@ namespace LuaInterface
                 case LuaTypes.LUA_TNIL:
                     return null;
                 case LuaTypes.LUA_TFUNCTION:
+                case LuaTypes.LUA_TTABLE:
                     LuaFunction func = ToLua.ToLuaFunction(L, stackPos);
                     return DelegateFactory.CreateDelegate(t, func);
                 case LuaTypes.LUA_TUSERDATA:
@@ -2890,6 +2929,7 @@ namespace LuaInterface
                 case LuaTypes.LUA_TNIL:
                     return null;
                 case LuaTypes.LUA_TFUNCTION:
+                case LuaTypes.LUA_TTABLE:
                     LuaFunction func = ToLua.ToLuaFunction(L, stackPos);
                     return DelegateTraits<T>.Create(func);
                 case LuaTypes.LUA_TUSERDATA:

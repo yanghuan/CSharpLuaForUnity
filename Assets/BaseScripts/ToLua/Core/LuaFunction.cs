@@ -773,6 +773,18 @@ namespace LuaInterface
                 throw e;
             }
         }
+        public Color32 CheckColor32()
+        {
+            try
+            {
+                return luaState.CheckColor32(stackPos++);
+            }
+            catch (Exception e)
+            {
+                EndPCall();
+                throw e;
+            }
+        }
 
         public Ray CheckRay()
         {
