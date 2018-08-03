@@ -39,12 +39,12 @@ public class UnityEngine_ShaderWrap
 		L.RegFunction("setmaximumLOD", set_maximumLOD);
 		L.RegVar("globalMaximumLOD", get_globalMaximumLOD, set_globalMaximumLOD);
 		L.RegFunction("getglobalMaximumLOD", get_globalMaximumLOD);
-		L.RegFunction("setglobalMaximumLOD", set_globalMaximumLOD);
+		L.RegFunction("setglobalMaximumLOD", set_globalMaximumLODter);
 		L.RegVar("isSupported", get_isSupported, null);
 		L.RegFunction("getisSupported", get_isSupported);
 		L.RegVar("globalRenderPipeline", get_globalRenderPipeline, set_globalRenderPipeline);
 		L.RegFunction("getglobalRenderPipeline", get_globalRenderPipeline);
-		L.RegFunction("setglobalRenderPipeline", set_globalRenderPipeline);
+		L.RegFunction("setglobalRenderPipeline", set_globalRenderPipelineter);
 		L.RegVar("renderQueue", get_renderQueue, null);
 		L.RegFunction("getrenderQueue", get_renderQueue);
 		L.EndClass();
@@ -978,11 +978,41 @@ public class UnityEngine_ShaderWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_globalMaximumLODter(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.Shader.globalMaximumLOD = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_globalRenderPipeline(IntPtr L)
 	{
 		try
 		{
 			string arg0 = ToLua.CheckString(L, 2);
+			UnityEngine.Shader.globalRenderPipeline = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_globalRenderPipelineter(IntPtr L)
+	{
+		try
+		{
+			string arg0 = ToLua.CheckString(L, 1);
 			UnityEngine.Shader.globalRenderPipeline = arg0;
 			return 0;
 		}

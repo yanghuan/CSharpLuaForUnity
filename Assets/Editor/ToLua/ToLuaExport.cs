@@ -3744,10 +3744,12 @@ public static class ToLuaExport
 
         for (int i = 0; i < fields.Length; i++)
         {
-            sb.AppendFormat("\t\tL.RegVar(\"{0}\", get_{0}, null);\r\n", fields[i].Name);
+            //sb.AppendFormat("\t\tL.RegVar(\"{0}\", get_{0}, null);\r\n", fields[i].Name);
+            string name = fields[i].Name;
+            sb.AppendFormat("\t\tL.RegConstant(\"{0}\", {1});\r\n", name, className + '.' + name);
         }
 
-        sb.AppendFormat("\t\tL.RegFunction(\"IntToEnum\", IntToEnum);\r\n");
+        //sb.AppendFormat("\t\tL.RegFunction(\"IntToEnum\", IntToEnum);\r\n");
         sb.AppendFormat("\t\tL.EndEnum();\r\n");
         sb.AppendFormat("\t\tTypeTraits<{0}>.Check = CheckType;\r\n", className);
         sb.AppendFormat("\t\tStackTraits<{0}>.Push = Push;\r\n", className);
@@ -3765,6 +3767,7 @@ public static class ToLuaExport
         sb.AppendFormat("\t\treturn TypeChecker.CheckEnumType(typeof({0}), L, pos);\r\n", className);
         sb.AppendLineEx("\t}");        
 
+        /*
         for (int i = 0; i < fields.Length; i++)
         {
             sb.AppendLineEx("\r\n\t[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]");
@@ -3782,7 +3785,7 @@ public static class ToLuaExport
         sb.AppendFormat("\t\t{0} o = ({0})arg0;\r\n", className);
         sb.AppendLineEx("\t\tToLua.Push(L, o);");
         sb.AppendLineEx("\t\treturn 1;");
-        sb.AppendLineEx("\t}");    
+        sb.AppendLineEx("\t}"); */   
     }
 
     static string CreateDelegate = @"    

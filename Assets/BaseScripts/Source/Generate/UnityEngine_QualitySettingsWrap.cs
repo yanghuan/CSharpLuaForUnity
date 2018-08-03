@@ -14,84 +14,84 @@ public class UnityEngine_QualitySettingsWrap
 		L.RegFunction("__eq", op_Equality);
 		L.RegVar("pixelLightCount", get_pixelLightCount, set_pixelLightCount);
 		L.RegFunction("getpixelLightCount", get_pixelLightCount);
-		L.RegFunction("setpixelLightCount", set_pixelLightCount);
+		L.RegFunction("setpixelLightCount", set_pixelLightCountter);
 		L.RegVar("shadows", get_shadows, set_shadows);
 		L.RegFunction("getshadows", get_shadows);
-		L.RegFunction("setshadows", set_shadows);
+		L.RegFunction("setshadows", set_shadowster);
 		L.RegVar("shadowProjection", get_shadowProjection, set_shadowProjection);
 		L.RegFunction("getshadowProjection", get_shadowProjection);
-		L.RegFunction("setshadowProjection", set_shadowProjection);
+		L.RegFunction("setshadowProjection", set_shadowProjectionter);
 		L.RegVar("shadowCascades", get_shadowCascades, set_shadowCascades);
 		L.RegFunction("getshadowCascades", get_shadowCascades);
-		L.RegFunction("setshadowCascades", set_shadowCascades);
+		L.RegFunction("setshadowCascades", set_shadowCascadester);
 		L.RegVar("shadowDistance", get_shadowDistance, set_shadowDistance);
 		L.RegFunction("getshadowDistance", get_shadowDistance);
-		L.RegFunction("setshadowDistance", set_shadowDistance);
+		L.RegFunction("setshadowDistance", set_shadowDistanceter);
 		L.RegVar("shadowResolution", get_shadowResolution, set_shadowResolution);
 		L.RegFunction("getshadowResolution", get_shadowResolution);
-		L.RegFunction("setshadowResolution", set_shadowResolution);
+		L.RegFunction("setshadowResolution", set_shadowResolutionter);
 		L.RegVar("shadowmaskMode", get_shadowmaskMode, set_shadowmaskMode);
 		L.RegFunction("getshadowmaskMode", get_shadowmaskMode);
-		L.RegFunction("setshadowmaskMode", set_shadowmaskMode);
+		L.RegFunction("setshadowmaskMode", set_shadowmaskModeter);
 		L.RegVar("shadowNearPlaneOffset", get_shadowNearPlaneOffset, set_shadowNearPlaneOffset);
 		L.RegFunction("getshadowNearPlaneOffset", get_shadowNearPlaneOffset);
-		L.RegFunction("setshadowNearPlaneOffset", set_shadowNearPlaneOffset);
+		L.RegFunction("setshadowNearPlaneOffset", set_shadowNearPlaneOffsetter);
 		L.RegVar("shadowCascade2Split", get_shadowCascade2Split, set_shadowCascade2Split);
 		L.RegFunction("getshadowCascade2Split", get_shadowCascade2Split);
-		L.RegFunction("setshadowCascade2Split", set_shadowCascade2Split);
+		L.RegFunction("setshadowCascade2Split", set_shadowCascade2Splitter);
 		L.RegVar("shadowCascade4Split", get_shadowCascade4Split, set_shadowCascade4Split);
 		L.RegFunction("getshadowCascade4Split", get_shadowCascade4Split);
-		L.RegFunction("setshadowCascade4Split", set_shadowCascade4Split);
+		L.RegFunction("setshadowCascade4Split", set_shadowCascade4Splitter);
 		L.RegVar("lodBias", get_lodBias, set_lodBias);
 		L.RegFunction("getlodBias", get_lodBias);
-		L.RegFunction("setlodBias", set_lodBias);
+		L.RegFunction("setlodBias", set_lodBiaster);
 		L.RegVar("anisotropicFiltering", get_anisotropicFiltering, set_anisotropicFiltering);
 		L.RegFunction("getanisotropicFiltering", get_anisotropicFiltering);
-		L.RegFunction("setanisotropicFiltering", set_anisotropicFiltering);
+		L.RegFunction("setanisotropicFiltering", set_anisotropicFilteringter);
 		L.RegVar("masterTextureLimit", get_masterTextureLimit, set_masterTextureLimit);
 		L.RegFunction("getmasterTextureLimit", get_masterTextureLimit);
-		L.RegFunction("setmasterTextureLimit", set_masterTextureLimit);
+		L.RegFunction("setmasterTextureLimit", set_masterTextureLimitter);
 		L.RegVar("maximumLODLevel", get_maximumLODLevel, set_maximumLODLevel);
 		L.RegFunction("getmaximumLODLevel", get_maximumLODLevel);
-		L.RegFunction("setmaximumLODLevel", set_maximumLODLevel);
+		L.RegFunction("setmaximumLODLevel", set_maximumLODLevelter);
 		L.RegVar("particleRaycastBudget", get_particleRaycastBudget, set_particleRaycastBudget);
 		L.RegFunction("getparticleRaycastBudget", get_particleRaycastBudget);
-		L.RegFunction("setparticleRaycastBudget", set_particleRaycastBudget);
+		L.RegFunction("setparticleRaycastBudget", set_particleRaycastBudgetter);
 		L.RegVar("softParticles", get_softParticles, set_softParticles);
 		L.RegFunction("getsoftParticles", get_softParticles);
-		L.RegFunction("setsoftParticles", set_softParticles);
+		L.RegFunction("setsoftParticles", set_softParticlester);
 		L.RegVar("softVegetation", get_softVegetation, set_softVegetation);
 		L.RegFunction("getsoftVegetation", get_softVegetation);
-		L.RegFunction("setsoftVegetation", set_softVegetation);
+		L.RegFunction("setsoftVegetation", set_softVegetationter);
 		L.RegVar("vSyncCount", get_vSyncCount, set_vSyncCount);
 		L.RegFunction("getvSyncCount", get_vSyncCount);
-		L.RegFunction("setvSyncCount", set_vSyncCount);
+		L.RegFunction("setvSyncCount", set_vSyncCountter);
 		L.RegVar("antiAliasing", get_antiAliasing, set_antiAliasing);
 		L.RegFunction("getantiAliasing", get_antiAliasing);
-		L.RegFunction("setantiAliasing", set_antiAliasing);
+		L.RegFunction("setantiAliasing", set_antiAliasingter);
 		L.RegVar("asyncUploadTimeSlice", get_asyncUploadTimeSlice, set_asyncUploadTimeSlice);
 		L.RegFunction("getasyncUploadTimeSlice", get_asyncUploadTimeSlice);
-		L.RegFunction("setasyncUploadTimeSlice", set_asyncUploadTimeSlice);
+		L.RegFunction("setasyncUploadTimeSlice", set_asyncUploadTimeSliceter);
 		L.RegVar("asyncUploadBufferSize", get_asyncUploadBufferSize, set_asyncUploadBufferSize);
 		L.RegFunction("getasyncUploadBufferSize", get_asyncUploadBufferSize);
-		L.RegFunction("setasyncUploadBufferSize", set_asyncUploadBufferSize);
+		L.RegFunction("setasyncUploadBufferSize", set_asyncUploadBufferSizeter);
 		L.RegVar("realtimeReflectionProbes", get_realtimeReflectionProbes, set_realtimeReflectionProbes);
 		L.RegFunction("getrealtimeReflectionProbes", get_realtimeReflectionProbes);
-		L.RegFunction("setrealtimeReflectionProbes", set_realtimeReflectionProbes);
+		L.RegFunction("setrealtimeReflectionProbes", set_realtimeReflectionProbester);
 		L.RegVar("billboardsFaceCameraPosition", get_billboardsFaceCameraPosition, set_billboardsFaceCameraPosition);
 		L.RegFunction("getbillboardsFaceCameraPosition", get_billboardsFaceCameraPosition);
-		L.RegFunction("setbillboardsFaceCameraPosition", set_billboardsFaceCameraPosition);
+		L.RegFunction("setbillboardsFaceCameraPosition", set_billboardsFaceCameraPositionter);
 		L.RegVar("resolutionScalingFixedDPIFactor", get_resolutionScalingFixedDPIFactor, set_resolutionScalingFixedDPIFactor);
 		L.RegFunction("getresolutionScalingFixedDPIFactor", get_resolutionScalingFixedDPIFactor);
-		L.RegFunction("setresolutionScalingFixedDPIFactor", set_resolutionScalingFixedDPIFactor);
+		L.RegFunction("setresolutionScalingFixedDPIFactor", set_resolutionScalingFixedDPIFactorter);
 		L.RegVar("blendWeights", get_blendWeights, set_blendWeights);
 		L.RegFunction("getblendWeights", get_blendWeights);
-		L.RegFunction("setblendWeights", set_blendWeights);
+		L.RegFunction("setblendWeights", set_blendWeightster);
 		L.RegVar("names", get_names, null);
 		L.RegFunction("getnames", get_names);
 		L.RegVar("maxQueuedFrames", get_maxQueuedFrames, set_maxQueuedFrames);
 		L.RegFunction("getmaxQueuedFrames", get_maxQueuedFrames);
-		L.RegFunction("setmaxQueuedFrames", set_maxQueuedFrames);
+		L.RegFunction("setmaxQueuedFrames", set_maxQueuedFramester);
 		L.RegVar("desiredColorSpace", get_desiredColorSpace, null);
 		L.RegFunction("getdesiredColorSpace", get_desiredColorSpace);
 		L.RegVar("activeColorSpace", get_activeColorSpace, null);
@@ -644,11 +644,41 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_pixelLightCountter(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.QualitySettings.pixelLightCount = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_shadows(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.ShadowQuality arg0 = (UnityEngine.ShadowQuality)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.QualitySettings.shadows = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_shadowster(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.ShadowQuality arg0 = (UnityEngine.ShadowQuality)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.QualitySettings.shadows = arg0;
 			return 0;
 		}
@@ -674,11 +704,41 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_shadowProjectionter(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.ShadowProjection arg0 = (UnityEngine.ShadowProjection)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.QualitySettings.shadowProjection = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_shadowCascades(IntPtr L)
 	{
 		try
 		{
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.QualitySettings.shadowCascades = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_shadowCascadester(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.QualitySettings.shadowCascades = arg0;
 			return 0;
 		}
@@ -704,11 +764,41 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_shadowDistanceter(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.QualitySettings.shadowDistance = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_shadowResolution(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.ShadowResolution arg0 = (UnityEngine.ShadowResolution)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.QualitySettings.shadowResolution = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_shadowResolutionter(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.ShadowResolution arg0 = (UnityEngine.ShadowResolution)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.QualitySettings.shadowResolution = arg0;
 			return 0;
 		}
@@ -734,11 +824,41 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_shadowmaskModeter(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.ShadowmaskMode arg0 = (UnityEngine.ShadowmaskMode)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.QualitySettings.shadowmaskMode = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_shadowNearPlaneOffset(IntPtr L)
 	{
 		try
 		{
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.QualitySettings.shadowNearPlaneOffset = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_shadowNearPlaneOffsetter(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.QualitySettings.shadowNearPlaneOffset = arg0;
 			return 0;
 		}
@@ -764,11 +884,41 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_shadowCascade2Splitter(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.QualitySettings.shadowCascade2Split = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_shadowCascade4Split(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 2);
+			UnityEngine.QualitySettings.shadowCascade4Split = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_shadowCascade4Splitter(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 1);
 			UnityEngine.QualitySettings.shadowCascade4Split = arg0;
 			return 0;
 		}
@@ -794,11 +944,41 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_lodBiaster(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.QualitySettings.lodBias = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_anisotropicFiltering(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.AnisotropicFiltering arg0 = (UnityEngine.AnisotropicFiltering)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.QualitySettings.anisotropicFiltering = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_anisotropicFilteringter(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.AnisotropicFiltering arg0 = (UnityEngine.AnisotropicFiltering)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.QualitySettings.anisotropicFiltering = arg0;
 			return 0;
 		}
@@ -824,11 +1004,41 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_masterTextureLimitter(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.QualitySettings.masterTextureLimit = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_maximumLODLevel(IntPtr L)
 	{
 		try
 		{
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.QualitySettings.maximumLODLevel = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_maximumLODLevelter(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.QualitySettings.maximumLODLevel = arg0;
 			return 0;
 		}
@@ -854,11 +1064,41 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_particleRaycastBudgetter(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.QualitySettings.particleRaycastBudget = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_softParticles(IntPtr L)
 	{
 		try
 		{
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			UnityEngine.QualitySettings.softParticles = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_softParticlester(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
 			UnityEngine.QualitySettings.softParticles = arg0;
 			return 0;
 		}
@@ -884,11 +1124,41 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_softVegetationter(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
+			UnityEngine.QualitySettings.softVegetation = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_vSyncCount(IntPtr L)
 	{
 		try
 		{
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.QualitySettings.vSyncCount = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_vSyncCountter(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.QualitySettings.vSyncCount = arg0;
 			return 0;
 		}
@@ -914,11 +1184,41 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_antiAliasingter(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.QualitySettings.antiAliasing = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_asyncUploadTimeSlice(IntPtr L)
 	{
 		try
 		{
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.QualitySettings.asyncUploadTimeSlice = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_asyncUploadTimeSliceter(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.QualitySettings.asyncUploadTimeSlice = arg0;
 			return 0;
 		}
@@ -944,11 +1244,41 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_asyncUploadBufferSizeter(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.QualitySettings.asyncUploadBufferSize = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_realtimeReflectionProbes(IntPtr L)
 	{
 		try
 		{
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			UnityEngine.QualitySettings.realtimeReflectionProbes = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_realtimeReflectionProbester(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
 			UnityEngine.QualitySettings.realtimeReflectionProbes = arg0;
 			return 0;
 		}
@@ -974,11 +1304,41 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_billboardsFaceCameraPositionter(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
+			UnityEngine.QualitySettings.billboardsFaceCameraPosition = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_resolutionScalingFixedDPIFactor(IntPtr L)
 	{
 		try
 		{
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.QualitySettings.resolutionScalingFixedDPIFactor = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_resolutionScalingFixedDPIFactorter(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.QualitySettings.resolutionScalingFixedDPIFactor = arg0;
 			return 0;
 		}
@@ -1004,11 +1364,41 @@ public class UnityEngine_QualitySettingsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_blendWeightster(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.BlendWeights arg0 = (UnityEngine.BlendWeights)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.QualitySettings.blendWeights = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_maxQueuedFrames(IntPtr L)
 	{
 		try
 		{
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.QualitySettings.maxQueuedFrames = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_maxQueuedFramester(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.QualitySettings.maxQueuedFrames = arg0;
 			return 0;
 		}

@@ -25,18 +25,18 @@ public class UnityEngine_TimeWrap
 		L.RegFunction("getfixedUnscaledDeltaTime", get_fixedUnscaledDeltaTime);
 		L.RegVar("fixedDeltaTime", get_fixedDeltaTime, set_fixedDeltaTime);
 		L.RegFunction("getfixedDeltaTime", get_fixedDeltaTime);
-		L.RegFunction("setfixedDeltaTime", set_fixedDeltaTime);
+		L.RegFunction("setfixedDeltaTime", set_fixedDeltaTimeter);
 		L.RegVar("maximumDeltaTime", get_maximumDeltaTime, set_maximumDeltaTime);
 		L.RegFunction("getmaximumDeltaTime", get_maximumDeltaTime);
-		L.RegFunction("setmaximumDeltaTime", set_maximumDeltaTime);
+		L.RegFunction("setmaximumDeltaTime", set_maximumDeltaTimeter);
 		L.RegVar("smoothDeltaTime", get_smoothDeltaTime, null);
 		L.RegFunction("getsmoothDeltaTime", get_smoothDeltaTime);
 		L.RegVar("maximumParticleDeltaTime", get_maximumParticleDeltaTime, set_maximumParticleDeltaTime);
 		L.RegFunction("getmaximumParticleDeltaTime", get_maximumParticleDeltaTime);
-		L.RegFunction("setmaximumParticleDeltaTime", set_maximumParticleDeltaTime);
+		L.RegFunction("setmaximumParticleDeltaTime", set_maximumParticleDeltaTimeter);
 		L.RegVar("timeScale", get_timeScale, set_timeScale);
 		L.RegFunction("gettimeScale", get_timeScale);
-		L.RegFunction("settimeScale", set_timeScale);
+		L.RegFunction("settimeScale", set_timeScaleter);
 		L.RegVar("frameCount", get_frameCount, null);
 		L.RegFunction("getframeCount", get_frameCount);
 		L.RegVar("renderedFrameCount", get_renderedFrameCount, null);
@@ -45,7 +45,7 @@ public class UnityEngine_TimeWrap
 		L.RegFunction("getrealtimeSinceStartup", get_realtimeSinceStartup);
 		L.RegVar("captureFramerate", get_captureFramerate, set_captureFramerate);
 		L.RegFunction("getcaptureFramerate", get_captureFramerate);
-		L.RegFunction("setcaptureFramerate", set_captureFramerate);
+		L.RegFunction("setcaptureFramerate", set_captureFramerateter);
 		L.RegVar("inFixedTimeStep", get_inFixedTimeStep, null);
 		L.RegFunction("getinFixedTimeStep", get_inFixedTimeStep);
 		L.EndStaticLibs();
@@ -319,11 +319,41 @@ public class UnityEngine_TimeWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_fixedDeltaTimeter(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.Time.fixedDeltaTime = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_maximumDeltaTime(IntPtr L)
 	{
 		try
 		{
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.Time.maximumDeltaTime = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_maximumDeltaTimeter(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.Time.maximumDeltaTime = arg0;
 			return 0;
 		}
@@ -349,6 +379,21 @@ public class UnityEngine_TimeWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_maximumParticleDeltaTimeter(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.Time.maximumParticleDeltaTime = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_timeScale(IntPtr L)
 	{
 		try
@@ -364,11 +409,41 @@ public class UnityEngine_TimeWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_timeScaleter(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.Time.timeScale = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_captureFramerate(IntPtr L)
 	{
 		try
 		{
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.Time.captureFramerate = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_captureFramerateter(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.Time.captureFramerate = arg0;
 			return 0;
 		}

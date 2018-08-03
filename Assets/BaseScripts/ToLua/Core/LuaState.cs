@@ -494,6 +494,10 @@ namespace LuaInterface
             LuaDLL.tolua_constant(L, name, d);
         }
 
+        public void RegConstant(string name, ValueType value) {
+            LuaDLL.tolua_constant(L, name, (int)value);
+        }
+
         public void RegConstant(string name, bool flag)
         {
             LuaDLL.lua_pushstring(L, name);

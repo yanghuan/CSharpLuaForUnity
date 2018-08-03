@@ -24,7 +24,7 @@ public class UnityEngine_InputWrap
 		L.RegFunction("GetTouch", GetTouch);
 		L.RegVar("compensateSensors", get_compensateSensors, set_compensateSensors);
 		L.RegFunction("getcompensateSensors", get_compensateSensors);
-		L.RegFunction("setcompensateSensors", set_compensateSensors);
+		L.RegFunction("setcompensateSensors", set_compensateSensorster);
 		L.RegVar("gyro", get_gyro, null);
 		L.RegFunction("getgyro", get_gyro);
 		L.RegVar("mousePosition", get_mousePosition, null);
@@ -35,7 +35,7 @@ public class UnityEngine_InputWrap
 		L.RegFunction("getmousePresent", get_mousePresent);
 		L.RegVar("simulateMouseWithTouches", get_simulateMouseWithTouches, set_simulateMouseWithTouches);
 		L.RegFunction("getsimulateMouseWithTouches", get_simulateMouseWithTouches);
-		L.RegFunction("setsimulateMouseWithTouches", set_simulateMouseWithTouches);
+		L.RegFunction("setsimulateMouseWithTouches", set_simulateMouseWithTouchester);
 		L.RegVar("anyKey", get_anyKey, null);
 		L.RegFunction("getanyKey", get_anyKey);
 		L.RegVar("anyKeyDown", get_anyKeyDown, null);
@@ -60,7 +60,7 @@ public class UnityEngine_InputWrap
 		L.RegFunction("gettouchSupported", get_touchSupported);
 		L.RegVar("multiTouchEnabled", get_multiTouchEnabled, set_multiTouchEnabled);
 		L.RegFunction("getmultiTouchEnabled", get_multiTouchEnabled);
-		L.RegFunction("setmultiTouchEnabled", set_multiTouchEnabled);
+		L.RegFunction("setmultiTouchEnabled", set_multiTouchEnabledter);
 		L.RegVar("location", get_location, null);
 		L.RegFunction("getlocation", get_location);
 		L.RegVar("compass", get_compass, null);
@@ -69,17 +69,17 @@ public class UnityEngine_InputWrap
 		L.RegFunction("getdeviceOrientation", get_deviceOrientation);
 		L.RegVar("imeCompositionMode", get_imeCompositionMode, set_imeCompositionMode);
 		L.RegFunction("getimeCompositionMode", get_imeCompositionMode);
-		L.RegFunction("setimeCompositionMode", set_imeCompositionMode);
+		L.RegFunction("setimeCompositionMode", set_imeCompositionModeter);
 		L.RegVar("compositionString", get_compositionString, null);
 		L.RegFunction("getcompositionString", get_compositionString);
 		L.RegVar("imeIsSelected", get_imeIsSelected, null);
 		L.RegFunction("getimeIsSelected", get_imeIsSelected);
 		L.RegVar("compositionCursorPos", get_compositionCursorPos, set_compositionCursorPos);
 		L.RegFunction("getcompositionCursorPos", get_compositionCursorPos);
-		L.RegFunction("setcompositionCursorPos", set_compositionCursorPos);
+		L.RegFunction("setcompositionCursorPos", set_compositionCursorPoster);
 		L.RegVar("backButtonLeavesApp", get_backButtonLeavesApp, set_backButtonLeavesApp);
 		L.RegFunction("getbackButtonLeavesApp", get_backButtonLeavesApp);
-		L.RegFunction("setbackButtonLeavesApp", set_backButtonLeavesApp);
+		L.RegFunction("setbackButtonLeavesApp", set_backButtonLeavesAppter);
 		L.EndStaticLibs();
 	}
 
@@ -760,11 +760,41 @@ public class UnityEngine_InputWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_compensateSensorster(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
+			UnityEngine.Input.compensateSensors = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_simulateMouseWithTouches(IntPtr L)
 	{
 		try
 		{
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			UnityEngine.Input.simulateMouseWithTouches = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_simulateMouseWithTouchester(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
 			UnityEngine.Input.simulateMouseWithTouches = arg0;
 			return 0;
 		}
@@ -790,11 +820,41 @@ public class UnityEngine_InputWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_multiTouchEnabledter(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
+			UnityEngine.Input.multiTouchEnabled = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_imeCompositionMode(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.IMECompositionMode arg0 = (UnityEngine.IMECompositionMode)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.Input.imeCompositionMode = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_imeCompositionModeter(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.IMECompositionMode arg0 = (UnityEngine.IMECompositionMode)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.Input.imeCompositionMode = arg0;
 			return 0;
 		}
@@ -820,11 +880,41 @@ public class UnityEngine_InputWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_compositionCursorPoster(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.Vector2 arg0 = ToLua.ToVector2(L, 1);
+			UnityEngine.Input.compositionCursorPos = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_backButtonLeavesApp(IntPtr L)
 	{
 		try
 		{
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			UnityEngine.Input.backButtonLeavesApp = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_backButtonLeavesAppter(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
 			UnityEngine.Input.backButtonLeavesApp = arg0;
 			return 0;
 		}

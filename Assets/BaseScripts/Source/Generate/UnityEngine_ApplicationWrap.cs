@@ -38,7 +38,7 @@ public class UnityEngine_ApplicationWrap
 		L.RegFunction("getisConsolePlatform", get_isConsolePlatform);
 		L.RegVar("runInBackground", get_runInBackground, set_runInBackground);
 		L.RegFunction("getrunInBackground", get_runInBackground);
-		L.RegFunction("setrunInBackground", set_runInBackground);
+		L.RegFunction("setrunInBackground", set_runInBackgroundter);
 		L.RegVar("dataPath", get_dataPath, null);
 		L.RegFunction("getdataPath", get_dataPath);
 		L.RegVar("streamingAssetsPath", get_streamingAssetsPath, null);
@@ -69,12 +69,12 @@ public class UnityEngine_ApplicationWrap
 		L.RegFunction("getcloudProjectId", get_cloudProjectId);
 		L.RegVar("targetFrameRate", get_targetFrameRate, set_targetFrameRate);
 		L.RegFunction("gettargetFrameRate", get_targetFrameRate);
-		L.RegFunction("settargetFrameRate", set_targetFrameRate);
+		L.RegFunction("settargetFrameRate", set_targetFrameRateter);
 		L.RegVar("systemLanguage", get_systemLanguage, null);
 		L.RegFunction("getsystemLanguage", get_systemLanguage);
 		L.RegVar("backgroundLoadingPriority", get_backgroundLoadingPriority, set_backgroundLoadingPriority);
 		L.RegFunction("getbackgroundLoadingPriority", get_backgroundLoadingPriority);
-		L.RegFunction("setbackgroundLoadingPriority", set_backgroundLoadingPriority);
+		L.RegFunction("setbackgroundLoadingPriority", set_backgroundLoadingPriorityter);
 		L.RegVar("internetReachability", get_internetReachability, null);
 		L.RegFunction("getinternetReachability", get_internetReachability);
 		L.RegVar("genuine", get_genuine, null);
@@ -800,6 +800,21 @@ public class UnityEngine_ApplicationWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_runInBackgroundter(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
+			UnityEngine.Application.runInBackground = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_targetFrameRate(IntPtr L)
 	{
 		try
@@ -815,11 +830,41 @@ public class UnityEngine_ApplicationWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_targetFrameRateter(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.Application.targetFrameRate = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_backgroundLoadingPriority(IntPtr L)
 	{
 		try
 		{
 			UnityEngine.ThreadPriority arg0 = (UnityEngine.ThreadPriority)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.Application.backgroundLoadingPriority = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_backgroundLoadingPriorityter(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.ThreadPriority arg0 = (UnityEngine.ThreadPriority)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.Application.backgroundLoadingPriority = arg0;
 			return 0;
 		}

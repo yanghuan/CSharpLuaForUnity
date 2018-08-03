@@ -42,43 +42,43 @@ public class UnityEngine_PhysicsWrap
 		L.RegConstant("AllLayers", -1);
 		L.RegVar("gravity", get_gravity, set_gravity);
 		L.RegFunction("getgravity", get_gravity);
-		L.RegFunction("setgravity", set_gravity);
+		L.RegFunction("setgravity", set_gravityter);
 		L.RegVar("defaultContactOffset", get_defaultContactOffset, set_defaultContactOffset);
 		L.RegFunction("getdefaultContactOffset", get_defaultContactOffset);
-		L.RegFunction("setdefaultContactOffset", set_defaultContactOffset);
+		L.RegFunction("setdefaultContactOffset", set_defaultContactOffsetter);
 		L.RegVar("bounceThreshold", get_bounceThreshold, set_bounceThreshold);
 		L.RegFunction("getbounceThreshold", get_bounceThreshold);
-		L.RegFunction("setbounceThreshold", set_bounceThreshold);
+		L.RegFunction("setbounceThreshold", set_bounceThresholdter);
 		L.RegVar("defaultSolverIterations", get_defaultSolverIterations, set_defaultSolverIterations);
 		L.RegFunction("getdefaultSolverIterations", get_defaultSolverIterations);
-		L.RegFunction("setdefaultSolverIterations", set_defaultSolverIterations);
+		L.RegFunction("setdefaultSolverIterations", set_defaultSolverIterationster);
 		L.RegVar("defaultSolverVelocityIterations", get_defaultSolverVelocityIterations, set_defaultSolverVelocityIterations);
 		L.RegFunction("getdefaultSolverVelocityIterations", get_defaultSolverVelocityIterations);
-		L.RegFunction("setdefaultSolverVelocityIterations", set_defaultSolverVelocityIterations);
+		L.RegFunction("setdefaultSolverVelocityIterations", set_defaultSolverVelocityIterationster);
 		L.RegVar("sleepThreshold", get_sleepThreshold, set_sleepThreshold);
 		L.RegFunction("getsleepThreshold", get_sleepThreshold);
-		L.RegFunction("setsleepThreshold", set_sleepThreshold);
+		L.RegFunction("setsleepThreshold", set_sleepThresholdter);
 		L.RegVar("queriesHitTriggers", get_queriesHitTriggers, set_queriesHitTriggers);
 		L.RegFunction("getqueriesHitTriggers", get_queriesHitTriggers);
-		L.RegFunction("setqueriesHitTriggers", set_queriesHitTriggers);
+		L.RegFunction("setqueriesHitTriggers", set_queriesHitTriggerster);
 		L.RegVar("queriesHitBackfaces", get_queriesHitBackfaces, set_queriesHitBackfaces);
 		L.RegFunction("getqueriesHitBackfaces", get_queriesHitBackfaces);
-		L.RegFunction("setqueriesHitBackfaces", set_queriesHitBackfaces);
+		L.RegFunction("setqueriesHitBackfaces", set_queriesHitBackfacester);
 		L.RegVar("interCollisionDistance", get_interCollisionDistance, set_interCollisionDistance);
 		L.RegFunction("getinterCollisionDistance", get_interCollisionDistance);
-		L.RegFunction("setinterCollisionDistance", set_interCollisionDistance);
+		L.RegFunction("setinterCollisionDistance", set_interCollisionDistanceter);
 		L.RegVar("interCollisionStiffness", get_interCollisionStiffness, set_interCollisionStiffness);
 		L.RegFunction("getinterCollisionStiffness", get_interCollisionStiffness);
-		L.RegFunction("setinterCollisionStiffness", set_interCollisionStiffness);
+		L.RegFunction("setinterCollisionStiffness", set_interCollisionStiffnesster);
 		L.RegVar("interCollisionSettingsToggle", get_interCollisionSettingsToggle, set_interCollisionSettingsToggle);
 		L.RegFunction("getinterCollisionSettingsToggle", get_interCollisionSettingsToggle);
-		L.RegFunction("setinterCollisionSettingsToggle", set_interCollisionSettingsToggle);
+		L.RegFunction("setinterCollisionSettingsToggle", set_interCollisionSettingsToggleter);
 		L.RegVar("autoSimulation", get_autoSimulation, set_autoSimulation);
 		L.RegFunction("getautoSimulation", get_autoSimulation);
-		L.RegFunction("setautoSimulation", set_autoSimulation);
+		L.RegFunction("setautoSimulation", set_autoSimulationter);
 		L.RegVar("autoSyncTransforms", get_autoSyncTransforms, set_autoSyncTransforms);
 		L.RegFunction("getautoSyncTransforms", get_autoSyncTransforms);
-		L.RegFunction("setautoSyncTransforms", set_autoSyncTransforms);
+		L.RegFunction("setautoSyncTransforms", set_autoSyncTransformster);
 		L.EndStaticLibs();
 	}
 
@@ -2254,11 +2254,41 @@ public class UnityEngine_PhysicsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_gravityter(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.Vector3 arg0 = ToLua.ToVector3(L, 1);
+			UnityEngine.Physics.gravity = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_defaultContactOffset(IntPtr L)
 	{
 		try
 		{
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.Physics.defaultContactOffset = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_defaultContactOffsetter(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.Physics.defaultContactOffset = arg0;
 			return 0;
 		}
@@ -2284,11 +2314,41 @@ public class UnityEngine_PhysicsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_bounceThresholdter(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.Physics.bounceThreshold = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_defaultSolverIterations(IntPtr L)
 	{
 		try
 		{
 			int arg0 = (int)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.Physics.defaultSolverIterations = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_defaultSolverIterationster(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.Physics.defaultSolverIterations = arg0;
 			return 0;
 		}
@@ -2314,11 +2374,41 @@ public class UnityEngine_PhysicsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_defaultSolverVelocityIterationster(IntPtr L)
+	{
+		try
+		{
+			int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.Physics.defaultSolverVelocityIterations = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_sleepThreshold(IntPtr L)
 	{
 		try
 		{
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.Physics.sleepThreshold = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_sleepThresholdter(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.Physics.sleepThreshold = arg0;
 			return 0;
 		}
@@ -2344,11 +2434,41 @@ public class UnityEngine_PhysicsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_queriesHitTriggerster(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
+			UnityEngine.Physics.queriesHitTriggers = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_queriesHitBackfaces(IntPtr L)
 	{
 		try
 		{
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			UnityEngine.Physics.queriesHitBackfaces = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_queriesHitBackfacester(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
 			UnityEngine.Physics.queriesHitBackfaces = arg0;
 			return 0;
 		}
@@ -2374,11 +2494,41 @@ public class UnityEngine_PhysicsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_interCollisionDistanceter(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
+			UnityEngine.Physics.interCollisionDistance = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_interCollisionStiffness(IntPtr L)
 	{
 		try
 		{
 			float arg0 = (float)LuaDLL.luaL_checknumber(L, 2);
+			UnityEngine.Physics.interCollisionStiffness = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_interCollisionStiffnesster(IntPtr L)
+	{
+		try
+		{
+			float arg0 = (float)LuaDLL.luaL_checknumber(L, 1);
 			UnityEngine.Physics.interCollisionStiffness = arg0;
 			return 0;
 		}
@@ -2404,6 +2554,21 @@ public class UnityEngine_PhysicsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_interCollisionSettingsToggleter(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
+			UnityEngine.Physics.interCollisionSettingsToggle = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_autoSimulation(IntPtr L)
 	{
 		try
@@ -2419,11 +2584,41 @@ public class UnityEngine_PhysicsWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_autoSimulationter(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
+			UnityEngine.Physics.autoSimulation = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int set_autoSyncTransforms(IntPtr L)
 	{
 		try
 		{
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
+			UnityEngine.Physics.autoSyncTransforms = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_autoSyncTransformster(IntPtr L)
+	{
+		try
+		{
+			bool arg0 = LuaDLL.luaL_checkboolean(L, 1);
 			UnityEngine.Physics.autoSyncTransforms = arg0;
 			return 0;
 		}

@@ -32,7 +32,7 @@ public class UnityEngine_RenderTextureWrap
 		L.RegFunction("getdepthBuffer", get_depthBuffer);
 		L.RegVar("active", get_active, set_active);
 		L.RegFunction("getactive", get_active);
-		L.RegFunction("setactive", set_active);
+		L.RegFunction("setactive", set_activeter);
 		L.RegVar("width", get_width, set_width);
 		L.RegFunction("getwidth", get_width);
 		L.RegFunction("setwidth", set_width);
@@ -925,6 +925,21 @@ public class UnityEngine_RenderTextureWrap
 		try
 		{
 			UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 2);
+			UnityEngine.RenderTexture.active = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_activeter(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
 			UnityEngine.RenderTexture.active = arg0;
 			return 0;
 		}
