@@ -29,7 +29,7 @@ public class UnityEngine_SphereColliderWrap
 			if (count == 0)
 			{
 				UnityEngine.SphereCollider obj = new UnityEngine.SphereCollider();
-				ToLua.PushSealed(L, obj);
+				ToLua.Push(L, obj);
 				return 1;
 			}
 			else

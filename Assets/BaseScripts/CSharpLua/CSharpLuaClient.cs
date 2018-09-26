@@ -17,9 +17,13 @@ namespace CSharpLua {
     public string SerializeData;
     public UnityEngine.Object[] SerializeObjects;
 
+    public void Bind(LuaTable table, string luaClass) {
+      Table = table;
+      LuaClass = luaClass;
+    }
+
     public void Bind(LuaTable table) {
       Table = table;
-      LuaClass = (string)table["__name__"];
     }
 
     internal void Bind(string luaClass, string serializeData, UnityEngine.Object[] serializeObjects) {
@@ -45,7 +49,13 @@ namespace CSharpLua {
 
     private void Awake() {
       if (!string.IsNullOrEmpty(LuaClass)) {
-        Table = CSharpLuaClient.Instance.BindLua(this);
+        if (Table == null) {
+          Table = CSharpLuaClient.Instance.BindLua(this);
+        } else {
+          using (var fn = Table.GetLuaFunction("Awake")) {
+            fn.Call(Table);
+          }
+        }
       }
     }
 
@@ -156,10 +166,11 @@ namespace CSharpLua {
     }
 
     internal LuaTable BindLua(BridgeMonoBehaviour bridgeMonoBehaviour) {
-      return bindFn_.Invoke<BridgeMonoBehaviour, string, string, LuaTable>(
+      return bindFn_.Invoke<BridgeMonoBehaviour, string, string, UnityEngine.Object[], LuaTable>(
         bridgeMonoBehaviour, 
         bridgeMonoBehaviour.LuaClass, 
-        bridgeMonoBehaviour.SerializeData);
+        bridgeMonoBehaviour.SerializeData,
+        bridgeMonoBehaviour.SerializeObjects);
     }
   }
 }

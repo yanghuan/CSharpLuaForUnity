@@ -14,10 +14,10 @@ public class UnityEngine_GameObjectWrap
 		L.RegFunction("GetComponents", GetComponents);
 		L.RegFunction("GetComponentsInChildren", GetComponentsInChildren);
 		L.RegFunction("GetComponentsInParent", GetComponentsInParent);
+		L.RegFunction("FindWithTag", FindWithTag);
 		L.RegFunction("SetActive", SetActive);
 		L.RegFunction("CompareTag", CompareTag);
 		L.RegFunction("FindGameObjectWithTag", FindGameObjectWithTag);
-		L.RegFunction("FindWithTag", FindWithTag);
 		L.RegFunction("FindGameObjectsWithTag", FindGameObjectsWithTag);
 		L.RegFunction("Find", Find);
 		L.RegFunction("AddComponent", AddComponent);
@@ -297,6 +297,23 @@ public class UnityEngine_GameObjectWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int FindWithTag(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			string arg0 = ToLua.CheckString(L, 1);
+			UnityEngine.GameObject o = UnityEngine.GameObject.FindWithTag(arg0);
+			ToLua.PushSealed(L, o);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int SetActive(IntPtr L)
 	{
 		try
@@ -339,23 +356,6 @@ public class UnityEngine_GameObjectWrap
 			ToLua.CheckArgsCount(L, 1);
 			string arg0 = ToLua.CheckString(L, 1);
 			UnityEngine.GameObject o = UnityEngine.GameObject.FindGameObjectWithTag(arg0);
-			ToLua.PushSealed(L, o);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int FindWithTag(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 1);
-			string arg0 = ToLua.CheckString(L, 1);
-			UnityEngine.GameObject o = UnityEngine.GameObject.FindWithTag(arg0);
 			ToLua.PushSealed(L, o);
 			return 1;
 		}

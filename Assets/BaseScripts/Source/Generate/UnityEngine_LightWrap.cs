@@ -27,6 +27,9 @@ public class UnityEngine_LightWrap
 		L.RegVar("shadowResolution", get_shadowResolution, set_shadowResolution);
 		L.RegFunction("getshadowResolution", get_shadowResolution);
 		L.RegFunction("setshadowResolution", set_shadowResolution);
+		L.RegVar("layerShadowCullDistances", get_layerShadowCullDistances, set_layerShadowCullDistances);
+		L.RegFunction("getlayerShadowCullDistances", get_layerShadowCullDistances);
+		L.RegFunction("setlayerShadowCullDistances", set_layerShadowCullDistances);
 		L.RegVar("cookieSize", get_cookieSize, set_cookieSize);
 		L.RegFunction("getcookieSize", get_cookieSize);
 		L.RegFunction("setcookieSize", set_cookieSize);
@@ -80,6 +83,9 @@ public class UnityEngine_LightWrap
 		L.RegVar("cullingMask", get_cullingMask, set_cullingMask);
 		L.RegFunction("getcullingMask", get_cullingMask);
 		L.RegFunction("setcullingMask", set_cullingMask);
+		L.RegVar("lightShadowCasterMode", get_lightShadowCasterMode, set_lightShadowCasterMode);
+		L.RegFunction("getlightShadowCasterMode", get_lightShadowCasterMode);
+		L.RegFunction("setlightShadowCasterMode", set_lightShadowCasterMode);
 		L.RegVar("shadowRadius", get_shadowRadius, set_shadowRadius);
 		L.RegFunction("getshadowRadius", get_shadowRadius);
 		L.RegFunction("setshadowRadius", set_shadowRadius);
@@ -360,6 +366,25 @@ public class UnityEngine_LightWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o, "attempt to index shadowResolution on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_layerShadowCullDistances(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			UnityEngine.Light obj = (UnityEngine.Light)o;
+			float[] ret = obj.layerShadowCullDistances;
+			ToLua.Push(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index layerShadowCullDistances on a nil value");
 		}
 	}
 
@@ -706,6 +731,25 @@ public class UnityEngine_LightWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_lightShadowCasterMode(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			UnityEngine.Light obj = (UnityEngine.Light)o;
+			UnityEngine.LightShadowCasterMode ret = obj.lightShadowCasterMode;
+			LuaDLL.lua_pushinteger(L, (int)ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index lightShadowCasterMode on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_shadowRadius(IntPtr L)
 	{
 		object o = null;
@@ -797,6 +841,25 @@ public class UnityEngine_LightWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o, "attempt to index shadowResolution on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_layerShadowCullDistances(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			UnityEngine.Light obj = (UnityEngine.Light)o;
+			float[] arg0 = ToLua.CheckNumberArray<float>(L, 2);
+			obj.layerShadowCullDistances = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index layerShadowCullDistances on a nil value");
 		}
 	}
 
@@ -1120,6 +1183,25 @@ public class UnityEngine_LightWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o, "attempt to index cullingMask on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_lightShadowCasterMode(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			UnityEngine.Light obj = (UnityEngine.Light)o;
+			UnityEngine.LightShadowCasterMode arg0 = (UnityEngine.LightShadowCasterMode)LuaDLL.luaL_checknumber(L, 2);
+			obj.lightShadowCasterMode = arg0;
+			return 0;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index lightShadowCasterMode on a nil value");
 		}
 	}
 

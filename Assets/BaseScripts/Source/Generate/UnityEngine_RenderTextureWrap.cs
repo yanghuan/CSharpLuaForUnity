@@ -8,17 +8,17 @@ public class UnityEngine_RenderTextureWrap
 	{
 		L.BeginClass(typeof(UnityEngine.RenderTexture), typeof(UnityEngine.Texture));
 		L.RegFunction("ReleaseTemporary", ReleaseTemporary);
-		L.RegFunction("ResolveAntiAliasedSurface", ResolveAntiAliasedSurface);
+		L.RegFunction("GetNativeDepthBufferPtr", GetNativeDepthBufferPtr);
 		L.RegFunction("DiscardContents", DiscardContents);
 		L.RegFunction("MarkRestoreExpected", MarkRestoreExpected);
-		L.RegFunction("GetNativeDepthBufferPtr", GetNativeDepthBufferPtr);
+		L.RegFunction("ResolveAntiAliasedSurface", ResolveAntiAliasedSurface);
 		L.RegFunction("SetGlobalShaderProperty", SetGlobalShaderProperty);
-		L.RegFunction("SupportsStencil", SupportsStencil);
 		L.RegFunction("Create", Create);
 		L.RegFunction("Release", Release);
 		L.RegFunction("IsCreated", IsCreated);
 		L.RegFunction("GenerateMips", GenerateMips);
 		L.RegFunction("ConvertToEquirect", ConvertToEquirect);
+		L.RegFunction("SupportsStencil", SupportsStencil);
 		L.RegFunction("GetTemporary", GetTemporary);
 		L.RegFunction("New", _CreateUnityEngine_RenderTexture);
 		L.RegFunction("__eq", op_Equality);
@@ -26,13 +26,6 @@ public class UnityEngine_RenderTextureWrap
 		L.RegVar("depth", get_depth, set_depth);
 		L.RegFunction("getdepth", get_depth);
 		L.RegFunction("setdepth", set_depth);
-		L.RegVar("colorBuffer", get_colorBuffer, null);
-		L.RegFunction("getcolorBuffer", get_colorBuffer);
-		L.RegVar("depthBuffer", get_depthBuffer, null);
-		L.RegFunction("getdepthBuffer", get_depthBuffer);
-		L.RegVar("active", get_active, set_active);
-		L.RegFunction("getactive", get_active);
-		L.RegFunction("setactive", set_activeter);
 		L.RegVar("width", get_width, set_width);
 		L.RegFunction("getwidth", get_width);
 		L.RegFunction("setwidth", set_width);
@@ -77,6 +70,13 @@ public class UnityEngine_RenderTextureWrap
 		L.RegVar("isPowerOfTwo", get_isPowerOfTwo, set_isPowerOfTwo);
 		L.RegFunction("getisPowerOfTwo", get_isPowerOfTwo);
 		L.RegFunction("setisPowerOfTwo", set_isPowerOfTwo);
+		L.RegVar("active", get_active, set_active);
+		L.RegFunction("getactive", get_active);
+		L.RegFunction("setactive", set_activeter);
+		L.RegVar("colorBuffer", get_colorBuffer, null);
+		L.RegFunction("getcolorBuffer", get_colorBuffer);
+		L.RegVar("depthBuffer", get_depthBuffer, null);
+		L.RegFunction("getdepthBuffer", get_depthBuffer);
 		L.RegVar("descriptor", get_descriptor, set_descriptor);
 		L.RegFunction("getdescriptor", get_descriptor);
 		L.RegFunction("setdescriptor", set_descriptor);
@@ -113,12 +113,22 @@ public class UnityEngine_RenderTextureWrap
 				ToLua.Push(L, obj);
 				return 1;
 			}
-			else if (count == 4)
+			else if (count == 4 && TypeChecker.CheckTypes<uint>(L, 4))
 			{
 				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
 				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
 				int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
-				UnityEngine.RenderTextureFormat arg3 = (UnityEngine.RenderTextureFormat)LuaDLL.luaL_checknumber(L, 4);
+				UnityEngine.Experimental.Rendering.GraphicsFormat arg3 = (UnityEngine.Experimental.Rendering.GraphicsFormat)LuaDLL.lua_tonumber(L, 4);
+				UnityEngine.RenderTexture obj = new UnityEngine.RenderTexture(arg0, arg1, arg2, arg3);
+				ToLua.Push(L, obj);
+				return 1;
+			}
+			else if (count == 4 && TypeChecker.CheckTypes<uint>(L, 4))
+			{
+				int arg0 = (int)LuaDLL.luaL_checknumber(L, 1);
+				int arg1 = (int)LuaDLL.luaL_checknumber(L, 2);
+				int arg2 = (int)LuaDLL.luaL_checknumber(L, 3);
+				UnityEngine.RenderTextureFormat arg3 = (UnityEngine.RenderTextureFormat)LuaDLL.lua_tonumber(L, 4);
 				UnityEngine.RenderTexture obj = new UnityEngine.RenderTexture(arg0, arg1, arg2, arg3);
 				ToLua.Push(L, obj);
 				return 1;
@@ -162,29 +172,15 @@ public class UnityEngine_RenderTextureWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int ResolveAntiAliasedSurface(IntPtr L)
+	static int GetNativeDepthBufferPtr(IntPtr L)
 	{
 		try
 		{
-			int count = LuaDLL.lua_gettop(L);
-
-			if (count == 1)
-			{
-				UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
-				obj.ResolveAntiAliasedSurface();
-				return 0;
-			}
-			else if (count == 2)
-			{
-				UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
-				UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 2);
-				obj.ResolveAntiAliasedSurface(arg0);
-				return 0;
-			}
-			else
-			{
-				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.RenderTexture.ResolveAntiAliasedSurface");
-			}
+			ToLua.CheckArgsCount(L, 1);
+			UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
+			System.IntPtr o = obj.GetNativeDepthBufferPtr();
+			LuaDLL.lua_pushlightuserdata(L, o);
+			return 1;
 		}
 		catch (Exception e)
 		{
@@ -241,15 +237,29 @@ public class UnityEngine_RenderTextureWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetNativeDepthBufferPtr(IntPtr L)
+	static int ResolveAntiAliasedSurface(IntPtr L)
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
-			System.IntPtr o = obj.GetNativeDepthBufferPtr();
-			LuaDLL.lua_pushlightuserdata(L, o);
-			return 1;
+			int count = LuaDLL.lua_gettop(L);
+
+			if (count == 1)
+			{
+				UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
+				obj.ResolveAntiAliasedSurface();
+				return 0;
+			}
+			else if (count == 2)
+			{
+				UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
+				UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 2);
+				obj.ResolveAntiAliasedSurface(arg0);
+				return 0;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.RenderTexture.ResolveAntiAliasedSurface");
+			}
 		}
 		catch (Exception e)
 		{
@@ -267,23 +277,6 @@ public class UnityEngine_RenderTextureWrap
 			string arg0 = ToLua.CheckString(L, 2);
 			obj.SetGlobalShaderProperty(arg0);
 			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int SupportsStencil(IntPtr L)
-	{
-		try
-		{
-			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
-			bool o = UnityEngine.RenderTexture.SupportsStencil(arg0);
-			LuaDLL.lua_pushboolean(L, o);
-			return 1;
 		}
 		catch (Exception e)
 		{
@@ -383,6 +376,23 @@ public class UnityEngine_RenderTextureWrap
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.RenderTexture.ConvertToEquirect");
 			}
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int SupportsStencil(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 1);
+			UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
+			bool o = UnityEngine.RenderTexture.SupportsStencil(arg0);
+			LuaDLL.lua_pushboolean(L, o);
+			return 1;
 		}
 		catch (Exception e)
 		{
@@ -541,58 +551,6 @@ public class UnityEngine_RenderTextureWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o, "attempt to index depth on a nil value");
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_colorBuffer(IntPtr L)
-	{
-		object o = null;
-
-		try
-		{
-			o = ToLua.ToObject(L, 1);
-			UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)o;
-			UnityEngine.RenderBuffer ret = obj.colorBuffer;
-			ToLua.PushValue(L, ret);
-			return 1;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e, o, "attempt to index colorBuffer on a nil value");
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_depthBuffer(IntPtr L)
-	{
-		object o = null;
-
-		try
-		{
-			o = ToLua.ToObject(L, 1);
-			UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)o;
-			UnityEngine.RenderBuffer ret = obj.depthBuffer;
-			ToLua.PushValue(L, ret);
-			return 1;
-		}
-		catch(Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e, o, "attempt to index depthBuffer on a nil value");
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_active(IntPtr L)
-	{
-		try
-		{
-			ToLua.Push(L, UnityEngine.RenderTexture.active);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
 		}
 	}
 
@@ -882,6 +840,58 @@ public class UnityEngine_RenderTextureWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_active(IntPtr L)
+	{
+		try
+		{
+			ToLua.Push(L, UnityEngine.RenderTexture.active);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_colorBuffer(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)o;
+			UnityEngine.RenderBuffer ret = obj.colorBuffer;
+			ToLua.PushValue(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index colorBuffer on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_depthBuffer(IntPtr L)
+	{
+		object o = null;
+
+		try
+		{
+			o = ToLua.ToObject(L, 1);
+			UnityEngine.RenderTexture obj = (UnityEngine.RenderTexture)o;
+			UnityEngine.RenderBuffer ret = obj.depthBuffer;
+			ToLua.PushValue(L, ret);
+			return 1;
+		}
+		catch(Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e, o, "attempt to index depthBuffer on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_descriptor(IntPtr L)
 	{
 		object o = null;
@@ -916,36 +926,6 @@ public class UnityEngine_RenderTextureWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o, "attempt to index depth on a nil value");
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_active(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 2);
-			UnityEngine.RenderTexture.active = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int set_activeter(IntPtr L)
-	{
-		try
-		{
-			UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
-			UnityEngine.RenderTexture.active = arg0;
-			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
 		}
 	}
 
@@ -1212,6 +1192,36 @@ public class UnityEngine_RenderTextureWrap
 		catch(Exception e)
 		{
 			return LuaDLL.toluaL_exception(L, e, o, "attempt to index isPowerOfTwo on a nil value");
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_active(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 2);
+			UnityEngine.RenderTexture.active = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int set_activeter(IntPtr L)
+	{
+		try
+		{
+			UnityEngine.RenderTexture arg0 = (UnityEngine.RenderTexture)ToLua.CheckObject<UnityEngine.RenderTexture>(L, 1);
+			UnityEngine.RenderTexture.active = arg0;
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
 		}
 	}
 

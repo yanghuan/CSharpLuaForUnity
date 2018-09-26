@@ -237,6 +237,7 @@ function Type.GetTypeFrom(typeName, throwOnError, ignoreCase)
   return nil    
 end
 
+Type.Equals = System.equals
 System.define("System.Type", Type)
 
 local function isInterfaceOf(t, ifaceType)
@@ -354,6 +355,3 @@ function System.CreateInstance(type, ...)
   end
   return type.c(...)
 end
-
-
-

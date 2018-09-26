@@ -22,7 +22,7 @@ local io = io
 local open = io.open
 local tinsert = table.insert
 
-local IOException = System.define("System.IOException", {
+local IOException = System.define("System.IO.IOException", {
   __tostring = System.Exception.ToString,
   __inherits__ = { System.Exception },
   __ctor__ = function(this, message, innerException) 
@@ -87,6 +87,12 @@ function File.WriteAllLines(path, contents)
     end
   end
   f:close()
+end
+
+function File.Exists(path)
+  local file = io.open(path, "rb")
+  if file then file:close() end
+  return file ~= nil
 end
 
 System.define("System.IO.File", File)

@@ -49,11 +49,15 @@ limitations under the License.
       </class>
       <class name="Single" Name="System.Double" >
         <field name="NaN" Template="System.Double.NaN" />
+        <field name="PositiveInfinity" Template="System.Double.PositiveInfinity" />
+        <field name="NegativeInfinity" Template="System.Double.NegativeInfinity" />
         <method name="Parse" Name="ParseSingle" />
         <method name="TryParse" Name="TryParseSingle" />
       </class>
       <class name="Double">
         <field name="NaN" Template="System.Double.NaN" />
+        <field name="PositiveInfinity" Template="System.Double.PositiveInfinity" />
+        <field name="NegativeInfinity" Template="System.Double.NegativeInfinity" />
       </class>
       <class name="String">
         <field name="Empty" Template="&quot;&quot;" />
@@ -79,6 +83,8 @@ limitations under the License.
         <method name="GetType" ArgCount ="1" Name="GetTypeFrom" />
         <method name="GetType" ArgCount ="2" Name="GetTypeFrom" />
         <method name="GetType" ArgCount ="3" Name="GetTypeFrom" />
+        <method name="op_Equality" Template="{0} == {1}" />
+        <method name="op_Inequality" Template="{0} ~= {1}" />
       </class>
       <class name="Array">
         <property name="Length">
@@ -482,13 +488,40 @@ limitations under the License.
       <class name="Assembly">
         <method name="GetType" Name="GetTypeFrom" />
       </class>
+      <class name="MemberInfo">
+        <method name="op_Inequality" Template="{0} ~= {1}" />
+        <method name="op_Equality" Template="{0} == {1}" />
+      </class>
+      <class name="FieldInfo">
+        <method name="op_Inequality" Template="{0} ~= {1}" />
+        <method name="op_Equality" Template="{0} == {1}" />
+      </class>
+      <class name="PropertyInfo">
+        <method name="op_Inequality" Template="{0} ~= {1}" />
+        <method name="op_Equality" Template="{0} == {1}" />
+      </class>
+      <class name="MethodInfo">
+        <method name="op_Inequality" Template="{0} ~= {1}" />
+        <method name="op_Equality" Template="{0} == {1}" />
+      </class>
+      <class name="MethodBase">
+        <method name="op_Inequality" Template="{0} ~= {1}" />
+        <method name="op_Equality" Template="{0} == {1}" />
+      </class>
     </namespace>
     <namespace name="System.Text">
       <class name="StringBuilder">
         <method name="Append" Name="AppendChar" >
           <arg type="System.Char" />
         </method> 
+        <method name="Append" Name="AppendCharRepeat">
+          <arg type="System.Char" />
+          <arg type="System.Int32" />
+        </method>  
       </class>
+    </namespace>
+    <namespace name="System.Threading.Tasks" Name="System">
+      <class name="TaskCompletionSource^1" IgnoreGeneric="true" />
     </namespace>
   </assembly>
 </meta>

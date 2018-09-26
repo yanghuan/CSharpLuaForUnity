@@ -12,6 +12,7 @@ namespace Sample {
     public int a = 10;
     public GameObject DataOfGameObject;
     public UnityEngine.Object DateOfObject;
+    public TestCoroutine HangingMonoBehaviour;
 
     public void Awake() {
       print("Awake");
@@ -19,6 +20,8 @@ namespace Sample {
       print(DataOfInt);
       print(DataOfString2);
       print(a);
+
+      print(HangingMonoBehaviour.name);
     }
 
     public void Start() {

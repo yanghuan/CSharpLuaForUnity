@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "e2330a00fde190cbbac4d0ea04562bda0965e74c"
+    "signature": "e646d65c0324f0450c751edd2940a0e5da3eb465"
   },
   "compilationOptions": {},
   "targets": {
@@ -15,7 +15,7 @@
         }
       },
       "Microsoft.CodeAnalysis.Analyzers/1.1.0": {},
-      "Microsoft.CodeAnalysis.Common/2.6.1": {
+      "Microsoft.CodeAnalysis.Common/2.8.2": {
         "dependencies": {
           "Microsoft.CodeAnalysis.Analyzers": "1.1.0",
           "System.AppContext": "4.3.0",
@@ -59,19 +59,19 @@
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.CodeAnalysis.dll": {
-            "assemblyVersion": "2.6.0.0",
-            "fileVersion": "2.6.1.62414"
+            "assemblyVersion": "2.8.0.0",
+            "fileVersion": "2.8.2.62916"
           }
         }
       },
-      "Microsoft.CodeAnalysis.CSharp/2.6.1": {
+      "Microsoft.CodeAnalysis.CSharp/2.8.2": {
         "dependencies": {
-          "Microsoft.CodeAnalysis.Common": "2.6.1"
+          "Microsoft.CodeAnalysis.Common": "2.8.2"
         },
         "runtime": {
           "lib/netstandard1.3/Microsoft.CodeAnalysis.CSharp.dll": {
-            "assemblyVersion": "2.6.0.0",
-            "fileVersion": "2.6.1.62414"
+            "assemblyVersion": "2.8.0.0",
+            "fileVersion": "2.8.2.62916"
           }
         }
       },
@@ -880,7 +880,7 @@
       },
       "CSharp.lua/1.1.0": {
         "dependencies": {
-          "Microsoft.CodeAnalysis.CSharp": "2.6.1"
+          "Microsoft.CodeAnalysis.CSharp": "2.8.2"
         },
         "runtime": {
           "CSharp.lua.dll": {}
@@ -901,19 +901,19 @@
       "path": "microsoft.codeanalysis.analyzers/1.1.0",
       "hashPath": "microsoft.codeanalysis.analyzers.1.1.0.nupkg.sha512"
     },
-    "Microsoft.CodeAnalysis.Common/2.6.1": {
+    "Microsoft.CodeAnalysis.Common/2.8.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-FUDSP9wUdFrVQlSvfzpDWdeeoYHAyhednROVZVEccDDo8XV58NYAg5aNYWVnwsYfbhyFwAk/xFNXK6vi9c6vYg==",
-      "path": "microsoft.codeanalysis.common/2.6.1",
-      "hashPath": "microsoft.codeanalysis.common.2.6.1.nupkg.sha512"
+      "sha512": "sha512-69e6Y+eCdllSRRlLLEs8qf7C4b7XhgG2ZQW9X+n7JomrVZ7SPcMF2asPbRTSK2dRJXDlhgxb8d+a8FxFiaoTYQ==",
+      "path": "microsoft.codeanalysis.common/2.8.2",
+      "hashPath": "microsoft.codeanalysis.common.2.8.2.nupkg.sha512"
     },
-    "Microsoft.CodeAnalysis.CSharp/2.6.1": {
+    "Microsoft.CodeAnalysis.CSharp/2.8.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-HodSc/cNtkTMufeYqliX6/RPH66/n8fRRHkmzP0R7ezr5b/DmPyMjiTBr1mOs5NbXyqjSTTSdPJ4xfBlp2NREQ==",
-      "path": "microsoft.codeanalysis.csharp/2.6.1",
-      "hashPath": "microsoft.codeanalysis.csharp.2.6.1.nupkg.sha512"
+      "sha512": "sha512-6PwtKdwBv+0+2QqFXZXg7oYXS0v4eYwaA3Jlv2yJLFihv5puQqtVupOM6yecsUhTkdN1ul1YyVZldkPUKMldAQ==",
+      "path": "microsoft.codeanalysis.csharp/2.8.2",
+      "hashPath": "microsoft.codeanalysis.csharp.2.8.2.nupkg.sha512"
     },
     "Microsoft.NETCore.Targets/1.1.0": {
       "type": "package",

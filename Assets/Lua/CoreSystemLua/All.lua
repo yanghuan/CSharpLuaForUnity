@@ -47,4 +47,7 @@ return function(dir, conf)
   load("Console")
   load("IO.File")
   load("Reflection.Assembly")
+  load("Threads.Timer")
+  load("Threads.Thread")
+  load("Threads.Task")
 end

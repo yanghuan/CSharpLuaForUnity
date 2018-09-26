@@ -108,7 +108,7 @@ public class UnityEngine_AnimationClipWrap
 			string arg0 = ToLua.CheckString(L, 2);
 			System.Type arg1 = ToLua.CheckMonoType(L, 3);
 			string arg2 = ToLua.CheckString(L, 4);
-			UnityEngine.AnimationCurve arg3 = (UnityEngine.AnimationCurve)ToLua.CheckObject(L, 5, typeof(UnityEngine.AnimationCurve));
+			UnityEngine.AnimationCurve arg3 = (UnityEngine.AnimationCurve)ToLua.CheckObject<UnityEngine.AnimationCurve>(L, 5);
 			obj.SetCurve(arg0, arg1, arg2, arg3);
 			return 0;
 		}

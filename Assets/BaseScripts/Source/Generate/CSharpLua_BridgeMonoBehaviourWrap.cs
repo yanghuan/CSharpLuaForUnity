@@ -26,11 +26,27 @@ public class CSharpLua_BridgeMonoBehaviourWrap
 	{
 		try
 		{
-			ToLua.CheckArgsCount(L, 2);
-			CSharpLua.BridgeMonoBehaviour obj = (CSharpLua.BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(CSharpLua.BridgeMonoBehaviour));
-			LuaTable arg0 = ToLua.CheckLuaTable(L, 2);
-			obj.Bind(arg0);
-			return 0;
+			int count = LuaDLL.lua_gettop(L);
+
+			if (count == 2)
+			{
+				CSharpLua.BridgeMonoBehaviour obj = (CSharpLua.BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(CSharpLua.BridgeMonoBehaviour));
+				LuaTable arg0 = ToLua.CheckLuaTable(L, 2);
+				obj.Bind(arg0);
+				return 0;
+			}
+			else if (count == 3)
+			{
+				CSharpLua.BridgeMonoBehaviour obj = (CSharpLua.BridgeMonoBehaviour)ToLua.CheckObject(L, 1, typeof(CSharpLua.BridgeMonoBehaviour));
+				LuaTable arg0 = ToLua.CheckLuaTable(L, 2);
+				string arg1 = ToLua.CheckString(L, 3);
+				obj.Bind(arg0, arg1);
+				return 0;
+			}
+			else
+			{
+				return LuaDLL.luaL_throw(L, "invalid arguments to method: CSharpLua.BridgeMonoBehaviour.Bind");
+			}
 		}
 		catch (Exception e)
 		{

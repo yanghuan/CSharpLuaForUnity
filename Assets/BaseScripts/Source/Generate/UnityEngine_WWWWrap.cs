@@ -370,7 +370,7 @@ public class UnityEngine_WWWWrap
 			o = ToLua.ToObject(L, 1);
 			UnityEngine.WWW obj = (UnityEngine.WWW)o;
 			UnityEngine.AssetBundle ret = obj.assetBundle;
-			ToLua.PushSealed(L, ret);
+			ToLua.Push(L, ret);
 			return 1;
 		}
 		catch(Exception e)

@@ -9,7 +9,6 @@ public class UnityEngine_ApplicationWrap
 		L.BeginStaticLibs("Application");
 		L.RegFunction("Quit", Quit);
 		L.RegFunction("Unload", Unload);
-		L.RegFunction("GetStreamProgressForLevel", GetStreamProgressForLevel);
 		L.RegFunction("CanStreamedLevelBeLoaded", CanStreamedLevelBeLoaded);
 		L.RegFunction("GetBuildTags", GetBuildTags);
 		L.RegFunction("SetBuildTags", SetBuildTags);
@@ -20,14 +19,10 @@ public class UnityEngine_ApplicationWrap
 		L.RegFunction("SetStackTraceLogType", SetStackTraceLogType);
 		L.RegFunction("RequestUserAuthorization", RequestUserAuthorization);
 		L.RegFunction("HasUserAuthorization", HasUserAuthorization);
-		L.RegVar("streamedBytes", get_streamedBytes, null);
-		L.RegFunction("getstreamedBytes", get_streamedBytes);
 		L.RegVar("isPlaying", get_isPlaying, null);
 		L.RegFunction("getisPlaying", get_isPlaying);
 		L.RegVar("isFocused", get_isFocused, null);
 		L.RegFunction("getisFocused", get_isFocused);
-		L.RegVar("isEditor", get_isEditor, null);
-		L.RegFunction("getisEditor", get_isEditor);
 		L.RegVar("platform", get_platform, null);
 		L.RegFunction("getplatform", get_platform);
 		L.RegVar("buildGUID", get_buildGUID, null);
@@ -39,6 +34,8 @@ public class UnityEngine_ApplicationWrap
 		L.RegVar("runInBackground", get_runInBackground, set_runInBackground);
 		L.RegFunction("getrunInBackground", get_runInBackground);
 		L.RegFunction("setrunInBackground", set_runInBackgroundter);
+		L.RegVar("isBatchMode", get_isBatchMode, null);
+		L.RegFunction("getisBatchMode", get_isBatchMode);
 		L.RegVar("dataPath", get_dataPath, null);
 		L.RegFunction("getdataPath", get_dataPath);
 		L.RegVar("streamingAssetsPath", get_streamingAssetsPath, null);
@@ -81,6 +78,8 @@ public class UnityEngine_ApplicationWrap
 		L.RegFunction("getgenuine", get_genuine);
 		L.RegVar("genuineCheckAvailable", get_genuineCheckAvailable, null);
 		L.RegFunction("getgenuineCheckAvailable", get_genuineCheckAvailable);
+		L.RegVar("isEditor", get_isEditor, null);
+		L.RegFunction("getisEditor", get_isEditor);
 		L.RegVar("lowMemory", get_lowMemory, set_lowMemory);
 		L.RegVar("logMessageReceived", get_logMessageReceived, set_logMessageReceived);
 		L.RegVar("logMessageReceivedThreaded", get_logMessageReceivedThreaded, set_logMessageReceivedThreaded);
@@ -116,38 +115,6 @@ public class UnityEngine_ApplicationWrap
 			ToLua.CheckArgsCount(L, 0);
 			UnityEngine.Application.Unload();
 			return 0;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int GetStreamProgressForLevel(IntPtr L)
-	{
-		try
-		{
-			int count = LuaDLL.lua_gettop(L);
-
-			if (count == 1 && TypeChecker.CheckTypes<int>(L, 1))
-			{
-				int arg0 = (int)LuaDLL.lua_tonumber(L, 1);
-				float o = UnityEngine.Application.GetStreamProgressForLevel(arg0);
-				LuaDLL.lua_pushnumber(L, o);
-				return 1;
-			}
-			else if (count == 1 && TypeChecker.CheckTypes<string>(L, 1))
-			{
-				string arg0 = ToLua.ToString(L, 1);
-				float o = UnityEngine.Application.GetStreamProgressForLevel(arg0);
-				LuaDLL.lua_pushnumber(L, o);
-				return 1;
-			}
-			else
-			{
-				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Application.GetStreamProgressForLevel");
-			}
 		}
 		catch (Exception e)
 		{
@@ -337,20 +304,6 @@ public class UnityEngine_ApplicationWrap
 	}
 
 	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_streamedBytes(IntPtr L)
-	{
-		try
-		{
-			LuaDLL.lua_pushinteger(L, UnityEngine.Application.streamedBytes);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
 	static int get_isPlaying(IntPtr L)
 	{
 		try
@@ -370,20 +323,6 @@ public class UnityEngine_ApplicationWrap
 		try
 		{
 			LuaDLL.lua_pushboolean(L, UnityEngine.Application.isFocused);
-			return 1;
-		}
-		catch (Exception e)
-		{
-			return LuaDLL.toluaL_exception(L, e);
-		}
-	}
-
-	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
-	static int get_isEditor(IntPtr L)
-	{
-		try
-		{
-			LuaDLL.lua_pushboolean(L, UnityEngine.Application.isEditor);
 			return 1;
 		}
 		catch (Exception e)
@@ -454,6 +393,20 @@ public class UnityEngine_ApplicationWrap
 		try
 		{
 			LuaDLL.lua_pushboolean(L, UnityEngine.Application.runInBackground);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_isBatchMode(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, UnityEngine.Application.isBatchMode);
 			return 1;
 		}
 		catch (Exception e)
@@ -734,6 +687,20 @@ public class UnityEngine_ApplicationWrap
 		try
 		{
 			LuaDLL.lua_pushboolean(L, UnityEngine.Application.genuineCheckAvailable);
+			return 1;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int get_isEditor(IntPtr L)
+	{
+		try
+		{
+			LuaDLL.lua_pushboolean(L, UnityEngine.Application.isEditor);
 			return 1;
 		}
 		catch (Exception e)

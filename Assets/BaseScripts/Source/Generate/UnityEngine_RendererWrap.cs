@@ -10,6 +10,8 @@ public class UnityEngine_RendererWrap
 		L.RegFunction("HasPropertyBlock", HasPropertyBlock);
 		L.RegFunction("SetPropertyBlock", SetPropertyBlock);
 		L.RegFunction("GetPropertyBlock", GetPropertyBlock);
+		L.RegFunction("GetMaterials", GetMaterials);
+		L.RegFunction("GetSharedMaterials", GetSharedMaterials);
 		L.RegFunction("GetClosestReflectionProbes", GetClosestReflectionProbes);
 		L.RegFunction("New", _CreateUnityEngine_Renderer);
 		L.RegFunction("__eq", op_Equality);
@@ -190,6 +192,40 @@ public class UnityEngine_RendererWrap
 			{
 				return LuaDLL.luaL_throw(L, "invalid arguments to method: UnityEngine.Renderer.GetPropertyBlock");
 			}
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetMaterials(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			UnityEngine.Renderer obj = (UnityEngine.Renderer)ToLua.CheckObject<UnityEngine.Renderer>(L, 1);
+			System.Collections.Generic.List<UnityEngine.Material> arg0 = (System.Collections.Generic.List<UnityEngine.Material>)ToLua.CheckObject(L, 2, typeof(System.Collections.Generic.List<UnityEngine.Material>));
+			obj.GetMaterials(arg0);
+			return 0;
+		}
+		catch (Exception e)
+		{
+			return LuaDLL.toluaL_exception(L, e);
+		}
+	}
+
+	[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]
+	static int GetSharedMaterials(IntPtr L)
+	{
+		try
+		{
+			ToLua.CheckArgsCount(L, 2);
+			UnityEngine.Renderer obj = (UnityEngine.Renderer)ToLua.CheckObject<UnityEngine.Renderer>(L, 1);
+			System.Collections.Generic.List<UnityEngine.Material> arg0 = (System.Collections.Generic.List<UnityEngine.Material>)ToLua.CheckObject(L, 2, typeof(System.Collections.Generic.List<UnityEngine.Material>));
+			obj.GetSharedMaterials(arg0);
+			return 0;
 		}
 		catch (Exception e)
 		{

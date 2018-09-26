@@ -35,7 +35,7 @@ public class UnityEngine_CapsuleColliderWrap
 			if (count == 0)
 			{
 				UnityEngine.CapsuleCollider obj = new UnityEngine.CapsuleCollider();
-				ToLua.PushSealed(L, obj);
+				ToLua.Push(L, obj);
 				return 1;
 			}
 			else

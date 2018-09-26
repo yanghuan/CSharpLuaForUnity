@@ -1,6 +1,7 @@
 ﻿#if UNITY_EDITOR  
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Text;
 using System.IO;
@@ -15,6 +16,8 @@ namespace CSharpLua {
     private sealed class SerializeFieldsInfo {
       public Dictionary<string, object> Normals = new Dictionary<string, object>();
       public Dictionary<string, UnityEngine.Object> Objects = new Dictionary<string, UnityEngine.Object>();
+      public Dictionary<string, string> MonoBehaviourFields = new Dictionary<string, string>();
+      private List<int> monoBehaviourFieldIndexs_ = new List<int>();
 
       private void AppendNormals(StringBuilder sb) {
         sb.Append('{');
@@ -42,9 +45,13 @@ namespace CSharpLua {
           } else {
             sb.Append(',');
           }
+
           sb.Append(key);
           sb.Append('=');
           sb.Append(objectIndex);
+          if (MonoBehaviourFields.ContainsKey(key)) {
+            monoBehaviourFieldIndexs_.Add(objectIndex);
+          } 
           ++objectIndex;
         }
         sb.Append('}');
@@ -57,7 +64,15 @@ namespace CSharpLua {
           sb.Append("return{");
           AppendNormals(sb);
           sb.Append(',');
-          AppendObjects(sb);
+          if (Objects.Count > 0) {
+            AppendObjects(sb);
+            if (monoBehaviourFieldIndexs_.Count > 0) {
+              sb.Append(',');
+              sb.Append('{');
+              sb.Append(string.Join(",", monoBehaviourFieldIndexs_));
+              sb.Append('}');
+            }
+          }
           sb.Append('}');
         }
         return sb.ToString();
@@ -72,6 +87,22 @@ namespace CSharpLua {
           return "\"" + v + "\"";
         }
         return v.ToString();
+      }
+    }
+
+    private sealed class MonoBehaviourFieldLazy {
+      public string ClassName;
+      public SerializeFieldsInfo SerializeInfo;
+      public BridgeMonoBehaviour BridgeMonoBehaviour;
+
+      public void Bind() {
+        foreach (var pair in SerializeInfo.MonoBehaviourFields) {
+          var gameObject = (GameObject)SerializeInfo.Objects[pair.Key];
+          var bridges = gameObject.GetComponents<BridgeMonoBehaviour>();
+          var item = bridges.First(i => i.LuaClass == pair.Value);
+          SerializeInfo.Objects[pair.Key] = item;
+        }
+        BridgeMonoBehaviour.Bind(ClassName, SerializeInfo.GetSerializeData(), SerializeInfo.GetSerializeObjects());
       }
     }
 
@@ -155,10 +186,17 @@ namespace CSharpLua {
     public bool Do(ref GameObject prefab) {
       if (IsUserMonoBehaviourExists(prefab)) {
         CopyTempPrefab(ref prefab);
+
+        List<MonoBehaviourFieldLazy> monoBehaviourFieldLazys = new List<MonoBehaviourFieldLazy>();
         var childrens = GetChildrenTransform(prefab.transform);
         foreach (var t in childrens) {
-          Convert(t.gameObject);
+          Convert(t.gameObject, monoBehaviourFieldLazys);
         }
+        
+        foreach (var i in monoBehaviourFieldLazys) {
+          i.Bind();
+        }
+
         return true;
       }
       return false;
@@ -183,11 +221,11 @@ namespace CSharpLua {
       return userDefinedNames_.Contains(type.FullName);
     }
 
-    private void Convert(GameObject gameObject) {
+    private void Convert(GameObject gameObject, List<MonoBehaviourFieldLazy> lazys) {
       var monoBehaviours = gameObject.GetComponents<MonoBehaviour>();
       foreach (MonoBehaviour monoBehaviour in monoBehaviours) {
         if (IsUserDefine(monoBehaviour.GetType())) {
-          Convert(monoBehaviour);
+          Convert(monoBehaviour, lazys);
         }
       }
     }
@@ -200,7 +238,7 @@ namespace CSharpLua {
       }
     }
 
-    private void Convert(MonoBehaviour monoBehaviour) {
+    private void Convert(MonoBehaviour monoBehaviour, List<MonoBehaviourFieldLazy> lazys) {
       Type type = monoBehaviour.GetType();
       string className = type.FullName;
       using (var luaClass = luaState_.GetTable(className)) {
@@ -220,7 +258,15 @@ namespace CSharpLua {
         GameObject gameObject = monoBehaviour.gameObject;
         UnityEngine.Object.DestroyImmediate(monoBehaviour, true);
         var bridgeMonoBehaviour = gameObject.AddComponent<BridgeMonoBehaviour>();
-        bridgeMonoBehaviour.Bind(className, info.GetSerializeData(), info.GetSerializeObjects());
+        if (info.MonoBehaviourFields.Count == 0) {
+          bridgeMonoBehaviour.Bind(className, info.GetSerializeData(), info.GetSerializeObjects());
+        } else {
+          lazys.Add(new MonoBehaviourFieldLazy() {
+            ClassName = className,
+            SerializeInfo = info,
+            BridgeMonoBehaviour = bridgeMonoBehaviour,
+          });
+        }
       }
     }
 
@@ -267,14 +313,38 @@ namespace CSharpLua {
               if (x != null) {
                 var obj = x as UnityEngine.Object;
                 if (obj != null) {
-                  var gameObject = obj as GameObject;
-                  if (gameObject != null) {
+                  if (obj is GameObject) {
+                    var gameObject = (GameObject)obj;
                     if (!IsSameRootGameObject(monoBehaviour.gameObject, gameObject)) {
                       bool hasChanged = Do(ref gameObject);
                       if (hasChanged) {
                         obj = gameObject;
-                        field.SetValue(monoBehaviour, obj);
                       }
+                    }
+                  } else if (obj is MonoBehaviour) {
+                    var mb = (MonoBehaviour)obj;
+                    var gameObject = mb.gameObject;
+                    bool isSameRoot = IsSameRootGameObject(monoBehaviour.gameObject, gameObject);
+                    if (!isSameRoot) {
+                      bool hasChanged = Do(ref gameObject);
+                      if (hasChanged) {
+                        obj = gameObject;
+                      }
+                    } else {
+                      obj = gameObject;
+                    }
+                    if (IsUserDefine(mb.GetType())) {
+                      if (isSameRoot) {
+                        info.MonoBehaviourFields.Add(field.Name, mb.GetType().FullName);
+                      } else {
+                        var bridges = gameObject.GetComponents<BridgeMonoBehaviour>();
+                        var mbNew = Array.Find(bridges, i => i.LuaClass == mb.GetType().FullName);
+                        Contract.Assert(mbNew != null);
+                        obj = mbNew;
+                      }
+                    } else {
+                      var mbNew = gameObject.GetComponent(mb.GetType());
+                      obj = mbNew;
                     }
                   }
                   info.Objects.Add(field.Name, obj);

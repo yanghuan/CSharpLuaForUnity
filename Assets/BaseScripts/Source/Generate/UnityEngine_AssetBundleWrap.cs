@@ -77,7 +77,7 @@ public class UnityEngine_AssetBundleWrap
 			{
 				string arg0 = ToLua.CheckString(L, 1);
 				UnityEngine.AssetBundleCreateRequest o = UnityEngine.AssetBundle.LoadFromFileAsync(arg0);
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else if (count == 2)
@@ -85,7 +85,7 @@ public class UnityEngine_AssetBundleWrap
 				string arg0 = ToLua.CheckString(L, 1);
 				uint arg1 = (uint)LuaDLL.luaL_checknumber(L, 2);
 				UnityEngine.AssetBundleCreateRequest o = UnityEngine.AssetBundle.LoadFromFileAsync(arg0, arg1);
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else if (count == 3)
@@ -94,7 +94,7 @@ public class UnityEngine_AssetBundleWrap
 				uint arg1 = (uint)LuaDLL.luaL_checknumber(L, 2);
 				ulong arg2 = LuaDLL.tolua_checkuint64(L, 3);
 				UnityEngine.AssetBundleCreateRequest o = UnityEngine.AssetBundle.LoadFromFileAsync(arg0, arg1, arg2);
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else
@@ -119,7 +119,7 @@ public class UnityEngine_AssetBundleWrap
 			{
 				string arg0 = ToLua.CheckString(L, 1);
 				UnityEngine.AssetBundle o = UnityEngine.AssetBundle.LoadFromFile(arg0);
-				ToLua.PushSealed(L, o);
+				ToLua.Push(L, o);
 				return 1;
 			}
 			else if (count == 2)
@@ -127,7 +127,7 @@ public class UnityEngine_AssetBundleWrap
 				string arg0 = ToLua.CheckString(L, 1);
 				uint arg1 = (uint)LuaDLL.luaL_checknumber(L, 2);
 				UnityEngine.AssetBundle o = UnityEngine.AssetBundle.LoadFromFile(arg0, arg1);
-				ToLua.PushSealed(L, o);
+				ToLua.Push(L, o);
 				return 1;
 			}
 			else if (count == 3)
@@ -136,7 +136,7 @@ public class UnityEngine_AssetBundleWrap
 				uint arg1 = (uint)LuaDLL.luaL_checknumber(L, 2);
 				ulong arg2 = LuaDLL.tolua_checkuint64(L, 3);
 				UnityEngine.AssetBundle o = UnityEngine.AssetBundle.LoadFromFile(arg0, arg1, arg2);
-				ToLua.PushSealed(L, o);
+				ToLua.Push(L, o);
 				return 1;
 			}
 			else
@@ -161,7 +161,7 @@ public class UnityEngine_AssetBundleWrap
 			{
 				byte[] arg0 = ToLua.CheckByteBuffer(L, 1);
 				UnityEngine.AssetBundleCreateRequest o = UnityEngine.AssetBundle.LoadFromMemoryAsync(arg0);
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else if (count == 2)
@@ -169,7 +169,7 @@ public class UnityEngine_AssetBundleWrap
 				byte[] arg0 = ToLua.CheckByteBuffer(L, 1);
 				uint arg1 = (uint)LuaDLL.luaL_checknumber(L, 2);
 				UnityEngine.AssetBundleCreateRequest o = UnityEngine.AssetBundle.LoadFromMemoryAsync(arg0, arg1);
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else
@@ -194,7 +194,7 @@ public class UnityEngine_AssetBundleWrap
 			{
 				byte[] arg0 = ToLua.CheckByteBuffer(L, 1);
 				UnityEngine.AssetBundle o = UnityEngine.AssetBundle.LoadFromMemory(arg0);
-				ToLua.PushSealed(L, o);
+				ToLua.Push(L, o);
 				return 1;
 			}
 			else if (count == 2)
@@ -202,7 +202,7 @@ public class UnityEngine_AssetBundleWrap
 				byte[] arg0 = ToLua.CheckByteBuffer(L, 1);
 				uint arg1 = (uint)LuaDLL.luaL_checknumber(L, 2);
 				UnityEngine.AssetBundle o = UnityEngine.AssetBundle.LoadFromMemory(arg0, arg1);
-				ToLua.PushSealed(L, o);
+				ToLua.Push(L, o);
 				return 1;
 			}
 			else
@@ -227,7 +227,7 @@ public class UnityEngine_AssetBundleWrap
 			{
 				System.IO.Stream arg0 = (System.IO.Stream)ToLua.CheckObject<System.IO.Stream>(L, 1);
 				UnityEngine.AssetBundleCreateRequest o = UnityEngine.AssetBundle.LoadFromStreamAsync(arg0);
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else if (count == 2)
@@ -235,7 +235,7 @@ public class UnityEngine_AssetBundleWrap
 				System.IO.Stream arg0 = (System.IO.Stream)ToLua.CheckObject<System.IO.Stream>(L, 1);
 				uint arg1 = (uint)LuaDLL.luaL_checknumber(L, 2);
 				UnityEngine.AssetBundleCreateRequest o = UnityEngine.AssetBundle.LoadFromStreamAsync(arg0, arg1);
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else if (count == 3)
@@ -244,7 +244,7 @@ public class UnityEngine_AssetBundleWrap
 				uint arg1 = (uint)LuaDLL.luaL_checknumber(L, 2);
 				uint arg2 = (uint)LuaDLL.luaL_checknumber(L, 3);
 				UnityEngine.AssetBundleCreateRequest o = UnityEngine.AssetBundle.LoadFromStreamAsync(arg0, arg1, arg2);
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else
@@ -269,7 +269,7 @@ public class UnityEngine_AssetBundleWrap
 			{
 				System.IO.Stream arg0 = (System.IO.Stream)ToLua.CheckObject<System.IO.Stream>(L, 1);
 				UnityEngine.AssetBundle o = UnityEngine.AssetBundle.LoadFromStream(arg0);
-				ToLua.PushSealed(L, o);
+				ToLua.Push(L, o);
 				return 1;
 			}
 			else if (count == 2)
@@ -277,7 +277,7 @@ public class UnityEngine_AssetBundleWrap
 				System.IO.Stream arg0 = (System.IO.Stream)ToLua.CheckObject<System.IO.Stream>(L, 1);
 				uint arg1 = (uint)LuaDLL.luaL_checknumber(L, 2);
 				UnityEngine.AssetBundle o = UnityEngine.AssetBundle.LoadFromStream(arg0, arg1);
-				ToLua.PushSealed(L, o);
+				ToLua.Push(L, o);
 				return 1;
 			}
 			else if (count == 3)
@@ -286,7 +286,7 @@ public class UnityEngine_AssetBundleWrap
 				uint arg1 = (uint)LuaDLL.luaL_checknumber(L, 2);
 				uint arg2 = (uint)LuaDLL.luaL_checknumber(L, 3);
 				UnityEngine.AssetBundle o = UnityEngine.AssetBundle.LoadFromStream(arg0, arg1, arg2);
-				ToLua.PushSealed(L, o);
+				ToLua.Push(L, o);
 				return 1;
 			}
 			else
@@ -306,7 +306,7 @@ public class UnityEngine_AssetBundleWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+			UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 			string arg0 = ToLua.CheckString(L, 2);
 			bool o = obj.Contains(arg0);
 			LuaDLL.lua_pushboolean(L, o);
@@ -327,7 +327,7 @@ public class UnityEngine_AssetBundleWrap
 
 			if (count == 2)
 			{
-				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
 				UnityEngine.Object o = obj.LoadAsset(arg0);
 				ToLua.Push(L, o);
@@ -335,7 +335,7 @@ public class UnityEngine_AssetBundleWrap
 			}
 			else if (count == 3)
 			{
-				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
 				System.Type arg1 = ToLua.CheckMonoType(L, 3);
 				UnityEngine.Object o = obj.LoadAsset(arg0, arg1);
@@ -362,19 +362,19 @@ public class UnityEngine_AssetBundleWrap
 
 			if (count == 2)
 			{
-				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
 				UnityEngine.AssetBundleRequest o = obj.LoadAssetAsync(arg0);
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else if (count == 3)
 			{
-				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
 				System.Type arg1 = ToLua.CheckMonoType(L, 3);
 				UnityEngine.AssetBundleRequest o = obj.LoadAssetAsync(arg0, arg1);
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else
@@ -397,7 +397,7 @@ public class UnityEngine_AssetBundleWrap
 
 			if (count == 2)
 			{
-				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
 				UnityEngine.Object[] o = obj.LoadAssetWithSubAssets(arg0);
 				ToLua.Push(L, o);
@@ -405,7 +405,7 @@ public class UnityEngine_AssetBundleWrap
 			}
 			else if (count == 3)
 			{
-				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
 				System.Type arg1 = ToLua.CheckMonoType(L, 3);
 				UnityEngine.Object[] o = obj.LoadAssetWithSubAssets(arg0, arg1);
@@ -432,19 +432,19 @@ public class UnityEngine_AssetBundleWrap
 
 			if (count == 2)
 			{
-				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
 				UnityEngine.AssetBundleRequest o = obj.LoadAssetWithSubAssetsAsync(arg0);
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else if (count == 3)
 			{
-				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 				string arg0 = ToLua.CheckString(L, 2);
 				System.Type arg1 = ToLua.CheckMonoType(L, 3);
 				UnityEngine.AssetBundleRequest o = obj.LoadAssetWithSubAssetsAsync(arg0, arg1);
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else
@@ -467,14 +467,14 @@ public class UnityEngine_AssetBundleWrap
 
 			if (count == 1)
 			{
-				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 				UnityEngine.Object[] o = obj.LoadAllAssets();
 				ToLua.Push(L, o);
 				return 1;
 			}
 			else if (count == 2)
 			{
-				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 				System.Type arg0 = ToLua.CheckMonoType(L, 2);
 				UnityEngine.Object[] o = obj.LoadAllAssets(arg0);
 				ToLua.Push(L, o);
@@ -500,17 +500,17 @@ public class UnityEngine_AssetBundleWrap
 
 			if (count == 1)
 			{
-				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 				UnityEngine.AssetBundleRequest o = obj.LoadAllAssetsAsync();
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else if (count == 2)
 			{
-				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+				UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 				System.Type arg0 = ToLua.CheckMonoType(L, 2);
 				UnityEngine.AssetBundleRequest o = obj.LoadAllAssetsAsync(arg0);
-				ToLua.PushSealed(L, o);
+				ToLua.PushObject(L, o);
 				return 1;
 			}
 			else
@@ -530,7 +530,7 @@ public class UnityEngine_AssetBundleWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 2);
-			UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+			UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 			bool arg0 = LuaDLL.luaL_checkboolean(L, 2);
 			obj.Unload(arg0);
 			return 0;
@@ -547,7 +547,7 @@ public class UnityEngine_AssetBundleWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+			UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 			string[] o = obj.GetAllAssetNames();
 			ToLua.Push(L, o);
 			return 1;
@@ -564,7 +564,7 @@ public class UnityEngine_AssetBundleWrap
 		try
 		{
 			ToLua.CheckArgsCount(L, 1);
-			UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject(L, 1, typeof(UnityEngine.AssetBundle));
+			UnityEngine.AssetBundle obj = (UnityEngine.AssetBundle)ToLua.CheckObject<UnityEngine.AssetBundle>(L, 1);
 			string[] o = obj.GetAllScenePaths();
 			ToLua.Push(L, o);
 			return 1;

@@ -1,5 +1,6 @@
 local System = System
 local throw = System.throw
+local emptyFn = System.emptyFn
 local getClass = System.getClass
 local is = System.is
 local NotSupportedException = System.NotSupportedException
@@ -19,7 +20,9 @@ local rawset = rawset
 local type = type
 local tinsert = table.insert
 local sformat = string.format
+local sbyte = string.byte
 local loadstring = loadstring
+local ipairs = ipairs
 local pairs = pairs
 local typeof = typeof
 
@@ -28,194 +31,62 @@ local BridgeMonoBehaviour = CSharpLua.BridgeMonoBehaviour
 local UnityEngine = UnityEngine
 local toluaSystem = toluaSystem
 
-local Debug = {
+System.define("UnityEngine.Debug", {
   Log = Debugger.Log
-}
+})
 
-System.define("UnityEngine.Debug", Debug)
+local MonoBehaviour = System.define("MonoBehaviour", {
+  __kind__ = "C",
+  __ctor__ = emptyFn,
+  Awake = emptyFn,
+  Start = emptyFn
+})
 
-local MonoBehaviour = {
-  __ctor__ = false,
-  Awake = function (this)
-  end,
-  Start = function (this)
-  end,
-  
-  -- MonoBehaviour methods
-  getuseGUILayout = function (this)
-    return this.ref.useGUILayout
-  end,
-  setuseGUILayout = function (this, value)
-    this.ref.useGUILayout = value
-  end,
-  print = UnityEngine.MonoBehaviour.print,
-  CancelInvoke = function (this, methodName)  
-    if methodName == nil then
-      this.ref:CancelInvoke()
-    else
-      throw(NotSupportedException())
+local metatableOfMonoBehaviour = getmetatable(BridgeMonoBehaviour) 
+setmetatable(MonoBehaviour, {
+  __index = function (t, k)
+    if sbyte(k, 1) ~= 95 then
+      local super = metatableOfMonoBehaviour
+      while true do
+        local f = rawget(super, k)
+        if f then
+         local v = function (this, ...)
+           return f(this.ref, ...)
+         end
+         t.k = v
+         return v
+        end
+        super = getmetatable(super)
+        if not super then
+          return nil
+        end
+      end
     end
-  end,
-  Invoke = function (this, methodName, time)
-    throw(NotSupportedException())
-  end,
-  InvokeRepeating = function (this, methodName, time, repeatRate)
-    throw(NotSupportedException())
-  end,
-  IsInvoking = function (this, methodName)
-    if methodName == nil then
-      this.ref:IsInvoking()
-    else
-      throw(NotSupportedException())
-    end
-  end,
-  StartCoroutine = function (this, routine)
-    if type(routine) == "string" then
-      throw(NotSupportedException())
-    end  
-    return this.ref:StartCoroutine(routine)
-  end,
-  StopAllCoroutines = function (this)
-    this.ref:StopAllCoroutines()
-  end,
-  StopCoroutine = function (this, routine)
-    if type(routine) ~= "userdata" then
-      throw(NotSupportedException())
-    end  
-    this.ref:StopCoroutine(routine)
-  end,
-  
-  -- Behaviour methods
-  getenabled = function (this)
-    return this.ref.enabled
-  end,
-  setenabled = function (this, value)
-    this.ref.enabled = value
-  end,
-  getisActiveAndEnabled = function (this)
-    return this.ref.isActiveAndEnabled
-  end,
-  setisActiveAndEnabled = function (this, value)
-    this.ref.isActiveAndEnabled = value
-  end,
-  
-  -- Component methods
-  getgameObject = function (this)
-    return this.ref.gameObject
-  end,
-  gettag = function (this)
-    return this.ref.tag
-  end,
-  settag = function (this, value)
-    this.ref.tag = value
-  end,
-  getrigidbody = function (this)
-    return this.ref.rigidbody
-  end,
-  getrigidbody2D = function (this)
-    return this.ref.rigidbody2D
-  end,
-  getcamera = function (this)
-    return this.ref.camera
-  end,
-  getlight = function (this)
-    return this.ref.light
-  end,
-  getanimation = function (this)
-    return this.ref.animation
-  end,
-  getconstantForce = function (this)
-    return this.ref.constantForce
-  end,
-  getrenderer = function (this)
-    return this.ref.renderer
-  end,
-  getaudio = function (this)
-    return this.ref.audio
-  end,
-  getguiText = function (this)
-    return this.ref.guiText
-  end,
-  getnetworkView = function (this)
-    return this.ref.networkView
-  end,
-  getguiElement = function (this)
-    return this.ref.guiElement
-  end,
-  getguiTexture = function (this)
-    return this.ref.guiTexture
-  end,
-  getcollider = function (this)
-    return this.ref.collider
-  end,
-  getcollider2D = function (this)
-    return this.ref.collider2D
-  end,
-  gethingeJoint = function (this)
-    return this.ref.hingeJoint
-  end,
-  gettransform = function (this)
-    return this.ref.transform
-  end,
-  getparticleEmitter = function (this)
-    return this.ref.particleEmitter
-  end,
-  getparticleSystem = function (this)
-    return this.ref.particleSystem
-  end,
-  BroadcastMessage = function (this)
-    throw(NotSupportedException())
-  end,
-  CompareTag = function (this, tag)
-    return this.ref:CompareTag(tag)
-  end,
-  GetComponent = function (this, componentType)
-    return this.ref:GetComponent(componentType)
-  end,
-  GetComponentInChildren = function (this, t, includeInactive)
-    return this.ref:GetComponentInChildren(t, includeInactive)
-  end,
-  GetComponents = function (this, t, results)
-    return this.ref:GetComponents(t, results)
-  end,
-  
-  -- Object methods
-  getname = function (this)
-    return this.ref.name
-  end,
-  setname = function (this, value)
-    this.ref.name = value
-  end,
-  gethideFlags = function (this)
-    return this.ref.hideFlags
-  end,
-  sethideFlags = function (this, value)
-    this.ref.hideFlags = value
-  end,
-  EqualsObj = function (this, other)
-    return this.ref:EqualsObj(other)
-  end,
-  GetInstanceID = function (this)
-    return this.ref:GetInstanceID()
-  end,
-  ToString = function (this)
-    return this.ref:ToString()
-  end,
-}
+    return nil
+  end
+})
 
 local updateIndexs = { Update = 0, FixedUpdate = 1, LateUpdate = 2 }
 
 local function registerUpdate(this, bridgeMonoBehaviour, nameOfFn)
-  local update = this[nameOfFn]
-  if update and type(update) == "function" then
-    bridgeMonoBehaviour:RegisterUpdate(updateIndexs[nameOfFn], update)
+  local super = getmetatable(this)
+  while true do
+    local f = rawget(super, nameOfFn)
+    if f and type(f) == "function" then
+      bridgeMonoBehaviour:RegisterUpdate(updateIndexs[nameOfFn], f)
+      return
+    end
+    super = getmetatable(super)
+    if super == MonoBehaviour then
+      return
+    end
   end
 end
 
-function MonoBehaviour.__ctor__(this, bridgeMonoBehaviour, isFromConverter, serializeData)
-  this.ref = bridgeMonoBehaviour
-  if not isFromConverter then
-    bridgeMonoBehaviour:Bind(this)
+local function makeBridge(this, bridgeMonoBehaviour, state, serializeData, serializeObjects)
+  this.ref = assert(bridgeMonoBehaviour)
+  if not state then
+    bridgeMonoBehaviour:Bind(this, this.__name__)
   else
     if serializeData and #serializeData > 0 then
       local datas = loadstring(serializeData)()
@@ -227,9 +98,36 @@ function MonoBehaviour.__ctor__(this, bridgeMonoBehaviour, isFromConverter, seri
       end
       local objects = datas[2]
       if objects then
-        local serializeObjects = bridgeMonoBehaviour.SerializeObjects 
+        local lazyFields = datas[3]
+        local lazyObjects
+        if lazyFields then
+          lazyObjects = {}
+          for _, index in ipairs(lazyFields) do
+            local bridge = serializeObjects[index]
+            local t = bridge.Table
+            if t == nil then
+              local luaClass = bridge.LuaClass
+              local T = getClass(luaClass)
+              assert(T, luaClass .. " is not found")
+              t = setmetatable({}, T)
+              makeBridge(t, bridge, state, bridge.SerializeData, bridge.SerializeObjects)
+              T.__ctor__(t)
+              bridge:Bind(t)
+            end     
+            lazyObjects[index] = t
+          end
+        end
         for k, v in pairs(objects) do
-          this[k] = serializeObjects[v]
+          if lazyObjects then
+            local t = lazyObjects[v]
+            if t then
+              this[k] = t
+            else
+              this[k] = serializeObjects[v]
+            end
+          else
+            this[k] = serializeObjects[v]
+          end        
         end 
       end
     end
@@ -237,10 +135,15 @@ function MonoBehaviour.__ctor__(this, bridgeMonoBehaviour, isFromConverter, seri
   registerUpdate(this, bridgeMonoBehaviour, "Update")
   registerUpdate(this, bridgeMonoBehaviour, "FixedUpdate")
   registerUpdate(this, bridgeMonoBehaviour, "LateUpdate")
-  this:Awake()
 end
 
-System.define("MonoBehaviour", MonoBehaviour)
+local function newMonoBehaviour(T, bridgeMonoBehaviour, state, serializeData, serializeObjects)
+  local this = setmetatable({}, T)
+  makeBridge(this, bridgeMonoBehaviour, state, serializeData, serializeObjects)
+  T.__ctor__(this)
+  this:Awake()
+  return this
+end
 
 local function isFromCSharp(T)
   return T.__gc ~= nil
@@ -260,18 +163,51 @@ local function checkBridgeMonoBehaviour(t)
   return t
 end
 
-local metatableOfComponent = getmetatable(UnityEngine.Component)
-local sourceGetComponent = rawget(metatableOfComponent, "GetComponent")
-local sourceGetComponentInChildren = rawget(metatableOfComponent, "GetComponentInChildren")
-local sourceGetComponentInParent = rawget(metatableOfComponent, "GetComponentInParent")
-local sourceGetComponents = rawget(metatableOfComponent, "GetComponents")
-local sourceGetComponentsInChildren = rawget(metatableOfComponent, "GetComponentsInChildren")
-local sourceGetComponentsInParent = rawget(metatableOfComponent, "GetComponentsInParent")
+local metatableOfGameObject = getmetatable(UnityEngine.GameObject)
+local sourceAddComponent = rawget(metatableOfGameObject, "AddComponent")
+local sourceGetComponent = rawget(metatableOfGameObject, "GetComponent")
+local sourceGetComponentInChildren = rawget(metatableOfGameObject, "GetComponentInChildren")
+local sourceGetComponentInParent = rawget(metatableOfGameObject, "GetComponentInParent")
+local sourceGetComponents = rawget(metatableOfGameObject, "GetComponents")
+local sourceGetComponentsInChildren = rawget(metatableOfGameObject, "GetComponentsInChildren")
+local sourceGetComponentsInParent = rawget(metatableOfGameObject, "GetComponentsInParent")
+
+local function addBridgeMonoBehaviour(gameObject, T)
+  local monoBehaviour = sourceAddComponent(gameObject, typeofBridgeMonoBehaviour)
+  return newMonoBehaviour(T, monoBehaviour)
+end
+
+local function addComponent(gameObject, T)
+  if T == nil then throw(ArgumentNullException("type")) end
+  if isSystemType(T) then
+    T = T.c
+  end
+  if isFromCSharp(T) then
+    if type(T) ~= "userdata" then
+      T = typeof(T)
+    end
+    return sourceAddComponent(gameObject, T)
+  elseif type(T) == "string" then
+    local cls = getClass(T)  
+    if cls ~= nil then
+      return addBridgeMonoBehaviour(gameObject, cls)
+    else
+      local type_ = typeof(T)
+      assert(type_, T .. " is not found")
+      return sourceAddComponent(gameObject, type_)
+    end
+  else
+    return addBridgeMonoBehaviour(gameObject, T)
+  end
+end
+
+rawset(metatableOfGameObject, "AddComponent", addComponent)
 
 local function getBridgeComponent(sourceGetComponents, component, T, ...)
   local coms = sourceGetComponents(component, typeofBridgeMonoBehaviour, ...)
   for i = 0, coms.Length - 1 do
     local t = coms[i].Table
+    assert(t)
     if is(t, T) then
       return t
     end
@@ -302,7 +238,7 @@ local function getComponent(component, T)
   end
 end
 
-rawset(metatableOfComponent, "GetComponent", getComponent)
+rawset(metatableOfGameObject, "GetComponent", getComponent)
 
 local function getComponentInChildren(component, T, includeInactive)
   if T == nil then throw(ArgumentNullException("type")) end
@@ -327,7 +263,7 @@ local function getComponentInChildren(component, T, includeInactive)
     return getBridgeComponent(sourceGetComponentsInChildren, component, T, includeInactive)
 end
 
-rawset(metatableOfComponent, "GetComponentInChildren", getComponentInChildren)
+rawset(metatableOfGameObject, "GetComponentInChildren", getComponentInChildren)
 
 local function getComponentInParent(component, T)
   if T == nil then throw(ArgumentNullException("type")) end
@@ -344,7 +280,7 @@ local function getComponentInParent(component, T)
   end  
 end
 
-rawset(metatableOfComponent, "GetComponentInParent", getComponentInParent)
+rawset(metatableOfGameObject, "GetComponentInParent", getComponentInParent)
 
 local function getBridgeComponents(sourceGetComponents, component, T, results, ...)
   hasReturn = results == nil
@@ -384,7 +320,7 @@ local function getComponents(component, T, results)
   return getBridgeComponents(sourceGetComponents, component, T, results)
 end
 
-rawset(metatableOfComponent, "GetComponents", getComponents)
+rawset(metatableOfGameObject, "GetComponents", getComponents)
 
 local function getComponentsInChildren(component, T, includeInactive, results)
   if T == nil then throw(ArgumentNullException("type")) end
@@ -411,7 +347,7 @@ local function getComponentsInChildren(component, T, includeInactive, results)
   return getBridgeComponents(sourceGetComponentsInChildren, component, T, results, includeInactive)
 end
 
-rawset(metatableOfComponent, "GetComponentsInChildren", getComponentsInChildren)
+rawset(metatableOfGameObject, "GetComponentsInChildren", getComponentsInChildren)
 
 local function getComponentsInParent(component, T, includeInactive, results)
   if T == nil then throw(ArgumentNullException("type")) end
@@ -432,41 +368,34 @@ local function getComponentsInParent(component, T, includeInactive, results)
   return getBridgeComponents(sourceGetComponentsInParent, component, T, results, includeInactive)
 end
 
-rawset(metatableOfComponent, "GetComponentsInParent", getComponentsInParent)
+rawset(metatableOfGameObject, "GetComponentsInParent", getComponentsInParent)
 
-local metatableOfGameObject = getmetatable(UnityEngine.GameObject)
-local sourceAddComponent = rawget(metatableOfGameObject, "AddComponent")
 
-local function addBridgeMonoBehaviour(gameObject, T)
-  local monoBehaviour = sourceAddComponent(gameObject, typeofBridgeMonoBehaviour)
-  return T(monoBehaviour)
-end
+local metatableOfComponent = getmetatable(UnityEngine.Component)
 
-local function addComponent(gameObject, T)
-  if T == nil then throw(ArgumentNullException("type")) end
-  if isSystemType(T) then
-    T = T.c
-  end
-  if isFromCSharp(T) then
-    if type(T) ~= "userdata" then
-      T = typeof(T)
-    end
-    return sourceAddComponent(gameObject, T)
-  elseif type(T) == "string" then
-    local cls = getClass(T)  
-    if cls ~= nil then
-      return addBridgeMonoBehaviour(gameObject, cls)
-    else
-      local type_ = typeof(T)
-      assert(type_, T .. " is not found")
-      return sourceAddComponent(gameObject, type_)
-    end
-  else
-    return addBridgeMonoBehaviour(gameObject, T)
-  end
-end
+rawset(metatableOfComponent, "GetComponent", function (this, ...)
+  return this.gameObject:GetComponent(...)
+end)
 
-rawset(metatableOfGameObject, "AddComponent", addComponent)
+rawset(metatableOfComponent, "GetComponentInChildren", function (this, ...)
+  return this.gameObject:GetComponentInChildren(...)
+end)
+
+rawset(metatableOfComponent, "GetComponentInParent", function (this, ...)
+  return this.gameObject:GetComponentInParent(...)
+end)
+
+rawset(metatableOfComponent, "GetComponents", function (this, ...)
+  return this.gameObject:GetComponents(...)
+end)
+
+rawset(metatableOfComponent, "GetComponentsInChildren", function (this, ...)
+  return this.gameObject:GetComponentsInChildren(...)
+end)
+
+rawset(metatableOfComponent, "GetComponentsInParent", function (this, ...)
+  return this.gameObject:GetComponentsInParent(...)
+end)
 
 local metatableOfObject = getmetatable(UnityEngine.Object)
 local sourceDestroy = rawget(metatableOfObject, "Destroy")
@@ -480,6 +409,7 @@ local sourceFindSceneObjectsOfType = rawget(metatableOfObject, "FindSceneObjects
 local source__eq = rawget(metatableOfObject, "__eq")
 
 local function destroy(obj, t)
+  print(obj.__name__)
   if obj and not isFromCSharp(obj) then
     obj = assert(obj.ref)
   end
@@ -650,10 +580,10 @@ UnityEngine.op_Equality = op_Equality
 UnityEngine.op_Inequality = op_Inequality
 UnityEngine.op_Implicit = op_Implicit
 
-function UnityEngine.bind(monoBehaviour, luaClass, serializeData)
+function UnityEngine.bind(monoBehaviour, luaClass, serializeData, serializeObjects)
   T = getClass(luaClass)
   assert(T, luaClass .. " is not found")
-  return T(monoBehaviour, true, serializeData)
+  return newMonoBehaviour(T, monoBehaviour, true, serializeData, serializeObjects)
 end
 
 local cjson = require("cjson")
@@ -692,7 +622,7 @@ local function defineUnityStruct(name, T)
   local __index = T.__index
   System.defStc(name, T)
    
-  local super = getmetatable(cls)
+  local super = getmetatable(T)
   setmetatable(T, { 
     __call = __call,
     __index = function (t, k)
