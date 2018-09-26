@@ -409,7 +409,6 @@ local sourceFindSceneObjectsOfType = rawget(metatableOfObject, "FindSceneObjects
 local source__eq = rawget(metatableOfObject, "__eq")
 
 local function destroy(obj, t)
-  print(obj.__name__)
   if obj and not isFromCSharp(obj) then
     obj = assert(obj.ref)
   end
