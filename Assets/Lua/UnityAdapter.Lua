@@ -5,7 +5,7 @@ local getClass = System.getClass
 local is = System.is
 local NotSupportedException = System.NotSupportedException
 local SystemType = System.Type
-local SystemList = System.List
+local SystemListObject = System.List(System.Object)
 local SystemTypeof = System.typeof
 local arrayFromList = System.arrayFromList
 local ArgumentNullException = System.ArgumentNullException
@@ -189,13 +189,12 @@ local function addComponent(gameObject, T)
     return sourceAddComponent(gameObject, T)
   elseif type(T) == "string" then
     local cls = getClass(T)  
-    if cls ~= nil then
+    if cls ~= nil and not isFromCSharp(cls) then
       return addBridgeMonoBehaviour(gameObject, cls)
-    else
-      local type_ = typeof(T)
-      assert(type_, T .. " is not found")
-      return sourceAddComponent(gameObject, type_)
     end
+    local type_ = typeof(T)
+    assert(type_, T .. " is not found")
+    return sourceAddComponent(gameObject, type_)
   else
     return addBridgeMonoBehaviour(gameObject, T)
   end
@@ -227,11 +226,12 @@ local function getComponent(component, T)
   elseif type(T) == "string" then
     local cls = getClass(T)
     if cls ~= nil then
+      if isFromCSharp(cls) then
+        return sourceGetComponent(component, T)
+      end
       return checkBridgeMonoBehaviour(getBridgeComponent(sourceGetComponents, component, cls))
     else
-      local type_ = typeof(T)
-      assert(type_, T .. " is not found")
-      return checkBridgeMonoBehaviour(sourceGetComponent(component, type_))
+      return sourceGetComponent(component, T)
     end
   else
     return getBridgeComponent(sourceGetComponents, component, T)
@@ -285,7 +285,7 @@ rawset(metatableOfGameObject, "GetComponentInParent", getComponentInParent)
 local function getBridgeComponents(sourceGetComponents, component, T, results, ...)
   hasReturn = results == nil
   if hasReturn then
-    results = SystemList(T)
+    results = SystemListObject()
   end
   if isFromCSharp(T) then
     if type(T) ~= "userdata" then
@@ -294,7 +294,7 @@ local function getBridgeComponents(sourceGetComponents, component, T, results, .
     local coms = sourceGetComponents(component, T, ...)
     for i = 0, coms.Length - 1 do
       local t = coms[i]
-      results:Add(checkBridgeMonoBehaviour(t))
+      results:Add(t)
     end
   else
     local coms = sourceGetComponents(component, typeofBridgeMonoBehaviour, ...)
@@ -329,6 +329,10 @@ local function getComponentsInChildren(component, T, includeInactive, results)
     if includeInactive == nil then
       includeInactive = false
     end
+  elseif isFromCSharp(T) then
+    if includeInactive == nil then
+      includeInactive = false
+    end
   else
     if type(T) == "boolean" then
       if not results then
@@ -352,8 +356,14 @@ rawset(metatableOfGameObject, "GetComponentsInChildren", getComponentsInChildren
 local function getComponentsInParent(component, T, includeInactive, results)
   if T == nil then throw(ArgumentNullException("type")) end
   if isSystemType(T) then
-     T = T.c
-     includeInactive = false
+    T = T.c
+    if includeInactive == nil then
+      includeInactive = false
+    end
+  elseif isFromCSharp(T) then
+    if includeInactive == nil then
+      includeInactive = false
+    end
   else
     if type(T) == "boolean" then
       if not results then
@@ -459,7 +469,7 @@ local function findObjectOfType(T)
 end
 
 local function findBridgeObjectsOfType(sourceFindObjectsOfType, T)
-  local results = SystemList(T)
+  local results = SystemListObject()
   if isFromCSharp(T) then
     if type(T) ~= "userdata" then
       T = typeof(T)
@@ -566,7 +576,7 @@ function UnityEngine.addComponent(gameObject, componentString)
   if pos then
     local name = componentString:sub(1, pos - 1)
     local cls = getClass(name)  
-    if cls ~= nil then
+    if cls ~= nil and not isFromCSharp(cls) then
       return addBridgeMonoBehaviour(gameObject, cls)
     end
   end
