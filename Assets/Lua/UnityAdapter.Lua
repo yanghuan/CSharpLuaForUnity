@@ -95,7 +95,7 @@ local function checkBridgeMonoBehaviour(t)
       local T = getClass(luaClass)
       assert(T, luaClass .. " is not found")
       t = setmetatable({}, T)
-      makeBridge(t, bridge, state, bridge.SerializeData, bridge.SerializeObjects)
+      makeBridge(t, bridge, true, bridge.SerializeData, bridge.SerializeObjects)
       T.__ctor__(t)
       bridge:Bind(t)
     end
