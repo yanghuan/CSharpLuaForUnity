@@ -54,7 +54,7 @@ setmetatable(MonoBehaviour, {
       local v = function (this, ...)
         return f(this.ref, ...)
       end
-      t.k = v
+      t[k] = v
       return v
     end
     return nil
