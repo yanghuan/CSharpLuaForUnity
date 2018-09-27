@@ -17,7 +17,6 @@ namespace CSharpLua {
       public Dictionary<string, object> Normals = new Dictionary<string, object>();
       public Dictionary<string, UnityEngine.Object> Objects = new Dictionary<string, UnityEngine.Object>();
       public Dictionary<string, string> MonoBehaviourFields = new Dictionary<string, string>();
-      private List<int> monoBehaviourFieldIndexs_ = new List<int>();
 
       private void AppendNormals(StringBuilder sb) {
         sb.Append('{');
@@ -36,25 +35,24 @@ namespace CSharpLua {
       }
 
       private void AppendObjects(StringBuilder sb) {
-        sb.Append('{');
-        bool isFirst = true;
-        int objectIndex = 0;
-        foreach (string key in Objects.Keys) {
-          if (isFirst) {
-            isFirst = false;
-          } else {
-            sb.Append(',');
-          }
+        if (Objects.Count > 0) {
+          sb.Append('{');
+          bool isFirst = true;
+          int objectIndex = 0;
+          foreach (string key in Objects.Keys) {
+            if (isFirst) {
+              isFirst = false;
+            } else {
+              sb.Append(',');
+            }
 
-          sb.Append(key);
-          sb.Append('=');
-          sb.Append(objectIndex);
-          if (MonoBehaviourFields.ContainsKey(key)) {
-            monoBehaviourFieldIndexs_.Add(objectIndex);
-          } 
-          ++objectIndex;
+            sb.Append(key);
+            sb.Append('=');
+            sb.Append(objectIndex);
+            ++objectIndex;
+          }
+          sb.Append('}');
         }
-        sb.Append('}');
       }
 
       public string GetSerializeData() {
@@ -64,15 +62,7 @@ namespace CSharpLua {
           sb.Append("return{");
           AppendNormals(sb);
           sb.Append(',');
-          if (Objects.Count > 0) {
-            AppendObjects(sb);
-            if (monoBehaviourFieldIndexs_.Count > 0) {
-              sb.Append(',');
-              sb.Append('{');
-              sb.Append(string.Join(",", monoBehaviourFieldIndexs_));
-              sb.Append('}');
-            }
-          }
+          AppendObjects(sb);
           sb.Append('}');
         }
         return sb.ToString();
@@ -99,7 +89,7 @@ namespace CSharpLua {
         foreach (var pair in SerializeInfo.MonoBehaviourFields) {
           var gameObject = (GameObject)SerializeInfo.Objects[pair.Key];
           var bridges = gameObject.GetComponents<BridgeMonoBehaviour>();
-          var item = bridges.First(i => i.LuaClass == pair.Value);
+          var item = bridges.Single(i => i.LuaClass == pair.Value);
           SerializeInfo.Objects[pair.Key] = item;
         }
         BridgeMonoBehaviour.Bind(ClassName, SerializeInfo.GetSerializeData(), SerializeInfo.GetSerializeObjects());
@@ -338,7 +328,7 @@ namespace CSharpLua {
                         info.MonoBehaviourFields.Add(field.Name, mb.GetType().FullName);
                       } else {
                         var bridges = gameObject.GetComponents<BridgeMonoBehaviour>();
-                        var mbNew = Array.Find(bridges, i => i.LuaClass == mb.GetType().FullName);
+                        var mbNew = bridges.Single(i => i.LuaClass == mb.GetType().FullName);
                         Contract.Assert(mbNew != null);
                         obj = mbNew;
                       }

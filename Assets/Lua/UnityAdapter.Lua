@@ -38,29 +38,24 @@ System.define("UnityEngine.Debug", {
 local MonoBehaviour = System.define("MonoBehaviour", {
   __kind__ = "C",
   __ctor__ = emptyFn,
+  GetType = System.Object.GetType,
+  ToString = function (this)
+    return sformat("%s (%s)", this.ref.gameObject.name, this.__name__)
+  end,
   Awake = emptyFn,
-  Start = emptyFn
+  Start = emptyFn,
 })
 
 local metatableOfMonoBehaviour = getmetatable(BridgeMonoBehaviour) 
 setmetatable(MonoBehaviour, {
   __index = function (t, k)
     if sbyte(k, 1) ~= 95 then
-      local super = metatableOfMonoBehaviour
-      while true do
-        local f = rawget(super, k)
-        if f then
-         local v = function (this, ...)
-           return f(this.ref, ...)
-         end
-         t.k = v
-         return v
-        end
-        super = getmetatable(super)
-        if not super then
-          return nil
-        end
+      local f = metatableOfMonoBehaviour[k]
+      local v = function (this, ...)
+        return f(this.ref, ...)
       end
+      t.k = v
+      return v
     end
     return nil
   end
@@ -83,7 +78,32 @@ local function registerUpdate(this, bridgeMonoBehaviour, nameOfFn)
   end
 end
 
-local function makeBridge(this, bridgeMonoBehaviour, state, serializeData, serializeObjects)
+local typeofBridgeMonoBehaviour = typeof(BridgeMonoBehaviour)
+local isInstanceOfType = typeofBridgeMonoBehaviour.IsInstanceOfType 
+
+local function isBridgeInstance(t)
+  return isInstanceOfType(typeofBridgeMonoBehaviour, t)
+end
+
+local makeBridge
+local function checkBridgeMonoBehaviour(t)
+  if isBridgeInstance(t) then
+    local bridge = t
+    t = bridge.Table
+    if t == nil then
+      local luaClass = bridge.LuaClass
+      local T = getClass(luaClass)
+      assert(T, luaClass .. " is not found")
+      t = setmetatable({}, T)
+      makeBridge(t, bridge, state, bridge.SerializeData, bridge.SerializeObjects)
+      T.__ctor__(t)
+      bridge:Bind(t)
+    end
+  end
+  return t
+end
+
+function makeBridge(this, bridgeMonoBehaviour, state, serializeData, serializeObjects)
   this.ref = assert(bridgeMonoBehaviour)
   if not state then
     bridgeMonoBehaviour:Bind(this, this.__name__)
@@ -98,36 +118,8 @@ local function makeBridge(this, bridgeMonoBehaviour, state, serializeData, seria
       end
       local objects = datas[2]
       if objects then
-        local lazyFields = datas[3]
-        local lazyObjects
-        if lazyFields then
-          lazyObjects = {}
-          for _, index in ipairs(lazyFields) do
-            local bridge = serializeObjects[index]
-            local t = bridge.Table
-            if t == nil then
-              local luaClass = bridge.LuaClass
-              local T = getClass(luaClass)
-              assert(T, luaClass .. " is not found")
-              t = setmetatable({}, T)
-              makeBridge(t, bridge, state, bridge.SerializeData, bridge.SerializeObjects)
-              T.__ctor__(t)
-              bridge:Bind(t)
-            end     
-            lazyObjects[index] = t
-          end
-        end
         for k, v in pairs(objects) do
-          if lazyObjects then
-            local t = lazyObjects[v]
-            if t then
-              this[k] = t
-            else
-              this[k] = serializeObjects[v]
-            end
-          else
-            this[k] = serializeObjects[v]
-          end        
+          this[k] = checkBridgeMonoBehaviour(serializeObjects[v])  
         end 
       end
     end
@@ -151,16 +143,6 @@ end
 
 local function isSystemType(t)
   return getmetatable(t) == SystemType
-end
-
-local typeofBridgeMonoBehaviour = typeof(BridgeMonoBehaviour)
-local isInstanceOfType = typeofBridgeMonoBehaviour.IsInstanceOfType 
-
-local function checkBridgeMonoBehaviour(t)
-  if isInstanceOfType(typeofBridgeMonoBehaviour, t) then
-    t = t.Table
-  end
-  return t
 end
 
 local metatableOfGameObject = getmetatable(UnityEngine.GameObject)
@@ -205,8 +187,7 @@ rawset(metatableOfGameObject, "AddComponent", addComponent)
 local function getBridgeComponent(sourceGetComponents, component, T, ...)
   local coms = sourceGetComponents(component, typeofBridgeMonoBehaviour, ...)
   for i = 0, coms.Length - 1 do
-    local t = coms[i].Table
-    assert(t)
+    local t = assert(coms[i].Table)
     if is(t, T) then
       return t
     end
@@ -225,14 +206,10 @@ local function getComponent(component, T)
     return sourceGetComponent(component, T) 
   elseif type(T) == "string" then
     local cls = getClass(T)
-    if cls ~= nil then
-      if isFromCSharp(cls) then
-        return sourceGetComponent(component, T)
-      end
-      return checkBridgeMonoBehaviour(getBridgeComponent(sourceGetComponents, component, cls))
-    else
-      return sourceGetComponent(component, T)
+    if cls ~= nil and not isFromCSharp(cls) then
+      return getBridgeComponent(sourceGetComponents, component, cls)
     end
+    return sourceGetComponent(component, T)
   else
     return getBridgeComponent(sourceGetComponents, component, T)
   end
