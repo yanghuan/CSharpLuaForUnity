@@ -372,15 +372,7 @@ test(testType, "Type")
 --test(testStringBuilder, "StringBuilder")
 --test(testConsole, "Console")
 --test(testIO, "IO")
---test(testAsync, "Async")
-
-
-local t = { 2, 3 }
-
-for k, i in ipairs(t) do
-  t[i] = 
-end  
-  
+test(testAsync, "Async")
 
 
 
