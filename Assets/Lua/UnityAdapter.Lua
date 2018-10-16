@@ -2,6 +2,7 @@ local System = System
 local throw = System.throw
 local emptyFn = System.emptyFn
 local getClass = System.getClass
+local base = System.Object.base
 local is = System.is
 local NotSupportedException = System.NotSupportedException
 local SystemType = System.Type
@@ -49,7 +50,9 @@ local MonoBehaviour = System.define("MonoBehaviour", {
 local metatableOfMonoBehaviour = getmetatable(BridgeMonoBehaviour) 
 setmetatable(MonoBehaviour, {
   __index = function (t, k)
-    if sbyte(k, 1) ~= 95 then
+    if k == "base" then
+      return base
+    elseif type(k) == "string" and sbyte(k, 1) ~= 95 then
       local f = metatableOfMonoBehaviour[k]
       local v = function (this, ...)
         return f(this.ref, ...)
