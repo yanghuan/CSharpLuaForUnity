@@ -15,9 +15,6 @@
         <method name="StopCoroutine" Baned="true">
           <arg type="System.String" />
         </method>
-        <method name="StopCoroutine" Baned="true">
-          <arg type="System.Collections.IEnumerator" />
-        </method>
       </class>
       <class name="Component">
         <method name="BroadcastMessage" Baned="true" />

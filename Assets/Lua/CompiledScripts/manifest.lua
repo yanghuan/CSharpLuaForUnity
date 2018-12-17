@@ -4,13 +4,11 @@ return function (dir)
   local require = require
   local load = function(module) return require(dir .. module) end
 
-  load("Sample.TestCoroutine")
-  load("Sample.TestHangingScript")
-  load("Sample.TestHelloWord")
+  load("Program")
 
   System.init({
-    "Sample.TestCoroutine",
-    "Sample.TestHangingScript",
-    "Sample.TestHelloWord"
+    "CSLua.Program"
+  }, {
+    Main = "CSLua.Program.Main"
   })
 end
