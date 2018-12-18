@@ -2517,24 +2517,26 @@ namespace LuaInterface
             {
                 LuaDLL.lua_pushnil(L);
             }
-            else if (iter.GetType() == typeof(CSharpLua.LuaIEnumerator)) 
+            else 
             {
-                var luaIter = iter as CSharpLua.LuaIEnumerator;
-                luaIter.Push(L);
-            }       
-            else
-            {                
-                int reference = LuaStatic.GetMetaReference(L, iter.GetType());
-
-                if (reference > 0)
+                var luaIEnumerator = iter as CSharpLua.LuaIEnumerator;
+                if (luaIEnumerator != null) 
                 {
-                    PushUserData(L, iter, reference);
+                    luaIEnumerator.Push(L);
                 }
-                else
+                else 
                 {
-                    int iterMetatable = LuaStatic.GetIterMetatable(L);
-                    PushUserData(L, iter, iterMetatable);
-                }            
+                    int reference = LuaStatic.GetMetaReference(L, iter.GetType());
+                    if (reference > 0) 
+                    {
+                        PushUserData(L, iter, reference);
+                    } 
+                    else 
+                    {
+                        int iterMetatable = LuaStatic.GetIterMetatable(L);
+                        PushUserData(L, iter, iterMetatable);
+                    }
+                }
             }
         }
 
