@@ -15,15 +15,19 @@ limitations under the License.
 --]]
 
 local System = System
+local throw = System.throw
 local Collection = System.Collection
 local buildArray = Collection.buildArray
 local getArray = Collection.getArray
 local setArray = Collection.setArray
-local checkIndex = Collection.checkIndex 
 local arrayEnumerator = Collection.arrayEnumerator
+local findAll = Collection.findAllOfArray
+
+local IndexOutOfRangeException = System.IndexOutOfRangeException
 
 local assert = assert
 local select = select
+local setmetatable = setmetatable
 
 local Array = {}
 local emptys = {}
@@ -47,6 +51,13 @@ function Array.getLength(this)
   return #this
 end
 
+function Array.GetLength(this, dimension)
+  if dimension ~= 0 then
+    throw(IndexOutOfRangeException())
+  end
+  return #this
+end
+
 function Array.getCount(this)
   return #this
 end
@@ -67,9 +78,8 @@ end
 Array.Exists = Collection.existsOfArray
 Array.Find = Collection.findOfArray
 
-local findAll = Collection.findAllOfArray
 function Array.FindAll(t, match)
-  return findAll(t, match):toArray()
+  return setmetatable(findAll(t, match), Array(t.__genericT__))
 end
 
 Array.FindIndex = Collection.findIndexOfArray
@@ -77,21 +87,19 @@ Array.FindLast = Collection.findLastOfArray
 Array.FindLastIndex = Collection.findLastIndexOfArray
 Array.IndexOf = Collection.indexOfArray
 Array.LastIndexOf = Collection.lastIndexOfArray
+Array.Resize = Collection.resizeArray
 Array.Reverse = Collection.reverseArray
 Array.Sort = Collection.sortArray
 Array.TrueForAll = Collection.trueForAllOfArray
 Array.Copy = Collection.copyArray
+Array.GetValue = getArray
 
 function Array.CreateInstance(elementType, length)
   return Array(elementType.c):new(length)
 end
 
-function Array.GetValue(this, index)
-  return this:get(index)
-end
-
 function Array.SetValue(this, value, index)
-  this:set(index, value)
+  setArray(this, index, value)
 end
 
 System.define("System.Array", function(T) 
@@ -142,13 +150,16 @@ function MultiArray.get(this, ...)
   return getArray(this, index)
 end
 
-function MultiArray.getLength(this, dimension)
-  if dimension == nil then
-    return #this
-  end
+function MultiArray.getLength(this)
+	return #this
+end
+
+function MultiArray.GetLength(this, dimension)
   local rank = this.__rank__
-  checkIndex(rank, dimension)
-  return this.__rank__[dimension + 1]
+  if dimension < 0 or dimension >= #rank then
+    throw(IndexOutOfRangeException())
+  end
+  return rank[dimension + 1]
 end
 
 function MultiArray.getRank(this)

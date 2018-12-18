@@ -17,14 +17,13 @@ limitations under the License.
 local System = System
 local throw = System.throw
 local Int = System.Int
-local Double = System.Double
+local Number = System.Number
 local band = System.band
 local ArgumentNullException = System.ArgumentNullException
 local ArgumentException = System.ArgumentException
 
 local pairs = pairs
 local tostring = tostring
-local tinsert = table.insert
 
 local Enum = {}
 
@@ -44,14 +43,14 @@ local function toString(this, cls)
 end
 
 Enum.ToString = toString
-Double.ToEnumString = toString
+Number.ToEnumString = toString
 
 local function hasFlag(this, flag)
   return band(this, flag) ~= 0
 end
 
 Enum.HasFlag = hasFlag
-Double.HasFlag = hasFlag
+Number.HasFlag = hasFlag
 
 function Enum.GetName(enumType, value)
   if enumType == nil then throw(ArgumentNullException("enumType")) end
@@ -70,7 +69,7 @@ function Enum.GetNames(enumType)
   if not enumType:getIsEnum() then throw(ArgumentException("Arg_MustBeEnum")) end
   local t = {}
   for k, v in pairs(enumType.c) do
-    tinsert(t, k)
+    t[#t + 1] = k
   end
   return System.arrayFromTable(t, System.String)
 end
@@ -80,7 +79,7 @@ function Enum.GetValues(enumType)
   if not enumType:getIsEnum() then throw(ArgumentException("Arg_MustBeEnum")) end
   local t = {}
   for k, v in pairs(enumType.c) do
-    tinsert(t, v)
+    t[#t + 1] = v
   end
   return System.arrayFromTable(t, Int)
 end

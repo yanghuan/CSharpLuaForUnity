@@ -133,15 +133,15 @@ function Collection.setArray(t, index, v)
 end
 
 function Collection.pushArray(t, v)
-  tinsert(t, wrap(v))
+  t[#t + 1] = wrap(v)
   changeVersion(t)
 end
 
 function Collection.buildArray(t, size, ...)
   local len = select("#", ...)
   for i = 1, len do
-    local v = select(i, ...)   
-    tinsert(t, wrap(v))
+    local v = select(i, ...)
+    t[#t + 1] = wrap(v)
   end
   if len < size then
     local default = t.__genericT__:__default__()
@@ -149,7 +149,7 @@ function Collection.buildArray(t, size, ...)
       default = null
     end
     for i = len + 1, size do
-      tinsert(t, default)
+      t[#t + 1] = default
     end
   end
 end
@@ -421,6 +421,19 @@ function Collection.lastIndexOfArray(t, ...)
   return lastIndexOfArray(t, v, index, count)
 end
 
+function Collection.resizeArray(t, newSize, T)
+  if newSize < 0 then throw(ArgumentOutOfRangeException("newSize")) end
+  if t == nil then
+    return System.Array(T):new(newSize)
+  end
+  local arr = t
+  if #arr ~= newSize then
+    arr = setmetatable({}, System.Array(T))
+    tmove(t, 1, #t, 1, arr)
+  end
+  return arr
+end
+
 function Collection.reverseArray(t, index, count)
   if not index then
     index = 0
@@ -468,7 +481,7 @@ local function sortArray(t, index, count, comparer)
       checkIndexAndCount(t, index, count)
       local arr = {}
       for i = index + 1, index + count do
-        tinsert(arr, t[i])
+        arr[#arr + 1] = t[i]
       end
       tsort(arr, comp)
       for i = index + 1, index + count do
@@ -616,11 +629,11 @@ function Collection.toArray(t)
   local array = {}    
   if isArrayLike(t) then
     for _, v in ipairs(t) do
-      tinsert(array, v)
+      array[#array + 1] = v
     end   
   else
     for _, v in each(t) do
-      tinsert(array, wrap(v))
+      array[#array + 1] = wrap(v)
     end
   end
   return System.arrayFromTable(array, t.__genericT__)
@@ -634,46 +647,37 @@ local function toLuaTable(array)
   return t
 end
 
-local KeyValuePair = {}
-
-function KeyValuePair.__ctor__(this, key, value)
-  this.Key, this.Value = key, value
-end
-
-function KeyValuePair.__clone__(this)
-  return setmetatable({ Key = this.Key, Value = this.Value }, KeyValuePair)
-end
-
-function KeyValuePair.__default__(T)
-  local TKey, TValue = T.__genericTKey__, T.__genericTValue__
-  return setmetatable({ Key = TKey:__default__(), Value = TValue:__default__() }, KeyValuePair)
-end
-
-function KeyValuePair.Deconstruct(this)
-  return this.Key, this.Value
-end
-
-function KeyValuePair.ToString(this)
-  local t = {}
-  tinsert(t, "[")
-  local k, v = this.Key, this.Value
-  if k ~= nil then
-    tinsert(t, k:ToString())
+local KeyValuePair
+KeyValuePair = System.defStc("System.KeyValuePair", {
+  __ctor__ = function (this, key, value)
+    this.Key, this.Value = key, value
+  end,
+  __clone__ = function (this)
+    return setmetatable({ Key = this.Key, Value = this.Value }, KeyValuePair)
+  end,
+  __default__ = function (T)
+    throw(System.NotSupportedException("KeyValuePair not support default(T)"))
+  end,
+  Create = function (key, value)
+    return setmetatable({ Key = key, Value = value }, KeyValuePair)
+  end,
+  Deconstruct = function (this)
+    return this.Key, this.Value
+  end,
+  ToString = function (this)
+    local t = { "[" }
+    local k, v = this.Key, this.Value
+    if k ~= nil then
+      t[#t + 1] = k:ToString()
+    end
+    t[#t + 1] = ", "
+    if v ~= nil then
+      t[#t + 1] = v:ToString()
+    end
+    t[#t + 1] = "]"
+    return tconcat(t)
   end
-  tinsert(t, ", ")
-  if v ~= nil then
-    tinsert(t, v:ToString())
-  end
-  tinsert(t, "]")
-  return tconcat(t)
-end
-
-System.defStc("System.KeyValuePair", function (TKey, TValue) 
-  return {
-    __genericTKey__ = TKey,
-    __genericTValue__ = TValue,
-  }
-end, KeyValuePair)
+})
 
 local DictionaryEnumerator = {}
 DictionaryEnumerator.__index = DictionaryEnumerator
@@ -709,11 +713,7 @@ function Collection.dictionaryEnumerator(t, kind)
     dict = t,
     version = getVersion(t),
     kind = kind,
-    pair = kind == 0 and setmetatable({ 
-      Key = false, 
-      Value = false,
-      __genericTKey__ = t.__genericTKey__,
-      __genericTValue__ = t.__genericTValue__ }, KeyValuePair) or nil
+    pair = kind == 0 and setmetatable({ Key = false, Value = false }, KeyValuePair) or nil
   }
   setmetatable(en, DictionaryEnumerator)
   return en
@@ -762,7 +762,7 @@ local function yieldCoroutineCreate(f)
       f(...)
       while true do
         f = nil
-        tinsert(yieldCoroutinePool, co)
+        yieldCoroutinePool[#yieldCoroutinePool + 1] = co
         f = cyield(yieldCoroutineExit)
         f(cyield())
       end

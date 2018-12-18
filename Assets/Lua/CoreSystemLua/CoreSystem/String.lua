@@ -34,7 +34,6 @@ local smatch = string.match
 local sgsub = string.gsub
 
 local table = table
-local tinsert = table.insert
 local tconcat = table.concat
 local unpack = table.unpack
 local setmetatable = setmetatable
@@ -143,7 +142,7 @@ String.ToString = tostring
 
 function String.get(this, index)
   if index < 0 or index >= #this then
-      throw(IndexOutOfRangeException())
+    throw(IndexOutOfRangeException())
   end
   return sbyte(this, index + 1)
 end
@@ -155,7 +154,7 @@ function String.Concat(...)
     local v = ...
     if System.isEnumerableLike(v) then
       for _, v in System.each(array) do
-        tinsert(t, v:ToString())
+        t[#t + 1] = v:ToString()
       end
     else 
       return v:ToString()
@@ -163,7 +162,7 @@ function String.Concat(...)
   else
     for i = 1, len do
       local v = select(i, ...)
-    tinsert(t, v:ToString())
+      t[#t + 1] = v:ToString()
     end
   end
   return tconcat(t)
@@ -176,14 +175,14 @@ function String.Join(separator, value, startIndex, count)
     for i = startIndex + 1, startIndex + count do
       local v = value:get(i)
       if v ~= nil then
-        tinsert(t, v)
+        t[#t + 1] = v
       end
     end
   else
       for _, v in System.each(value) do
         if v ~= nil then
-          tinsert(t, v)
-        end      
+          t[#t + 1] = v
+        end
       end
   end
   return tconcat(t, separator)
@@ -313,7 +312,7 @@ function String.ToCharArray(str, startIndex, count)
   startIndex, count = check(str, startIndex, count)
   local t = { }
   for i = startIndex + 1, startIndex + count do
-    tinsert(t, sbyte(str, i))
+    t[#t + 1] = sbyte(str, i)
   end
   return System.arrayFromTable(t, System.Char)
 end
@@ -389,7 +388,7 @@ function String.Split(this, strings, count, options)
     posBegin = posBegin or 0
     local subStr = ssub(this, startIndex, posBegin -1)
     if options ~= 1 or #subStr > 0 then
-      tinsert(t, subStr)
+      t[#t + 1] = subStr
       if count then
         count = count -1
         if count == 0 then
@@ -441,8 +440,29 @@ function String.Trim(this, chars)
   return (sgsub(this, chars, "%1"))
 end
 
+local CharEnumerator = {}
+CharEnumerator.__index = CharEnumerator
+
+function CharEnumerator.MoveNext(this)
+  local index, s = this.index, this.s
+  if index <= #s then
+    this.current = sbyte(s, index)
+    this.index = index + 1
+    return true
+  end
+  return false
+end
+
+function CharEnumerator.getCurrent(this)
+  return this.current
+end
+
+function String.GetEnumerator(this)
+  return setmetatable({ s = this, index = 1 }, CharEnumerator)
+end
+
 function String.__inherits__()
-  return { System.IComparable, System.IEnumerable, System.IComparable_1(String), System.IEnumerable_1(String), System.IEquatable_1(String) }
+  return { System.IEnumerable_1(System.Char), System.IEnumerable, System.IComparable, System.IComparable_1(String), System.IConvertible, System.IEquatable_1(String) }
 end
 
 System.define("System.String", String)

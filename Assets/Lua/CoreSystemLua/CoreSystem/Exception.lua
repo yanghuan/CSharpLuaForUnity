@@ -20,22 +20,20 @@ local Object = System.Object
 
 local traceback = debug.traceback
 local tconcat = table.concat
-local tinsert = table.insert
 
 local function toString(this)
-  local t = {}
+  local t = { this.__name__ }
   local message, innerException, stackTrace = this.message, this.innerException, this.errorStack
-  tinsert(t, this.__name__)
   if message ~= nil and #message > 0 then
-    tinsert(t, ": ")
-    tinsert(t, message)
+    t[#t + 1] = ": "
+    t[#t + 1] = message
   end
   if innerException then
-    tinsert(t, "---> ")
-    tinsert(t, innerException:ToString())
+    t[#t + 1] = "---> "
+    t[#t + 1] = innerException:ToString()
   end
   if stackTrace then
-    tinsert(t, stackTrace)
+    t[#t + 1] = stackTrace
   end
   return tconcat(t)
 end
@@ -120,7 +118,16 @@ define("System.ArgumentOutOfRangeException", {
   end,
 
   getActualValue = function(this) 
-      return this.actualValue
+    return this.actualValue
+  end
+})
+
+define("System.IndexOutOfRangeException", {
+   __tostring = toString,
+   __inherits__ = { Exception },
+
+   __ctor__ = function (this, message, innerException)
+    Exception.__ctor__(this, message or "Index was outside the bounds of the array.", innerException)
   end
 })
 
@@ -238,7 +245,7 @@ define("System.NullReferenceException", {
   __inherits__ = { Exception },
 
   __ctor__ = function(this, message, innerException) 
-    Exception.__ctor__(this, message or "Object is null.", innerException)
+    Exception.__ctor__(this, message or "Object reference not set to an instance of an object.", innerException)
   end
 })
 

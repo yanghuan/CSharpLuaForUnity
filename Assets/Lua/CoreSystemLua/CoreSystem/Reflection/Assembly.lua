@@ -24,11 +24,11 @@ local ArgumentException = System.ArgumentException
 local ArgumentNullException = System.ArgumentNullException
 
 local setmetatable = setmetatable
+local getmetatable = getmetatable
 local assert = assert
 local unpack = table.unpack
 local pairs = pairs
 local ipairs = ipairs
-local tinsert = table.insert
 
 local Assembly = {}
 
@@ -59,7 +59,7 @@ function Assembly.GetExportedTypes(this)
   for _, cls in ipairs(System.classes) do
     local type_ = type(cls)
     if type_  == "table" then
-      tinsert(t, typeof(cls))
+      t[#t + 1] = typeof(cls)
     else
       assert(type_ == "function");
     end
@@ -110,7 +110,7 @@ function MemberInfo.IsDefined(this, attributeType, inherit)
       if isDefined(cls, name, attributeCls) then
         return true
       end
-      cls = cls.__base__
+      cls = getmetatable(cls)
     until cls == nil  
     return false
   end
@@ -187,10 +187,10 @@ function Type.GetMethods(this)
     for k, v in pairs(cls) do
       if type(v) == "function" then
         local methodInfo = buildMethodInfo(cls, k, v)
-        tinsert(t, methodInfo)
+        t[#t + 1] = methodInfo
       end
     end
-    cls = cls.__base__
+    cls = getmetatable(cls)
   until cls == nil 
   return System.arrayFromTable(t, MethodInfo)  
 end
@@ -300,11 +300,11 @@ function Type.GetMembers(this)
     for k, v in pairs(cls) do
       if type(v) == "function" then
         local methodInfo = buildMethodInfo(cls, k, v)
-        tinsert(t, methodInfo)
+        t[#t + 1] = methodInfo
         names[k] = true;
       else
         local fieldInfo = buildFieldInfo(cls, k)
-        tinsert(t, fieldInfo)
+        t[#t + 1] = fieldInfo
         names[k] = true;
       end
     end
@@ -313,12 +313,12 @@ function Type.GetMembers(this)
       for k , v in pairs(attributes) do
         if not names[k] then
             local fieldInfo = buildFieldInfo(cls, k)
-            tinsert(t, fieldInfo)
+            t[#t + 1] = fieldInfo
             names[k] = true;
         end
       end
     end
-    cls = cls.__base__
+    cls = getmetatable(cls)
   until cls == nil 
   return System.arrayFromTable(t, MemberInfo)  
 end
@@ -344,7 +344,7 @@ function Type.IsDefined(this, attributeType, inherit)
       if isDefined(cls, "class", attributeCls) then
         return true
       end
-      cls = cls.__base__
+      cls = getmetatable(cls)
     until cls == nil  
     return false
   end

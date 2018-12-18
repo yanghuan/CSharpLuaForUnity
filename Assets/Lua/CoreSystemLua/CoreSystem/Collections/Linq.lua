@@ -35,7 +35,6 @@ local Empty = System.Array.Empty
 
 local assert = assert
 local select = select
-local tinsert = table.insert
 local getmetatable = getmetatable
 
 local InternalEnumerable = System.define("System.Linq.InternalEnumerable", {
@@ -310,7 +309,7 @@ local function addToLookup(this, key, value)
 	group = this.groups[groupIndex]
 	assert(group)
   end
-  tinsert(group, wrap(value))
+  group[#group + 1] = wrap(value)
 end
 
 local function createLookup(source, keySelector, elementSelector, comparer, TKey, TElement)
@@ -392,7 +391,7 @@ local function ordered(source, compare)
     end, 
     function() 
       for _, v in each(source) do
-        tinsert(t, wrap(v))
+        t[#t + 1] = wrap(v)
       end  
       sort(t, compare)
     end)
@@ -406,16 +405,25 @@ local function orderBy(source, keySelector, comparer, TKey, descending)
   if source == nil then throw(ArgumentNullException("source")) end
   if keySelector == nil then throw(ArgumentNullException("keySelector")) end
   if comparer == nil then comparer = Comparer_1(TKey).getDefault() end 
+  local keys = {}
+  local function getKey(t) 
+    local k = keys[t]
+    if k == nil then
+      k = keySelector(t)
+      keys[t] = k
+    end
+    return k
+  end
   local compare
   if descending then
     local c = comparer.Compare
     compare = function(x, y)
-      return -c(keySelector(x), keySelector(y))
+      return -c(getKey(x), getKey(y))
     end
   else
     local c = comparer.Compare
     compare = function(x, y)
-      return c(keySelector(x), keySelector(y))
+      return c(getKey(x), getKey(y))
     end
   end
   return ordered(source, compare)
@@ -432,7 +440,16 @@ end
 local function thenBy(source, keySelector, comparer, TKey, descending)
   if source == nil then throw(ArgumentNullException("source")) end
   if keySelector == nil then throw(ArgumentNullException("keySelector")) end
-  if comparer == nil then comparer = Comparer_1(TKey).getDefault() end 
+  if comparer == nil then comparer = Comparer_1(TKey).getDefault() end
+  local keys = {}
+  local function getKey(t) 
+    local k = keys[t]
+    if k == nil then
+      k = keySelector(t)
+      keys[t] = k
+    end
+    return k
+  end
   local compare
   local parentSource, parentCompare = source.source, source.compare
   if descending then
@@ -442,7 +459,7 @@ local function thenBy(source, keySelector, comparer, TKey, descending)
       if v ~= 0 then
         return v
       else
-        return -c(keySelector(x), keySelector(y))
+        return -c(getKey(x), getKey(y))
       end
     end
   else
@@ -452,7 +469,7 @@ local function thenBy(source, keySelector, comparer, TKey, descending)
       if v ~= 0 then
         return v
       else
-        return c(keySelector(x), keySelector(y))
+        return c(getKey(x), getKey(y))
       end
     end
   end
@@ -690,7 +707,7 @@ function Enumerable.Reverse(source)
     end, 
     function() 
       for _, v in each(source) do
-        tinsert(t, wrap(v))
+        t[#t + 1] = wrap(v)
       end  
       index = #t + 1
     end)

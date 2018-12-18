@@ -904,14 +904,14 @@
     "Microsoft.CodeAnalysis.Common/2.8.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-69e6Y+eCdllSRRlLLEs8qf7C4b7XhgG2ZQW9X+n7JomrVZ7SPcMF2asPbRTSK2dRJXDlhgxb8d+a8FxFiaoTYQ==",
+      "sha512": "sha512-uLapAJpZbMdxGBYxlwicXEfpfbn5Uoxe+yQn93BbUhtsTyz+En1IE7Z/BiYc64rXNfsxUNcdCfwV8m6NQUXimQ==",
       "path": "microsoft.codeanalysis.common/2.8.2",
       "hashPath": "microsoft.codeanalysis.common.2.8.2.nupkg.sha512"
     },
     "Microsoft.CodeAnalysis.CSharp/2.8.2": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6PwtKdwBv+0+2QqFXZXg7oYXS0v4eYwaA3Jlv2yJLFihv5puQqtVupOM6yecsUhTkdN1ul1YyVZldkPUKMldAQ==",
+      "sha512": "sha512-cDoBPiUHJla7Z4xwPFwnFcBHDWsF/MZa/45cpoI8Js0R3HxIRxwMVLnuPC1MeGuz3hmj6sIaQtajKzp1zkrumQ==",
       "path": "microsoft.codeanalysis.csharp/2.8.2",
       "hashPath": "microsoft.codeanalysis.csharp.2.8.2.nupkg.sha512"
     },

@@ -20,7 +20,7 @@ local each = System.each
 
 local io = io
 local open = io.open
-local tinsert = table.insert
+local remove = os.remove
 
 local IOException = System.define("System.IO.IOException", {
   __tostring = System.Exception.ToString,
@@ -58,7 +58,7 @@ end
 function File.ReadAllLines(path)
   local t = {}
   for line in io.lines(path) do
-    tinsert(t, line)
+    t[#t + 1] = line
   end
   return System.arrayFromTable(t, System.String)
 end
@@ -93,6 +93,13 @@ function File.Exists(path)
   local file = io.open(path, "rb")
   if file then file:close() end
   return file ~= nil
+end
+
+function File.Delete(path)
+  local ok, err = remove(path)
+  if not ok then
+    throw(IOException(err))
+  end
 end
 
 System.define("System.IO.File", File)

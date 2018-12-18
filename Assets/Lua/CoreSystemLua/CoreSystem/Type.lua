@@ -17,30 +17,52 @@ limitations under the License.
 local System = System
 local throw = System.throw
 local Object = System.Object
-local Char = System.Char
-local Int = System.Int
-local Double = System.Double
 local String = System.String
 local Boolean = System.Boolean
 local Delegate = System.Delegate
 local getClass = System.getClass
+
 local InvalidCastException = System.InvalidCastException
 local ArgumentNullException = System.ArgumentNullException
 local TypeLoadException = System.TypeLoadException
 
+local Char = System.Char
+local SByte = System.SByte
+local Byte = System.Byte
+local Int16 = System.Int16
+local UInt16 = System.UInt16
+local Int32 = System.Int32
+local UInt32 = System.UInt32
+local Int64 = System.Int64
+local UInt64 = System.UInt64
+local Single = System.Single
+local Double = System.Double
+local Int = System.Int
+local Number = System.Number
+
 local type = type
 local getmetatable = getmetatable
-local tinsert = table.insert
 local ipairs = ipairs
 local select = select
 local unpack = table.unpack
+local floor = math.floor
 
 local Type = {}
-local numberType = setmetatable({ c = Double, name = "Number", fullName = "System.Number" }, Type)
+local numberType = setmetatable({ c = Number }, Type)
 local types = {
   [Char] = numberType,
-  [Int] = numberType,
+  [SByte] = numberType,
+  [Byte] = numberType,
+  [Int16] = numberType,
+  [UInt16] = numberType,
+  [Int32] = numberType,
+  [UInt32] = numberType,
+  [Int64] = numberType,
+  [UInt64] = numberType,
+  [Single] = numberType,
   [Double] = numberType,
+  [Int] = numberType,
+  [Number] = numberType
 }
 
 local function typeof(cls)
@@ -84,12 +106,7 @@ function Type.getName(this)
 end
 
 function Type.getFullName(this)
-  local fullName = this.fullName
-  if fullName == nil then
-    fullName = this.c.__name__
-    this.fullName = fullName
-  end
-  return fullName
+  return this.c.__name__
 end
 
 function Type.getNamespace(this)
@@ -106,7 +123,7 @@ end
 local function getBaseType(this)
   local baseType = this.baseType
   if baseType == nil then
-    local baseCls = this.c.__base__
+    local baseCls = getmetatable(this.c)
     if baseCls ~= nil then
       baseType = typeof(baseCls)
       this.baseType = baseType
@@ -154,10 +171,10 @@ local function getInterfaces(this)
       local interfacesCls = p.__interfaces__
       if interfacesCls ~= nil then
         for _, i in ipairs(interfacesCls) do
-          tinsert(interfaces, typeof(i))
+          interfaces[#interfaces + 1] = typeof(i)
         end
       end
-      p = p.__base__
+      p = getmetatable(p)
     until p == nil
     this.interfaces = interfaces
   end
@@ -168,7 +185,7 @@ function Type.getInterfaces(this)
   local interfaces = getInterfaces(this)
   local array = {}
   for _, i in ipairs(interfaces) do
-    tinsert(array, i)
+    array[#array + 1] = i
   end    
   return System.arrayFromTable(array, Type)
 end
@@ -222,7 +239,7 @@ function Type.GetTypeFrom(typeName, throwOnError, ignoreCase)
   end
   if #typeName == 0 then
     if throwOnError then
-        throw(TypeLoadException("Arg_TypeLoadNullStr"))
+      throw(TypeLoadException("Arg_TypeLoadNullStr"))
     end
     return nil
   end
@@ -230,7 +247,7 @@ function Type.GetTypeFrom(typeName, throwOnError, ignoreCase)
   local cls = getClass(typeName)
   if cls ~= nil then
     return typeof(cls)
-  end 
+  end
   if throwOnError then
     throw(TypeLoadException(typeName .. ": failed to load."))
   end
@@ -250,20 +267,63 @@ local function isInterfaceOf(t, ifaceType)
         end
       end 
     end
-    t = t.__base__
+    t = getmetatable(t)
   until t == nil
   return false
 end
 
 local isUserdataTypeOf = System.config.isUserdataTypeOf
+local numbers = {
+  [Char] = { 0, 65535 },
+  [SByte] = { -128, 127 },
+  [Byte] = { 0, 255 },
+  [Int16] = { -32768, 32767 },
+  [UInt16] = { 0, 65535 },
+  [Int32] = { -2147483648, 2147483647 },
+  [UInt32] = { 0, 4294967295 },
+  [Int64] = { -9223372036854775808, 9223372036854775807 },
+  [UInt64] = { 0, 18446744073709551615 },
+  [Single] = { -3.40282347E+38, 3.40282347E+38, 1 },
+  [Double] = { nil, nil, 2 }
+}
+numbers[Int] = numbers[Int32]
+
+local function isStringOrBoolean(cls, StringOrBoolean)
+  if cls == StringOrBoolean then
+    return true
+  end
+  if cls.__kind__ == "I" then
+    return isInterfaceOf(StringOrBoolean, cls)
+  end
+  return false 
+end
 
 function isTypeOf(obj, cls)    
   if cls == Object then return true end
   local typename = type(obj)
   if typename == "number" then
-    return cls == Int or cls == Double or cls == Char
+    local info = numbers[cls]
+    if info ~= nil then
+      local min, max, sign = info[1], info[2], info[3]
+      if sign == nil then
+        if obj < min or obj > max then
+          return false
+        end
+        if floor(obj) ~= obj then
+          return false
+        end
+      elseif sign == 1 then
+        if obj < min or obj > max then
+          return false
+        end
+      end
+      return true
+    elseif cls.__kind__ == "I" then
+      return isInterfaceOf(Number, cls)
+    end
+    return false
   elseif typename == "string" then
-    return cls == String
+    return isStringOrBoolean(cls, String)
   elseif typename == "table" then   
     local t = getmetatable(obj)
     if t == cls then
@@ -272,17 +332,17 @@ function isTypeOf(obj, cls)
     if cls.__kind__ == "I" then
       return isInterfaceOf(t, cls)
     else
-      local base = t.__base__
+      local base = getmetatable(t)
       while base ~= nil do
         if base == cls then
           return true
         end
-        base = base.__base__
+        base = getmetatable(base)
       end
       return false
     end
   elseif typename == "boolean" then
-    return cls == Boolean
+    return isStringOrBoolean(cls, Boolean)
   elseif typename == "function" then 
     return cls == Delegate
   elseif typename == "userdata" then
@@ -296,8 +356,11 @@ function isTypeOf(obj, cls)
 end
 
 function System.is(obj, cls)
-  return obj ~= nil and isTypeOf(obj, cls)
-end 
+  if obj ~= nil then
+    return isTypeOf(obj, cls)
+  end
+  return cls == nil
+end
 
 function System.as(obj, cls)
   if obj ~= nil and isTypeOf(obj, cls) then
@@ -320,7 +383,7 @@ function System.cast(cls, obj)
 end
 
 function System.new(cls)
-  if cls == Int or cls == Double then
+  if numbers[cls] then
     return 0
   end
   if cls == Boolean then

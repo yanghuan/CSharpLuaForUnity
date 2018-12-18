@@ -30,7 +30,7 @@ local InvalidOperationException = System.InvalidOperationException
 
 local type = type
 local table = table
-local tinsert = table.insert
+
 local tremove = table.remove
 local setmetatable = setmetatable
 local assert = assert
@@ -252,10 +252,10 @@ local function getResult(this)
   return waitToken
 end
 
-local function await(t, task)
+local function awaitTask(t, task)
   assert(t.co)
   local continueActions = getContinueActions(task)
-  tinsert(continueActions, function (task)
+  continueActions[#continueActions + 1] = function (task)
     local status = task.status
     local ok, v
     if status == TaskStatusRanToCompletion then
@@ -271,7 +271,7 @@ local function await(t, task)
     if not ok then
       assert(trySetException(t, v))
     end
-  end)
+  end
   local ok, v = cyield()
   if ok then
     return v
@@ -394,7 +394,7 @@ Task = System.define("System.Task", {
       post(f)
     else
       local continueActions = getContinueActions(task)
-      tinsert(continueActions, f)
+      continueActions[#continueActions + 1] = f
     end
     return t
   end,
@@ -412,18 +412,11 @@ Task = System.define("System.Task", {
     waitTask(getContinueActions(this))
   end,
   await = function (this, task)
-    local status = task.status
-    if status == TaskStatusWaitingForActivation then
-      return await(this, task)
-    elseif status == TaskStatusRanToCompletion then
-      return task.data
-    elseif status == TaskStatusFaulted then
-      throw(createExceptionObject(task.data))
-    elseif status ==  TaskStatusCanceled then
-      throw(TaskCanceledException(task))
-    else
-      return await(this, task)
+    local result = getResult(task)
+    if result ~= waitToken then
+      return result
     end
+    return awaitTask(this, task)
   end
 })
 
@@ -437,7 +430,7 @@ local function taskCoroutineCreate(t, f)
       while true do
         t = nil
         f = nil
-        tinsert(taskCoroutinePool, co)
+        taskCoroutinePool[#taskCoroutinePool + 1] = co
         t, f = cyield()
         r = f(t, cyield())
         assert(trySetResult(t, r))
@@ -451,20 +444,12 @@ local function taskCoroutineCreate(t, f)
   return co
 end
 
-local function async(f, isVoid, ...)
-  local t = newWaitingTask(isVoid)
+function System.async(f, void, ...)
+  local t = newWaitingTask(void)
   local co = taskCoroutineCreate(t, f)
   local ok, v = cresume(co, ...)
   if not ok then
     assert(trySetException(t, v))
   end
   return t
-end
-
-function System.asyncVoid(f, ...)
-  async(f, true, ...)
-end
-
-function System.async(f, ...)
-  return async(f, nil, ...)
 end

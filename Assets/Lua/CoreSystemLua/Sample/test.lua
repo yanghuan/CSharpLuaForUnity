@@ -1,6 +1,5 @@
 require("strict")
-pcall(require, "socket")
-
+local socket = require("socket")
 local timeout
 local conf = { 
   time = socket and socket.gettime or os.time,
@@ -297,7 +296,7 @@ local function testIO()
   File.WriteAllText(path, s)
   local text = File.ReadAllText(path)
   assert(text == s)
-  os.remove(path)
+  File.Delete(path)
 end
 
 local function testStringBuilder()
@@ -328,7 +327,7 @@ local function testAsync()
 					async:await(t)
 					async:await(t)
 					System.Console.WriteLine(("Delay {0}"):Format(t:getStatus():ToEnumString(System.TaskStatus)))
-				end, this)
+				end, nil, this)
 			end
 			return {
 				f = f,
@@ -367,12 +366,10 @@ test(testDelegate, "Delegate")
 test(testLinq, "Linq")
 test(testGroupBy, "GroupBy")
 test(testType, "Type")
---test(testNumCast, "NumCast")
---test(testSplit, "testSplit")
---test(testStringBuilder, "StringBuilder")
+test(testNumCast, "NumCast")
+test(testSplit, "testSplit")
+test(testStringBuilder, "StringBuilder")
+test(testIO, "IO")
 --test(testConsole, "Console")
---test(testIO, "IO")
-test(testAsync, "Async")
-
-
+--test(testAsync, "Async")
 

@@ -67,7 +67,7 @@ namespace CSharpLua {
     private LuaFunction current_;
     private LuaFunction moveNext_;
 
-    public LuaIEnumerator(LuaTable table) {
+    private LuaIEnumerator(LuaTable table) {
       table_ = table;
       current_ = table.GetLuaFunction("getCurrent");
       if (current_ == null) {

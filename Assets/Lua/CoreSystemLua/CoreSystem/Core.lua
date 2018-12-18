@@ -21,7 +21,6 @@ local ipairs = ipairs
 local pairs  = pairs
 local assert = assert
 local table = table
-local tinsert = table.insert
 local tremove = table.remove
 local tconcat = table.concat
 local tunpack = table.unpack
@@ -40,6 +39,7 @@ local global = _G
 local emptyFn = function() end
 local falseFn = function() return false end
 local identityFn = function(x) return x end
+local zeroFn = function() return 0 end
 local equals = function(x, y) return x == y end
 local modules = {}
 local usings = {}
@@ -47,11 +47,13 @@ local Object, ValueType
 
 local function new(cls, ...)
   local this = setmetatable({}, cls)
-  cls.__ctor__(this, ...)
-  return this
+  return this, cls.__ctor__(this, ...)
 end
 
 local function throw(e, lv)
+  if e == nil then
+    e = System.NullReferenceException()
+  end
   e:traceback(lv)
   error(e)
 end
@@ -121,10 +123,6 @@ local function set(className, cls)
   end
 end
 
-local function defaultValOfZero()
-  return 0
-end
-
 local function genericKey(t, k, ...) 
   for i = 1, select("#", ...) do
     local tk = t[k]
@@ -139,29 +137,33 @@ local function genericKey(t, k, ...)
 end
 
 local function genericName(name, ...)
-  local t = {}
-  tinsert(t, name)
-  tinsert(t, "[")
-  
+  local t = { name, "[" }  
   local hascomma
   for i = 1, select("#", ...) do
-      local cls = select(i, ...)
-      if hascomma then
-        tinsert(t, ",")
-      else
-        hascomma = true
-      end
-      tinsert(t, cls.__name__)
+    local cls = select(i, ...)
+    if hascomma then
+      t[#t + 1] = ","
+    else
+      hascomma = true
+    end
+    t[#t + 1] = cls.__name__
   end
-  tinsert(t, "]")
+  t[#t + 1] = "]"
   return tconcat(t)
 end
 
-local enumMetatable = { __kind__ = "E", __default__ = defaultValOfZero, __index = false }
+local enumMetatable = { __kind__ = "E", __default__ = zeroFn, __index = false }
 enumMetatable.__index = enumMetatable
 
 local interfaceMetatable = { __kind__ = "I", __default__ = emptyFn, __index = false }
 interfaceMetatable.__index = interfaceMetatable
+
+local function applyAttributes(cls)
+  local attributes = rawget(cls, "__attributes__")
+  if attributes ~= nil then
+    cls.__attributes__ = attributes(global)
+  end
+end
 
 local function setBase(cls, kind)
   cls.__index = cls 
@@ -188,7 +190,6 @@ local function setBase(cls, kind)
         cls.__interfaces__ = extends
         setmetatable(cls, Object)
       else
-        cls.__base__ = base
         setmetatable(cls, base)
         if #extends > 1 then
           tremove(extends, 1)
@@ -200,11 +201,7 @@ local function setBase(cls, kind)
       setmetatable(cls, Object)
     end  
   end
-
-  local attributes = rawget(cls, "__attributes__")
-  if attributes ~= nil then
-    cls.__attributes__ = attributes(global)
-  end
+  applyAttributes(cls)
 end
 
 local function staticCtorSetBase(cls)
@@ -233,7 +230,7 @@ local staticCtorMetatable = {
   __call = function(cls, ...)
     staticCtorSetBase(cls)
     return new(cls, ...)
-  end,
+  end
 }
 
 local function setHasStaticCtor(cls, kind)
@@ -248,8 +245,9 @@ local function setHasStaticCtor(cls, kind)
   cls.__name__ = name
   cls.__kind__ = kind
   cls.__call = new
+  cls.__index = cls
   setmetatable(cls, staticCtorMetatable)
-end  
+end
 
 local function def(name, kind, cls, generic)
   if type(cls) == "function" then
@@ -291,17 +289,11 @@ local function def(name, kind, cls, generic)
       cls.__interfaces__ = extends
       cls.__inherits__ = nil
     end
-    local attributes = cls.__attributes__
-    if attributes ~= nil then
-      cls.__attributes__ = attributes(global)
-    end
     setmetatable(cls, interfaceMetatable)
+    applyAttributes(cls)
   elseif kind == "E" then
-    local attributes = cls.__attributes__
-    if attributes ~= nil then
-      cls.__attributes__ = attributes(global)
-    end
     setmetatable(cls, enumMetatable)
+    applyAttributes(cls)
   else
     assert(false, kind)
   end
@@ -328,6 +320,7 @@ System = {
   emptyFn = emptyFn,
   falseFn = falseFn,
   identityFn = identityFn,
+  zeroFn = zeroFn,
   equals = equals,
   try = try,
   throw = throw,
@@ -626,7 +619,7 @@ else
   function System.xor(x, y) return x ~ y end
   function System.sl(x, y) return x << y end
   function System.sr(x, y) return x >> y end
-  function System.div (x, y) return x // y end
+  function System.div(x, y) return x // y end
   function System.mod(x, y) return x % y end
   
   local function toUInt (v, max, mask, checked)  
@@ -844,7 +837,7 @@ function System.usingX(f, ...)
   return status, ret
 end
 
-function System.create(t, f)
+function System.apply(t, f)
   f(t)
   return t
 end
@@ -879,8 +872,11 @@ end
 
 local function multiNew(cls, inx, ...) 
   local this = setmetatable({}, cls)
-  cls.__ctor__[inx](this, ...)
-  return this
+  return this, cls.__ctor__[inx](this, ...)
+end
+
+local function base(this)
+  return getmetatable(getmetatable(this))
 end
 
 local function equalsStatic(x, y)
@@ -899,6 +895,7 @@ Object = defCls("System.Object", {
   __ctor__ = emptyFn,
   __kind__ = "C",
   new = multiNew,
+  base = base,
   EqualsObj = equals,
   ReferenceEquals = equals,
   GetHashCode = identityFn,
@@ -968,7 +965,15 @@ local ValueTuple = {
   __default__ = function()
     throw(System.NotSupportedException("not support default(T) when T is ValueTuple"))
   end,
-  Deconstruct = tupleDeconstruct
+  Deconstruct = tupleDeconstruct,
+  __eq = function (this, other)
+    for k, v in ipairs(this) do
+     if not equalsStatic(v, other[k]) then
+        return false
+      end
+    end
+    return true
+  end
 }
 defStc("System.ValueTuple", ValueTuple)
 
@@ -1046,61 +1051,58 @@ function System.GetValueOrDefault(this, defaultValue)
   return this
 end
 
-local function ptrAccess(p)
-  local arr = p.arr
-  if arr == nil then
-    throw(System.NullReferenceException)
+local function pointerAddress(p)
+  local address = p[3]
+  if address == nil then
+    address = tostring(p):sub(7)
+    p[3] = address
   end
-  return arr 
+  return address + p[2]
 end
 
-local function ptrAddress(p)
-  return tostring(p):sub(7) + p.offset
+local Pointer
+local function newPointer(t, i)
+  return setmetatable({ t, i }, Pointer)
 end
 
-local ptr = {
+Pointer = {
   __index = false,
-  offset = 0,
   get = function(this)
-    return ptrAccess(this):get(this.offset)
+    local t, i = this[1], this[2]
+    return t[i]
   end,
   set = function(this, value)
-    return ptrAccess(this):set(this.offset, value)
+    local t, i = this[1], this[2]
+    t[i] = value
   end,
-  __add = function(this, num)
-    return setmetatable({ arr = this.arr, offset = this.offset + num }, ptr)
+  __add = function(this, count)
+    return newPointer(this[1], this[2] + count)
   end,
-  __sub = function(this, num)
-    return setmetatable({ arr = this.arr, offset = this.offset - num }, ptr)
+  __sub = function(this, count)
+    return newPointer(this[1], this[2] - count)
   end,
   __lt = function(t1, t2)
-    return ptrAddress(t1) < ptrAddress(t2)
+    return pointerAddress(t1) < pointerAddress(t2)
   end,
   __le = function(t1, t2)
-    return ptrAddress(t1) <= ptrAddress(t2)
+    return pointerAddress(t1) <= pointerAddress(t2)
   end
 }
-ptr.__index = ptr
+Pointer.__index = Pointer
 
-function System.stackalloc(arrayType, len)
-  if len < 0 then
-    throw(System.OverflowException)
-  end
-  if len == 0 then
-    return setmetatable({}, ptr)
-  end
-  return setmetatable({ arr = arrayType:new(len) }, ptr)
+function System.stackalloc(t)
+  return newPointer(t, 1)
 end
 
 function System.usingDeclare(f)
-  tinsert(usings, f)
+  usings[#usings + 1] = f
 end
 
 function System.init(namelist, conf)
   local classes = {}
   for _, name in ipairs(namelist) do
     local cls = assert(modules[name], name)()
-    tinsert(classes, cls)
+    classes[#classes + 1] = cls
   end
   for _, f in ipairs(usings) do
     f(global)
