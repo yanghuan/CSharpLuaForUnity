@@ -263,7 +263,7 @@ end
 rawset(metatableOfGameObject, "GetComponentInParent", getComponentInParent)
 
 local function getBridgeComponents(sourceGetComponents, component, T, results, ...)
-  hasReturn = results == nil
+  local hasReturn = results == nil
   if hasReturn then
     results = SystemListObject()
   end
