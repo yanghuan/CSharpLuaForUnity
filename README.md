@@ -6,11 +6,11 @@ CSharpLuaForUnity尝试使用[CSharp.lua](https://github.com/yanghuan/CSharp.lua
 * 使用[CSharp.lua](https://github.com/yanghuan/CSharp.lua)来将C#代码转换至Lua
 
 ## 如何使用
-  确保本机已经安装net core 2.0+ 的运行环境或者sdk，https://dotnet.microsoft.com/download ，CSharp.lua需要net core运行环境支持。
-1)  使用Visual Studio打开[GameScript/GameScript.sln](https://github.com/yanghuan/CSharpLuaForUnity/blob/master/GameScript/GameScript.sln)解决方案，里面的GameScript工程中的代码可以编译至Lua
-2)  菜单栏配置管理可在"Lua"以及"CSharp"之间进行切换，在Lua设置下会将GameScript工程中的代码编译至Lua并放至到[Assets/Lua/CompiledScripts](https://github.com/yanghuan/CSharpLuaForUnity/tree/master/Assets/Lua/CompiledScripts)目录，在CSharp设置下会将编译成功后的dll放置到Unity工程中加载。希望的是平时尽量在CSharp环境下开发、调试，仅需要的时候才编译至Lua。
+* 在Unity编辑器环境下，会新增菜单项'CSharpLua',子菜单'Compile'可将工程目录[Compiled](https://github.com/yanghuan/CSharpLuaForUnity/tree/master/Assets/Compiled)下的C#代码编译成Lua代码，子菜单'Switch to XXX'可在运行C#代码还是编译后的Lua代码中切换。设想的是实际开发中一直使用C#代码开发和调试，需要真机发布时，才编译到Lua代码。
+* [Examples](https://github.com/yanghuan/CSharpLuaForUnity/tree/master/Assets/LuaRuntime/CSharpLua/Examples)目录下有一个简易的列子,可直接运行。可以看出能够支持在预设中挂载自定义的C#脚本，在运行Lua代码时，预设会被动态适配处理，具体实现可见代码。因而在打包时也需要对存在挂载了自定义C#脚本的的预设做相同的处理。
 
-  Assets/LuaRuntime/CSharpLua/Examples/01_Hello/Hello.unity 是一个测试场景，可以直接运行。
+## 项目结构
+
 
 ## 致谢
 * https://github.com/topameng/tolua

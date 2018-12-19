@@ -128,7 +128,10 @@ namespace CSharpLua {
     }
   }
 
-  public class CSharpLuaClient : LuaClient {
+#pragma warning disable 0162
+
+  public class CSharpLuaClient : LuaClient, IProvider {
+    public string[] Components;
     private LuaFunction bindFn_;
     public static new CSharpLuaClient Instance { get { return (CSharpLuaClient)LuaClient.Instance; } }
 
@@ -139,7 +142,7 @@ namespace CSharpLua {
     }
 
     private void OpenPBC() {
-      luaState.OpenLibs(LuaDLL.luaopen_protobuf_c);  
+      luaState.OpenLibs(LuaDLL.luaopen_protobuf_c);
     }
 
     public override void Destroy() {
@@ -148,29 +151,52 @@ namespace CSharpLua {
         bindFn_ = null;
       }
       base.Destroy();
+      BaseUtility.Provider = null;
     }
 
     protected override void StartMain() {
+      BaseUtility.Provider = this;
+
       if (Settings.kIsRunFromLua) {
         base.StartMain();
         bindFn_ = luaState.GetFunction("UnityEngine.bind");
         if (bindFn_ == null) {
           throw new ArgumentNullException();
         }
+        if (Components != null && Components.Length > 0) {
+          using (var fn = luaState.GetFunction("UnityEngine.addComponent")) {
+            foreach (string type in Components) {
+              fn.Call(gameObject, type);
+            }
+          }
+        }
       } else {
-        var t = Type.GetType("CSLua.Program,GameScript", true);
-        var main = t.GetMethod("Main");
-        main.Invoke(null, new object[] { Array.Empty<string>() });
+        if (Components != null) {
+          foreach (string type in Components) {
+            Type componentType = Type.GetType(type, true, false);
+            gameObject.AddComponent(componentType);
+          }
+        }
       }
     }
 
     internal LuaTable BindLua(BridgeMonoBehaviour bridgeMonoBehaviour) {
       return bindFn_.Invoke<BridgeMonoBehaviour, string, string, UnityEngine.Object[], LuaTable>(
-        bridgeMonoBehaviour, 
-        bridgeMonoBehaviour.LuaClass, 
+        bridgeMonoBehaviour,
+        bridgeMonoBehaviour.LuaClass,
         bridgeMonoBehaviour.SerializeData,
         bridgeMonoBehaviour.SerializeObjects);
     }
+
+    public void ConvertCustomMonoBehaviour(ref GameObject prefab) {
+#if UNITY_EDITOR
+      if (Settings.kIsRunFromLua) {
+        UserMonoBehaviourConverter.Default.Do(ref prefab);
+      }
+#endif
+    }
+
+#pragma warning restore 0162
   }
 }
 

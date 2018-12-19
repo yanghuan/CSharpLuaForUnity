@@ -1,0 +1,10 @@
+{
+  "name": "Compiled",
+  "references": [
+    "Bridge"
+  ],
+  "optionalUnityReferences": [],
+  "includePlatforms": [],
+  "excludePlatforms": [],
+  "allowUnsafeCode": false
+}

@@ -570,7 +570,7 @@ UnityEngine.op_Inequality = op_Inequality
 UnityEngine.op_Implicit = op_Implicit
 
 function UnityEngine.bind(monoBehaviour, luaClass, serializeData, serializeObjects)
-  T = getClass(luaClass)
+  local T = getClass(luaClass)
   assert(T, luaClass .. " is not found")
   return newMonoBehaviour(T, monoBehaviour, true, serializeData, serializeObjects)
 end

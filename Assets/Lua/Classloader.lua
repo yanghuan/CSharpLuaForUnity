@@ -22,5 +22,5 @@ local config = {
 require("CoreSystemLua.All")("CoreSystemLua", config)
 require("UnityAdapter")
 UnityEngine.MonoBehaviour = MonoBehaviour
-require("CompiledScripts.manifest")("CompiledScripts")
+require("Compiled.manifest")("Compiled")
 UnityEngine.MonoBehaviour = UnityEngineMonoBehaviour

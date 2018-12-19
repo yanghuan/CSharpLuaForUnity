@@ -1,0 +1,10 @@
+{
+    "name": "Bridge",
+    "references": [
+        "Base"
+    ],
+    "optionalUnityReferences": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false
+}
