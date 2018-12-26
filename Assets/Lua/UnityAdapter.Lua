@@ -440,7 +440,7 @@ local function findObjectOfType(T)
   else
     local objs = sourceFindObjectsOfType(typeofBridgeMonoBehaviour)
     for i = 0, objs.Length - 1 do
-      local t = coms[i].Table
+      local t = objs[i].Table
       if is(t, T) then
         return t
       end
@@ -461,8 +461,8 @@ local function findBridgeObjectsOfType(sourceFindObjectsOfType, T)
     end
   else
     local objs = sourceFindObjectsOfType(typeofBridgeMonoBehaviour)
-    for i = 0, coms.Length - 1 do
-      local t = coms[i].Table
+    for i = 0, objs.Length - 1 do
+      local t = objs[i].Table
       if is(t, T) then
         results:Add(t)
       end
@@ -831,7 +831,6 @@ end
 function UnityEngine.ToVector4(v)
   return newVector4(v.x, v.y, v.z, v.w)
 end
-
 
 local Color = UnityEngine.Color
 local newColor = Color.New
