@@ -91,5 +91,8 @@
         <method name="op_Implicit" RetType="UnityEngine.LayerMask" Template="UnityEngine.ToLayerMask({0})" />
       </class>
     </namespace>
+    <namespace name="LuaInterface">
+      <class name="Debugger" Name="Debugger" />
+    </namespace>
   </assembly>
 </meta>
