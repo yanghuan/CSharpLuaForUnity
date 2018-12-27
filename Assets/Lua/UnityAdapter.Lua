@@ -45,6 +45,9 @@ local MonoBehaviour = System.define("MonoBehaviour", {
   end,
   Awake = emptyFn,
   Start = emptyFn,
+  Update = emptyFn,
+  FixedUpdate = emptyFn,
+  LateUpdate = emptyFn,
 })
 
 local metatableOfMonoBehaviour = getmetatable(BridgeMonoBehaviour) 
@@ -67,17 +70,9 @@ setmetatable(MonoBehaviour, {
 local updateIndexs = { Update = 0, FixedUpdate = 1, LateUpdate = 2 }
 
 local function registerUpdate(this, bridgeMonoBehaviour, nameOfFn)
-  local super = getmetatable(this)
-  while true do
-    local f = rawget(super, nameOfFn)
-    if f and type(f) == "function" then
-      bridgeMonoBehaviour:RegisterUpdate(updateIndexs[nameOfFn], f)
-      return
-    end
-    super = getmetatable(super)
-    if super == MonoBehaviour then
-      return
-    end
+  local f = this[nameOfFn]
+  if f ~= emptyFn and type(f) == "function" then
+    bridgeMonoBehaviour:RegisterUpdate(updateIndexs[nameOfFn], f)
   end
 end
 
