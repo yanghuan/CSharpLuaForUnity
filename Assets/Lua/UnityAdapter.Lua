@@ -907,11 +907,19 @@ end
 
 local Color32 = UnityEngine.Color32
 local newColor32 = Color32.New
+local equalsOfColor32 = Color32.Equals
 UnityEngine.Color32 = nil
 
 Color32.ToString = Color32.__tostring
 Color32.__clone__ = function (this) return newColor32(this.r, this.g, this.b, this.a) end
 Color32.__inherits__ = System.emptyFn
+
+function Color32.EqualsObj(this, other)
+  if getmetatable(other) ~= Color32 then
+    return false
+  end
+  return equalsOfColor32(this, other)
+end
 
 defineUnityStruct("UnityEngine.Color32", Color32)
 
