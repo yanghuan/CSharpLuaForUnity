@@ -67,8 +67,12 @@
         <method name="op_Division" Template="{0} / {1}" />
         <method name="op_Equality" Template="{0} == {1}" />
         <method name="op_Inequality" Template="{0} ~= {1}" />
-        <method name="op_Implicit" RetType="UnityEngine.Color" Template="UnityEngine.ToColor({0})" />
+        <method name="op_Implicit" RetType="UnityEngine.Color" Template="UnityEngine.ToColorFromVector4({0})" />
         <method name="op_Implicit" RetType="UnityEngine.Vector4" Template="UnityEngine.ToVector4FromColor({0})" />
+      </class>
+      <class name="Color32">
+        <method name="op_Implicit" RetType="UnityEngine.Color32" Template="UnityEngine.ToColor32FromColor({0})" />
+        <method name="op_Implicit" RetType="UnityEngine.Color" Template="UnityEngine.ToColorFromColor32({0})" />
       </class>
       <class name="Quaternion">
         <method name="Normalize" Name="SetNormalize" />

@@ -27,6 +27,8 @@ local ipairs = ipairs
 local pairs = pairs
 local typeof = typeof
 
+local Clamp01 = Mathf.Clamp01
+
 local Debugger = Debugger
 local BridgeMonoBehaviour = CSharpLua.BridgeMonoBehaviour
 local UnityEngine = UnityEngine
@@ -619,6 +621,10 @@ local function defineUnityStruct(name, T)
   })
 end
 
+local function inherits(_, T)
+  return { System.IEquatable_1(T) } 
+end
+
 local Vector2 = UnityEngine.Vector2
 local newVector2 = Vector2.New
 UnityEngine.Vector2 = nil
@@ -671,10 +677,7 @@ end
 Vector2.Equals = equalsOfVector2
 Vector2.ToString = Vector2.__tostring
 Vector2.__clone__ = Vector2.Clone
-
-function Vector2.__inherits__()
-  return { System.IEquatable_1(Vector2) }
-end
+Vector2.__inherits__ = inherits
 
 defineUnityStruct("UnityEngine.Vector2", Vector2)
 
@@ -739,10 +742,7 @@ end
 Vector3.Equals = equalsOfVector3
 Vector3.ToString = Vector3.__tostring
 Vector3.__clone__ = Vector3.Clone
-
-function Vector3.__inherits__()
-  return { System.IEquatable_1(Vector3) }
-end
+Vector3.__inherits__ = inherits
 
 defineUnityStruct("UnityEngine.Vector3", Vector3)
 
@@ -808,10 +808,7 @@ end
 Vector4.Equals = equalsOfVector4
 Vector4.ToString = Vector4.__tostring
 Vector4.__clone__ = Vector4.Clone
-
-function Vector4.__inherits__()
-  return { System.IEquatable_1(Vector4) }
-end
+Vector4.__inherits__ = inherits
 
 defineUnityStruct("UnityEngine.Vector4", Vector4)
 
@@ -896,19 +893,34 @@ end
 Color.Equals = equalsOfColor
 Color.ToString = Color.__tostring
 Color.__clone__ = function(this) return newColor(this.r, this.g, this.b, this.a) end
-
-function Color.__inherits__()
-  return { System.IEquatable_1(Color) }
-end
+Color.__inherits__ = inherits
 
 defineUnityStruct("UnityEngine.Color", Color)
 
-function UnityEngine.ToColor(v)
+function UnityEngine.ToColorFromVector4(v)
   return newColor(v.x ,v.y, v.z, v.w)
 end
 
 function UnityEngine.ToVector4FromColor(v)
   return newVector4(v.r, v.g, v.b, b.a)
+end
+
+local Color32 = UnityEngine.Color32
+local newColor32 = Color32.New
+UnityEngine.Color32 = nil
+
+Color32.ToString = Color32.__tostring
+Color32.__clone__ = function (this) return newColor32(this.r, this.g, this.b, this.a) end
+Color32.__inherits__ = System.emptyFn
+
+defineUnityStruct("UnityEngine.Color32", Color32)
+
+function UnityEngine.ToColor32FromColor(c)
+  return newColor32(Clamp01(c.r) * 255, Clamp01(c.g) * 255, Clamp01(c.b) * 255, Clamp01(c.a) * 255)
+end
+
+function UnityEngine.ToColorFromColor32(c)
+  return newColor(c.r / 255, c.g / 255, c.b / 255, c.a / 255) 
 end
 
 local Quaternion = UnityEngine.Quaternion
@@ -938,10 +950,7 @@ end
 Quaternion.Equals = equalsOfVector4
 Quaternion.ToString = Quaternion.__tostring
 Quaternion.__clone__ = Quaternion.Clone
-
-function Quaternion.__inherits__()
-  return { System.IEquatable_1(Quaternion) }
-end
+Quaternion.__inherits__ = inherits
 
 defineUnityStruct("UnityEngine.Quaternion", Quaternion)
 
@@ -967,10 +976,7 @@ end
 Bounds.Equals = equalsOfBounds
 Bounds.ToString = Quaternion.__tostring
 Bounds.__clone__ = function (this) return newBounds(this.center, this.extents) end
-
-function Bounds.__inherits__()
-  return { System.IEquatable_1(Bounds) }
-end
+Bounds.__inherits__ = inherits
 
 defineUnityStruct("UnityEngine.Bounds", Bounds)
 
