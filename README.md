@@ -18,6 +18,10 @@ Assembly-CSharp.dll --------> Compiled.dll --------> Bridge.dll --------> Base.d
 * Bridge 可被Compiled引用的代码，需要Wrap到Lua的环境中
 * Base 可被Bridge引用的代码，但是不需要被Compiled所引用到
 
+## 交流讨论
+- [Issues](https://github.com/yanghuan/CSharp.lua/issues)
+- 邮箱：sy.yanghuan@gmail.com
+- QQ群: 715350749
 
 ## 致谢
 * https://github.com/topameng/tolua
