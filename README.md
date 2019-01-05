@@ -19,7 +19,7 @@ Assembly-CSharp.dll --------> Compiled.dll --------> Bridge.dll --------> Base.d
 * Base 可被Bridge引用的代码，但是不需要被Compiled所引用到
 
 ## 交流讨论
-- [Issues](https://github.com/yanghuan/CSharp.lua/issues)
+- [Issues](https://github.com/yanghuan/CSharpLuaForUnity/issues)
 - 邮箱：sy.yanghuan@gmail.com
 - QQ群: 715350749
 
