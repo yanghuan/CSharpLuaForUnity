@@ -557,10 +557,10 @@ function UnityEngine.addComponent(gameObject, componentString)
       return addBridgeMonoBehaviour(gameObject, cls)
     end
   end
-  local type_ = typeof(T)
-  assert(type_, T .. " is not found")
+  local type_ = typeof(componentString)
+  assert(type_, componentString .. " is not found")
   return sourceAddComponent(gameObject, type_)
-end 
+end
 
 UnityEngine.op_Equality = op_Equality
 UnityEngine.op_Inequality = op_Inequality
