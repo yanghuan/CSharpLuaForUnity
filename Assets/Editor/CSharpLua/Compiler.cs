@@ -40,7 +40,8 @@ namespace CSharpLua {
         }
       }
 
-      List<string> libs = new List<string>();
+      HashSet<string> libs = new HashSet<string>();
+      FillUnityLibraries(libs);
       AssemblyName assemblyName = new AssemblyName(Settings.Paths.kCompiledScripts);
       Assembly assembly = Assembly.Load(assemblyName);
       foreach (var referenced in assembly.GetReferencedAssemblies()) {
@@ -72,6 +73,14 @@ namespace CSharpLua {
           string errorString = p.StandardError.ReadToEnd();
           throw new CompiledFail($"Compile fail, {errorString}\n{outString}\n{kDotnet} {args}");
         }
+      }
+    }
+
+    private static void FillUnityLibraries(HashSet<string> libs) {
+      string unityObjectPath = typeof(UnityEngine.Object).Assembly.Location;
+      string baseDir = Path.GetDirectoryName(unityObjectPath);
+      foreach (string path in Directory.EnumerateFiles(baseDir, "*.dll")) {
+        libs.Add(path);
       }
     }
 
