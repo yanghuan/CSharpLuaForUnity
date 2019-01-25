@@ -26,6 +26,7 @@ local loadstring = loadstring
 local ipairs = ipairs
 local pairs = pairs
 local typeof = typeof
+local pcall = pcall
 
 local Clamp01 = Mathf.Clamp01
 
@@ -52,18 +53,24 @@ local MonoBehaviour = System.define("MonoBehaviour", {
   LateUpdate = emptyFn,
 })
 
+local function getMonoBehaviourFunction(metatableOfMonoBehaviour, name)
+  return metatableOfMonoBehaviour[name]   
+end
+
 local metatableOfMonoBehaviour = getmetatable(BridgeMonoBehaviour) 
 setmetatable(MonoBehaviour, {
   __index = function (t, k)
     if k == "base" then
       return base
     elseif type(k) == "string" and sbyte(k, 1) ~= 95 then
-      local f = metatableOfMonoBehaviour[k]
-      local v = function (this, ...)
-        return f(this.ref, ...)
+      local ok, f = pcall(getMonoBehaviourFunction, metatableOfMonoBehaviour, k)
+      if ok then
+        local v = function (this, ...)
+          return f(this.ref, ...)
+        end
+        t[k] = v
+        return v
       end
-      t[k] = v
-      return v
     end
     return nil
   end
