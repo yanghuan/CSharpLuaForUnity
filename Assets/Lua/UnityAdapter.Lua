@@ -613,6 +613,7 @@ System.define("UnityEngine.JsonUtility", {
 local function defineUnityStruct(name, T)
   local __call = T.__call
   local __index = T.__index
+  setmetatable(T, nil)
   System.defStc(name, T)
    
   local super = getmetatable(T)
