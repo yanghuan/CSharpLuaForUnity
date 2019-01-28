@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using LuaInterface;
 using UnityEditor;
 
@@ -259,11 +260,22 @@ public static class CustomSettings
         LuaClient.Instance.DetachProfiler();
     }
 
+  private static bool IsCustomAssembly(string name) {
+      if (name == "mscorlib" || name.StartsWith("System") || name.StartsWith("UnityEngine") || name.StartsWith("UnityEditor")) {
+        return false;
+      }
+      return true;
+    }
+
     public static BindType[] customTypeList {
       get {
+        const string kBridgeAssemblyName = "Bridge";
         List<BindType> result = new List<BindType>(customTypeList_);
-        AssemblyName[] names = Assembly.GetExecutingAssembly().GetReferencedAssemblies();
-        foreach (AssemblyName name in names) {
+        var names = Assembly.GetExecutingAssembly().GetReferencedAssemblies().Select(i => i.Name).Where(IsCustomAssembly).ToList();
+        if (!names.Contains(kBridgeAssemblyName)) {
+          names.Add(kBridgeAssemblyName);
+        }
+        foreach (string name in names) {
           Assembly a = Assembly.Load(name);
           Type[] types = a.GetExportedTypes();
           foreach (Type type in types) {
