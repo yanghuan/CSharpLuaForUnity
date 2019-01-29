@@ -22,6 +22,7 @@ local FormatException = System.FormatException
 
 local type = type
 local tostring = tostring
+local setmetatable = setmetatable
 
 local function compareTo(this, v)
   if this == v then
@@ -49,7 +50,7 @@ local function parse(s)
 end
 
 local Boolean = System.defStc("System.Boolean", {
-  __default__ = System.falseFn,
+  default = System.falseFn,
   GetHashCode = System.identityFn,
   Equals = System.equals,
   CompareTo = compareTo,
@@ -112,3 +113,7 @@ local Boolean = System.defStc("System.Boolean", {
   end
 })
 debug.setmetatable(false, Boolean)
+
+local ValueType = System.ValueType
+local boolMetaTable = setmetatable({ __index = ValueType, __call = Boolean.default }, ValueType)
+setmetatable(Boolean, boolMetaTable)

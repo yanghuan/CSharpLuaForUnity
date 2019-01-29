@@ -49,7 +49,7 @@ end
 
 local Int = define("System.Int", {
   __inherits__ = inherits,
-  __default__ = zeroFn,
+  default = zeroFn,
   
   CompareTo = compareInt,
   Equals = equals,
@@ -70,6 +70,7 @@ local Int = define("System.Int", {
     return this == v
   end
 })
+Int.__call = zeroFn
 
 local function parseInt(s, min, max)
   if s == nil then
@@ -223,7 +224,7 @@ end
 
 local Number = define("System.Number", {
   __inherits__ = inherits,
-  __default__ = zeroFn,
+  default = zeroFn,
 
   CompareTo = compareDouble,
   Equals = equalsDouble,
@@ -265,6 +266,7 @@ local Number = define("System.Number", {
     return v == posInf
   end
 })
+Number.__call = zeroFn
 debug.setmetatable(0, Number)
 
 local function parseDouble(s)

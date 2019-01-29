@@ -44,15 +44,20 @@ local function peek(t)
   if #t == 0 then
     throw(InvalidOperationException())
   end
-  return getArray(t, #this - 1)
+  return getArray(t, #t - 1)
 end
 
 Stack.Peek = peek
 
 function Stack.Pop(this)
   local v = peek(this)
-  removeAtArray(t, #this -1)
+  removeAtArray(this, #this -1)
   return v
+end
+
+function System.stackFromTable(t, T)
+  assert(T)
+  return setmetatable(t, Stack(T))
 end
 
 System.define("System.Stack", function(T) 

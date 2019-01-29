@@ -15,6 +15,7 @@ limitations under the License.
 --]]
 
 local System = System
+local define = System.define
 local throw = System.throw
 local div = System.div
 local ArgumentOutOfRangeException = System.ArgumentOutOfRangeException
@@ -58,8 +59,8 @@ end
 
 local function checkVersion(t, verson)
   if verson ~= getVersion(t) then
-    throw(InvalidOperationException("has change when iterator"))
-  end 
+    throw(InvalidOperationException("Collection was modified; enumeration operation may not execute."))
+  end
 end
 
 Collection.getVersion = getVersion
@@ -76,7 +77,7 @@ local function addCount(t, inc)
   if inc ~= 0 then
     local v = (counts[t] or 0) + inc
     assert(v >= 0)
-    counts[t] = v 
+    counts[t] = v
   end
 end
 
@@ -137,21 +138,18 @@ function Collection.pushArray(t, v)
   changeVersion(t)
 end
 
-function Collection.buildArray(t, size, ...)
-  local len = select("#", ...)
-  for i = 1, len do
-    local v = select(i, ...)
-    t[#t + 1] = wrap(v)
-  end
-  if len < size then
-    local default = t.__genericT__:__default__()
+function Collection.buildArray(T, size)
+  local t = setmetatable({}, T)
+  if size > 0 then
+    local default = T.__genericT__:default()
     if default == nil then
       default = null
     end
-    for i = len + 1, size do
+    for i = 1, size do
       t[#t + 1] = default
     end
   end
+  return t
 end
 
 local function checkInsertIndex(t, index)   
@@ -300,7 +298,7 @@ function Collection.findOfArray(t, match)
       return item
     end
   end
-  return t.__genericT__:__default__()
+  return t.__genericT__:default()
 end
 
 function Collection.findAllOfArray(t, match)
@@ -327,7 +325,7 @@ function Collection.findLastOfArray(t, match)
       return item
     end
   end
-  return t.__genericT__:__default__()
+  return t.__genericT__:default()
 end
 
 function Collection.findLastIndexOfArray(t, ...)
@@ -480,13 +478,9 @@ local function sortArray(t, index, count, comparer)
     else
       checkIndexAndCount(t, index, count)
       local arr = {}
-      for i = index + 1, index + count do
-        arr[#arr + 1] = t[i]
-      end
+      tmove(t, index + 1, index + count, 1, arr)
       tsort(arr, comp)
-      for i = index + 1, index + count do
-        t[i] = arr[i - index]
-      end
+      tmove(arr, 1, count, index + 1, t)
     end
     changeVersion(t)
   end
@@ -500,7 +494,7 @@ function Collection.sortArray(t, ...)
     local comparer = ...
     sort(t, comparer)
   else
-    index, count, comparer = ...
+    local index, count, comparer = ...
     sortArray(t, index, count, comparer)
   end
 end
@@ -574,6 +568,8 @@ function ArrayEnumerator.Reset(this)
   this.current = nil
 end
 
+ArrayEnumerator.Dispose = System.emptyFn
+
 local function arrayEnumerator(t)
   local en = {
     list = t,
@@ -628,9 +624,7 @@ end
 function Collection.toArray(t)
   local array = {}    
   if isArrayLike(t) then
-    for _, v in ipairs(t) do
-      array[#array + 1] = v
-    end   
+    tmove(t, 1, #t, 1, array)
   else
     for _, v in each(t) do
       array[#array + 1] = wrap(v)
@@ -655,7 +649,7 @@ KeyValuePair = System.defStc("System.KeyValuePair", {
   __clone__ = function (this)
     return setmetatable({ Key = this.Key, Value = this.Value }, KeyValuePair)
   end,
-  __default__ = function (T)
+  default = function (T)
     throw(System.NotSupportedException("KeyValuePair not support default(T)"))
   end,
   Create = function (key, value)
@@ -708,6 +702,8 @@ function DictionaryEnumerator.getCurrent(this)
   return this.current
 end
 
+DictionaryEnumerator.Dispose = System.emptyFn
+
 function Collection.dictionaryEnumerator(t, kind)
   local en = {
     dict = t,
@@ -742,6 +738,8 @@ function LinkedListEnumerator.getCurrent(this)
   return this.current
 end
 
+LinkedListEnumerator.Dispose = System.emptyFn
+
 function Collection.linkedListEnumerator(t)
   local en = {
     list = t,
@@ -750,6 +748,25 @@ function Collection.linkedListEnumerator(t)
   }
   setmetatable(en, LinkedListEnumerator)
   return en
+end
+
+local Nullable = System.Nullable
+function Nullable.Compare(n1, n2, T)
+  if n1 then
+    if n2 then return Comparer_1(T).getDefault().Compare(n1, n2) end
+    return 1
+  end
+  if n2 then return -1 end
+  return 0
+end
+
+function Nullable.Equals(n1, n2, T)
+  if n1 then
+    if n2 then return EqualityComparer_1(t.__genericT__).getDefault().Equals(n1, n2) end
+    return false
+  end
+  if n2 then return false end
+  return true
 end
 
 local yieldCoroutinePool = {}
@@ -811,7 +828,9 @@ function YieldEnumerator.getCurrent(this)
   return this.current
 end
 
-System.define("System.YieldEnumerator", YieldEnumerator)
+YieldEnumerator.Dispose = System.emptyFn
+
+define("System.YieldEnumerator", YieldEnumerator)
 
 local function yieldIEnumerator(f, T, ...)
   return setmetatable({ f = f, __genericT__ = T, args = pack(...) }, YieldEnumerator)
@@ -824,7 +843,7 @@ function YieldEnumerable.GetEnumerator(this)
   return setmetatable({ f = this.f, __genericT__ = this.__genericT__, args = this.args }, YieldEnumerator)
 end
 
-System.define("System.YieldEnumerable", YieldEnumerable)
+define("System.YieldEnumerable", YieldEnumerable)
 
 local function yieldIEnumerable(f, T, ...)
   return setmetatable({ f = f, __genericT__ = T, args = pack(...) }, YieldEnumerable)
@@ -832,6 +851,8 @@ end
 
 System.toLuaTable = toLuaTable
 System.Collection = Collection
+System.null = null
+System.Void = null
 System.each = each
 System.ipairs = ipairsArray
 System.pairs = pairsDict

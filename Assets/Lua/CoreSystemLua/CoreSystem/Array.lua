@@ -15,6 +15,7 @@ limitations under the License.
 --]]
 
 local System = System
+local define = System.define
 local throw = System.throw
 local Collection = System.Collection
 local buildArray = Collection.buildArray
@@ -28,20 +29,10 @@ local IndexOutOfRangeException = System.IndexOutOfRangeException
 local assert = assert
 local select = select
 local setmetatable = setmetatable
+local type = type
 
 local Array = {}
 local emptys = {}
-
-function Array.__ctor__(this, ...)
-  local len = select("#", ...)
-  buildArray(this, len, ...)
-end
-
-function Array.new(cls, len)
-  local this = setmetatable({}, cls)
-  buildArray(this, len)
-  return this
-end
 
 Array.set = setArray
 Array.get = getArray
@@ -92,17 +83,18 @@ Array.Reverse = Collection.reverseArray
 Array.Sort = Collection.sortArray
 Array.TrueForAll = Collection.trueForAllOfArray
 Array.Copy = Collection.copyArray
+Array.ForEach = Collection.forEachArray
 Array.GetValue = getArray
 
 function Array.CreateInstance(elementType, length)
-  return Array(elementType.c):new(length)
+  return buildArray(Array(elementType.c), length)
 end
 
 function Array.SetValue(this, value, index)
   setArray(this, index, value)
 end
 
-System.define("System.Array", function(T) 
+define("System.Array", function(T) 
   local cls = { 
     __inherits__ = { System.IList_1(T), System.IList }, 
     __genericT__ = T
@@ -110,9 +102,24 @@ System.define("System.Array", function(T)
   return cls
 end, Array)
 
-function System.arrayFromTable(t, T)
+function Array.__call(T, t)
+  if type(t) == "number" then
+    return buildArray(T, t)
+  end
+  return setmetatable(t or {}, T)
+end
+
+local function unset()
+  throw(System.NotSupportedException("This array is readOnly"))
+end
+
+function System.arrayFromTable(t, T, readOnly)
   assert(T)
-  return setmetatable(t, Array(T))
+  local array = setmetatable(t, Array(T))
+  if readOnly then
+    array.set = unset
+  end
+  return array
 end
 
 function System.arrayFromList(t)
@@ -120,15 +127,6 @@ function System.arrayFromList(t)
 end
 
 local MultiArray = {}
-
-function MultiArray.__ctor__(this, rank, ...)
-  this.__rank__ = rank
-  local length = 1
-  for _, i in ipairs(rank) do
-    length = length * i
-  end
-  buildArray(this, length, ...)
-end
 
 local function getIndex(this, ...)
   local rank = this.__rank__
@@ -168,10 +166,29 @@ end
 
 MultiArray.GetEnumerator = arrayEnumerator
 
-System.define("System.MultiArray", function(T) 
+function System.multiArrayFromTable(t, T)
+  assert(T)
+  return setmetatable(t, MultiArray(T))
+end
+
+define("System.MultiArray", function(T) 
   local cls = { 
     __inherits__ = { System.IList_1(T), System.IList }, 
     __genericT__ = T
   }
   return cls
 end, MultiArray)
+
+function MultiArray.__call(T, rank, t)
+  if t then
+    t.__rank__ = rank
+    return setmetatable(t, T)
+  end
+  local length = 1
+  for _, i in ipairs(rank) do
+    length = length * i
+  end
+  local this = buildArray(T, length)
+  this.__rank__ = rank
+  return this
+end

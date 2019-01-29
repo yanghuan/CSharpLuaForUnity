@@ -2,8 +2,8 @@
 local System = System
 local UnityEngine = UnityEngine
 local Sample
-System.usingDeclare(function (global)
-  Sample = global.Sample
+System.import(function (out)
+  Sample = out.Sample
 end)
 System.namespace("Sample", function (namespace)
   namespace.class("TestHelloWord", function (namespace)
@@ -28,9 +28,9 @@ System.namespace("Sample", function (namespace)
       UnityEngine.MonoBehaviour.print("TestHelloWord.Update")
     end
     return {
-      __inherits__ = function (global)
+      __inherits__ = function (out)
         return {
-          global.UnityEngine.MonoBehaviour
+          out.UnityEngine.MonoBehaviour
         }
       end,
       Awake = Awake,

@@ -257,19 +257,23 @@ local function simpleFormat(format, args, len, getFn)
   end))
 end
 
+local function formatGetFromArray(t, n)
+  return t:get(n)
+end
+
+local function formatGetFromTable(t, n)
+  return t[n + 1]
+end
+
 function String.Format(format, ...)
   local len = select("#", ...)
   if len == 1 then
     local args = ...
     if System.isArrayLike(args) then
-      return simpleFormat(format, args, #args, function (t, n)
-        return t:get(n)
-      end)
+      return simpleFormat(format, args, #args, formatGetFromArray)
     end 
   end
-  return simpleFormat(format, { ... }, len, function (t, n)
-    return t[n + 1]
-  end)
+  return simpleFormat(format, { ... }, len, formatGetFromTable)
 end
 
 function String.StartsWith(this, prefix)
@@ -335,7 +339,7 @@ function String.Insert(this, startIndex, value)
 end
 
 function String.Remove(this, startIndex, count) 
-  startIndex, count = stringCheck(this, startIndex, count)
+  startIndex, count = check(this, startIndex, count)
   return ssub(this, 1, startIndex) .. ssub(this, startIndex + 1 + count)
 end
 
@@ -440,6 +444,26 @@ function String.Trim(this, chars)
   return (sgsub(this, chars, "%1"))
 end
 
+function String.PadLeft(this, totalWidth, paddingChar) 
+  local len = #this;
+  if len >= totalWidth then
+    return this
+  else
+    paddingChar = paddingChar or 0x20;
+    return srep(schar(paddingChar), totalWidth - len) .. this
+  end
+end
+
+function String.PadRight(this, totalWidth, paddingChar) 
+  local len = #this;
+  if len >= totalWidth then
+    return this
+  else
+    paddingChar = paddingChar or 0x20;
+    return this .. srep(schar(paddingChar), totalWidth - len)
+  end
+end
+
 local CharEnumerator = {}
 CharEnumerator.__index = CharEnumerator
 
@@ -456,6 +480,8 @@ end
 function CharEnumerator.getCurrent(this)
   return this.current
 end
+
+CharEnumerator.Dispose = System.emptyFn
 
 function String.GetEnumerator(this)
   return setmetatable({ s = this, index = 1 }, CharEnumerator)

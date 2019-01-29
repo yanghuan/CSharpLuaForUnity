@@ -34,10 +34,7 @@ namespace CSharpLua {
       }
 
       if (Directory.Exists(outDir_)) {
-        string[] files = Directory.GetFiles(outDir_, "*.lua");
-        foreach (string file in files) {
-          File.Delete(file);
-        }
+        Directory.Delete(outDir_, true);
       }
 
       HashSet<string> libs = new HashSet<string>();

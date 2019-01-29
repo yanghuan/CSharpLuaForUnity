@@ -40,8 +40,8 @@ System.define("UnityEngine.Debug", {
 })
 
 local MonoBehaviour = System.define("MonoBehaviour", {
-  __kind__ = "C",
   __ctor__ = emptyFn,
+  class = "C",
   GetType = System.Object.GetType,
   ToString = function (this)
     return sformat("%s (%s)", this.ref.gameObject.name, this.__name__)
@@ -550,8 +550,8 @@ local function getType(this)
   return SystemTypeof(cls)
 end
 
-rawset(metatableOfSystemObject, "__kind__", "C")
-rawset(metatableOfSystemObject, "__default__", System.emptyFn)
+rawset(metatableOfSystemObject, "class", "C")
+rawset(metatableOfSystemObject, "default", System.emptyFn)
 rawset(metatableOfSystemObject, "EqualsObj", equals)
 rawset(metatableOfSystemObject, "GetType", getType)
 

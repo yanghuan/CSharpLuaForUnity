@@ -134,7 +134,7 @@ function Dictionary.Remove(this, key)
 end
 
 local function getValueDefault(this)
-  return this.__genericTValue__:__default__()
+  return this.__genericTValue__:default()
 end
 
 function Dictionary.TryGetValue(this, key)
@@ -198,6 +198,12 @@ end
 
 function Dictionary.getValues(this)
   return DictionaryCollection(this, false, this.__genericTValue__)
+end
+
+function System.dictionaryFromTable(t, TKey, TValue)
+  assert(TKey)
+  assert(TValue)
+  return setmetatable(t, Dictionary(TKey, TValue))
 end
 
 System.define("System.Dictionary", function(TKey, TValue) 

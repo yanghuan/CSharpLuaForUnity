@@ -15,6 +15,7 @@ limitations under the License.
 --]]
 
 local System = System
+local define = System.define
 local throw = System.throw
 local each = System.each
 
@@ -22,11 +23,11 @@ local io = io
 local open = io.open
 local remove = os.remove
 
-local IOException = System.define("System.IO.IOException", {
+local IOException = define("System.IO.IOException", {
   __tostring = System.Exception.ToString,
   __inherits__ = { System.Exception },
   __ctor__ = function(this, message, innerException) 
-    System.Exception.__ctor__(this, message, innerException)
+    System.Exception.__ctor__(this, message or "I/O error occurred.", innerException)
   end,
 })
 
@@ -102,4 +103,4 @@ function File.Delete(path)
   end
 end
 
-System.define("System.IO.File", File)
+define("System.IO.File", File)

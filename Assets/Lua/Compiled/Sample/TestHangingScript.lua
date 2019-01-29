@@ -17,9 +17,9 @@ System.namespace("Sample", function (namespace)
       UnityEngine.MonoBehaviour.print("Start")
     end
     return {
-      __inherits__ = function (global)
+      __inherits__ = function (out)
         return {
-          global.UnityEngine.MonoBehaviour
+          out.UnityEngine.MonoBehaviour
         }
       end,
       DataOfInt = 0,

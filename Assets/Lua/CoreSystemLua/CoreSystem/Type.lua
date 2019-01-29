@@ -25,6 +25,7 @@ local getClass = System.getClass
 local InvalidCastException = System.InvalidCastException
 local ArgumentNullException = System.ArgumentNullException
 local TypeLoadException = System.TypeLoadException
+local NullReferenceException = System.NullReferenceException
 
 local Char = System.Char
 local SByte = System.SByte
@@ -39,6 +40,7 @@ local Single = System.Single
 local Double = System.Double
 local Int = System.Int
 local Number = System.Number
+local ValueType = System.ValueType
 
 local type = type
 local getmetatable = getmetatable
@@ -48,28 +50,48 @@ local unpack = table.unpack
 local floor = math.floor
 
 local Type = {}
-local numberType = setmetatable({ c = Number }, Type)
-local types = {
-  [Char] = numberType,
-  [SByte] = numberType,
-  [Byte] = numberType,
-  [Int16] = numberType,
-  [UInt16] = numberType,
-  [Int32] = numberType,
-  [UInt32] = numberType,
-  [Int64] = numberType,
-  [UInt64] = numberType,
-  [Single] = numberType,
-  [Double] = numberType,
-  [Int] = numberType,
-  [Number] = numberType
+
+local NumberType = {
+  __index = Type,
+  __eq = function (a, b)
+    local c1, c2 = a.c, b.c
+    if c1 == c2 then
+      return true
+    end
+    if c1 == Number or c2 == Number then
+      return true
+    end
+    return false
+  end
 }
+
+local function newNumberType(c)
+  return setmetatable({ c = c }, NumberType)
+end
+
+local types = {
+  [Char] = newNumberType(Char),
+  [SByte] = newNumberType(SByte),
+  [Byte] = newNumberType(Byte),
+  [Int16] = newNumberType(Int16),
+  [UInt16] = newNumberType(UInt16),
+  [Int32] = newNumberType(Int32),
+  [UInt32] = newNumberType(UInt32),
+  [Int64] = newNumberType(Int64),
+  [UInt64] = newNumberType(UInt64),
+  [Single] = newNumberType(Single),
+  [Double] = newNumberType(Double),
+  [Int] = newNumberType(Int),
+  [Number] = newNumberType(Number),
+}
+
+local createType = System.config.customTypeOf or function(cls) return setmetatable({ c = cls }, Type) end
 
 local function typeof(cls)
   assert(cls)
   local type = types[cls]
   if type == nil then
-    type = setmetatable({ c = cls }, Type)
+    type = createType(cls)
     types[cls] = type
   end
   return type
@@ -91,7 +113,7 @@ function Type.getIsGenericType(this)
 end
 
 function Type.getIsEnum(this)
-  return this.c.__kind__ == "E"
+  return this.c.class == "E"
 end
 
 function Type.getName(this)
@@ -151,13 +173,13 @@ end
 Type.IsSubclassOf = isSubclassOf
 
 local function getIsInterface(this)
-  return this.c.__kind__ == "I"
+  return this.c.class == "I"
 end
 
 Type.getIsInterface = getIsInterface
 
 local function getIsValueType(this)
-  return this.c.__kind__ == "S"
+  return this.c.class == "S"
 end
 
 Type.getIsValueType = getIsValueType
@@ -168,7 +190,7 @@ local function getInterfaces(this)
     interfaces = {}
     local p = this.c
     repeat
-      local interfacesCls = p.__interfaces__
+      local interfacesCls = p.interface
       if interfacesCls ~= nil then
         for _, i in ipairs(interfacesCls) do
           interfaces[#interfaces + 1] = typeof(i)
@@ -251,7 +273,7 @@ function Type.GetTypeFrom(typeName, throwOnError, ignoreCase)
   if throwOnError then
     throw(TypeLoadException(typeName .. ": failed to load."))
   end
-  return nil    
+  return nil
 end
 
 Type.Equals = System.equals
@@ -259,7 +281,7 @@ System.define("System.Type", Type)
 
 local function isInterfaceOf(t, ifaceType)
   repeat
-    local interfaces = t.__interfaces__
+    local interfaces = t.interface
     if interfaces then
       for _, i in ipairs(interfaces) do
         if i == ifaceType or isInterfaceOf(i, ifaceType) then
@@ -288,16 +310,6 @@ local numbers = {
 }
 numbers[Int] = numbers[Int32]
 
-local function isStringOrBoolean(cls, StringOrBoolean)
-  if cls == StringOrBoolean then
-    return true
-  end
-  if cls.__kind__ == "I" then
-    return isInterfaceOf(StringOrBoolean, cls)
-  end
-  return false 
-end
-
 function isTypeOf(obj, cls)    
   if cls == Object then return true end
   local typename = type(obj)
@@ -318,18 +330,26 @@ function isTypeOf(obj, cls)
         end
       end
       return true
-    elseif cls.__kind__ == "I" then
+    elseif cls.class == "I" then
       return isInterfaceOf(Number, cls)
+    elseif cls == ValueType  then
+      return true
     end
     return false
   elseif typename == "string" then
-    return isStringOrBoolean(cls, String)
+    if cls == String then
+      return true
+    end
+    if cls.class == "I" then
+      return isInterfaceOf(String, cls)
+    end
+    return false
   elseif typename == "table" then   
     local t = getmetatable(obj)
     if t == cls then
       return true
     end
-    if cls.__kind__ == "I" then
+    if cls.class == "I" then
       return isInterfaceOf(t, cls)
     else
       local base = getmetatable(t)
@@ -342,7 +362,13 @@ function isTypeOf(obj, cls)
       return false
     end
   elseif typename == "boolean" then
-    return isStringOrBoolean(cls, Boolean)
+    if cls == Boolean or cls == ValueType then
+      return true
+    end
+    if cls.class == "I" then
+      return isInterfaceOf(Boolean, cls)
+    end
+    return false
   elseif typename == "function" then 
     return cls == Delegate
   elseif typename == "userdata" then
@@ -371,31 +397,16 @@ end
 
 function System.cast(cls, obj)
   if obj == nil then
-    if cls.__kind__ ~= "S" then
+    if cls.class ~= "S" then
       return nil
     end
+    throw(NullReferenceException(), 1)
   else 
     if isTypeOf(obj, cls) then
       return obj
     end
+    throw(InvalidCastException(), 1)
   end
-  throw(InvalidCastException(), 1)
-end
-
-function System.new(cls)
-  if numbers[cls] then
-    return 0
-  end
-  if cls == Boolean then
-    return false
-  end
-  local ctor = cls.__ctor__
-  if type(ctor) == "table" then
-    ctor = ctor[1]
-  end
-  local this = setmetatable({}, cls)
-  ctor(this)
-  return this
 end
 
 function System.CreateInstance(type, ...)

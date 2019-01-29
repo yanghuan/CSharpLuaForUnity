@@ -43,6 +43,7 @@ local zeroFn = function() return 0 end
 local equals = function(x, y) return x == y end
 local modules = {}
 local usings = {}
+local metadatas = {}
 local Object, ValueType
 
 local function new(cls, ...)
@@ -51,18 +52,18 @@ local function new(cls, ...)
 end
 
 local function throw(e, lv)
-  if e == nil then
-    e = System.NullReferenceException()
-  end
+  if e == nil then e = System.NullReferenceException() end
   e:traceback(lv)
   error(e)
 end
 
 local function xpcallErr(e)
-  if type(e) == "string" then
+  if e == nil then
+    e = System.Exception("script error")
+    e:traceback()
+  elseif type(e) == "string" then
     e = System.Exception(e)
     e:traceback()
-    return e
   end
   return e
 end
@@ -152,16 +153,24 @@ local function genericName(name, ...)
   return tconcat(t)
 end
 
-local enumMetatable = { __kind__ = "E", __default__ = zeroFn, __index = false }
+local enumMetatable = { class = "E", default = zeroFn, __index = false }
 enumMetatable.__index = enumMetatable
 
-local interfaceMetatable = { __kind__ = "I", __default__ = emptyFn, __index = false }
+local interfaceMetatable = { class = "I", default = emptyFn, __index = false }
 interfaceMetatable.__index = interfaceMetatable
 
-local function applyAttributes(cls)
-  local attributes = rawget(cls, "__attributes__")
-  if attributes ~= nil then
-    cls.__attributes__ = attributes(global)
+local ctorMetatable = { __call = function (ctor, ...) return ctor[1](...) end }
+
+local function applyMetadata(cls)
+  local metadata = rawget(cls, "__metadata__")
+  if metadata then
+    if metadatas then
+      metadatas[#metadatas + 1] = function (global)
+				cls.__metadata__ = metadata(global)
+			end
+    else
+			cls.__metadata__ = metadata(global)
+		end
   end
 end
 
@@ -169,39 +178,41 @@ local function setBase(cls, kind)
   cls.__index = cls 
   cls.__call = new
 
+  local ctor = cls.__ctor__
+  if ctor and type(ctor) == "table" then
+    setmetatable(ctor, ctorMetatable)
+  end
+
+  local extends = cls.__inherits__
+  if extends and type(extends) == "function" then
+    extends = extends(global, cls)
+  end
+
   if kind == "S" then
-    local extends = cls.__inherits__
-    if extends ~= nil then
-      if type(extends) == "function" then
-        extends = extends(global, cls)
-      end 
-      cls.__interfaces__ = extends
+    if extends then
+      cls.interface = extends
       cls.__inherits__ = nil
     end
     setmetatable(cls, ValueType)
   else
-    local extends = cls.__inherits__
-    if extends ~= nil then
-      if type(extends) == "function" then
-        extends = extends(global, cls)
-      end           
+    if extends then      
       local base = extends[1]
-      if base.__kind__ == "I" then
-        cls.__interfaces__ = extends
+      if base.class == "I" then
+        cls.interface = extends
         setmetatable(cls, Object)
       else
         setmetatable(cls, base)
         if #extends > 1 then
           tremove(extends, 1)
-          cls.__interfaces__ = extends
+          cls.interface = extends
         end
       end
       cls.__inherits__ = nil
     else
       setmetatable(cls, Object)
-    end  
+    end
   end
-  applyAttributes(cls)
+  applyMetadata(cls)
 end
 
 local function staticCtorSetBase(cls)
@@ -211,11 +222,11 @@ local function staticCtorSetBase(cls)
     cls[k] = v
   end
   cls[cls] = nil
-  local kind = cls.__kind__
-  cls.__kind__ = nil
+  local kind = cls.class
+  cls.class = nil
   setBase(cls, kind)
-  cls:__staticCtor__()
-  cls.__staticCtor__ = nil
+  cls:static()
+  cls.static = nil
 end
 
 local staticCtorMetatable = {
@@ -243,7 +254,7 @@ local function setHasStaticCtor(cls, kind)
   end  
   cls[cls] = t
   cls.__name__ = name
-  cls.__kind__ = kind
+  cls.class = kind
   cls.__call = new
   cls.__index = cls
   setmetatable(cls, staticCtorMetatable)
@@ -278,7 +289,7 @@ local function def(name, kind, cls, generic)
     cls.__name__ = generic
   end
   if kind == "C" or kind == "S" then
-    if cls.__staticCtor__ == nil then
+    if cls.static == nil then
       setBase(cls, kind)
     else
       setHasStaticCtor(cls, kind)
@@ -286,14 +297,17 @@ local function def(name, kind, cls, generic)
   elseif kind == "I" then
     local extends = cls.__inherits__
     if extends then
-      cls.__interfaces__ = extends
+      if type(extends) == "function" then
+        extends = extends(global, cls)
+      end
+      cls.interface = extends
       cls.__inherits__ = nil
     end
     setmetatable(cls, interfaceMetatable)
-    applyAttributes(cls)
+    applyMetadata(cls)
   elseif kind == "E" then
     setmetatable(cls, enumMetatable)
-    applyAttributes(cls)
+    applyMetadata(cls)
   else
     assert(false, kind)
   end
@@ -325,11 +339,12 @@ System = {
   try = try,
   throw = throw,
   getClass = set,
+  genericKey = genericKey,
   define = defCls,
   defInf = defInf,
   defStc = defStc,
   defEnum = defEnum,
-  global = global,
+  global = global
 }
 
 local System = System
@@ -412,7 +427,7 @@ if version < 5.3 then
       throw(System.DivideByZeroException(), 1)
     end
     return trunc(x / y)
-  end    
+  end
 
   function System.divOfNull(x, y)
     if x == nil or y == nil then
@@ -621,6 +636,62 @@ else
   function System.sr(x, y) return x >> y end
   function System.div(x, y) return x // y end
   function System.mod(x, y) return x % y end
+  
+  function System.bnotOfNull(x) 
+    if x == nil 
+      then return nil 
+    end 
+    return ~v 
+  end
+  
+  function System.bandOfNull(x, y) 
+    if x == nil or y == nil then
+      return nil
+    end
+    return x & y
+  end
+
+  function System.borOfNull(x, y)
+    if x == nil or y == nil then
+      return nil
+    end
+    return x | y
+  end
+  
+  function System.xorOfNull(x, y)
+    if x == nil or y == nil then
+      return nil
+    end
+    return x ~ y
+  end
+  
+  function System.slOfNull(x, y)
+    if x == nil or y == nil then
+      return nil
+    end
+    return x << y
+  end
+  
+  function System.srOfNull(x, y)
+    if x == nil or y == nil then
+      return nil
+    end
+    return x >> y
+  end
+  
+  function System.divOfNull(x, y)
+    if x == nil or y == nil then
+      return nil
+    end
+    return x // y
+  end
+  
+  function System.modOfNull(x, y)
+    if x == nil or y == nil then
+      return nil
+    end
+    return x % y
+  end
   
   local function toUInt (v, max, mask, checked)  
     if v >= 0 and v <= max then
@@ -843,7 +914,7 @@ function System.apply(t, f)
 end
 
 function System.default(T)
-  return T:__default__()
+  return T:default()
 end
 
 function System.property(name)
@@ -866,13 +937,9 @@ function System.event(name)
   return add, remove
 end
 
-function System.CreateInstance(type, ...)
-  return type.c(...)
-end
-
-local function multiNew(cls, inx, ...) 
+function System.new(cls, index, ...)
   local this = setmetatable({}, cls)
-  return this, cls.__ctor__[inx](this, ...)
+  return this, cls.__ctor__[index](this, ...)
 end
 
 local function base(this)
@@ -886,15 +953,22 @@ local function equalsStatic(x, y)
   if x == nil or y == nil then
     return false
   end
-  return x:EqualsObj(y)
+  local ix = x.EqualsObj
+  if ix ~= nil then
+    return ix(x, y)
+  end
+  local iy = y.EqualsObj
+  if iy ~= nil then
+    return iy(y, x)
+  end
+  return false
 end
 
 Object = defCls("System.Object", {
   __call = new,
-  __default__ = emptyFn,
+  default = emptyFn,
   __ctor__ = emptyFn,
-  __kind__ = "C",
-  new = multiNew,
+  class = "C",
   base = base,
   EqualsObj = equals,
   ReferenceEquals = equals,
@@ -906,9 +980,9 @@ Object = defCls("System.Object", {
 setmetatable(Object, { __call = new })
 
 ValueType = {
-  __kind__ = "S",
-  __default__ = function(cls) 
-    return setmetatable({}, cls)
+  class = "S",
+  default = function(T) 
+    return T()
   end,
   __clone__ = function(this)
     local type_ = type(this)
@@ -918,7 +992,7 @@ ValueType = {
       local cls = getmetatable(this)
       local t = {}
       for k, v in pairs(this) do
-        if type(v) == "table" and v.__kind__ == "S" then
+        if type(v) == "table" and v.class == "S" then
           t[k] = v:__clone__()
         else
           t[k] = v
@@ -962,7 +1036,7 @@ function System.tuple(...)
 end
 
 local ValueTuple = {
-  __default__ = function()
+  default = function()
     throw(System.NotSupportedException("not support default(T) when T is ValueTuple"))
   end,
   Deconstruct = tupleDeconstruct,
@@ -982,6 +1056,7 @@ function System.valueTuple(t)
 end
 
 defCls("System.Attribute", {})
+defStc("System.Nullable", emptyFn)
 
 debug.setmetatable(nil, {
   __concat = function(a, b)
@@ -1039,7 +1114,7 @@ end
 
 function System.GetValueOrDefaultT(this, T)
   if this == nil then
-    return T:__default__()
+    return T:default()
   end
   return this
 end
@@ -1094,25 +1169,8 @@ function System.stackalloc(t)
   return newPointer(t, 1)
 end
 
-function System.usingDeclare(f)
+function System.import(f)
   usings[#usings + 1] = f
-end
-
-function System.init(namelist, conf)
-  local classes = {}
-  for _, name in ipairs(namelist) do
-    local cls = assert(modules[name], name)()
-    classes[#classes + 1] = cls
-  end
-  for _, f in ipairs(usings) do
-    f(global)
-  end
-  if conf ~= nil then
-    System.entryPoint = conf.Main
-  end
-  modules = nil
-  usings = nil
-  System.classes = classes
 end
 
 local namespace
@@ -1150,6 +1208,34 @@ function System.namespace(name, f)
   curCacheName = name
   f(namespace)
   curCacheName = nil
+end
+
+function System.init(namelist, conf)
+  local classes = {}
+  for _, name in ipairs(namelist) do
+    local cls = assert(modules[name], name)()
+    classes[#classes + 1] = cls
+  end
+  for _, f in ipairs(usings) do
+    f(global)
+  end
+	for _, f in ipairs(metadatas) do
+		f(global)
+	end
+  if conf ~= nil then
+    System.entryPoint = conf.Main
+  end
+	System.classes = classes
+	
+  modules = nil
+  usings = nil
+	metadatas = nil
+
+	namespace = nil
+	curCacheName = nil
+	defIn = nil
+	System.import = nil
+	System.init = nil
 end
 
 System.config = {}

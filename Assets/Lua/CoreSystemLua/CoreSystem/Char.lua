@@ -18,6 +18,8 @@ local System = System
 local throw = System.throw
 local Int = System.Int
 
+local setmetatable = setmetatable
+
 local Char = {}
 
 Char.CompareTo = Int.CompareTo
@@ -25,7 +27,7 @@ Char.CompareToObj = Int.CompareToObj
 Char.Equals = Int.Equals
 Char.EqualsObj = Int.EqualsObj
 Char.GetHashCode = Int.GetHashCode
-Char.__default__ = Int.__default__
+Char.default = Int.default
 
 function Char.IsControl(c, index)
   if index then
@@ -230,3 +232,7 @@ function Char.__inherits__()
 end
 
 System.defStc("System.Char", Char)
+
+local ValueType = System.ValueType
+local charMetaTable = setmetatable({ __index = ValueType, __call = Char.default }, ValueType)
+setmetatable(Char, charMetaTable)

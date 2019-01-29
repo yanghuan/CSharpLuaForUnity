@@ -116,10 +116,15 @@ limitations under the License.
           <arg type="System.Char" />
         </method>
       </class>
+      <class name="Random">
+        <method name="Next" ArgCount="0" Name="Next0" />
+        <method name="Next" ArgCount="1" Name="Next1" />
+        <method name="Next" ArgCount="2" Name="Next2" />
+      </class>
       <class name="Math" Name="math" />
       <class name="Activator" >
-        <method name="CreateInstance" ArgCount="0" Template="System.new({^0})" />
-        <method name="CreateInstance" ArgCount="1" Template="System.new({0}.c)" />
+        <method name="CreateInstance" ArgCount="0" Template="{^0}()" />
+        <method name="CreateInstance" ArgCount="1" Template="{0}.c()" />
         <method name="CreateInstance" ArgCount="2" Template="System.CreateInstance({0}, {*1})" />
       </class>
       <class name="Environment">
@@ -287,18 +292,19 @@ limitations under the License.
         <method name="Create" ArgCount="7" Template="System.valueTuple({0}, {1}, {2}, {3}, {4}, {5}, {6})" />
         <method name="Create" ArgCount="8" Template="System.valueTuple({0}, {1}, {2}, {3}, {4}, {5}, {6}, {7})" />
       </class>
-      <class name="Nullable^1">
+      <class name="Nullable^1" Name="System.Nullable">
         <property name="HasValue">
           <get Template="System.HasValueOfNull({this})" />
         </property>
         <property name="Value">
           <get Template="System.getValueOfNull({this})" />
         </property>
-        <method name="Equals" Template="Object.EqualsStatic({this}, {0})" />
+        <method name="Equals" Template="System.Object.EqualsStatic({this}, {0})" />
         <method name="GetHashCode" Template="System.GetHashCodeOfNull({this})" />
         <method name="GetValueOrDefault" ArgCount="0" Template="System.GetValueOrDefaultT({this}, {^0})" />
         <method name="GetValueOrDefault" ArgCount="1" Template="System.GetValueOrDefault({this}, {0})" />
         <method name="ToString" Template="System.toString({this})" />
+        <method name="op_Explicit" Template="System.getValueOfNull({0})" />
       </class>
     </namespace>
     <namespace name="System.Collections" Name="System" />
@@ -469,6 +475,7 @@ limitations under the License.
         <method name="Max" ArgCount="2" RetType="System.Double" Template="Linq.Max({0}, {1}, System.Double)" />
         <method name="Max" ArgCount="2" RetType="System.Decimal" Template="Linq.Max({0}, {1}, System.Double)" />
         <method name="Max" ArgCount="2" GenericArgCount="2" Template="Linq.Max({0}, {1}, {^1})" />
+        <method name="OfType" Template="Linq.OfType({0}, {^0})" />
         <method name="OrderBy" ArgCount="2" Template="Linq.OrderBy({0}, {1}, nil, {^1})" />
         <method name="OrderBy" ArgCount="3" Template="Linq.OrderBy({0}, {1}, {2}, {^1})" />
         <method name="OrderByDescending" ArgCount="2" Template="Linq.OrderByDescending({0}, {1}, nil, {^1})" />

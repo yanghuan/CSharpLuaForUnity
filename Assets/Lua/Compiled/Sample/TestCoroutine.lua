@@ -27,9 +27,9 @@ System.namespace("Sample", function (namespace)
       UnityEngine.MonoBehaviour.print("TestCoroutine.Test")
     end
     return {
-      __inherits__ = function (global)
+      __inherits__ = function (out)
         return {
-          global.UnityEngine.MonoBehaviour
+          out.UnityEngine.MonoBehaviour
         }
       end,
       Awake = Awake,
