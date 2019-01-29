@@ -155,9 +155,14 @@ namespace CSharpLua {
     }
 
     private static void CopyTempPrefab(ref GameObject prefab) {
-      string path = Path.Combine(tempPrefabDir_, AssetDatabase.GetAssetPath(prefab));
+      string oldPath = AssetDatabase.GetAssetPath(prefab);
+      string path = Path.Combine(tempPrefabDir_, oldPath);
       Directory.CreateDirectory(Path.GetDirectoryName(path));
-      prefab = PrefabUtility.CreatePrefab(path, prefab);
+      try {
+        prefab = PrefabUtility.CreatePrefab(path, prefab);
+      } catch (ArgumentException e) when (e.Message == "Can't save persistent object as a Prefab asset") {
+        throw new InvalidDataException("目前2018.3拷贝预设存在BUG,暂时未发现规避的方法,请使用较低版本");
+      }
     }
 
     private bool IsUserMonoBehaviourExists(GameObject prefab) {
