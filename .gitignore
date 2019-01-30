@@ -30,6 +30,6 @@ sysinfo.txt
 Assets/Source/Generate
 Packages
 ProjectSettings
-CSharpLuaTools/update_csharp.lua.cmd
+/Assets/LuaRuntime/Source/Generate
 /Assets/CSharpLuaTemp
 /Assets/CSharpLuaTemp.meta
