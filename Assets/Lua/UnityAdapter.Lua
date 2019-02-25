@@ -36,7 +36,10 @@ local UnityEngine = UnityEngine
 local toluaSystem = toluaSystem
 
 System.define("UnityEngine.Debug", {
-  Log = Debugger.Log
+  Log = Debugger.Log,
+  LogErrorFormat = function (format, ...)
+    Debugger.LogError(format:Format(...))
+  end,
 })
 
 local MonoBehaviour = System.define("MonoBehaviour", {
