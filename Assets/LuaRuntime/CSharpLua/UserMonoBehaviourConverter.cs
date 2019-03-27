@@ -1,5 +1,6 @@
 ﻿#if UNITY_EDITOR  
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
 using System.Linq;
@@ -76,6 +77,34 @@ namespace CSharpLua {
         if (v is string) {
           return "\"" + v + "\"";
         }
+
+        if (v is IList) {
+          var array = (IList)v;
+          StringBuilder sb = new StringBuilder();
+          sb.Append('{');
+          if (array.Count > 0) {
+            bool isFirst = true;
+            foreach (var i in array) {
+              if (isFirst) {
+                isFirst = false;
+              } else {
+                sb.Append(',');
+              }
+              sb.Append(ValueToString(i));
+            }
+            sb.Append(',');
+          }
+          if (v is Array) {
+            sb.AppendFormat("System.Array({0})", v.GetType().GetElementType().FullName);
+          } else {
+            var listType = v.GetType().GetInterfaces().First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IList<>));
+            var elementType = listType.GetGenericArguments().First();
+            sb.AppendFormat("System.List({0})", elementType.FullName);
+          }
+          sb.Append('}');
+          return sb.ToString();
+        }
+
         return v.ToString();
       }
     }
@@ -187,7 +216,7 @@ namespace CSharpLua {
         foreach (var t in childrens) {
           Convert(t.gameObject, monoBehaviourFieldLazys);
         }
-        
+
         foreach (var i in monoBehaviourFieldLazys) {
           i.Bind();
         }
@@ -265,106 +294,107 @@ namespace CSharpLua {
       }
     }
 
-    private bool IsSameRootGameObject(GameObject x, GameObject y) {
+    private static bool IsSameRootGameObject(GameObject x, GameObject y) {
       string pathX = AssetDatabase.GetAssetPath(x);
       string pathY = AssetDatabase.GetAssetPath(y);
       return pathX == pathY;
     }
 
+    private static bool IsNormalType(Type type, out TypeCode typeCode) {
+      typeCode = Type.GetTypeCode(type);
+      return typeCode == TypeCode.String || (typeCode >= TypeCode.Boolean && typeCode <= TypeCode.Double);
+    }
+
+    private static bool IsNormalType(Type type) {
+      TypeCode typeCode;
+      return IsNormalType(type, out typeCode);
+    }
+
     private void Convert(MonoBehaviour monoBehaviour, LuaTable luaClass, FieldInfo field, SerializeFieldsInfo info) {
       Type fieldType = field.FieldType;
-      TypeCode fieldTypeCode = Type.GetTypeCode(fieldType);
-      switch (fieldTypeCode) {
-        case TypeCode.Boolean:
-        case TypeCode.Char:
-        case TypeCode.SByte:
-        case TypeCode.Byte:
-        case TypeCode.Int16:
-        case TypeCode.UInt16:
-        case TypeCode.Int32:
-        case TypeCode.UInt32:
-        case TypeCode.Int64:
-        case TypeCode.UInt64:
-        case TypeCode.Single:
-        case TypeCode.Double:
-        case TypeCode.String: {
-            object x = field.GetValue(monoBehaviour);
-            object y = luaClass.RawGet<string, object>(field.Name);
-            if (y is double) {
-              if (fieldTypeCode == TypeCode.Char) {
-                x = (double)(char)x;
-              } else {
-                x = System.Convert.ToDouble(x);
-              }
-            }
-            if (!EqualityComparer<object>.Default.Equals(x, y)) {
-              info.Normals.Add(field.Name, x);
-            }
-            break;
+      object fieldValue = field.GetValue(monoBehaviour);
+      TypeCode fieldTypeCode;
+
+      if (IsNormalType(fieldType, out fieldTypeCode)) {
+        object x = fieldValue;
+        object y = luaClass.RawGet<string, object>(field.Name);
+        if (y is double) {
+          if (fieldTypeCode == TypeCode.Char) {
+            x = (double)(char)x;
+          } else {
+            x = System.Convert.ToDouble(x);
           }
-        case TypeCode.Object: {
-            if (typeof(UnityEngine.Object).IsAssignableFrom(fieldType)) {
-              object x = field.GetValue(monoBehaviour);
-              if (x != null) {
-                var obj = x as UnityEngine.Object;
-                if (obj != null) {
-                  if (obj is GameObject) {
-                    var gameObject = (GameObject)obj;
-                    if (!IsSameRootGameObject(monoBehaviour.gameObject, gameObject)) {
-                      bool hasChanged = Do(ref gameObject);
-                      if (hasChanged) {
-                        obj = gameObject;
-                      }
-                    }
-                  } else if (obj is MonoBehaviour) {
-                    var mb = (MonoBehaviour)obj;
-                    var gameObject = mb.gameObject;
-                    bool isSameRoot = IsSameRootGameObject(monoBehaviour.gameObject, gameObject);
-                    if (!isSameRoot) {
-                      bool hasChanged = Do(ref gameObject);
-                      if (hasChanged) {
-                        obj = gameObject;
-                      }
-                    } else {
-                      obj = gameObject;
-                    }
-                    if (IsUserDefine(mb.GetType())) {
-                      if (isSameRoot) {
-                        info.MonoBehaviourFields.Add(field.Name, mb.GetType().FullName);
-                      } else {
-                        var bridges = gameObject.GetComponents<BridgeMonoBehaviour>();
-                        var mbNew = bridges.Single(i => i.LuaClass == mb.GetType().FullName);
-                        Contract.Assert(mbNew != null);
-                        obj = mbNew;
-                      }
-                    } else {
-                      var mbNew = gameObject.GetComponent(mb.GetType());
-                      obj = mbNew;
-                    }
-                  }
-                  info.Objects.Add(field.Name, obj);
-                } 
-              }
-            } else {
-              if (fieldType.IsDefined(typeof(SerializableAttribute), true)) {
-                PauseEdit();
-                throw new NotImplementedException($"{monoBehaviour.GetType()}'s field[{field.Name}] type[{fieldType}] not implemented serialized");
-              }
-            }
-            break;
-          }
-        default: {
-            if (fieldType.IsEnum) {
-              int x = (int)(ValueType)field.GetValue(monoBehaviour);
-              int y = luaClass.RawGet<string, int>(field.Name);
-              if (x != y) {
-                info.Normals.Add(field.Name, x);
-              }
-            }
-            PauseEdit();
-            throw new NotSupportedException($"{monoBehaviour.GetType()}'s field[{field.Name}] type[{fieldType}] not support serialized");
-          }
+        }
+        if (!EqualityComparer<object>.Default.Equals(x, y)) {
+          info.Normals.Add(field.Name, x);
+        }
+        return;
       }
+
+      if (fieldType.IsEnum) {
+        int x = (int)(ValueType)fieldValue;
+        int y = luaClass.RawGet<string, int>(field.Name);
+        if (x != y) {
+          info.Normals.Add(field.Name, x);
+        }
+        return;
+      }
+
+      if (fieldValue == null) {
+        return;
+      }
+
+      if (typeof(UnityEngine.Object).IsAssignableFrom(fieldType)) {
+        var obj = (UnityEngine.Object)fieldValue;
+        if (obj is GameObject) {
+          var gameObject = (GameObject)obj;
+          if (!IsSameRootGameObject(monoBehaviour.gameObject, gameObject)) {
+            bool hasChanged = Do(ref gameObject);
+            if (hasChanged) {
+              obj = gameObject;
+            }
+          }
+        } else if (obj is MonoBehaviour) {
+          var mb = (MonoBehaviour)obj;
+          var gameObject = mb.gameObject;
+          bool isSameRoot = IsSameRootGameObject(monoBehaviour.gameObject, gameObject);
+          if (!isSameRoot) {
+            bool hasChanged = Do(ref gameObject);
+            if (hasChanged) {
+              obj = gameObject;
+            }
+          } else {
+            obj = gameObject;
+          }
+          if (IsUserDefine(mb.GetType())) {
+            if (isSameRoot) {
+              info.MonoBehaviourFields.Add(field.Name, mb.GetType().FullName);
+            } else {
+              var bridges = gameObject.GetComponents<BridgeMonoBehaviour>();
+              var mbNew = bridges.Single(i => i.LuaClass == mb.GetType().FullName);
+              Contract.Assert(mbNew != null);
+              obj = mbNew;
+            }
+          } else {
+            var mbNew = gameObject.GetComponent(mb.GetType());
+            obj = mbNew;
+          }
+        }
+        info.Objects.Add(field.Name, obj);
+        return;
+      }
+
+      var listType = fieldType.GetInterfaces().FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IList<>));
+      if (listType != null) {
+        var elementType = listType.GetGenericArguments().First();
+        if (IsNormalType(elementType)) {
+          info.Normals.Add(field.Name, fieldValue);
+          return;
+        }
+      }
+
+      PauseEdit();
+      throw new NotSupportedException($"{monoBehaviour.GetType()}'s field[{field.Name}] type[{fieldType}] not support serialized");
     }
   }
 }

@@ -105,8 +105,8 @@ local function checkBridgeMonoBehaviour(t)
       local T = getClass(luaClass)
       assert(T, luaClass .. " is not found")
       t = setmetatable({}, T)
-      makeBridge(t, bridge, true, bridge.SerializeData, bridge.SerializeObjects)
       T.__ctor__(t)
+      makeBridge(t, bridge, true, bridge.SerializeData, bridge.SerializeObjects)
       bridge:Bind(t)
     end
   end
@@ -123,14 +123,31 @@ function makeBridge(this, bridgeMonoBehaviour, state, serializeData, serializeOb
       local normals = datas[1]
       if normals then
         for k, v in pairs(normals) do
+          if type(v) == "table" then
+            local n = #v
+            local T = v[n]
+            v[n] = nil
+            setmetatable(v, T)
+          end
           this[k] = v
         end
       end
       local objects = datas[2]
       if objects then
         for k, v in pairs(objects) do
-          this[k] = checkBridgeMonoBehaviour(serializeObjects[v])  
-        end 
+          if type(v) == "table" then
+            local n = #v
+            local T = v[n]
+            v[n] = nil
+            for i = 1, n - 1 do
+              v[i] = checkBridgeMonoBehaviour(serializeObjects[v[i]])
+            end
+            setmetatable(v, T)
+          else
+            v = checkBridgeMonoBehaviour(serializeObjects[v])
+          end
+          this[k] = v
+        end
       end
     end
   end
@@ -141,8 +158,8 @@ end
 
 local function newMonoBehaviour(T, bridgeMonoBehaviour, state, serializeData, serializeObjects)
   local this = setmetatable({}, T)
-  makeBridge(this, bridgeMonoBehaviour, state, serializeData, serializeObjects)
   T.__ctor__(this)
+  makeBridge(this, bridgeMonoBehaviour, state, serializeData, serializeObjects)
   this:Awake()
   return this
 end
