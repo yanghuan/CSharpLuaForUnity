@@ -2,7 +2,6 @@ local System = System
 local throw = System.throw
 local emptyFn = System.emptyFn
 local getClass = System.getClass
-local base = System.Object.base
 local is = System.is
 local NotSupportedException = System.NotSupportedException
 local SystemType = System.Type
@@ -63,9 +62,7 @@ end
 local metatableOfMonoBehaviour = getmetatable(BridgeMonoBehaviour) 
 setmetatable(MonoBehaviour, {
   __index = function (t, k)
-    if k == "base" then
-      return base
-    elseif type(k) == "string" and sbyte(k, 1) ~= 95 then
+    if type(k) == "string" and sbyte(k, 1) ~= 95 then
       local ok, f = pcall(getMonoBehaviourFunction, metatableOfMonoBehaviour, k)
       if ok then
         local v = function (this, ...)

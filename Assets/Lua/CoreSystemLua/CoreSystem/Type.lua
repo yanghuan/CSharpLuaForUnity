@@ -21,6 +21,7 @@ local String = System.String
 local Boolean = System.Boolean
 local Delegate = System.Delegate
 local getClass = System.getClass
+local arrayFromTable = System.arrayFromTable
 
 local InvalidCastException = System.InvalidCastException
 local ArgumentNullException = System.ArgumentNullException
@@ -44,7 +45,6 @@ local ValueType = System.ValueType
 
 local type = type
 local getmetatable = getmetatable
-local ipairs = ipairs
 local select = select
 local unpack = table.unpack
 local floor = math.floor
@@ -110,6 +110,14 @@ end
 
 function Type.getIsGenericType(this)
   return isGenericName(this.c.__name__)
+end
+
+function Type.MakeGenericType(this, ...)
+  local args = { ... }
+  for i = 1, #args do
+    args[i] = args[i].c
+  end
+  return typeof(this.c(unpack(args)))
 end
 
 function Type.getIsEnum(this)
@@ -187,13 +195,15 @@ Type.getIsValueType = getIsValueType
 local function getInterfaces(this)
   local interfaces = this.interfaces
   if interfaces == nil then
-    interfaces = {}
+    interfaces = arrayFromTable({}, Type, true)
+    local count = 1
     local p = this.c
     repeat
       local interfacesCls = p.interface
       if interfacesCls ~= nil then
-        for _, i in ipairs(interfacesCls) do
-          interfaces[#interfaces + 1] = typeof(i)
+        for i = 1, #interfacesCls do
+          interfaces[count] = typeof(interfacesCls[i])
+          count = count + 1
         end
       end
       p = getmetatable(p)
@@ -203,22 +213,16 @@ local function getInterfaces(this)
   return interfaces
 end
 
-function Type.getInterfaces(this)
-  local interfaces = getInterfaces(this)
-  local array = {}
-  for _, i in ipairs(interfaces) do
-    array[#array + 1] = i
-  end    
-  return System.arrayFromTable(array, Type)
-end
+Type.getInterfaces = getInterfaces
 
 local function implementInterface(this, ifaceType)
   local t = this
   while t ~= nil do
     local interfaces = getInterfaces(this)
     if interfaces ~= nil then
-      for _, i in ipairs(interfaces) do
-        if i == ifaceType or implementInterface(i, ifaceType) then
+      for i = 1, #interfaces do
+        local it = interfaces[i]
+        if it == ifaceType or implementInterface(it, ifaceType) then
           return true
         end
       end
@@ -283,8 +287,9 @@ local function isInterfaceOf(t, ifaceType)
   repeat
     local interfaces = t.interface
     if interfaces then
-      for _, i in ipairs(interfaces) do
-        if i == ifaceType or isInterfaceOf(i, ifaceType) then
+      for i = 1, #interfaces do
+        local it = interfaces[i]
+        if it == ifaceType or isInterfaceOf(it, ifaceType) then
           return true
         end
       end 
@@ -310,10 +315,27 @@ local numbers = {
 }
 numbers[Int] = numbers[Int32]
 
-function isTypeOf(obj, cls)    
+local function isTypeOf(obj, cls)    
   if cls == Object then return true end
   local typename = type(obj)
-  if typename == "number" then
+  if typename == "table" then
+    local t = getmetatable(obj)
+    if t == cls then
+      return true
+    end
+    if cls.class == "I" then
+      return isInterfaceOf(t, cls)
+    else
+      local base = getmetatable(t)
+      while base ~= nil do
+        if base == cls then
+          return true
+        end
+        base = getmetatable(base)
+      end
+      return false
+    end
+  elseif typename == "number" then
     local info = numbers[cls]
     if info ~= nil then
       local min, max, sign = info[1], info[2], info[3]
@@ -344,23 +366,6 @@ function isTypeOf(obj, cls)
       return isInterfaceOf(String, cls)
     end
     return false
-  elseif typename == "table" then   
-    local t = getmetatable(obj)
-    if t == cls then
-      return true
-    end
-    if cls.class == "I" then
-      return isInterfaceOf(t, cls)
-    else
-      local base = getmetatable(t)
-      while base ~= nil do
-        if base == cls then
-          return true
-        end
-        base = getmetatable(base)
-      end
-      return false
-    end
   elseif typename == "boolean" then
     if cls == Boolean or cls == ValueType then
       return true
@@ -420,11 +425,7 @@ function System.CreateInstance(type, ...)
   if len == 1 then
     local args = ...
     if System.isArrayLike(args) then
-      local t = {}
-      for k, v in System.ipairs(args) do
-        t[k] = v
-      end
-      return type.c(unpack(t, 1, #args))
+      return type.c(unpack(args))
     end
   end
   return type.c(...)

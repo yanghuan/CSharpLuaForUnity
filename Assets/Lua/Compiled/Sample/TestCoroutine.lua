@@ -7,7 +7,7 @@ System.namespace("Sample", function (namespace)
     local Awake, OnTick, Test, __ctor__
     __ctor__ = function (this)
       this.list = ListInt32()
-      this:base().__ctor__(this)
+      System.base(this).__ctor__(this)
     end
     Awake = function (this)
       UnityEngine.Debug.Log("TestCoroutine")

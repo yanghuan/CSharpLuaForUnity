@@ -27,29 +27,33 @@ end
 
 local function toString(this)
   local t = { this.__name__ }
+  local count = 2
   local message, innerException, stackTrace = getMessage(this), this.innerException, this.errorStack
-  t[#t + 1] = ": "
-  t[#t + 1] = message
+  t[count] = ": "
+  t[count + 1] = message
+  count = count + 2
   if innerException then
-    t[#t + 1] = "---> "
-    t[#t + 1] = innerException:ToString()
+    t[count] = "---> "
+    t[count + 1] = innerException:ToString()
+    count = count + 2
   end
   if stackTrace then
-    t[#t + 1] = stackTrace
+    t[count] = stackTrace
   end
   return tconcat(t)
 end
 
+local function ctorOfException(this, message, innerException)
+  this.message = message
+  this.innerException = innerException
+end
+
 local Exception = define("System.Exception", {
   __tostring = toString,
+  __ctor__ = ctorOfException,
   ToString = toString,
   getMessage = getMessage,
-
-  __ctor__ = function(this, message, innerException) 
-    this.message = message
-    this.innerException = innerException
-  end,
-
+  
   getInnerException = function(this) 
     return this.innerException
   end,
@@ -77,7 +81,7 @@ local ArgumentException = define("System.ArgumentException", {
   __inherits__ = { Exception },
 
   __ctor__ = function(this, message, paramName, innerException) 
-    System.Exception.__ctor__(this, message or "Value does not fall within the expected range.", innerException)
+    ctorOfException(this, message or "Value does not fall within the expected range.", innerException)
     this.paramName = paramName
   end,
 
@@ -126,7 +130,7 @@ define("System.IndexOutOfRangeException", {
    __inherits__ = { Exception },
 
    __ctor__ = function (this, message, innerException)
-    Exception.__ctor__(this, message or "Index was outside the bounds of the array.", innerException)
+    ctorOfException(this, message or "Index was outside the bounds of the array.", innerException)
   end
 })
 
@@ -163,7 +167,7 @@ define("System.KeyNotFoundException", {
   __inherits__ = { Exception },
 
   __ctor__ = function(this, message, innerException) 
-    Exception.__ctor__(this, message or "Key not found.", innerException)
+    ctorOfException(this, message or "Key not found.", innerException)
   end
 })
 
@@ -172,7 +176,7 @@ local ArithmeticException = define("System.ArithmeticException", {
   __inherits__ = { Exception },
 
   __ctor__ = function(this, message, innerException) 
-    Exception.__ctor__(this, message or "Overflow or underflow in the arithmetic operation.", innerException)
+    ctorOfException(this, message or "Overflow or underflow in the arithmetic operation.", innerException)
   end
 })
 
@@ -199,7 +203,7 @@ define("System.FormatException", {
   __inherits__ = { Exception },
 
   __ctor__ = function(this, message, innerException) 
-    Exception.__ctor__(this, message or "Invalid format.", innerException)
+    ctorOfException(this, message or "Invalid format.", innerException)
   end
 })
 
@@ -208,7 +212,7 @@ define("System.InvalidCastException", {
   __inherits__ = { Exception },
 
   __ctor__ = function(this, message, innerException) 
-    Exception.__ctor__(this, message or "The cast is not valid.", innerException)
+    ctorOfException(this, message or "The cast is not valid.", innerException)
   end
 })
 
@@ -217,7 +221,7 @@ define("System.InvalidOperationException", {
   __inherits__ = { Exception },
 
   __ctor__ = function(this, message, innerException) 
-    Exception.__ctor__(this, message or "Operation is not valid due to the current state of the object.", innerException)
+    ctorOfException(this, message or "Operation is not valid due to the current state of the object.", innerException)
   end
 })
 
@@ -226,7 +230,7 @@ define("System.NotImplementedException", {
   __inherits__ = { Exception },
 
   __ctor__ = function(this, message, innerException) 
-    Exception.__ctor__(this, message or "The method or operation is not implemented.", innerException)
+    ctorOfException(this, message or "The method or operation is not implemented.", innerException)
   end
 })
 
@@ -235,7 +239,7 @@ define("System.NotSupportedException", {
   __inherits__ = { Exception },
 
   __ctor__ = function(this, message, innerException) 
-    Exception.__ctor__(this, message or "Specified method is not supported.", innerException)
+    ctorOfException(this, message or "Specified method is not supported.", innerException)
   end
 })
 
@@ -244,7 +248,7 @@ define("System.NullReferenceException", {
   __inherits__ = { Exception },
 
   __ctor__ = function(this, message, innerException) 
-    Exception.__ctor__(this, message or "Object reference not set to an instance of an object.", innerException)
+    ctorOfException(this, message or "Object reference not set to an instance of an object.", innerException)
   end
 })
 
@@ -253,7 +257,7 @@ define("System.RankException", {
   __inherits__ = { Exception },
 
   __ctor__ = function(this, message, innerException) 
-    Exception.__ctor__(this, message or "Attempted to operate on an array with the incorrect number of dimensions.", innerException)
+    ctorOfException(this, message or "Attempted to operate on an array with the incorrect number of dimensions.", innerException)
   end
 })
 
@@ -262,6 +266,6 @@ define("System.TypeLoadException", {
   __inherits__ = { Exception },
 
   __ctor__ = function(this, message, innerException) 
-    Exception.__ctor__(this, message or "Failed when load type.", innerException)
+    ctorOfException(this, message or "Failed when load type.", innerException)
   end
 })

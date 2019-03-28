@@ -41,31 +41,22 @@ local coroutine = coroutine
 local ccreate = coroutine.create
 local cresume = coroutine.resume
 local cyield = coroutine.yield
-local ipairs = ipairs
 
 local Collection = {}
 local null = {}
 
-local versons = setmetatable({}, { __mode = "k" })
-
-local function getVersion(t)
-  return versons[t] or 0
-end
+local versions = setmetatable({}, { __mode = "k" })
 
 local function changeVersion(t)
-  local verson = getVersion(t)
-  versons[t] = verson + 1
+  local version = versions[t]
+  versions[t] = version and version + 1 or 0
 end
 
-local function checkVersion(t, verson)
-  if verson ~= getVersion(t) then
-    throw(InvalidOperationException("Collection was modified; enumeration operation may not execute."))
-  end
+local function throwFailedVersion()
+  throw(InvalidOperationException("Collection was modified; enumeration operation may not execute."))
 end
 
-Collection.getVersion = getVersion
 Collection.changeVersion = changeVersion
-Collection.checkVersion = checkVersion
 
 local counts = setmetatable({}, { __mode = "k" })
 
@@ -138,18 +129,31 @@ function Collection.pushArray(t, v)
   changeVersion(t)
 end
 
-function Collection.buildArray(T, size)
-  local t = setmetatable({}, T)
-  if size > 0 then
-    local default = T.__genericT__:default()
-    if default == nil then
-      default = null
+function Collection.buildArray(T, len, t)
+  if t == nil then 
+    t = {}
+    if len > 0 then
+      local default = T.__genericT__:default()
+      if default == nil then
+        default = null
+      end
+      for i = 1, len do
+        t[i] = default
+      end
     end
-    for i = 1, size do
-      t[#t + 1] = default
+  else
+    if len > 0 then
+      local default = T.__genericT__:default()
+      if default == nil then
+        for i = 1, len do
+          if t[i] == nil then
+            t[i] = null
+          end
+        end
+      end
     end
   end
-  return t
+  return setmetatable(t, T)
 end
 
 local function checkInsertIndex(t, index)   
@@ -292,8 +296,8 @@ function Collection.findOfArray(t, match)
   if match == nil then
     throw(ArgumentNullException("match"))
   end
-  for _, i in ipairs(t) do
-    local item = unWrap(i)
+  for i = 1, #t do
+    local item = unWrap(t[i])
     if match(item) then
       return item
     end
@@ -306,8 +310,8 @@ function Collection.findAllOfArray(t, match)
     throw(ArgumentNullException("match"))
   end
   local list = System.List(t.__genericT__)()
-  for _, i in ipairs(t) do
-    local item = unWrap(i)
+  for i = 1, #t do
+    local item = unWrap(t[i])
     if match(item) then
       list:Add(item)
     end
@@ -503,42 +507,54 @@ function Collection.trueForAllOfArray(t, match)
   if match == nil then
     throw(ArgumentNullException("match"))
   end
-  for _, i in ipairs(t) do
-    if not match(unWrap(i)) then
+  for i = 1, #t do
+    if not match(unWrap(t[i])) then
       return false
     end
   end
   return true
 end
 
-local ipairsFn = ipairs(null)
 local function ipairsArray(t)
-  local version = getVersion(t)
-  return function(t, inx) 
-    checkVersion(t, version)
-    local k, v = ipairsFn(t, inx)
-    return k, unWrap(v)
-  end, t, 0
+  local version = versions[t]
+  return function (t, i)
+    if version ~= versions[t] then
+      throwFailedVersion()
+    end
+    local v = t[i]
+    if v ~= nil then
+      if v == null then
+        v = nil
+      end
+      return i + 1, v
+    end
+  end, t, 1
 end
 
 local pairsFn = next
+
 local function pairsDict(t)
-  local version = getVersion(t)
-  return function(t, inx) 
-    checkVersion(t, version)
-    local k, v = pairsFn(t, inx)
-    return k, unWrap(v)
+  local version = versions[t]
+  return function (t, i)
+    if version ~= versions[t] then
+      throwFailedVersion()
+    end
+    local k, v = pairsFn(t, i)
+    if v == null then
+      return k
+    end
+    return k, v
   end, t, nil
 end
 
 function Collection.forEachArray(t, action)
-  if action == null then
-    throw(ArgumentNullException("action"))
-  end
-  local verson = getVersion(t)
-  for _, i in ipairs(t) do
-    checkVersion(t, verson)
-    action(unWrap(i))
+  if action == null then throw(ArgumentNullException("action")) end
+  local version = versions[t]
+  for i = 1, #t do
+    if version ~= versions[t] then
+      throwFailedVersion()
+    end
+    action(unWrap(t[i]))
   end
 end
 
@@ -547,12 +563,18 @@ ArrayEnumerator.__index = ArrayEnumerator
 
 function ArrayEnumerator.MoveNext(this)
   local t = this.list
-  checkVersion(t, this.verson)
+  if this.version ~= versions[t] then
+    throwFailedVersion()
+  end
   local index = this.index
-  if index < #t then
-    local i, v = ipairsFn(t, index)
-    this.current = unWrap(v)
-    this.index = i
+  local v = t[index]
+  if v ~= nil then
+    if v == null then
+      this.current = nil
+    else
+      this.current = v
+    end
+    this.index = index + 1
     return true
   end
   this.current = nil
@@ -573,8 +595,8 @@ ArrayEnumerator.Dispose = System.emptyFn
 local function arrayEnumerator(t)
   local en = {
     list = t,
-    index = 0,
-    verson = getVersion(t),
+    index = 1,
+    version = versions[t],
   }
   setmetatable(en, ArrayEnumerator)
   return en
@@ -598,10 +620,8 @@ local function eachFn(en)
 end
 
 local function each(t)
-  if t == nil then
-    throw(NullReferenceException(), 1)
-  end
-  local getEnumerator = assert(t.GetEnumerator, t.__name__)
+  if t == nil then throw(NullReferenceException(), 1) end
+  local getEnumerator = t.GetEnumerator
   if getEnumerator == arrayEnumerator then
     return ipairsArray(t)
   end
@@ -626,8 +646,10 @@ function Collection.toArray(t)
   if isArrayLike(t) then
     tmove(t, 1, #t, 1, array)
   else
+    local count = 1
     for _, v in each(t) do
-      array[#array + 1] = wrap(v)
+      array[count] = wrap(v)
+      count = count + 1
     end
   end
   return System.arrayFromTable(array, t.__genericT__)
@@ -635,50 +657,62 @@ end
 
 local function toLuaTable(array)
   local t = {}
-  for i, v in ipairs(array) do
-    t[i] = unWrap(v)
+  for i = 1, #array do
+    t[i] = unWrap(array[i])
   end   
   return t
 end
 
-local KeyValuePair
-KeyValuePair = System.defStc("System.KeyValuePair", {
-  __ctor__ = function (this, key, value)
-    this.Key, this.Value = key, value
+local KeyValuePairFn
+local KeyValuePair = {
+  __ctor__ = function (this, ...)
+    if select("#", ...) == 0 then
+      this.Key, this.Value = this.__genericTKey__:default(), this.__genericTValue__:default()
+    else
+      this.Key, this.Value = ...
+    end
   end,
-  __clone__ = function (this)
-    return setmetatable({ Key = this.Key, Value = this.Value }, KeyValuePair)
-  end,
-  default = function (T)
-    throw(System.NotSupportedException("KeyValuePair not support default(T)"))
-  end,
-  Create = function (key, value)
-    return setmetatable({ Key = key, Value = value }, KeyValuePair)
+  Create = function (key, value, TKey, TValue)
+    return setmetatable({ Key = key, Value = value }, KeyValuePairFn(TKey, TValue))
   end,
   Deconstruct = function (this)
     return this.Key, this.Value
   end,
   ToString = function (this)
     local t = { "[" }
+    local count = 2
     local k, v = this.Key, this.Value
     if k ~= nil then
-      t[#t + 1] = k:ToString()
+      t[count] = k:ToString()
+      count = count + 1
     end
-    t[#t + 1] = ", "
+    t[count] = ", "
+    count = count + 1
     if v ~= nil then
-      t[#t + 1] = v:ToString()
+      t[count] = v:ToString()
+      count = count + 1
     end
-    t[#t + 1] = "]"
+    t[count] = "]"
     return tconcat(t)
   end
-})
+}
+
+KeyValuePairFn = System.defStc("System.KeyValuePair", function(TKey, TValue)
+  local cls = {
+    __genericTKey__ = TKey,
+    __genericTValue__ = TValue,
+  }
+  return cls
+end, KeyValuePair)
 
 local DictionaryEnumerator = {}
 DictionaryEnumerator.__index = DictionaryEnumerator
 
 function DictionaryEnumerator.MoveNext(this)
   local t = this.dict
-  checkVersion(t, this.version)
+  if this.version ~= versions[t] then
+    throwFailedVersion()
+  end
   local k, v = pairsFn(t, this.index)
   if k ~= nil then
     if this.kind == 0 then
@@ -687,7 +721,7 @@ function DictionaryEnumerator.MoveNext(this)
       pair.Value = unWrap(v)
       this.current = pair
     elseif this.kind == 1 then
-      this.current = unWrap(k)
+      this.current = k
     else
       this.current = unWrap(v)
     end
@@ -707,9 +741,9 @@ DictionaryEnumerator.Dispose = System.emptyFn
 function Collection.dictionaryEnumerator(t, kind)
   local en = {
     dict = t,
-    version = getVersion(t),
+    version = versions[t],
     kind = kind,
-    pair = kind == 0 and setmetatable({ Key = false, Value = false }, KeyValuePair) or nil
+    pair = kind == 0 and setmetatable({ Key = false, Value = false }, KeyValuePairFn(t.__genericTKey__, t.__genericTValue__)) or nil
   }
   setmetatable(en, DictionaryEnumerator)
   return en
@@ -721,7 +755,9 @@ LinkedListEnumerator.__index = LinkedListEnumerator
 function LinkedListEnumerator.MoveNext(this)
   local list = this.list
   local node = this.node
-  checkVersion(list, this.version)
+  if this.version ~= versions[list] then
+    throwFailedVersion()
+  end
   if node == nil then
     return false
   end
@@ -743,7 +779,7 @@ LinkedListEnumerator.Dispose = System.emptyFn
 function Collection.linkedListEnumerator(t)
   local en = {
     list = t,
-    version = getVersion(t),
+    version = versions[t],
     node = t.head
   }
   setmetatable(en, LinkedListEnumerator)

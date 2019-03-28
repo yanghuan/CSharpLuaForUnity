@@ -17,7 +17,6 @@ limitations under the License.
 local setmetatable = setmetatable
 local getmetatable = getmetatable
 local type = type
-local ipairs = ipairs
 local pairs  = pairs
 local assert = assert
 local table = table
@@ -32,6 +31,7 @@ local xpcall = xpcall
 local rawget = rawget
 local rawset = rawset
 local tostring = tostring
+local string = string
 local sfind = string.find
 local ssub = string.sub
 local global = _G
@@ -43,7 +43,9 @@ local zeroFn = function() return 0 end
 local equals = function(x, y) return x == y end
 local modules = {}
 local usings = {}
-local metadatas = {}
+local classes = {}
+local metadatas
+
 local Object, ValueType
 
 local function new(cls, ...)
@@ -124,32 +126,36 @@ local function set(className, cls)
   end
 end
 
-local function genericKey(t, k, ...) 
+local function multiKey(t, ...)
+  local k 
   for i = 1, select("#", ...) do
+    k = select(i, ...)
     local tk = t[k]
     if tk == nil then
       tk = {}
       t[k] = tk
     end
     t = tk
-    k = select(i, ...)
   end
   return t, k
 end
 
 local function genericName(name, ...)
-  local t = { name, "[" }  
+  local t = { name, "[" }
+  local count = 3
   local hascomma
   for i = 1, select("#", ...) do
     local cls = select(i, ...)
     if hascomma then
-      t[#t + 1] = ","
+      t[count] = ","
+      count = count + 1
     else
       hascomma = true
     end
-    t[#t + 1] = cls.__name__
+    t[count] = cls.__name__
+    count = count + 1
   end
-  t[#t + 1] = "]"
+  t[count] = "]"
   return tconcat(t)
 end
 
@@ -161,8 +167,19 @@ interfaceMetatable.__index = interfaceMetatable
 
 local ctorMetatable = { __call = function (ctor, ...) return ctor[1](...) end }
 
+local function applyExtends(cls)
+  local extends = cls.__inherits__
+  if extends then
+    if type(extends) == "function" then
+      extends = extends(global, cls)
+    end
+    cls.__inherits__ = nil
+  end
+  return extends
+end
+
 local function applyMetadata(cls)
-  local metadata = rawget(cls, "__metadata__")
+  local metadata = cls.__metadata__
   if metadata then
     if metadatas then
       metadatas[#metadatas + 1] = function (global)
@@ -182,16 +199,12 @@ local function setBase(cls, kind)
   if ctor and type(ctor) == "table" then
     setmetatable(ctor, ctorMetatable)
   end
-
-  local extends = cls.__inherits__
-  if extends and type(extends) == "function" then
-    extends = extends(global, cls)
-  end
+  local extends = applyExtends(cls)
+  applyMetadata(cls)
 
   if kind == "S" then
     if extends then
       cls.interface = extends
-      cls.__inherits__ = nil
     end
     setmetatable(cls, ValueType)
   else
@@ -207,12 +220,10 @@ local function setBase(cls, kind)
           cls.interface = extends
         end
       end
-      cls.__inherits__ = nil
     else
       setmetatable(cls, Object)
     end
   end
-  applyMetadata(cls)
 end
 
 local function staticCtorSetBase(cls)
@@ -268,10 +279,10 @@ local function def(name, kind, cls, generic)
     end
     local mt = {}
     local fn = function(_, ...)
-      local gt, gk = genericKey(mt, ...)
+      local gt, gk = multiKey(mt, ...)
       local t = gt[gk]
       if t == nil then
-        t = def(nil, kind, cls(...) or {}, genericName(name, ...))
+        t = def(genericName(name, ...), kind, cls(...) or {}, true)
         if generic then
           setmetatable(t, generic)
         end
@@ -282,11 +293,9 @@ local function def(name, kind, cls, generic)
     return set(name, setmetatable(generic or {}, { __call = fn, __index = Object }))
   end
   cls = cls or {}
-  if name ~= nil then
+  cls.__name__ = name
+  if not generic then
     set(name, cls)
-    cls.__name__ = name
-  else
-    cls.__name__ = generic
   end
   if kind == "C" or kind == "S" then
     if cls.static == nil then
@@ -295,19 +304,15 @@ local function def(name, kind, cls, generic)
       setHasStaticCtor(cls, kind)
     end
   elseif kind == "I" then
-    local extends = cls.__inherits__
-    if extends then
-      if type(extends) == "function" then
-        extends = extends(global, cls)
-      end
-      cls.interface = extends
-      cls.__inherits__ = nil
+    local extends = applyExtends(cls)
+    if extends then 
+      cls.interface = extends 
     end
+    applyMetadata(cls)
     setmetatable(cls, interfaceMetatable)
-    applyMetadata(cls)
   elseif kind == "E" then
-    setmetatable(cls, enumMetatable)
     applyMetadata(cls)
+    setmetatable(cls, enumMetatable)
   else
     assert(false, kind)
   end
@@ -339,12 +344,13 @@ System = {
   try = try,
   throw = throw,
   getClass = set,
-  genericKey = genericKey,
+  multiKey = multiKey,
   define = defCls,
   defInf = defInf,
   defStc = defStc,
   defEnum = defEnum,
-  global = global
+  global = global,
+  classes = classes
 }
 
 local System = System
@@ -363,22 +369,20 @@ if version < 5.3 then
   local bnot, band, bor, xor, sl, sr
   local ok, bit = pcall(require, "bit")
   if ok then
-    bnot = bit.bnot
-    band = bit.band
-    bor = bit.bor
-    xor = bit.bxor
-    sl = bit.lshift
-    sr = bit.rshift
-
-    System.bnot = bnot
-    System.band = band
-    System.bor = bor
-    System.xor = xor
-    System.sl = sl
-    System.sr = sr
+    bnot, band, bor, xor, sl, sr = bit.bnot, bit.band, bit.bor, bit.bxor, bit.lshift, bit.rshift
   else
-    print("load bit fail, bit operation is not enabled")
+    local function disable()
+      throw(System.NotSupportedException("bit operation is not enabled."))
+    end
+    bnot, band, bor, xor, sl, sr  = disable, disable, disable, disable, disable, disable
   end
+
+  System.bnot = bnot
+  System.band = band
+  System.bor = bor
+  System.xor = xor
+  System.sl = sl
+  System.sr = sr
   
   function System.bnotOfNull(x)
     if x == nil then
@@ -443,7 +447,7 @@ if version < 5.3 then
     if y == 0 then
       throw(System.DivideByZeroException(), 1)
     end
-    return x % y;
+    return x % y
   end
 
   function System.modOfNull(x, y)
@@ -453,7 +457,7 @@ if version < 5.3 then
     if y == 0 then
       throw(System.DivideByZeroException(), 1)
     end
-    return x % y;
+    return x % y
   end
 
   function System.toUInt(v, max, mask, checked)
@@ -942,7 +946,7 @@ function System.new(cls, index, ...)
   return this, cls.__ctor__[index](this, ...)
 end
 
-local function base(this)
+function System.base(this)
   return getmetatable(getmetatable(this))
 end
 
@@ -966,10 +970,9 @@ end
 
 Object = defCls("System.Object", {
   __call = new,
-  default = emptyFn,
   __ctor__ = emptyFn,
+  default = emptyFn,
   class = "C",
-  base = base,
   EqualsObj = equals,
   ReferenceEquals = equals,
   GetHashCode = identityFn,
@@ -1041,8 +1044,8 @@ local ValueTuple = {
   end,
   Deconstruct = tupleDeconstruct,
   __eq = function (this, other)
-    for k, v in ipairs(this) do
-     if not equalsStatic(v, other[k]) then
+    for i = 1, #this do
+     if not equalsStatic(this[i], other[i]) then
         return false
       end
     end
@@ -1070,7 +1073,15 @@ debug.setmetatable(nil, {
       return a
     end
   end,
-  __add = emptyFn,
+  __add = function (a, b)
+    if a == nil then
+      if b == nil or type(b) == "number" then
+        return nil
+      end
+      return b
+    end
+    return nil
+  end,
   __sub = emptyFn,
   __mul = emptyFn,
   __div = emptyFn,
@@ -1211,36 +1222,35 @@ function System.namespace(name, f)
 end
 
 function System.init(namelist, conf)
-  local classes = {}
-  for _, name in ipairs(namelist) do
+  metadatas = {}
+
+  local count = #classes + 1
+  for i = 1, #namelist do
+    local name = namelist[i]
     local cls = assert(modules[name], name)()
-    classes[#classes + 1] = cls
+    classes[count] = cls
+    count = count + 1
   end
-  for _, f in ipairs(usings) do
-    f(global)
+  for i = 1, #usings do
+    usings[i](global)
   end
-	for _, f in ipairs(metadatas) do
-		f(global)
+	for i = 1, #metadatas do
+		metadatas[i](global)
 	end
   if conf ~= nil then
-    System.entryPoint = conf.Main
+    local main = conf.Main
+    if main then
+      assert(not System.entryPoint)
+      System.entryPoint = main
+    end
   end
-	System.classes = classes
-	
-  modules = nil
-  usings = nil
-	metadatas = nil
 
-	namespace = nil
+  modules = {}
+  usings = {}
+	metadatas = nil
 	curCacheName = nil
-	defIn = nil
-	System.import = nil
-	System.init = nil
 end
 
-System.config = {}
-return function (config) 
-  if config then
-    System.config = config
-  end
+return function (config)
+  System.config = config or {}
 end
