@@ -15,9 +15,39 @@ using LuaInterface;
 namespace CSharpLua {
   public sealed class UserMonoBehaviourConverter {
     private sealed class SerializeFieldsInfo {
+      internal abstract class ObjectField {
+        public string Name;
+        public abstract void FillTo(StringBuilder sb);
+      }
+
+      internal sealed class PoolIndexObjectField : ObjectField {
+        public int PoolIndex;
+
+        public override void FillTo(StringBuilder sb) {
+          sb.Append(PoolIndex);
+        }
+      }
+
+      internal sealed class ArrayObjectField : ObjectField {
+        public bool IsArray;
+        public Type ElementType;
+        public List<int> PoolIndexs = new List<int>();
+
+        public override void FillTo(StringBuilder sb) {
+          string array = ToList(IsArray, ElementType, PoolIndexs, i => i.ToString());
+          sb.Append(array);
+        }
+      }
+
+      internal sealed class MonoBehaviourField {
+        public int PoolIndex;
+        public string ClassName;
+      }
+
       public Dictionary<string, object> Normals = new Dictionary<string, object>();
-      public Dictionary<string, UnityEngine.Object> Objects = new Dictionary<string, UnityEngine.Object>();
-      public Dictionary<string, string> MonoBehaviourFields = new Dictionary<string, string>();
+      public List<UnityEngine.Object> ObjectsPool = new List<UnityEngine.Object>();
+      public List<ObjectField> Objects = new List<ObjectField>();
+      public List<MonoBehaviourField> MonoBehaviourFields = new List<MonoBehaviourField>();
 
       private void AppendNormals(StringBuilder sb) {
         sb.Append('{');
@@ -39,18 +69,15 @@ namespace CSharpLua {
         if (Objects.Count > 0) {
           sb.Append('{');
           bool isFirst = true;
-          int objectIndex = 0;
-          foreach (string key in Objects.Keys) {
+          foreach (var field in Objects) {
             if (isFirst) {
               isFirst = false;
             } else {
               sb.Append(',');
             }
-
-            sb.Append(key);
+            sb.Append(field.Name);
             sb.Append('=');
-            sb.Append(objectIndex);
-            ++objectIndex;
+            field.FillTo(sb);
           }
           sb.Append('}');
         }
@@ -70,42 +97,50 @@ namespace CSharpLua {
       }
 
       public UnityEngine.Object[] GetSerializeObjects() {
-        return Objects.Count > 0 ? Objects.Values.ToArray() : null;
+        return ObjectsPool.Count > 0 ? ObjectsPool.ToArray() : null;
       }
 
-      private static string ValueToString(object v) {
+      private static string ToList(bool isArray, Type elementType, IList list, Func<object, string> transfore) {
+        StringBuilder sb = new StringBuilder();
+        sb.Append('{');
+        if (list.Count > 0) {
+          bool isFirst = true;
+          foreach (var i in list) {
+            if (isFirst) {
+              isFirst = false;
+            } else {
+              sb.Append(',');
+            }
+            sb.Append(transfore(i));
+          }
+          sb.Append(',');
+        }
+        if (isArray) {
+          sb.AppendFormat("System.Array({0})", elementType.FullName);
+        } else {
+          sb.AppendFormat("System.List({0})", elementType.FullName);
+        }
+        sb.Append('}');
+        return sb.ToString();
+      }
+
+      private static string NormalValueToString(object v) {
         if (v is string) {
           return "\"" + v + "\"";
         }
 
+        return v.ToString();
+      }
+
+      private static string ValueToString(object v) {
         if (v is IList) {
-          var array = (IList)v;
-          StringBuilder sb = new StringBuilder();
-          sb.Append('{');
-          if (array.Count > 0) {
-            bool isFirst = true;
-            foreach (var i in array) {
-              if (isFirst) {
-                isFirst = false;
-              } else {
-                sb.Append(',');
-              }
-              sb.Append(ValueToString(i));
-            }
-            sb.Append(',');
-          }
-          if (v is Array) {
-            sb.AppendFormat("System.Array({0})", v.GetType().GetElementType().FullName);
-          } else {
-            var listType = v.GetType().GetInterfaces().First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IList<>));
-            var elementType = listType.GetGenericArguments().First();
-            sb.AppendFormat("System.List({0})", elementType.FullName);
-          }
-          sb.Append('}');
-          return sb.ToString();
+          var list = (IList)v;
+          bool isArray = list is Array;
+          var elementType = isArray ? v.GetType().GetElementType() : v.GetType().GetIListElementType();
+          return ToList(isArray, elementType, list, NormalValueToString);
         }
 
-        return v.ToString();
+        return NormalValueToString(v);
       }
     }
 
@@ -115,11 +150,11 @@ namespace CSharpLua {
       public BridgeMonoBehaviour BridgeMonoBehaviour;
 
       public void Bind() {
-        foreach (var pair in SerializeInfo.MonoBehaviourFields) {
-          var gameObject = (GameObject)SerializeInfo.Objects[pair.Key];
+        foreach (var field in SerializeInfo.MonoBehaviourFields) {
+          var gameObject = (GameObject)SerializeInfo.ObjectsPool[field.PoolIndex];
           var bridges = gameObject.GetComponents<BridgeMonoBehaviour>();
-          var item = bridges.Single(i => i.LuaClass == pair.Value);
-          SerializeInfo.Objects[pair.Key] = item;
+          var item = bridges.Single(i => i.LuaClass == field.ClassName);
+          SerializeInfo.ObjectsPool[field.PoolIndex] = item;
         }
         BridgeMonoBehaviour.Bind(ClassName, SerializeInfo.GetSerializeData(), SerializeInfo.GetSerializeObjects());
       }
@@ -310,6 +345,51 @@ namespace CSharpLua {
       return IsNormalType(type, out typeCode);
     }
 
+    private int ConvertUnityEngineGameObject(MonoBehaviour monoBehaviour, object fieldValue, SerializeFieldsInfo info) {
+      int poolIndex = info.Objects.Count;
+      var obj = (UnityEngine.Object)fieldValue;
+      if (obj is GameObject) {
+        var gameObject = (GameObject)obj;
+        if (!IsSameRootGameObject(monoBehaviour.gameObject, gameObject)) {
+          bool hasChanged = Do(ref gameObject);
+          if (hasChanged) {
+            obj = gameObject;
+          }
+        }
+      } else if (obj is MonoBehaviour) {
+        var mb = (MonoBehaviour)obj;
+        var gameObject = mb.gameObject;
+        bool isSameRoot = IsSameRootGameObject(monoBehaviour.gameObject, gameObject);
+        if (!isSameRoot) {
+          bool hasChanged = Do(ref gameObject);
+          if (hasChanged) {
+            obj = gameObject;
+          }
+        } else {
+          obj = gameObject;
+        }
+        if (IsUserDefine(mb.GetType())) {
+          if (isSameRoot) {
+            info.MonoBehaviourFields.Add(new SerializeFieldsInfo.MonoBehaviourField() {
+              PoolIndex = poolIndex,
+              ClassName = mb.GetType().FullName,
+            });
+          } else {
+            var bridges = gameObject.GetComponents<BridgeMonoBehaviour>();
+            var mbNew = bridges.Single(i => i.LuaClass == mb.GetType().FullName);
+            Contract.Assert(mbNew != null);
+            obj = mbNew;
+          }
+        } else {
+          var mbNew = gameObject.GetComponent(mb.GetType());
+          obj = mbNew;
+        }
+      }
+
+      info.ObjectsPool.Add(obj);
+      return poolIndex;
+    }
+
     private void Convert(MonoBehaviour monoBehaviour, LuaTable luaClass, FieldInfo field, SerializeFieldsInfo info) {
       Type fieldType = field.FieldType;
       object fieldValue = field.GetValue(monoBehaviour);
@@ -344,57 +424,49 @@ namespace CSharpLua {
         return;
       }
 
-      if (typeof(UnityEngine.Object).IsAssignableFrom(fieldType)) {
-        var obj = (UnityEngine.Object)fieldValue;
-        if (obj is GameObject) {
-          var gameObject = (GameObject)obj;
-          if (!IsSameRootGameObject(monoBehaviour.gameObject, gameObject)) {
-            bool hasChanged = Do(ref gameObject);
-            if (hasChanged) {
-              obj = gameObject;
-            }
-          }
-        } else if (obj is MonoBehaviour) {
-          var mb = (MonoBehaviour)obj;
-          var gameObject = mb.gameObject;
-          bool isSameRoot = IsSameRootGameObject(monoBehaviour.gameObject, gameObject);
-          if (!isSameRoot) {
-            bool hasChanged = Do(ref gameObject);
-            if (hasChanged) {
-              obj = gameObject;
-            }
-          } else {
-            obj = gameObject;
-          }
-          if (IsUserDefine(mb.GetType())) {
-            if (isSameRoot) {
-              info.MonoBehaviourFields.Add(field.Name, mb.GetType().FullName);
-            } else {
-              var bridges = gameObject.GetComponents<BridgeMonoBehaviour>();
-              var mbNew = bridges.Single(i => i.LuaClass == mb.GetType().FullName);
-              Contract.Assert(mbNew != null);
-              obj = mbNew;
-            }
-          } else {
-            var mbNew = gameObject.GetComponent(mb.GetType());
-            obj = mbNew;
-          }
-        }
-        info.Objects.Add(field.Name, obj);
+      if (fieldType.IsUnityEngineObject()) {
+        int poolIndex = ConvertUnityEngineGameObject(monoBehaviour, fieldValue, info);
+        info.Objects.Add(new SerializeFieldsInfo.PoolIndexObjectField() {
+          Name = field.Name,
+          PoolIndex = poolIndex,
+        });
         return;
       }
 
-      var listType = fieldType.GetInterfaces().FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IList<>));
-      if (listType != null) {
-        var elementType = listType.GetGenericArguments().First();
-        if (IsNormalType(elementType)) {
+      var elementTypeOfIList = fieldType.GetIListElementType();
+      if (elementTypeOfIList != null) {
+        if (IsNormalType(elementTypeOfIList)) {
           info.Normals.Add(field.Name, fieldValue);
+          return;
+        } else if (elementTypeOfIList.IsUnityEngineObject()) {
+          SerializeFieldsInfo.ArrayObjectField array = new SerializeFieldsInfo.ArrayObjectField() {
+            Name = field.Name,
+            IsArray = fieldType.IsArray,
+            ElementType = elementTypeOfIList
+          };
+          IList list = (IList)fieldValue;
+          foreach (object v in list) {
+            int poolIndex = ConvertUnityEngineGameObject(monoBehaviour, v, info);
+            array.PoolIndexs.Add(poolIndex);
+          }
+          info.Objects.Add(array);
           return;
         }
       }
 
       PauseEdit();
       throw new NotSupportedException($"{monoBehaviour.GetType()}'s field[{field.Name}] type[{fieldType}] not support serialized");
+    }
+  }
+
+  public static partial class Extensions {
+    public static Type GetIListElementType(this Type type) {
+      var listType = type.GetInterfaces().FirstOrDefault(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IList<>));
+      return listType != null ? listType.GetGenericArguments().First() : null;
+    }
+
+    public static bool IsUnityEngineObject(this Type type) {
+      return typeof(UnityEngine.Object).IsAssignableFrom(type);
     }
   }
 }
