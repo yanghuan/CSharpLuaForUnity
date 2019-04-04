@@ -346,7 +346,7 @@ namespace CSharpLua {
     }
 
     private int ConvertUnityEngineGameObject(MonoBehaviour monoBehaviour, object fieldValue, SerializeFieldsInfo info) {
-      int poolIndex = info.Objects.Count;
+      int poolIndex = info.ObjectsPool.Count;
       var obj = (UnityEngine.Object)fieldValue;
       if (obj is GameObject) {
         var gameObject = (GameObject)obj;
