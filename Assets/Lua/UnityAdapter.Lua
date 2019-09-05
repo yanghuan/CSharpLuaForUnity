@@ -441,11 +441,11 @@ local function destroyImmediate(obj, t)
   end  
 end
 
-local function dontDestroyOnLoad(target)
+local function dontDestroyOnLoad(obj)
   if obj and not isFromCSharp(obj) then
     obj = assert(obj.ref)
   end
-  sourceDontDestroyOnLoad(target)
+  sourceDontDestroyOnLoad(obj)
 end
 
 local function findObjectOfType(T)
