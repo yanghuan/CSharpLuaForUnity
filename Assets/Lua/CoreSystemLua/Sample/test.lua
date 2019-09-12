@@ -30,6 +30,7 @@ local function runTimeout()
   end
 end
 
+package.path = package.path .. ";CSharp.lua/Coresystem.lua/?.lua"
 require("All")("", conf)
 collectgarbage("collect")
 print(collectgarbage("count"))
@@ -69,7 +70,7 @@ local function testDateTimeAndTimeSpan()
 end
 
 local function testArray() 
-  local arr = System.Array(System.Int):new(10)
+  local arr = System.Array(System.Int32):new(10)
   print(arr:ToString(), #arr)
   printList(arr)
   arr:set(0, 2)
@@ -371,6 +372,3 @@ test(testStringBuilder, "StringBuilder")
 test(testIO, "IO")
 --test(testConsole, "Console")
 --test(testAsync, "Async")
-
-
- 

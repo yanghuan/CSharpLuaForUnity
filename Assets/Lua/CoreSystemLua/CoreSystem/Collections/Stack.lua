@@ -15,56 +15,28 @@ limitations under the License.
 --]]
 
 local System = System
-local Collection = System.Collection
-local removeAtArray = Collection.removeAtArray
-local getArray = Collection.getArray
-local insertRangeArray = Collection.insertRangeArray
+local Array = System.Array
 
-local select = select
-
-local Stack = {}
-
-function Stack.__ctor__(this, ...)
-  local len = select("#", ...)
-  if len == 0 then return end
-  local collection = ...
-  if type(collection) == "number" then return end
-  insertRangeArray(this, 0, collection)
-end
-
-function Stack.getCount(this)
-  return #this
-end
-
-Stack.Clear = Collection.removeArrayAll
-Stack.Push = Collection.pushArray
-Stack.Contains = Collection.contains
-
-local function peek(t)
-  local n = #t
-  if n == 0 then
-    throw(InvalidOperationException())
-  end
-  return getArray(t, n - 1)
-end
-
-Stack.Peek = peek
-
-function Stack.Pop(this)
-  local v = peek(this)
-  removeAtArray(this, #this - 1)
-  return v
-end
+local Stack = {
+  __ctor__ = Array.ctorList,
+  getCount = Array.getLength,
+  Clear = Array.clear,
+  Contains = Array.Contains,
+  GetEnumerator = Array.reverseEnumerator,
+  Push = Array.add,
+  Peek = Array.last,
+  Pop = Array.popLast,
+  ToArray = Array.toArray,
+  TrimExcess = System.emptyFn
+}
 
 function System.stackFromTable(t, T)
-  assert(T)
   return setmetatable(t, Stack(T))
 end
 
 System.define("System.Stack", function(T) 
-  local cls = {
+  return {
     __inherits__ = { System.IEnumerable_1(T), System.ICollection },
     __genericT__ = T,
   }
-  return cls
 end, Stack)

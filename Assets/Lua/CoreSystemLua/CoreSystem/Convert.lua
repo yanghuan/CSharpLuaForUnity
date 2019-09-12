@@ -25,6 +25,8 @@ local IConvertible = System.IConvertible
 
 local OverflowException = System.OverflowException
 local FormatException = System.FormatException
+local ArgumentException = System.ArgumentException
+local ArgumentOutOfRangeException = System.ArgumentOutOfRangeException
 local ArgumentNullException = System.ArgumentNullException
 local InvalidCastException = System.InvalidCastException
 
@@ -60,8 +62,11 @@ local ParseBoolean = Boolean.Parse
 local type = type
 local string = string
 local sbyte = string.byte
+local math = math
 local floor = math.floor
+local tconcat = table.concat
 local getmetatable = getmetatable
+local tonumber = tonumber
 
 local function toBoolean(value)
   if value == nil then return false end
@@ -81,11 +86,11 @@ local function toChar(value)
   if value == nil then return 0 end
   local typename = type(value)
   if typename == "number" then
+    if value ~= floor(value) or value > 9223372036854775807 or value < -9223372036854775808 then
+      throw(InvalidCastException("InvalidCast_FromTo_Char"))
+    end
     if value < 0 or value > 65535 then 
       throw(OverflowException("Overflow_Char")) 
-    end
-    if value ~= floor(value) then
-      throw(InvalidCastException("InvalidCast_FromTo_Char"))
     end
     return value
   elseif typename == "string" then
@@ -98,22 +103,92 @@ local function toChar(value)
   end
 end
 
+local function parseBits(s, p, n)
+  local i, j, v = s:find(p)
+  if not i then
+    throw(FormatException())
+  end
+  v = tonumber(v)
+  for i = j + 1, #s do
+    local ch = sbyte(s, i)
+    local b = ch - 48
+    if b < 0 or b >= n then
+      if not s:find("^%s*$", i) then
+        throw(FormatException())
+      end
+      break
+    end
+    v = v * n + b
+  end
+  return v
+end
+
+local function parseNumberFromBase(value, fromBase, min, max)
+  if fromBase == 2 then
+    value = parseBits(value, "^%s*([01])", fromBase)
+  elseif fromBase == 8 then
+    value = parseBits(value, "^%s*([0-7])", fromBase)
+  elseif fromBase == 16 then
+    local _, _, v = value:find("^%s*(%w+)%s*$")
+    if not v then
+      throw(ArgumentException("String cannot contain a minus sign if the base is not 10."))
+    end
+    local ch = sbyte(v, 2)
+    if ch == 120 or ch == 88 then
+    else
+      v = "0x" .. v
+    end
+    value = tonumber(v)
+  else
+    throw(ArgumentException("fromBase")) 
+  end
+  if max == 127 and value <= 255 then
+    return System.toSByte(value)
+  end
+  if max == 32767 and value <= 65535 then
+    return System.toInt16(value)
+  end
+  if max == 2147483647 and value <= 4294967295 then
+    return System.toInt32(value)
+  end
+  if value < min or value > max then
+    throw(OverflowException())
+  end
+  return value
+end
+
 local function toNumber(value, min, max, parse, objectTo, sign)
   if value == nil then return 0 end
   local typename = type(value)
   if typename == "number" then
-    if sign == nil then
-      if value < min or value > max then
-        throw(OverflowException())
+    if sign == false then
+      value = System.ToSingle(value * 1.0)
+    elseif sign == true then
+      value = value * 1.0
+    else
+      local i = value
+      value = trunc(value)
+      if value ~= i then
+        local dif = i - value
+        if value >= 0 then
+          if dif > 0.5 or (dif == 0.5 and value % 2 ~= 0) then
+            value = value + 1  
+          end
+        else
+          if dif < -0.5 or (dif == -0.5 and value % 2 ~= 0) then
+            value = value - 1  
+          end
+        end
       end
-      return trunc(value)
-    elseif sign == 1 then
       if value < min or value > max then
         throw(OverflowException())
       end
     end
     return value
   elseif typename == "string" then
+    if sign and sign ~= 10 and type(sign) == "number" then
+      return parseNumberFromBase(value, sign, min, max)
+    end
     return parse(value) 
   elseif typename == "boolean" then
     return value and 1 or 0
@@ -122,84 +197,84 @@ local function toNumber(value, min, max, parse, objectTo, sign)
   end
 end
 
-local function objectToSByte(v)
+local function objectToSByte(value)
   return cast(IConvertible, value):ToSByte()
 end
 
-local function toSByte(value)
-  return toNumber(value, -128, 127, ParseSByte, objectToSByte)
+local function toSByte(value, fromBase)
+  return toNumber(value, -128, 127, ParseSByte, objectToSByte, fromBase)
 end
 
-local function objectToByte(v)
+local function objectToByte(value)
   return cast(IConvertible, value):ToByte()
 end
 
-local function toByte(value)
-  return toNumber(value, 0, 255, ParseByte, objectToByte) 
+local function toByte(value, fromBase)
+  return toNumber(value, 0, 255, ParseByte, objectToByte, fromBase) 
 end
 
-local function objectToInt16(v)
+local function objectToInt16(value)
   return cast(IConvertible, value):ToInt16()
 end
 
-local function toInt16(value)
-  return toNumber(value, -32768, 32767, ParseInt16, objectToInt16) 
+local function toInt16(value, fromBase)
+  return toNumber(value, -32768, 32767, ParseInt16, objectToInt16, fromBase) 
 end
 
-local function objectToUInt16(v)
+local function objectToUInt16(value)
   return cast(IConvertible, value):ToUInt16()
 end
 
-local function toUInt16(value)
-  return toNumber(value, 0, 65535, ParseUInt16, objectToUInt16) 
+local function toUInt16(value, fromBase)
+  return toNumber(value, 0, 65535, ParseUInt16, objectToUInt16, fromBase) 
 end
 
-local function objectToInt32(v)
+local function objectToInt32(value)
   return cast(IConvertible, value):ToInt32()
 end
 
-local function toInt32(value)
-  return toNumber(value, -2147483648, 2147483647, ParseUInt16, objectToInt32) 
+local function toInt32(value, fromBase)
+  return toNumber(value, -2147483648, 2147483647, ParseInt32, objectToInt32, fromBase) 
 end
 
-local function objectToUInt32(v)
+local function objectToUInt32(value)
   return cast(IConvertible, value):ToUInt32()
 end
 
-local function toUInt32(value)
-  return toNumber(value, 0, 4294967295, ParseUInt32, objectToUInt32) 
+local function toUInt32(value, fromBase)
+  return toNumber(value, 0, 4294967295, ParseUInt32, objectToUInt32, fromBase) 
 end
 
-local function objectToInt64(v)
+local function objectToInt64(value)
   return cast(IConvertible, value):ToInt64()
 end
 
-local function toInt64(value)
-  return toNumber(value, -9223372036854775808, 9223372036854775807, ParseInt64, objectToInt64) 
+local function toInt64(value, fromBase)
+  return toNumber(value, -9223372036854775808, 9223372036854775807, ParseInt64, objectToInt64, fromBase) 
 end
 
-local function objectToUInt64(v)
+local function objectToUInt64(value)
   return cast(IConvertible, value):ToUInt64()
 end
 
-local function toUInt64(value)
-  return toNumber(value, 0, 18446744073709551615, ParseUInt64, objectToUInt64) 
+local function toUInt64(value, fromBase)
+  return toNumber(value, 0, 18446744073709551615.0, ParseUInt64, objectToUInt64, fromBase) 
 end
 
-local function objectToSingle(v)
+local function objectToSingle(value)
   return cast(IConvertible, value):ToSingle()
 end
 
 local function toSingle(value)
-  return toNumber(value, -3.40282347E+38, 3.40282347E+38, ParseSingle, objectToSingle, 1) 
+  return toNumber(value, nil, nil, ParseSingle, objectToSingle, false) 
 end
 
-local function objectToDouble(v)
+local function objectToDouble(value)
   return cast(IConvertible, value):ToDouble()
 end
 
 local function toDouble(value)
-  return toNumber(value, nil, nil, ParseDouble, objectToDouble, 2) 
+  return toNumber(value, nil, nil, ParseDouble, objectToDouble, true) 
 end
 
 local function toDateTime(value)
@@ -210,7 +285,7 @@ local function toDateTime(value)
 end
 
 local function toBaseType(ic, targetType)
-  local cls = targetType.c
+  local cls = targetType[1]
   if cls == Boolean then return ic:ToBoolean() end
   if cls == Char then return ic:ToChar() end
   if cls == SByte then return ic:ToSByte() end
@@ -262,6 +337,48 @@ local function changeType(value, conversionType)
   return ic.ToType(conversionType)
 end
 
+local function toBits(num, bits)
+  -- returns a table of bits, most significant first.
+  bits = bits or math.max(1, select(2, math.frexp(num)))
+  local t = {} -- will contain the bits        
+  for b = bits, 1, -1 do
+    local i =  num % 2
+    t[b] = i
+    num = System.div(num - i, 2)
+  end
+  if bits == 64 and t[1] == 0 then
+    return tconcat(t, nil, 2, bits)
+  end
+  return tconcat(t)
+end
+
+local function toString(value, toBaseOrProvider, cast)
+  if value == nil then
+    return ""
+  end
+  if toBaseOrProvider then
+    if type(toBaseOrProvider) == "number" then
+      if toBaseOrProvider ~= 10 then
+        if cast and value < 0 then
+          value = cast(value)
+        end
+      end
+      if toBaseOrProvider == 2 then
+        return toBits(value)
+      elseif toBaseOrProvider == 8 then
+        return ("%o"):format(value)
+      elseif toBaseOrProvider == 10 then
+        return value:ToString()
+      elseif toBaseOrProvider == 16 then
+        return ("%x"):format(value)
+      else
+        throw(ArgumentException())
+      end
+    end
+  end
+  return value:ToString()
+end
+
 define("System.Convert", {
   ToBoolean = toBoolean,
   ToChar = toChar,
@@ -276,7 +393,9 @@ define("System.Convert", {
   ToSingle = toSingle,
   ToDouble = toDouble,
   ToDateTime = toDateTime,
-  ChangeType = changeType
+  ChangeType = changeType,
+  ToString = toString,
+  ToStringFromChar = string.char
 })
 
 String.ToBoolean = toBoolean
@@ -353,12 +472,9 @@ local sr = System.sr
 local div = System.div
 local global = System.global
 local systemToInt16 = System.toInt16
-local systemToUInt16 = System.toUInt16
 local systemToInt32 = System.toInt32
-local systemToUInt32 = System.toUInt32
 local systemToUInt64 = System.toUInt64
 local arrayFromTable = System.arrayFromTable
-local checkIndexAndCount = System.Collection.checkIndexAndCount
 local NotSupportedException = System.NotSupportedException
 
 local assert = assert
@@ -381,6 +497,17 @@ end
 
 local function bytes(t)
   return arrayFromTable(t, Byte)    
+end
+
+local function checkIndex(value, startIndex, count)
+  if value == nil then throw(ArgumentNullException("value")) end
+  local len = #value
+  if startIndex < 0 or startIndex >= len then
+    throw(ArgumentOutOfRangeException("startIndex"))
+  end
+  if startIndex > len - count then
+    throw(ArgumentException())
+  end
 end
 
 local spack, sunpack, getBytesFromInt64, toInt64
@@ -423,8 +550,7 @@ if System.luaVersion < 5.3 then
   end
 
   toInt64 = function (value, startIndex)
-    if value == nil then throw(ArgumentNullException("value")) end
-    checkIndexAndCount(value, startIndex, 8)
+    checkIndex(value, startIndex, 8)
     if value <= -2147483647 or value >= 2147483647 then
       throw(System.NotSupportedException()) 
     end
@@ -458,8 +584,7 @@ else
   end
 
   toInt64 = function (value, startIndex)
-    if value == nil then throw(ArgumentNullException("value")) end
-    checkIndexAndCount(value, startIndex, 8)
+    checkIndex(value, startIndex, 8)
     if isLittleEndian then
       local i = value[startIndex + 1]
       i = bor(i, sl(value[startIndex + 2], 8))
@@ -529,14 +654,12 @@ local function getBytesFromDouble(value)
 end
 
 local function toBoolean(value, startIndex)
-  if value == nil then throw(ArgumentNullException("value")) end
-  checkIndexAndCount(value, startIndex, 1)
+  checkIndex(value, startIndex, 1)
   return value[startIndex + 1] ~= 0 and true or false
 end
 
-local function getInt16(value, startIndex)
-  if value == nil then throw(ArgumentNullException("value")) end
-  checkIndexAndCount(value, startIndex, 2)
+local function toUInt16(value, startIndex)
+  checkIndex(value, startIndex, 2)
   if isLittleEndian then
     value = bor(value[startIndex + 1], sl(value[startIndex + 2], 8))
   else
@@ -546,18 +669,12 @@ local function getInt16(value, startIndex)
 end
 
 local function toInt16(value, startIndex)
-  value = getInt16(value. startIndex)
+  value = toUInt16(value, startIndex)
   return systemToInt16(value)
 end
 
-local function toUInt16(value, startIndex)
-  value = getInt16(value. startIndex)
-  return systemToUInt16(value)
-end
-
-local function getInt32(value, startIndex)
-  if value == nil then throw(ArgumentNullException("value")) end
-  checkIndexAndCount(value, startIndex, 4)
+local function toUInt32(value, startIndex)
+  checkIndex(value, startIndex, 4)
   local i
   if isLittleEndian then
     i = value[startIndex + 1]
@@ -574,13 +691,8 @@ local function getInt32(value, startIndex)
 end
 
 local function toInt32(value, startIndex)
-  value = getInt32(value, startIndex)
+  value = toUInt32(value, startIndex)
   return systemToInt32(value)
-end
-
-local function toUInt32(value, startIndex)
-  value = getInt32(value, startIndex)
-  return systemToUInt32(value)
 end
 
 local function toUInt64(value, startIndex)
@@ -589,15 +701,13 @@ local function toUInt64(value, startIndex)
 end
 
 local function toSingle(value, startIndex)
-  if value == nil then throw(ArgumentNullException("value")) end
-  checkIndexAndCount(value, startIndex, 4)
-  return sunpack("f", schar(unpack(value)))
+  checkIndex(value, startIndex, 4)
+  return sunpack("f", schar(unpack(value, startIndex + 1)))
 end
 
 local function toDouble(value, startIndex)
-  if value == nil then throw(ArgumentNullException("value")) end
-  checkIndexAndCount(value, startIndex, 4)
-  return sunpack("d", schar(unpack(value)))
+  checkIndex(value, startIndex, 8)
+  return sunpack("d", schar(unpack(value, startIndex + 1)))
 end
 
 local function getHexValue(i)
@@ -610,22 +720,34 @@ end
 
 local function toString(value, startIndex, length)
   if value == nil then throw(ArgumentNullException("value")) end
+  local len = #value
   if not startIndex then
     startIndex, length = 0, #value
   elseif not length then
-    length = #value - startIndex
+    length = len - startIndex
   end
-  checkIndexAndCount(value, startIndex, length)
+  if startIndex < 0 or (startIndex >= len and startIndex > 0) then
+    throw(ArgumentOutOfRangeException("startIndex"))
+  end
+  if length < 0 then
+    throw(ArgumentOutOfRangeException("length"))
+  end
+  if startIndex + length > len then
+    throw(ArgumentException())
+  end
+  if length == 0 then
+    return ""
+  end
   local t = {}
   local len = 1
-  for i = startIndex + 1, length  do
+  for i = startIndex + 1, startIndex + length  do
     local b = value[i]
     t[len] = getHexValue(div(b, 16))
     t[len + 1] = getHexValue(b % 16)
     t[len + 2] = 45
     len = len + 3
   end
-  return schar(unpack(t, 1, len - 1))
+  return schar(unpack(t, 1, len - 2))
 end
 
 local function doubleToInt64Bits(value)
@@ -649,6 +771,7 @@ define("System.BitConverter", {
   GetBytesFromFloat = getBytesFromFloat,
   GetBytesFromDouble = getBytesFromDouble,
   ToBoolean = toBoolean,
+  ToChar = toUInt16,
   ToInt16 = toInt16,
   ToUInt16 = toUInt16,
   ToInt32 = toInt32,

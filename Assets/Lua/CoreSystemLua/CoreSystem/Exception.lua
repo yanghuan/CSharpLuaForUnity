@@ -20,6 +20,7 @@ local Object = System.Object
 
 local traceback = debug.traceback
 local tconcat = table.concat
+local type = type
 
 local function getMessage(this)
   return this.message or ("Exception of type '%s' was thrown."):format(this.__name__)
@@ -53,15 +54,12 @@ local Exception = define("System.Exception", {
   __ctor__ = ctorOfException,
   ToString = toString,
   getMessage = getMessage,
-  
   getInnerException = function(this) 
     return this.innerException
   end,
-
   getStackTrace = function(this) 
     return this.errorStack
   end,
-
   getData = function (this)
     local data = this.data
     if not data then
@@ -70,21 +68,32 @@ local Exception = define("System.Exception", {
     end
     return data
   end,
-
   traceback = function(this, lv)
     this.errorStack = traceback("", lv and lv + 3 or 3)
   end
 })
 
-local ArgumentException = define("System.ArgumentException", {
+local SystemException = define("System.SystemException", {
   __tostring = toString,
   __inherits__ = { Exception },
+  __ctor__ = function (this, message, innerException)
+    ctorOfException(this, message or "System error.", innerException)
+  end
+})
 
-  __ctor__ = function(this, message, paramName, innerException) 
+local ArgumentException = define("System.ArgumentException", {
+  __tostring = toString,
+  __inherits__ = { SystemException },
+  __ctor__ = function(this, message, paramName, innerException)
+    if type(paramName) == "table" then
+      paramName, innerException = nil, paramName
+    end
     ctorOfException(this, message or "Value does not fall within the expected range.", innerException)
     this.paramName = paramName
+    if paramName and #paramName > 0 then
+      this.message = this.message .. "\nParameter name: " .. paramName
+    end
   end,
-
   getParamName = function(this) 
     return this.paramName
   end
@@ -93,33 +102,18 @@ local ArgumentException = define("System.ArgumentException", {
 define("System.ArgumentNullException", {
   __tostring = toString,
   __inherits__ = { ArgumentException },
-
   __ctor__ = function(this, paramName, message, innerException) 
-    if not message then
-      message = "Value cannot be null."
-      if paramName then 
-        message = message .. "\nParameter name = " .. paramName
-      end
-    end
-    ArgumentException.__ctor__(this, message, paramName, innerException)
+    ArgumentException.__ctor__(this, message or "Value cannot be null.", paramName, innerException)
   end
 })
 
 define("System.ArgumentOutOfRangeException", {
   __tostring = toString,
   __inherits__ = { ArgumentException },
-
   __ctor__ = function(this, paramName, message, innerException, actualValue) 
-    if not message then
-      message = "Value is out of range."
-      if paramName then
-        message = message .. "\nParameter name = " .. paramName
-      end
-    end
-    ArgumentException.__ctor__(this, message, paramName, innerException)
+    ArgumentException.__ctor__(this, message or "Specified argument was out of the range of valid values.", paramName, innerException)
     this.actualValue = actualValue
   end,
-
   getActualValue = function(this) 
     return this.actualValue
   end
@@ -127,8 +121,7 @@ define("System.ArgumentOutOfRangeException", {
 
 define("System.IndexOutOfRangeException", {
    __tostring = toString,
-   __inherits__ = { Exception },
-
+   __inherits__ = { SystemException },
    __ctor__ = function (this, message, innerException)
     ctorOfException(this, message or "Index was outside the bounds of the array.", innerException)
   end
@@ -137,7 +130,6 @@ define("System.IndexOutOfRangeException", {
 define("System.CultureNotFoundException", {
   __tostring = toString,
   __inherits__ = { ArgumentException },
-
   __ctor__ = function(this, paramName, invalidCultureName, message, innerException, invalidCultureId) 
     if not message then 
       message = "Culture is not supported."
@@ -152,29 +144,26 @@ define("System.CultureNotFoundException", {
     this.invalidCultureName = invalidCultureName
     this.invalidCultureId = invalidCultureId
   end,
-
   getInvalidCultureName = function(this)
     return this.invalidCultureName
   end,
-
   getInvalidCultureId = function(this) 
     return this.invalidCultureId
   end
 })
 
-define("System.KeyNotFoundException", {
+local KeyNotFoundException = define("System.Collections.Generic.KeyNotFoundException", {
   __tostring = toString,
-  __inherits__ = { Exception },
-
+  __inherits__ = { SystemException },
   __ctor__ = function(this, message, innerException) 
-    ctorOfException(this, message or "Key not found.", innerException)
+    ctorOfException(this, message or "The given key was not present in the dictionary.", innerException)
   end
 })
+System.KeyNotFoundException = KeyNotFoundException
 
 local ArithmeticException = define("System.ArithmeticException", {
   __tostring = toString,
-  __inherits__ = { Exception },
-
+  __inherits__ = { SystemException },
   __ctor__ = function(this, message, innerException) 
     ctorOfException(this, message or "Overflow or underflow in the arithmetic operation.", innerException)
   end
@@ -183,16 +172,14 @@ local ArithmeticException = define("System.ArithmeticException", {
 define("System.DivideByZeroException", {
   __tostring = toString,
   __inherits__ = { ArithmeticException },
-
   __ctor__ = function(this, message, innerException) 
-    ArithmeticException.__ctor__(this, message or "Division by 0.", innerException)
+    ArithmeticException.__ctor__(this, message or "Attempted to divide by zero.", innerException)
   end
 })
 
 define("System.OverflowException", {
   __tostring = toString,
   __inherits__ = { ArithmeticException },
-
   __ctor__ = function(this, message, innerException) 
     ArithmeticException.__ctor__(this, message or "Arithmetic operation resulted in an overflow.", innerException)
   end
@@ -200,8 +187,7 @@ define("System.OverflowException", {
 
 define("System.FormatException", {
   __tostring = toString,
-  __inherits__ = { Exception },
-
+  __inherits__ = { SystemException },
   __ctor__ = function(this, message, innerException) 
     ctorOfException(this, message or "Invalid format.", innerException)
   end
@@ -209,17 +195,15 @@ define("System.FormatException", {
 
 define("System.InvalidCastException", {
   __tostring = toString,
-  __inherits__ = { Exception },
-
+  __inherits__ = { SystemException },
   __ctor__ = function(this, message, innerException) 
-    ctorOfException(this, message or "The cast is not valid.", innerException)
+    ctorOfException(this, message or "Specified cast is not valid.", innerException)
   end
 })
 
-define("System.InvalidOperationException", {
+local InvalidOperationException = define("System.InvalidOperationException", {
   __tostring = toString,
-  __inherits__ = { Exception },
-
+  __inherits__ = { SystemException },
   __ctor__ = function(this, message, innerException) 
     ctorOfException(this, message or "Operation is not valid due to the current state of the object.", innerException)
   end
@@ -227,8 +211,7 @@ define("System.InvalidOperationException", {
 
 define("System.NotImplementedException", {
   __tostring = toString,
-  __inherits__ = { Exception },
-
+  __inherits__ = { SystemException },
   __ctor__ = function(this, message, innerException) 
     ctorOfException(this, message or "The method or operation is not implemented.", innerException)
   end
@@ -236,8 +219,7 @@ define("System.NotImplementedException", {
 
 define("System.NotSupportedException", {
   __tostring = toString,
-  __inherits__ = { Exception },
-
+  __inherits__ = { SystemException },
   __ctor__ = function(this, message, innerException) 
     ctorOfException(this, message or "Specified method is not supported.", innerException)
   end
@@ -245,8 +227,7 @@ define("System.NotSupportedException", {
 
 define("System.NullReferenceException", {
   __tostring = toString,
-  __inherits__ = { Exception },
-
+  __inherits__ = { SystemException },
   __ctor__ = function(this, message, innerException) 
     ctorOfException(this, message or "Object reference not set to an instance of an object.", innerException)
   end
@@ -255,7 +236,6 @@ define("System.NullReferenceException", {
 define("System.RankException", {
   __tostring = toString,
   __inherits__ = { Exception },
-
   __ctor__ = function(this, message, innerException) 
     ctorOfException(this, message or "Attempted to operate on an array with the incorrect number of dimensions.", innerException)
   end
@@ -264,8 +244,63 @@ define("System.RankException", {
 define("System.TypeLoadException", {
   __tostring = toString,
   __inherits__ = { Exception },
-
   __ctor__ = function(this, message, innerException) 
     ctorOfException(this, message or "Failed when load type.", innerException)
+  end
+})
+
+define("System.ObjectDisposedException", {
+  __tostring = toString,
+  __inherits__ = { InvalidOperationException },
+  __ctor__ = function(this, objectName, message, innerException)
+    ctorOfException(this, message or "Cannot access a disposed object.", innerException)
+    this.objectName = objectName
+    if objectName and #objectName > 0 then
+      this.message = this.message .. "\nObject name: '" .. objectName .. "'."
+    end
+  end
+})
+
+local function toStringOfAggregateException(this)
+  local t = { toString(this) }
+  local count = 2
+  for i = 0, this.innerExceptions:getCount() - 1 do
+    t[count] = "\n---> (Inner Exception #"
+    t[count + 1] = i
+    t[count + 2] = ") "
+    t[count + 3] = this.innerExceptions:get(i):ToString()
+    t[count + 4] = "<---\n"
+    count = count + 5
+  end
+  return tconcat(t)
+end
+
+define("System.AggregateException", {
+  ToString = toStringOfAggregateException,
+  __tostring = toStringOfAggregateException,
+  __inherits__ = { Exception },
+  __ctor__ = function (this, message, innerExceptions)
+    if type(message) == "table" then
+      message, innerExceptions = nil, message
+    end
+    Exception.__ctor__(this, message or "One or more errors occurred.")
+    local ReadOnlyCollection = System.ReadOnlyCollection(Exception)
+    if innerExceptions then
+      if System.is(innerExceptions, Exception) then
+        local list = System.List(Exception)()
+        list:Add(innerExceptions)
+        this.innerExceptions = ReadOnlyCollection(list)
+      else
+        if not System.isArrayLike(innerExceptions) then
+          innerExceptions = System.Array.toArray(innerExceptions)
+        end
+        this.innerExceptions = ReadOnlyCollection(innerExceptions)
+      end
+    else
+      this.innerExceptions = ReadOnlyCollection(System.Array.Empty(Exception))
+    end
+  end,
+  getInnerExceptions = function (this)
+    return this.innerExceptions
   end
 })

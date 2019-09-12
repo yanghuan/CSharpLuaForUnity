@@ -16,45 +16,37 @@ limitations under the License.
 
 local System = System
 local throw = System.throw
+local Object = System.Object
 local ArgumentNullException = System.ArgumentNullException
 
 local setmetatable = setmetatable
-local getmetatable = getmetatable
 local assert = assert
 local select = select
 local type = type
 local unpack = table.unpack
+local tmove = table.move
 
-local Delegate = {}
-debug.setmetatable(System.emptyFn, Delegate)
+local Delegate
+local multicast
 
-local multicast = setmetatable({}, Delegate)
-multicast.__index = multicast
-
-function multicast.__call(t, ...)
-  local result
-  for i = 1, #t do
-    result = t[i](...)
-  end
-  return result
-end
-
-local function appendFn(t, f)
-  local count = #t + 1
-  if getmetatable(f) == multicast then
+local function appendFn(t, count, f)
+  if type(f) == "table" then
     for i = 1, #f do
       t[count] = f[i]
       count = count + 1
     end
   else
     t[count] = f
+    count = count + 1
   end
+  return count
 end
 
 local function combineImpl(fn1, fn2)    
   local t = setmetatable({}, multicast)
-  appendFn(t, fn1)
-  appendFn(t, fn2)
+  local count = 1
+  count = appendFn(t, count, fn1)
+  appendFn(t, count, fn2)
   return t
 end
 
@@ -68,8 +60,6 @@ local function combine(fn1, fn2)
   if fn2 ~= nil then return fn2 end
   return nil
 end
-
-Delegate.Combine = combine
 
 local function equalsMulticast(fn1, fn2, start, count)
   for i = 1, count do
@@ -95,10 +85,10 @@ local function delete(fn, count, deleteIndex, deleteCount)
 end
 
 local function removeImpl(fn1, fn2) 
-  if getmetatable(fn2) ~= multicast then
-    if getmetatable(fn1) ~= multicast then
+  if type(fn2) ~= "table" then
+    if type(fn1) ~= "table" then
       if fn1 == fn2 then
-          return nil
+        return nil
       end
     else
       local count = #fn1
@@ -112,7 +102,7 @@ local function removeImpl(fn1, fn2)
         end
       end
     end
-  elseif getmetatable(fn1) == multicast then
+  elseif type(fn1) == "table" then
       local count1, count2 = #fn1, # fn2
       local diff = count1 - count2
       for i = diff + 1, 1, -1 do
@@ -140,66 +130,6 @@ local function remove(fn1, fn2)
   return nil
 end
 
-Delegate.Remove = remove
-
-function Delegate.RemoveAll(source, value)
-  local newDelegate
-  repeat
-    newDelegate = source
-    source = remove(source, value)
-  until newDelegate == source
-  return newDelegate
-end
-
-function Delegate.DynamicInvoke(this, ...)
-  return this(...)
-end
-
-local function equals(fn1, fn2)
-  if getmetatable(fn1) == multicast then
-    if getmetatable(fn2) == multicast then
-      local len1, len2 = #fn1, #fn2
-      if len1 ~= len2 then
-        return false         
-      end
-      for i = 1, len1 do
-        if fn1[i] ~= fn2[2] then
-          return false
-        end
-      end
-      return true
-    end
-    return false
-  end
-  if getmetatable(fn2) == multicast then return false end
-  return fn1 == fn2
-end
-
-Delegate.__add = combine
-Delegate.__sub = remove
-
-multicast.__add = combine
-multicast.__sub = remove
-multicast.__eq = equals
- 
-function Delegate.EqualsObj(this, obj)
-  local typename = type(obj)
-  if typename == "function" then
-    return equals(this, obj)
-  end
-  if typename == "table" then
-    local metatable = getmetatable(obj)
-    if metatable == multicast then
-      return equals(this, obj)
-    end
-  end
-  return false
-end
-
-function Delegate.GetType(this)
-  return System.typeof(Delegate)
-end
-
 local multiKey = System.multiKey
 
 local mt = {}
@@ -213,8 +143,66 @@ local function makeGenericTypes(...)
   return t
 end
 
-System.define("System.Delegate", Delegate)
-setmetatable(Delegate, { __index = System.Object, __call = makeGenericTypes })
+Delegate = System.define("System.Delegate", {
+  __add = combine,
+  __sub = remove,
+  EqualsObj = System.equals,
+  Combine = combine,
+  Remove = remove,
+  RemoveAll = function (source, value)
+    local newDelegate
+    repeat
+      newDelegate = source
+      source = remove(source, value)
+    until newDelegate == source
+    return newDelegate
+  end,
+  DynamicInvoke = function (this, ...)
+    return this(...)
+  end,
+  GetType = function (this)
+    return System.typeof(Delegate)
+  end,
+  GetInvocationList = function (this)
+    local t
+    if type(this) == "table" then
+      t = {}
+      tmove(this, 1, #this, 1, t)
+    else
+      t = { this }
+    end
+    return System.arrayFromTable(t, Delegate)
+  end
+})
+
+local delegateMetaTable = setmetatable({ __index = Object, __call = makeGenericTypes }, Object)
+setmetatable(Delegate, delegateMetaTable)
+debug.setmetatable(System.emptyFn, Delegate)
+
+multicast = setmetatable({
+  __index = Delegate,
+  __add = combine,
+  __sub = remove,
+  __call = function (t, ...)
+    local result
+    for i = 1, #t do
+      result = t[i](...)
+    end
+    return result
+  end,
+  __eq = function (fn1, fn2)
+    local len1, len2 = #fn1, #fn2
+    if len1 ~= len2 then
+      return false         
+    end
+    for i = 1, len1 do
+      if fn1[i] ~= fn2[i] then
+        return false
+      end
+    end
+    return true
+  end
+}, Delegate)
 
 function System.fn(target, method)
   assert(method)

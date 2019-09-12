@@ -33,14 +33,15 @@ local collectgarbage = collectgarbage
 define("System.Environment", {
   Exit = os.exit,
   getStackTrace = debug.traceback,
-  getTickCount = System.currentTimeMillis
+  getTickCount = function ()
+    return System.currentTimeMillis() % 2147483648
+  end
 })
 
 define("System.GC", {
   Collect = function ()
     collectgarbage("collect")
   end,
-
   GetTotalMemory = function (forceFullCollection)
     if forceFullCollection then 
       collectgarbage("collect")
@@ -51,7 +52,6 @@ define("System.GC", {
 
 local Lazy = {
   created = false,
-
   __ctor__ = function (this, ...)
     local n = select("#", ...)
     if n == 0 then
@@ -70,11 +70,9 @@ local Lazy = {
       this.valueFactory = valueFactory
     end
   end,
-
   getIsValueCreated = function (this)
     return this.created
   end,
-
   getValue = function (this)
     if not this.created then
       local valueFactory = this.valueFactory
@@ -88,7 +86,6 @@ local Lazy = {
     end
     return this.value
   end,
-
   ToString = function (this)
     if this.created then
       return this.value:ToString()
@@ -103,30 +100,14 @@ define("System.Lazy", function (T)
   }
 end, Lazy)
 
-local function getPrecision(seconds)
-  local s = tostring(seconds)
-  local i = s:find("%.")
-  if i then
-    return #s - i
-  end
-  return 0
-end
-
 local ticker, frequency
 local time = System.config.time
 if time then
-  local p1, p2 = getPrecision(time()), getPrecision(clock())
-  if p1 > p2 then
-    ticker = time
-    frequency = 10 ^ p1
-  else
-    ticker = clock
-    frequency = 10 ^ p2
-  end
+  ticker = time
+  frequency = 10000
 else
-  local p = getPrecision(clock())
   ticker = clock
-  frequency = 10 ^ p
+  frequency = 1000
 end
 
 local function getRawElapsedSeconds(this)
@@ -140,29 +121,25 @@ local function getRawElapsedSeconds(this)
 end
 
 local Stopwatch
-Stopwatch = define("System.Stopwatch", {
+Stopwatch = define("System.Diagnostics.Stopwatch", {
   elapsed = 0,
   running = false,
   IsHighResolution = false,
   Frequency = frequency,
-  
   StartNew = function ()
     local t = Stopwatch()
     t:Start()
     return t
   end,
-
   GetTimestamp = function ()
     return trunc(ticker() * frequency)
   end,
-
   Start = function (this)
     if not this.running then
       this.startTimeStamp = ticker()
       this.running = true
     end
   end,
-
   Stop = function (this)
     if this.running then
       local endTimeStamp = ticker()
@@ -176,35 +153,30 @@ Stopwatch = define("System.Stopwatch", {
       this.elapsed = elapsed
     end
   end,
-
   Reset = function (this)
     this.elapsed = 0
     this.running = false
     this.startTimeStamp = 0
   end,
-
   Restart = function (this)
     this.elapsed = 0
     this.startTimeStamp = ticker()
     this.running = true
   end,
-
   getIsRunning = function (this)
     return this.running
   end,
-
   getElapsed = function (this)
-    return TimeSpan(getRawElapsedSeconds(this) * 1e7)
+    return TimeSpan(trunc(getRawElapsedSeconds(this) * 1e7))
   end,
-
   getElapsedMilliseconds = function (this)
     return trunc(getRawElapsedSeconds(this) * 1000)
   end,
-
   getElapsedTicks = function (this)
     return trunc(getRawElapsedSeconds(this) * frequency)
   end
 })
+System.Stopwatch = Stopwatch
 
 local weaks = setmetatable({}, { __mode = "kv" })
 
@@ -216,76 +188,26 @@ define("System.WeakReference", {
   trackResurrection = false,
   SetTarget = setWeakTarget,
   setTarget = setWeakTarget,
-
   __ctor__ = function (this, target, trackResurrection)
     if trackResurrection then
       this.trackResurrection = trackResurrection
     end
     weaks[this] = target
   end,
-
   TryGetTarget = function (this)
     local target = weaks[this]
     return target ~= nil, target
   end,
-
   getIsAlive = function (this)
     return weaks[this] ~= nil
   end,
-
   getTrackResurrection = function (this)
     return this.trackResurrection
   end,
-
   getTarget = function (this)
     return weaks[this]
   end
 })
 
-define("System.Guid", {
-  __ctor__ = function (this, ...)
-    local n = select("#", ...)
-    if n == 0 then
-      local b = ...
-      if b == nil then throw(ArgumentNullException()) end
-      if type(b) ~= "string" then
-        local get = b.get
-        local i = sl(get(b, 3), 24)
-        i = bor(i, sl(get(b, 2), 16))
-        i = bor(i, sl(get(b, 1), 8))
-        i = bor(i, get(b, 0))
-        this.a = i
-        this.b = bor(sl(get(b, 5), 8), get(b, 4))
-        this.c = bor(sl(get(b, 7), 8), get(b, 6))
-        this.d = get(b, 8)
-        this.e = get(b, 9)
-        this.f = get(b, 10)
-        this.g = get(b, 11)
-        this.h = get(b, 12)
-        this.i = get(b, 13)
-        this.j = get(b, 14)
-        this.k = get(b, 15)
-      else
-        assert(false)
-      end
-    elseif n == 4 then
-      local a, b, c, d = ...
-      local get = d.get
-      this.a = a
-      this.b = b
-      this.c = c
-      this.d = get(d, 0)
-      this.e = get(d, 1)
-      this.f = get(d, 2)
-      this.g = get(d, 3)
-      this.h = get(d, 4)
-      this.i = get(d, 5)
-      this.j = get(d, 6)
-      this.k = get(d, 7)
-    else
-      this.a, this.b, this.c, this.d, this.e, this.f, this.g, this.h, this.i, this.j, this.k = ...
-    end
-  end
-})
-
-
+define("System.Guid", {})
+define("System.ArraySegment", {})

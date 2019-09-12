@@ -36,6 +36,7 @@ local type = type
 local tonumber = tonumber
 local floor = math.floor
 local setmetatable = setmetatable
+local tostring = tostring
 
 local function compareInt(this, v)
   if this < v then return -1 end
@@ -50,19 +51,16 @@ end
 local Int = define("System.Int", {
   __inherits__ = inherits,
   default = zeroFn,
-  
   CompareTo = compareInt,
   Equals = equals,
   GetHashCode = identityFn,
-  
   CompareToObj = function (this, v)
-    if v == null then return 1 end
+    if v == nil then return 1 end
     if type(v) ~= "number" then
       throw(ArgumentException("Arg_MustBeInt"))
     end
     return compareInt(this, v)
   end,
-  
   EqualsObj = function (this, v)
     if type(v) ~= "number" then
       return false
@@ -112,7 +110,6 @@ local SByte = define("System.SByte", {
   Parse = function (s)
     return parseIntWithException(s, -128, 127)
   end,
-  
   TryParse = function (s)
     return tryParseInt(s, -128, 127)
   end
@@ -123,7 +120,6 @@ local Byte = define("System.Byte", {
   Parse = function (s)
     return parseIntWithException(s, 0, 255)
   end,
-
   TryParse = function (s)
     return tryParseInt(s, 0, 255)
   end
@@ -134,7 +130,6 @@ local Int16 = define("System.Int16", {
   Parse = function (s)
     return parseIntWithException(s, -32768, 32767)
   end,
-
   TryParse = function (s)
     return tryParseInt(s, -32768, 32767)
   end
@@ -145,7 +140,6 @@ local UInt16 = define("System.UInt16", {
   Parse = function (s)
     return parseIntWithException(s, 0, 65535)
   end,
-
   TryParse = function (s)
     return tryParseInt(s, 0, 65535)
   end
@@ -156,7 +150,6 @@ local Int32 = define("System.Int32", {
   Parse = function (s)
     return parseIntWithException(s, -2147483648, 2147483647)
   end,
-
   TryParse = function (s)
     return tryParseInt(s, -2147483648, 2147483647)
   end
@@ -167,7 +160,6 @@ local UInt32 = define("System.UInt32", {
   Parse = function (s)
     return parseIntWithException(s, 0, 4294967295)
   end,
-
   TryParse = function (s)
     return tryParseInt(s, 0, 4294967295)
   end
@@ -178,7 +170,6 @@ local Int64 = define("System.Int64", {
   Parse = function (s)
     return parseIntWithException(s, -9223372036854775808, 9223372036854775807)
   end,
-
   TryParse = function (s)
     return tryParseInt(s, -9223372036854775808, 9223372036854775807)
   end
@@ -187,11 +178,10 @@ setmetatable(Int64, Int)
 
 local UInt64 = define("System.UInt64", {
   Parse = function (s)
-    return parseIntWithException(s, 0, 18446744073709551615)
+    return parseIntWithException(s, 0, 18446744073709551615.0)
   end,
-
   TryParse = function (s)
-    return tryParseInt(s, 0, 18446744073709551615)
+    return tryParseInt(s, 0, 18446744073709551615.0)
   end
 })
 setmetatable(UInt64, Int)
@@ -222,19 +212,64 @@ local function equalsDouble(this, v)
   return isNaN(this) and isNaN(v)
 end
 
+local function hexForamt(x, n)
+  return n == "" and "%" .. x or "%0" .. n .. x
+end
+
+local function floatForamt(x, n)
+  return n == "" and "%.f" or "%." .. n .. 'f'
+end
+
+local function integerFormat(x, n)
+  return n == "" and "%d" or "%0" .. n .. 'd'
+end
+
+local function exponentialFormat(x, n)
+  return n == "" and "%" .. x or "%." .. n .. x
+end
+
+local formats = {
+  ['x'] = hexForamt,
+  ['X'] = hexForamt,
+  ['f'] = floatForamt,
+  ['F'] = floatForamt,
+  ['d'] = integerFormat,
+  ['D'] = integerFormat,
+  ['e'] = exponentialFormat,
+  ['E'] = exponentialFormat
+}
+
+local function toStringWithFormat(this, format)
+  if #format ~= 0 then
+    local i, j, x, n = format:find("^%s*([xXdDfFeE])(%d?)%s*$")
+    if i then
+      local f = formats[x]
+      if f then
+        format = f(x, n)
+      end
+      return format:format(this)
+    end
+  end
+  return tostring(this)
+end
+
+local function toString(this, format)
+  if format then
+    return toStringWithFormat(this, format)
+  end
+  return tostring(this)
+end
+
 local Number = define("System.Number", {
   __inherits__ = inherits,
   default = zeroFn,
-
   CompareTo = compareDouble,
   Equals = equalsDouble,
-  ToString = tostring,
-  
+  ToString = toString,
   NaN = nan,
   IsNaN = isNaN,
   NegativeInfinity = negInf,
   PositiveInfinity = posInf,
-  
   CompareToObj = function (this, v)
     if v == nil then return 1 end
     if type(v) ~= "number" then
@@ -242,26 +277,24 @@ local Number = define("System.Number", {
     end
     return compareDouble(this, v)
   end,
-  
   EqualsObj = function (this, v)
     if type(v) ~= "number" then
       return false
     end
     return equalsDouble(this, v)
   end,
-  
   GetHashCode = function (this)
     return isNaN(this) and nanHashCode or this
   end,
-  
+  IsFinite = function (v)
+    return v ~= posInf and v ~= negInf and not isNaN(v)
+  end,
   IsInfinity = function (v)
     return v == posInf or v == negInf
   end,
-
   IsNegativeInfinity = function (v)
     return v == negInf
   end,
-  
   IsPositiveInfinity = function (v)
     return v == posInf
   end
@@ -300,7 +333,6 @@ local Single = define("System.Single", {
     end
     return v
   end,
-  
   TryParse = function (s)
     local v = parseDouble(s)
     if v and v >= -3.40282347E+38 and v < 3.40282347E+38 then
@@ -313,7 +345,6 @@ setmetatable(Single, Number)
 
 local Double = define("System.Double", {
   Parse = parseDoubleWithException,
-  
   TryParse = function (s)
     local v = parseDouble(s)
     if v then

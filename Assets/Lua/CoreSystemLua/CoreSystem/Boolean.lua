@@ -21,7 +21,6 @@ local ArgumentNullException = System.ArgumentNullException
 local FormatException = System.FormatException
 
 local type = type
-local tostring = tostring
 local setmetatable = setmetatable
 
 local function compareTo(this, v)
@@ -40,13 +39,20 @@ local function parse(s)
   if s == nil then
     return nil, 1
   end
-  s = s:Trim():lower()
-  if s == "true" then
-    return true
-  elseif s == "false" then
-    return false
+  local i, j, value = s:find("^[%s%c%z]*(%a+)[%s%c%z]*$")
+  if value then
+    s = value:lower()
+    if s == "true" then
+      return true
+    elseif s == "false" then
+      return false
+    end
   end
   return nil, 2
+end
+
+local function toString(this)
+  return this and trueString or falseString
 end
 
 local Boolean = System.defStc("System.Boolean", {
@@ -54,10 +60,9 @@ local Boolean = System.defStc("System.Boolean", {
   GetHashCode = System.identityFn,
   Equals = System.equals,
   CompareTo = compareTo,
-  ToString = tostring,
+  ToString = toString,
   FalseString = falseString,
   TrueString = trueString,
-
   CompareToObj = function (this, v)
     if v == nil then return 1 end
     if type(v) ~= "boolean" then
@@ -65,29 +70,20 @@ local Boolean = System.defStc("System.Boolean", {
     end
     return compareTo(this, v)
   end,
-  
   EqualsObj = function (this, v)
     if type(v) ~= "boolean" then
       return false
     end
     return this == v
   end,
-  
   __concat = function (a, b)
     if type(a) == "boolean" then
-      return tostring(a) .. b
+      return toString(a) .. b
     else 
-      return a .. tostring(b)
+      return a .. toString(b)
     end
   end,
-  
-  __tostring = function (this)
-    if this then
-      return trueString
-    end
-    return falseString
-  end,
-  
+  __tostring = toString,
   Parse = function (s)
     local v, err = parse(s)
     if v == nil then
@@ -99,7 +95,6 @@ local Boolean = System.defStc("System.Boolean", {
     end
     return v
   end,
-  
   TryParse = function (s)
     local v = parse(s)
     if v ~= nil then
@@ -107,9 +102,8 @@ local Boolean = System.defStc("System.Boolean", {
     end
     return false, false
   end,
-  
   __inherits__ = function (_, T)
-    return { System.IComparable, System.IComparable_1(T), System.IConvertible, System.IEquatable_1(T) }
+    return { System.IComparable, System.IConvertible, System.IComparable_1(T), System.IEquatable_1(T) }
   end
 })
 debug.setmetatable(false, Boolean)
