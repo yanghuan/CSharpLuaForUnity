@@ -357,13 +357,15 @@ local customTypeCheck = System.config.customTypeCheck
 local checks = setmetatable({}, {
   __index = function (checks, cls)
     if customTypeCheck then
-      local add, f = customTypeCheck(cls)
-      if add then
-        checks[cls] = f
+      local f, add = customTypeCheck(cls)
+      if f then
+        if add then
+          checks[cls] = f
+        end
+        return f
       end
-      return f
     end
-
+    
     local set = getCheckSet(cls)
     local function check(obj, T)
       return set[T] == true
