@@ -1340,6 +1340,8 @@ public static class ToLuaExport
         for (int i = 0; i < events.Length; i++)
         {
             sb.AppendFormat("\t\tL.RegVar(\"{0}\", get_{0}, set_{0});\r\n", events[i].Name);
+            sb.AppendFormat("\t\tL.RegFunction(\"add{0}\", add{0});\r\n", events[i].Name);
+            sb.AppendFormat("\t\tL.RegFunction(\"remove{0}\", remove{0});\r\n", events[i].Name);
         }
     }
 
@@ -3215,9 +3217,34 @@ public static class ToLuaExport
         EndTry();
 
         sb.AppendLineEx("\t}");
+        GenCSharpLuaEvent(varName, varType, isStatic, true);
+        GenCSharpLuaEvent(varName, varType, isStatic, false);
     }
 
-    static void GenNewIndexFunc()
+  private static void GenCSharpLuaEvent(string varName, Type type, bool isStatic, bool isAdd) 
+  {
+      sb.AppendLineEx("\r\n\t[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]");
+      sb.AppendFormat("\tstatic int {0}{1}(IntPtr L)\r\n", isAdd ? "add" : "remove", varName);
+      sb.AppendLineEx("\t{");
+      BeginTry();
+      sb.AppendFormat("\t\t\tToLua.CheckArgsCount(L, {0});\r\n", isStatic ? 1 : 2);
+
+      string strVarType = GetTypeStr(type);
+      string objStr = isStatic ? className : "obj";
+
+      if (!isStatic) 
+      {
+          sb.AppendFormat("\t\t\tvar obj = ({0})ToLua.CheckObject(L, 1, typeof({0}));\r\n", className);
+      }
+
+      sb.AppendFormat("\t\t\tvar arg0 = ({0})ToLua.CheckDelegate<{0}>(L, {1});\r\n", strVarType, isStatic ? 1 : 2);
+      sb.AppendFormat("\t\t\t{0}.{1} {2} arg0;\r\n", objStr, varName, isAdd ? "+=" : "-=");
+      sb.AppendLineEx("\t\t\treturn 0;");
+      EndTry();
+      sb.AppendLineEx("\t}");
+  }
+
+  static void GenNewIndexFunc()
     {
         for (int i = 0; i < fields.Length; i++)
         {
