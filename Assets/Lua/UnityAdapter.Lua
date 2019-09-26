@@ -186,7 +186,7 @@ end
 local function addComponent(gameObject, T)
   if T == nil then throw(ArgumentNullException("type")) end
   if isSystemType(T) then
-    T = T.c
+    T = T[1]
   end
   if isFromCSharp(T) then
     if type(T) ~= "userdata" then
@@ -221,7 +221,7 @@ end
 local function getComponent(component, T)
   if T == nil then throw(ArgumentNullException("type")) end
   if isSystemType(T) then
-    T = T.c
+    T = T[1]
   end  
   if isFromCSharp(T) then
     if type(T) ~= "userdata" then
@@ -247,7 +247,7 @@ local function getComponentInChildren(component, T, includeInactive)
     if includeInactive == nil then
       includeInactive = false
     end
-    T = T.c
+    T = T[1]
   else
     if type(T) == "boolean" then
       T, includeInactive = includeInactive, T
@@ -269,7 +269,7 @@ rawset(metatableOfGameObject, "GetComponentInChildren", getComponentInChildren)
 local function getComponentInParent(component, T)
   if T == nil then throw(ArgumentNullException("type")) end
   if isSystemType(T) then
-    T = T.c 
+    T = T[1] 
   end
   if isFromCSharp(T) then
     if type(T) ~= "userdata" then
@@ -314,7 +314,7 @@ end
 local function getComponents(component, T, results)
   if T == nil then throw(ArgumentNullException("type")) end
   if isSystemType(T) then
-    T = T.c
+    T = T[1]
   elseif results then
     T, results = results, T
   end
@@ -326,7 +326,7 @@ rawset(metatableOfGameObject, "GetComponents", getComponents)
 local function getComponentsInChildren(component, T, includeInactive, results)
   if T == nil then throw(ArgumentNullException("type")) end
   if isSystemType(T) then
-    T = T.c
+    T = T[1]
     if includeInactive == nil then
       includeInactive = false
     end
@@ -357,7 +357,7 @@ rawset(metatableOfGameObject, "GetComponentsInChildren", getComponentsInChildren
 local function getComponentsInParent(component, T, includeInactive, results)
   if T == nil then throw(ArgumentNullException("type")) end
   if isSystemType(T) then
-    T = T.c
+    T = T[1]
     if includeInactive == nil then
       includeInactive = false
     end
@@ -451,7 +451,7 @@ end
 local function findObjectOfType(T)
   if T == nil then throw(ArgumentNullException("type")) end
   if isSystemType(T) then
-    T = T.c
+    T = T[1]
   end
   if isFromCSharp(T) then
     if type(T) ~= "userdata" then
@@ -495,24 +495,24 @@ end
 local function findObjectsOfType(T)
   if T == nil then throw(ArgumentNullException("type")) end
   if isSystemType(T) then
-    T = T.c
+    T = T[1]
   end
   return findBridgeObjectsOfType(sourceFindObjectsOfType, T)
 end
 
 local function findObjectsOfTypeAll(t)
   if t == nil then throw(ArgumentNullException("type")) end
-  return findBridgeObjectsOfType(sourceFindObjectsOfTypeAll, t.c)
+  return findBridgeObjectsOfType(sourceFindObjectsOfTypeAll, t[1])
 end
 
 local function findObjectsOfTypeIncludingAssets(t)
   if t == nil then throw(ArgumentNullException("type")) end
-  return findBridgeObjectsOfType(sourceFindObjectsOfTypeIncludingAssets, t.c)
+  return findBridgeObjectsOfType(sourceFindObjectsOfTypeIncludingAssets, t[1])
 end
 
 local function findSceneObjectsOfType(t)
   if t == nil then throw(ArgumentNullException("type")) end
-  return findBridgeObjectsOfType(sourceFindSceneObjectsOfType, t.c)
+  return findBridgeObjectsOfType(sourceFindSceneObjectsOfType, t[1])
 end
 
 local function op_Equality(x, y)
@@ -619,7 +619,7 @@ System.define("UnityEngine.JsonUtility", {
   FromJson = function (json, T)
     if T == nil then throw(ArgumentNullException("type")) end
     if isSystemType(T) then
-      T = T.c
+      T = T[1]
     end
     local t = cjsonDecode(json)
     fromJsonTable(t, T)
