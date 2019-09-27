@@ -804,7 +804,7 @@ function Vector4.get(this, index)
   return getOfVector4(this, index, "Invalid Vector4 index!")
 end
 
-local function setOfVector4(this, inde, value, error)
+local function setOfVector4(this, index, value, error)
   if index < 0 or index > 2 then
     throw(ArgumentOutOfRangeException(error), 1)
   end
