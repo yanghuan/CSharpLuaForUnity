@@ -41,19 +41,24 @@ System.define("UnityEngine.Debug", {
   end,
 })
 
-local MonoBehaviour = System.define("MonoBehaviour", {
+local UnityEngineMonoBehaviour = UnityEngine.MonoBehaviour
+UnityEngine.MonoBehaviour = nil
+
+local MonoBehaviour = System.define("UnityEngine.MonoBehaviour", {
   __ctor__ = emptyFn,
   class = "C",
   GetType = System.Object.GetType,
-  ToString = function (this)
-    return sformat("%s (%s)", this.ref.gameObject.name, this.__name__)
-  end,
+  print = UnityEngineMonoBehaviour.print,
   Awake = emptyFn,
   Start = emptyFn,
   Update = emptyFn,
   FixedUpdate = emptyFn,
   LateUpdate = emptyFn,
+  ToString = function (this)
+    return sformat("%s (%s)", this.ref.gameObject.name, this.__name__)
+  end,
 })
+SystemTypeof(MonoBehaviour)[1] = UnityEngineMonoBehaviour
 
 local function getMonoBehaviourFunction(metatableOfMonoBehaviour, name)
   return metatableOfMonoBehaviour[name]   

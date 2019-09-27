@@ -1,8 +1,7 @@
 local typeof = typeof
-local UnityEngineMonoBehaviour = UnityEngine.MonoBehaviour
-local isInstanceOfType = typeof(UnityEngineMonoBehaviour).IsInstanceOfType
-local Timer = Timer.New  -- tolua.Timer
 toluaSystem = System
+local isInstanceOfType = typeof(toluaSystem.Object).IsInstanceOfType
+local Timer = Timer.New  -- tolua.Timer
 
 local function isUserdataType(obj, cls)
   if cls.__gc ~= nil then
@@ -43,6 +42,4 @@ end
 
 require("CoreSystemLua.All")("CoreSystemLua", config)
 require("UnityAdapter")
-UnityEngine.MonoBehaviour = MonoBehaviour
 require("Compiled.manifest")("Compiled")
-UnityEngine.MonoBehaviour = UnityEngineMonoBehaviour
