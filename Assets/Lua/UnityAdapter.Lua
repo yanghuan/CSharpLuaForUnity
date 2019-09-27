@@ -755,7 +755,7 @@ Vector3.getback = function() return newVector3(0, 0, -1) end
 Vector3.getzero = function() return newVector3(0, 0, 0) end
 Vector3.getone = function() return newVector3(1, 1, 1) end
 
-Vector3.getMagnitude = Vector3.Magnitude
+Vector3.getmagnitude = Vector3.Magnitude
 Vector3.getsqrMagnitude = Vector3.SqrMagnitude
 Vector3.getnormalized = Vector3.Normalize
 
