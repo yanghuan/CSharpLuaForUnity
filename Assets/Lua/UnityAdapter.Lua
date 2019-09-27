@@ -7,6 +7,7 @@ local NotSupportedException = System.NotSupportedException
 local SystemType = System.Type
 local SystemListObject = System.List(System.Object)
 local SystemTypeof = System.typeof
+local SystemIEnumerator = System.IEnumerator
 local arrayFromList = System.arrayFromList
 local ArgumentNullException = System.ArgumentNullException
 local ArgumentOutOfRangeException = System.ArgumentOutOfRangeException
@@ -164,6 +165,10 @@ local function newMonoBehaviour(T, bridgeMonoBehaviour, state, serializeData, se
   makeBridge(this, bridgeMonoBehaviour, state, serializeData, serializeObjects)
   this:Awake()
   return this
+end
+
+function System.IsIEnumerator(t)
+  return is(t, SystemIEnumerator)
 end
 
 local function isFromCSharp(T)

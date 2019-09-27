@@ -15,6 +15,7 @@ namespace Sample {
       StartCoroutine(OnTick());
       print(gameObject.name);
       print(list.Count);
+      StartCoroutine(T1());
     }
 
     private IEnumerator OnTick() {
@@ -26,6 +27,23 @@ namespace Sample {
 
     public void Test() {
       print("TestCoroutine.Test");
+    }
+
+
+    private IEnumerator T1() {
+      print("a0");
+      yield return null;
+      print("a1");
+      yield return T2();
+      print("a2");
+    }
+
+    private IEnumerator T2() {
+      print("b0");
+      yield return null;
+      print("b1");
+      yield return null;
+      print("b2");
     }
   }
 }

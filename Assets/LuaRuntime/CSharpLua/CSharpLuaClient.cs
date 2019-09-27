@@ -94,7 +94,12 @@ namespace CSharpLua {
 
     public object Current {
       get {
-        return current_.Invoke<LuaTable, object>(table_);
+        object obj = current_.Invoke<LuaTable, object>(table_);
+        var t = obj as LuaTable;
+        if (t != null && CSharpLuaClient.Instance.IsLuaIEnumerator(t)) {
+          return Create(t);
+        }
+        return obj;
       }
     }
 
@@ -133,6 +138,7 @@ namespace CSharpLua {
   public class CSharpLuaClient : LuaClient, IProvider {
     public string[] Components;
     private LuaFunction bindFn_;
+    private LuaFunction isIEnumeratorFn_;
     public static new CSharpLuaClient Instance { get { return (CSharpLuaClient)LuaClient.Instance; } }
 
     protected override void OpenLibs() {
@@ -150,6 +156,10 @@ namespace CSharpLua {
         bindFn_.Dispose();
         bindFn_ = null;
       }
+      if (isIEnumeratorFn_ != null) {
+        isIEnumeratorFn_.Dispose();
+        isIEnumeratorFn_ = null;
+      }
       base.Destroy();
       BaseUtility.Provider = null;
     }
@@ -161,7 +171,7 @@ namespace CSharpLua {
         base.StartMain();
         bindFn_ = luaState.GetFunction("UnityEngine.bind");
         if (bindFn_ == null) {
-          throw new ArgumentNullException();
+          throw new InvalidProgramException();
         }
         if (Components != null && Components.Length > 0) {
           using (var fn = luaState.GetFunction("UnityEngine.addComponent")) {
@@ -187,6 +197,17 @@ namespace CSharpLua {
         bridgeMonoBehaviour.SerializeData,
         bridgeMonoBehaviour.SerializeObjects);
     }
+
+    internal bool IsLuaIEnumerator(LuaTable t) {
+      if (isIEnumeratorFn_ == null) {
+        isIEnumeratorFn_ = luaState.GetFunction("System.IsIEnumerator");
+        if (isIEnumeratorFn_ == null) {
+          throw new InvalidProgramException();
+        }
+      }
+      return isIEnumeratorFn_.Invoke<LuaTable, bool>(t);
+    }
+
 
     public void ConvertCustomMonoBehaviour(ref GameObject prefab) {
 #if UNITY_EDITOR
