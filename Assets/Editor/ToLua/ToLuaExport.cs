@@ -785,6 +785,10 @@ public static class ToLuaExport
         GenNewIndexFunc();
         GenOutFunction();
         GenEventFunctions();
+        if (type.IsValueType && !type.IsEnum) 
+        {
+            GenCSharpLuaValueTypeClone();
+        }
 
         EndCodeGen(dir);
     }
@@ -1412,6 +1416,11 @@ public static class ToLuaExport
         GenRegisterOpItems();
         GenRegisterVariables();
         GenRegisterEventTypes();            //注册事件类型
+        
+        if (type.IsValueType && !type.IsEnum) 
+        {
+            sb.Append("\t\tL.RegFunction(\"__clone__\", __clone__);\r\n");
+        }
 
         if (!isStaticClass)
         {
@@ -3239,6 +3248,22 @@ public static class ToLuaExport
 
       sb.AppendFormat("\t\t\tvar arg0 = ({0})ToLua.CheckDelegate<{0}>(L, {1});\r\n", strVarType, isStatic ? 1 : 2);
       sb.AppendFormat("\t\t\t{0}.{1} {2} arg0;\r\n", objStr, varName, isAdd ? "+=" : "-=");
+      sb.AppendLineEx("\t\t\treturn 0;");
+      EndTry();
+      sb.AppendLineEx("\t}");
+  }
+
+  private static void GenCSharpLuaValueTypeClone() 
+  {
+      sb.AppendLineEx("\r\n\t[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]");
+      sb.AppendFormat("\tstatic int __clone__(IntPtr L)\r\n");
+      sb.AppendLineEx("\t{");
+      BeginTry();
+      sb.AppendFormat("\t\t\tToLua.CheckArgsCount(L, 1);\r\n");
+      sb.AppendFormat("\t\t\tvar obj = ({0})ToLua.CheckObject(L, 1, typeof({0}));\r\n", className);
+      sb.Append("\t\t\tvar o = obj;\r\n");
+      sb.Append("\t\t\tToLua.PushValue(L, o);\r\n");
+      sb.Append("\t\t\tToLua.SetBack(L, 1, obj);\r\n");
       sb.AppendLineEx("\t\t\treturn 0;");
       EndTry();
       sb.AppendLineEx("\t}");
