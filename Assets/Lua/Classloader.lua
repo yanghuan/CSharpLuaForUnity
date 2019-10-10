@@ -25,7 +25,7 @@ local config = {
     t:Stop()
   end,
   customTypeCheck = function (T)
-    if isFromCSharp(T) ~= nil then
+    if isFromCSharp(T) then
       return isUserdataType
     end
   end
