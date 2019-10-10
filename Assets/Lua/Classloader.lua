@@ -3,9 +3,13 @@ toluaSystem = System
 local isInstanceOfType = typeof(toluaSystem.Object).IsInstanceOfType
 local Timer = Timer.New  -- tolua.Timer
 
-local function isUserdataType(obj, cls)
-  if cls.__gc ~= nil then
-    return isInstanceOfType(typeof(cls), obj)
+local function isFromCSharp(T)
+  return T[".name"] ~= nil
+end
+
+local function isUserdataType(obj, T)
+  if isFromCSharp(T) then
+    return isInstanceOfType(typeof(T), obj)
   end
   return true
 end
@@ -21,11 +25,13 @@ local config = {
     t:Stop()
   end,
   customTypeCheck = function (T)
-    if T.__gc ~= nil then
+    if isFromCSharp(T) ~= nil then
       return isUserdataType
     end
   end
 }
+
+UnityEngine.isFromCSharp = isFromCSharp
 
 -- luajit table.move may causes a crash
 if jit then

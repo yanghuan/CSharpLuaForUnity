@@ -34,6 +34,7 @@ local Debugger = Debugger
 local BridgeMonoBehaviour = CSharpLua.BridgeMonoBehaviour
 local UnityEngine = UnityEngine
 local toluaSystem = toluaSystem
+local isFromCSharp = UnityEngine.isFromCSharp
 
 System.define("UnityEngine.Debug", {
   Log = Debugger.Log,
@@ -68,14 +69,17 @@ end
 local metatableOfMonoBehaviour = getmetatable(BridgeMonoBehaviour) 
 setmetatable(MonoBehaviour, {
   __index = function (t, k)
-    if type(k) == "string" and sbyte(k, 1) ~= 95 then
-      local ok, f = pcall(getMonoBehaviourFunction, metatableOfMonoBehaviour, k)
-      if ok then
-        local v = function (this, ...)
-          return f(this.ref, ...)
+    if type(k) == "string" then
+      local c = sbyte(k, 1)
+      if c ~= 95 and c ~= 46 then -- not '.' or '_'
+        local ok, f = pcall(getMonoBehaviourFunction, metatableOfMonoBehaviour, k)
+        if ok then
+          local v = function (this, ...)
+            return f(this.ref, ...)
+          end
+          t[k] = v
+          return v
         end
-        t[k] = v
-        return v
       end
     end
     return nil
@@ -169,10 +173,6 @@ end
 
 function System.IsIEnumerator(t)
   return is(t, SystemIEnumerator)
-end
-
-local function isFromCSharp(T)
-  return T.__gc ~= nil
 end
 
 local function isSystemType(t)
