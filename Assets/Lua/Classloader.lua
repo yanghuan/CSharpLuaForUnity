@@ -8,7 +8,10 @@ local function isFromCSharp(T)
 end
 
 local function isUserdataType(obj, T)
-  return isInstanceOfType(typeof(T), obj)
+  if isFromCSharp(T) then
+    return isInstanceOfType(typeof(T), obj)
+  end
+  return true
 end
 
 local config = {
@@ -23,7 +26,7 @@ local config = {
   end,
   customTypeCheck = function (T)
     if isFromCSharp(T) then
-      return isUserdataType, true
+      return isUserdataType
     end
   end
 }
