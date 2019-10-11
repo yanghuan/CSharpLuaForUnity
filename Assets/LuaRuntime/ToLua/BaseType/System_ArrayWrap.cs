@@ -7,10 +7,12 @@ public class System_ArrayWrap
 {
 	public static void Register(LuaState L)
 	{
-        L.BeginClass(typeof(Array), typeof(System.Object));
-        L.RegFunction(".geti", get_Item);
-        L.RegFunction(".seti", set_Item);
-        L.RegFunction("ToTable", ToTable);
+    L.BeginClass(typeof(Array), typeof(System.Object));
+    L.RegFunction(".geti", get_Item);
+    L.RegFunction("get", get_Item);
+    L.RegFunction(".seti", set_Item);
+    L.RegFunction("set", set_Item);
+    L.RegFunction("ToTable", ToTable);
 		L.RegFunction("GetLength", GetLength);
 		L.RegFunction("GetLongLength", GetLongLength);
 		L.RegFunction("GetLowerBound", GetLowerBound);

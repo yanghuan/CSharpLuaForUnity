@@ -10,7 +10,9 @@ public class System_Collections_Generic_DictionaryWrap
     {
         L.BeginClass(typeof(Dictionary<,>), typeof(System.Object), "Dictionary");
         L.RegFunction("get_Item", get_Item);
+        L.RegFunction("get", get_Item);
         L.RegFunction("set_Item", set_Item);
+        L.RegFunction("set", set_Item);
         L.RegFunction(".geti", _geti);
         L.RegFunction(".seti", _seti);
         L.RegFunction("Add", Add);

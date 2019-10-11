@@ -8,44 +8,46 @@ using System.Collections;
 public class System_Collections_Generic_ListWrap
 {    
     public static void Register(LuaState L)
-	{        
+	  {        
         L.BeginClass(typeof(List<>), typeof(System.Object), "List");
-		L.RegFunction("Add", Add);
-		L.RegFunction("AddRange", AddRange);
-		L.RegFunction("AsReadOnly", AsReadOnly);
-		L.RegFunction("BinarySearch", BinarySearch);
-		L.RegFunction("Clear", Clear);
-		L.RegFunction("Contains", Contains);
-		L.RegFunction("CopyTo", CopyTo);
-		L.RegFunction("Exists", Exists);
-		L.RegFunction("Find", Find);
-		L.RegFunction("FindAll", FindAll);
-		L.RegFunction("FindIndex", FindIndex);
-		L.RegFunction("FindLast", FindLast);
-		L.RegFunction("FindLastIndex", FindLastIndex);
-		L.RegFunction("ForEach", ForEach);
-		L.RegFunction("GetEnumerator", GetEnumerator);
-		L.RegFunction("GetRange", GetRange);
-		L.RegFunction("IndexOf", IndexOf);
-		L.RegFunction("Insert", Insert);
+		    L.RegFunction("Add", Add);
+		    L.RegFunction("AddRange", AddRange);
+		    L.RegFunction("AsReadOnly", AsReadOnly);
+		    L.RegFunction("BinarySearch", BinarySearch);
+		    L.RegFunction("Clear", Clear);
+		    L.RegFunction("Contains", Contains);
+		    L.RegFunction("CopyTo", CopyTo);
+		    L.RegFunction("Exists", Exists);
+		    L.RegFunction("Find", Find);
+		    L.RegFunction("FindAll", FindAll);
+		    L.RegFunction("FindIndex", FindIndex);
+		    L.RegFunction("FindLast", FindLast);
+		    L.RegFunction("FindLastIndex", FindLastIndex);
+		    L.RegFunction("ForEach", ForEach);
+		    L.RegFunction("GetEnumerator", GetEnumerator);
+		    L.RegFunction("GetRange", GetRange);
+		    L.RegFunction("IndexOf", IndexOf);
+		    L.RegFunction("Insert", Insert);
         L.RegFunction("InsertRange", InsertRange);
         L.RegFunction("LastIndexOf", LastIndexOf);
-		L.RegFunction("Remove", Remove);
-		L.RegFunction("RemoveAll", RemoveAll);
-		L.RegFunction("RemoveAt", RemoveAt);
-		L.RegFunction("RemoveRange", RemoveRange);
-		L.RegFunction("Reverse", Reverse);
-		L.RegFunction("Sort", Sort);
-		L.RegFunction("ToArray", ToArray);
-		L.RegFunction("TrimExcess", TrimExcess);
-		L.RegFunction("TrueForAll", TrueForAll);
-		L.RegFunction("get_Item", get_Item);
-		L.RegFunction("set_Item", set_Item);
+		    L.RegFunction("Remove", Remove);
+		    L.RegFunction("RemoveAll", RemoveAll);
+		    L.RegFunction("RemoveAt", RemoveAt);
+		    L.RegFunction("RemoveRange", RemoveRange);
+		    L.RegFunction("Reverse", Reverse);
+		    L.RegFunction("Sort", Sort);
+		    L.RegFunction("ToArray", ToArray);
+		    L.RegFunction("TrimExcess", TrimExcess);
+		    L.RegFunction("TrueForAll", TrueForAll);
+		    L.RegFunction("get_Item", get_Item);
+        L.RegFunction("get", get_Item);
+        L.RegFunction("set_Item", set_Item);
+        L.RegFunction("set", set_Item);
         L.RegFunction(".geti", get_Item);
         L.RegFunction(".seti", set_Item);
         L.RegFunction("__tostring", ToLua.op_ToString);
-		L.RegVar("Capacity", get_Capacity, set_Capacity);
-		L.RegVar("Count", get_Count, null);
+		    L.RegVar("Capacity", get_Capacity, set_Capacity);
+		    L.RegVar("Count", get_Count, null);
         L.EndClass();        
     }
 

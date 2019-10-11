@@ -1195,15 +1195,21 @@ public static class ToLuaExport
                 if (name == "get_Item" && IsThisArray(m.Method, 1))
                 {
                     sb.AppendFormat("\t\tL.RegFunction(\"{0}\", get_Item);\r\n", ".geti");
+                    sb.AppendFormat("\t\tL.RegFunction(\"{0}\", get_Item);\r\n", "get");
                 }
                 else if (name == "set_Item" && IsThisArray(m.Method, 2))
                 {
                     sb.AppendFormat("\t\tL.RegFunction(\"{0}\", set_Item);\r\n", ".seti");
-                }
+                    sb.AppendFormat("\t\tL.RegFunction(\"{0}\", get_Item);\r\n", "set");
+                 }
 
                 if (!name.StartsWith("op_"))
                 {
                     sb.AppendFormat("\t\tL.RegFunction(\"{0}\", {1});\r\n", name, name == "Register" ? "_Register" : name);
+                    if (m.Method.IsSpecialName) 
+                    {
+                        GenCSharpLuaGetOrSet(m, name);
+                    }
                 }
 
                 nameCounter[name] = 1;
@@ -3267,6 +3273,15 @@ public static class ToLuaExport
       sb.AppendLineEx("\t\t\treturn 0;");
       EndTry();
       sb.AppendLineEx("\t}");
+  }
+
+  private static void GenCSharpLuaGetOrSet(_MethodBase m, string methodName) 
+  {
+      string name = m.HasGetIndex() ? "get" : (m.HasSetIndex() ? "set" : null);
+      if (name != null) 
+      {
+          sb.AppendFormat("\t\tL.RegFunction(\"{0}\", {1});\r\n", name, methodName);
+      }
   }
 
   static void GenNewIndexFunc()
