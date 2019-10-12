@@ -52,6 +52,11 @@ namespace CSharpLua {
       string lib = string.Join(";", libs.ToArray());
       string meta = string.Join(";", metas);
       string args = $"{csharpLua_}  -s \"{compiledScriptDir_}\" -d \"{outDir_}\" -l \"{lib}\" -m {meta} -c";
+      string definesString = PlayerSettings.GetScriptingDefineSymbolsForGroup(EditorUserBuildSettings.selectedBuildTargetGroup);
+      if (!string.IsNullOrEmpty(definesString)) {
+        args += $" -csc -define:{definesString}";
+      }
+
       var info = new ProcessStartInfo() {
         FileName = kDotnet,
         Arguments = args,
@@ -85,7 +90,7 @@ namespace CSharpLua {
       bool has = InternalCheckDotnetInstall();
       if (!has) {
         UnityEngine.Debug.LogWarning("not found dotnet");
-        if (EditorUtility.DisplayDialog("dotnet未安装", "未安装.NET Core 2.0+运行环境，点击确定前往安装", "确定", "取消")) {
+        if (EditorUtility.DisplayDialog("dotnet未安装", "未安装.NET Core 3.0+运行环境，点击确定前往安装", "确定", "取消")) {
           Application.OpenURL("https://www.microsoft.com/net/download");
         }
       }
@@ -100,17 +105,23 @@ namespace CSharpLua {
         RedirectStandardOutput = true,
         RedirectStandardError = true,
         CreateNoWindow = true,
+        StandardOutputEncoding = Encoding.UTF8,
+        StandardErrorEncoding = Encoding.UTF8,
       };
       try {
         using (var p = Process.Start(info)) {
           p.WaitForExit();
-          if (p.ExitCode != 0) {
-            return false;
-          } else {
+          if (p.ExitCode == 0) {
             string version = p.StandardOutput.ReadToEnd();
-            UnityEngine.Debug.Log("found dotnet " + version);
-            return true;
+            UnityEngine.Debug.LogFormat("found dotnet {0}", version);
+            int major = version[0] - '0';
+            if (major >= 3) {
+              return true;
+            } else {
+              UnityEngine.Debug.LogErrorFormat("dotnet verson {0} must >= 3.0", version);
+            }
           }
+          return false;
         }
       } catch (Exception e) {
         UnityEngine.Debug.LogException(e);

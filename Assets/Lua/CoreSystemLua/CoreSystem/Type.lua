@@ -359,7 +359,7 @@ local checks = setmetatable({}, {
         return f
       end
     end
-    
+
     local set = getCheckSet(cls)
     local function check(obj, T)
       return set[T] == true
