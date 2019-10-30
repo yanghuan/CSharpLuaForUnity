@@ -33,7 +33,8 @@ public class System_ArrayWrap
 		L.RegFunction("CopyTo", CopyTo);
 		L.RegFunction("ConstrainedCopy", ConstrainedCopy);
 		L.RegFunction("__tostring", ToLua.op_ToString);
-		L.RegVar("Length", get_Length, null);
+    L.RegFunction("__len", get_Length);
+    L.RegVar("Length", get_Length, null);
 		L.RegVar("LongLength", get_LongLength, null);
 		L.RegVar("Rank", get_Rank, null);
 		L.RegVar("IsSynchronized", get_IsSynchronized, null);
