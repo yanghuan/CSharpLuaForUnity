@@ -15,7 +15,7 @@ namespace CSharpLua {
       public static readonly string ToolsDir = Application.dataPath + "/../Tools/CSharpLua";
       public const string kTempDir = "Assets/CSharpLuaTemp";
       public const string kCompiledScripts = "Compiled";
-      public static readonly string SettingFilePath = Application.dataPath + "CSharpLua/Base/CSharpLua/Settings.cs";
+      public static readonly string SettingFilePath = Application.dataPath + "/CSharpLua/Base/CSharpLua/Settings.cs";
     }
 
     public static class Menus {
