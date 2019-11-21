@@ -22,6 +22,7 @@ local trunc = System.trunc
 local define = System.define
 local identityFn = System.identityFn
 local IConvertible = System.IConvertible
+local systemToString = System.toString
 
 local OverflowException = System.OverflowException
 local FormatException = System.FormatException
@@ -139,6 +140,9 @@ local function parseNumberFromBase(value, fromBase, min, max)
       v = "0x" .. v
     end
     value = tonumber(v)
+    if value == nil then
+      throw(FormatException())
+    end
   else
     throw(ArgumentException("fromBase")) 
   end
@@ -368,7 +372,7 @@ local function toString(value, toBaseOrProvider, cast)
       elseif toBaseOrProvider == 8 then
         return ("%o"):format(value)
       elseif toBaseOrProvider == 10 then
-        return value:ToString()
+        return value .. ""
       elseif toBaseOrProvider == 16 then
         return ("%x"):format(value)
       else
@@ -376,7 +380,7 @@ local function toString(value, toBaseOrProvider, cast)
       end
     end
   end
-  return value:ToString()
+  return systemToString(value)
 end
 
 define("System.Convert", {
@@ -753,13 +757,13 @@ end
 local function doubleToInt64Bits(value)
   assert(isLittleEndian, "This method is implemented assuming little endian with an ambiguous spec.")
   local s = spack("d", value)
-  return sunpack("i8", s)
+  return (sunpack("i8", s))
 end
 
 local function int64BitsToDouble(value)
   assert(isLittleEndian, "This method is implemented assuming little endian with an ambiguous spec.")
   local s = spack("i8", value)
-  return sunpack("d", s)
+  return (sunpack("d", s))
 end
 
 define("System.BitConverter", {

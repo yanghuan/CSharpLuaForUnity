@@ -47,9 +47,10 @@ local function hasFlag(this, flag)
   return band(this, flag) ~= 0
 end
 
-Number.ToEnumString = toString
+Number.EnumToString = toString
 Number.HasFlag = hasFlag
-System.ToEnumString = toString
+System.EnumToString = toString
+System.EnumHasFlag = hasFlag
 
 local function tryParseEnum(enumType, value, ignoreCase)
   if enumType == nil then throw(ArgumentNullException("enumType")) end
@@ -94,7 +95,6 @@ System.define("System.Enum", {
   EqualsObj = Int.EqualsObj,
   default = Int.default,
   ToString = toString,
-  ToEnumString = toString,
   HasFlag = hasFlag,
   GetName = function (enumType, value)
     if enumType == nil then throw(ArgumentNullException("enumType")) end

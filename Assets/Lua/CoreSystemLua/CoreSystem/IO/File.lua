@@ -14,12 +14,14 @@ See the License for the specific language governing permissions and
 limitations under the License.
 --]]
 
+local io = io
+if io then
+
 local System = System
 local define = System.define
 local throw = System.throw
 local each = System.each
 
-local io = io
 local open = io.open
 local remove = os.remove
 
@@ -97,3 +99,5 @@ define("System.IO.File", {
     end
   end
 })
+
+end

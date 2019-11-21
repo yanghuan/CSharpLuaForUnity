@@ -18,13 +18,16 @@ local System = System
 local define = System.define
 local Object = System.Object
 
-local traceback = debug.traceback
 local tconcat = table.concat
 local type = type
+local debug = debug
 
 local function getMessage(this)
   return this.message or ("Exception of type '%s' was thrown."):format(this.__name__)
 end
+
+local traceback = (debug and debug.traceback) or System.config.traceback or function () return "" end
+System.traceback = traceback
 
 local function toString(this)
   local t = { this.__name__ }
@@ -302,5 +305,13 @@ define("System.AggregateException", {
   end,
   getInnerExceptions = function (this)
     return this.innerExceptions
+  end
+})
+
+System.SwitchExpressionException = define("System.Runtime.CompilerServices", {
+  __tostring = toString,
+  __inherits__ = { InvalidOperationException },
+  __ctor__ = function(this, message, innerException)
+    ctorOfException(this, message or "Non-exhaustive switch expression failed to match its input.", innerException)
   end
 })

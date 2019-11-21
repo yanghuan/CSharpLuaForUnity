@@ -27,6 +27,7 @@ local removeTimer = System.removeTimer
 local waitTask = System.Thread.waitTask
 local arrayFromTable = System.arrayFromTable
 local Exception = System.Exception
+local NullReferenceException = System.NullReferenceException
 local NotImplementedException = System.NotImplementedException
 local ArgumentException = System.ArgumentException
 local ArgumentNullException = System.ArgumentNullException
@@ -35,20 +36,22 @@ local InvalidOperationException = System.InvalidOperationException
 local AggregateException = System.AggregateException
 local ObjectDisposedException = System.ObjectDisposedException
 
+local ccreate = System.ccreate
+local cpool = System.cpool
+local cresume = System.cresume
+local cyield = System.yield
+
 local type = type
 local table = table
 local select = select
-
-local tremove = table.remove
-local setmetatable = setmetatable
-local getmetatable = getmetatable
 local assert = assert
-local coroutine = coroutine
-local ccreate = coroutine.create
-local cresume = coroutine.resume
-local cyield = coroutine.yield
+local setmetatable = setmetatable
+local tremove = table.remove
+local pack = table.pack
+local unpack = table.unpack
+local error = error
 
-local TaskCanceledException = define("System.TaskCanceledException", {
+local TaskCanceledException = define("System.Threading.Tasks.TaskCanceledException", {
   __tostring = Exception.ToString,
   __inherits__ = { Exception },
   __ctor__ = function (this, task)
@@ -59,6 +62,7 @@ local TaskCanceledException = define("System.TaskCanceledException", {
     return this.task
   end
 })
+System.TaskCanceledException = TaskCanceledException
 
 local TaskStatusCreated = 0
 local TaskStatusWaitingForActivation = 1
@@ -69,7 +73,7 @@ local TaskStatusRanToCompletion = 5
 local TaskStatusCanceled = 6
 local TaskStatusFaulted = 7
 
-System.defEnum("System.TaskStatus", {
+System.TaskStatus = System.defEnum("System.Threading.Tasks.TaskStatus", {
   Created = TaskStatusCreated,
   WaitingForActivation = TaskStatusWaitingForActivation,
   WaitingToRun = TaskStatusWaitingToRun,
@@ -80,7 +84,7 @@ System.defEnum("System.TaskStatus", {
   Faulted = TaskStatusFaulted,
 })
 
-local UnobservedTaskExceptionEventArgs = define("System.UnobservedTaskExceptionEventArgs", {
+local UnobservedTaskExceptionEventArgs = define("System.Threading.Tasks.UnobservedTaskExceptionEventArgs", {
   __ctor__ = function (this, exception)
     this.exception = exception
   end,
@@ -97,6 +101,7 @@ local UnobservedTaskExceptionEventArgs = define("System.UnobservedTaskExceptionE
     return this.exception
   end
 })
+System.UnobservedTaskExceptionEventArgs = UnobservedTaskExceptionEventArgs
 
 local unobservedTaskException
 local function publishUnobservedTaskException(sender, ueea)
@@ -106,7 +111,7 @@ local function publishUnobservedTaskException(sender, ueea)
   end
 end
 
-local TaskScheduler = define("System.TaskScheduler", {
+local TaskScheduler = define("System.Threading.Tasks.TaskScheduler", {
   addUnobservedTaskException = function (value)
     unobservedTaskException = unobservedTaskException + value
   end,
@@ -114,6 +119,7 @@ local TaskScheduler = define("System.TaskScheduler", {
     unobservedTaskException = unobservedTaskException - value
   end
 })
+System.TaskScheduler = TaskScheduler
 
 local TaskExceptionHolder = {
   __index = false,
@@ -305,31 +311,19 @@ local function getResult(this, await)
   return waitToken
 end
 
-local function awaitTask(t, task)
-  assert(t.co)
-  addContinueAction(task, function (task)
-    local status = task.status
-    local ok, v
-    if status == TaskStatusRanToCompletion then
-      ok, v = true, task.data
-    elseif status == TaskStatusFaulted then
-      ok, v = false, getException(task, true)
-    elseif status == TaskStatusCanceled then
-      ok, v = false, TaskCanceledException(task)
-    else
-      assert(false)
-    end
-    ok, v = cresume(t.co, ok, v)
-    if not ok then
-      assert(trySetException(t, v))
-    end
-  end)
-  local ok, v = cyield()
-  if ok then
-    return v
+local function getAwaitResult(task)
+  local status = task.status
+  local ok, v
+  if status == TaskStatusRanToCompletion then
+    ok, v = true, task.data
+  elseif status == TaskStatusFaulted then
+    ok, v = false, getException(task, true)
+  elseif status == TaskStatusCanceled then
+    ok, v = false, TaskCanceledException(task)
   else
-    throw(v)
+    assert(false)
   end
+  return ok, v
 end
 
 local factory = {
@@ -456,7 +450,7 @@ Task = define("System.Threading.Tasks.Task", {
         elseif cancelled then
           trySetCanceled(t)
         else
-          trySetResult(arrayFromTable(result, getmetatable(result[1])))
+          trySetResult(arrayFromTable(result, System.getClassFromObj(result[1])))
         end
       end
     end
@@ -536,14 +530,51 @@ Task = define("System.Threading.Tasks.Task", {
   Wait = function (this)
     waitTask(getContinueActions(this))
   end,
+  Await = function (this, t)
+    local a = t:GetAwaiter()
+    if a:getIsCompleted() then
+      return a:getResult()
+    end
+    a:OnCompleted(function ()
+      local ok, v
+      try(function ()
+        ok, v = true, a:getResult()
+      end, function (e)
+        ok, v = false, e
+      end)
+      ok, v = cresume(this.c, ok, v)
+      if not ok then
+        assert(trySetException(this, v))
+      end
+    end)
+    local ok, v = cyield()
+    if ok then
+      return v
+    else
+      error(v)
+    end
+  end,
   await = function (this, task)
     local result = getResult(task, true)
     if result ~= waitToken then
       return result
     end
-    return awaitTask(this, task)
+    addContinueAction(task, function (task)
+      local ok, v = getAwaitResult(task)
+      ok, v = cresume(this.c, ok, v)
+      if not ok then
+        assert(trySetException(this, v))
+      end
+    end)
+    local ok, v = cyield()
+    if ok then
+      return v
+    else
+      error(v)
+    end
   end
 })
+System.Task = Task
 
 local TaskT_TransitionToFinal_AlreadyCompleted = "An attempt was made to transition a task to a final state when it had already completed."
 local TaskCompletionSource = define("System.Threading.Tasks.TaskCompletionSource", {
@@ -573,6 +604,7 @@ local TaskCompletionSource = define("System.Threading.Tasks.TaskCompletionSource
   TrySetException = trySetException,
   TrySetResult = trySetResult
 })
+System.TaskCompletionSource = TaskCompletionSource
 
 local CancellationTokenRegistration = defStc("System.Threading.CancellationTokenRegistration", (function ()
   local function unregister(this)
@@ -605,8 +637,7 @@ local CancellationTokenRegistration = defStc("System.Threading.CancellationToken
     Dispose = unregister
   }
 end)())
-
-local canceledSource
+System.CancellationTokenRegistration = CancellationTokenRegistration
 
 local OperationCanceledException = define("System.OperationCanceledException", {
   __tostring = Exception.ToString,
@@ -620,6 +651,7 @@ local OperationCanceledException = define("System.OperationCanceledException", {
   end
 })
 
+local canceledSource
 local CancellationToken 
 CancellationToken = defStc("System.Threading.CancellationToken", {
   __ctor__ = function (this, canceled)
@@ -666,6 +698,7 @@ CancellationToken = defStc("System.Threading.CancellationToken", {
     end
   end
 })
+System.CancellationToken = CancellationToken
 
 local CancellationTokenSource 
 CancellationTokenSource = define("System.Threading.CancellationTokenSource", (function ()
@@ -789,45 +822,132 @@ CancellationTokenSource = define("System.Threading.CancellationTokenSource", (fu
     end
   }
 end)())
-
+System.CancellationTokenSource = CancellationTokenSource
 canceledSource = setmetatable({ state = 1 }, CancellationTokenSource)
 
-System.Task = Task
-System.TaskCompletionSource = TaskCompletionSource
-System.CancellationTokenRegistration = CancellationTokenRegistration
-System.CancellationToken = CancellationToken
-System.CancellationTokenSource = CancellationTokenSource
-
-local taskCoroutinePool = {}
 local function taskCoroutineCreate(t, f)
-  local co = tremove(taskCoroutinePool)
-  if co == nil then
-    co = ccreate(function (...)
-      local r = f(t, ...)
-      assert(trySetResult(t, r))
-      while true do
-        t = nil
-        f = nil
-        taskCoroutinePool[#taskCoroutinePool + 1] = co
-        t, f = cyield()
-        r = f(t, cyield())
-        assert(trySetResult(t, r))
-      end
-    end)
-    t.co = co
-  else
-    t.co = co
-    cresume(co, t, f)
-  end
-  return co
+  local c = ccreate(function (...)
+    local r = f(t, ...)
+    assert(trySetResult(t, r))
+  end)
+  t.c = c
+  return c
 end
 
 function System.async(f, void, ...)
   local t = newWaitingTask(void)
-  local co = taskCoroutineCreate(t, f)
-  local ok, v = cresume(co, ...)
+  local c = taskCoroutineCreate(t, f)
+  local ok, v = cresume(c, ...)
   if not ok then
     assert(trySetException(t, v))
   end
   return t
 end
+
+local IAsyncDisposable = System.defInf("System.IAsyncDisposable")
+local IAsyncEnumerable = System.defInf("System.Collections.Generic.IAsyncEnumerable", System.emptyFn)
+local IAsyncEnumerator = System.defInf("System.Collections.Generic.IAsyncEnumerator", System.emptyFn)
+
+System.IAsyncEnumerable_1 =  IAsyncEnumerable
+System.IAsyncEnumerator_1 = IAsyncEnumerator
+
+local yieldAsync 
+local function checkYieldAsync(this, ok, v, current)
+  if ok then
+    if v == yieldAsync then
+      this.e.current = current
+      assert(trySetResult(this.t, true))
+    elseif v == cpool then
+      this.c = nil
+      this.e.current = nil
+      assert(trySetResult(this.t, false))
+    end
+  else
+    assert(trySetException(this.t, v))
+  end
+end
+yieldAsync = {
+  __index = false,
+  await = function (this, task)
+    local result = getResult(task, true)
+    if result ~= waitToken then
+      return result
+    end
+    addContinueAction(task, function (task)
+      local current
+      local ok, v = getAwaitResult(task)
+      ok, v, current = cresume(this.c, ok, v)
+      checkYieldAsync(this, ok, v, current)
+    end)
+    local ok, v = cyield()
+    if ok then
+      return v
+    else
+      error(v)
+    end
+  end,
+  yield = function (this, v)
+    cyield(yieldAsync, v)
+  end
+}
+yieldAsync.__index = yieldAsync
+
+local YieldAsyncEnumerable
+YieldAsyncEnumerable = define("System.YieldAsyncEnumerable", function (T)
+   return {
+    __inherits__ = { IAsyncEnumerable(T), IAsyncEnumerator(T), IAsyncDisposable },
+    __genericT__ = T
+  }
+end, {
+  getCurrent = System.getCurrent, 
+  GetAsyncEnumerator = function (this)
+    return setmetatable({ f = this.f, args = this.args }, YieldAsyncEnumerable(this.__genericT__))
+  end,
+  DisposeAsync = function (this)
+    return getCompletedTask()
+  end,
+  MoveNextAsync = function (this)
+    local a = this.a
+    if a and a.c == nil then
+      return fromResult(false)
+    end
+
+    local t = newWaitingTask()
+    local ok, v, current
+    if a == nil then
+      local c = ccreate(this.f)
+      a = setmetatable({ t = t, c = c, e = this }, yieldAsync)
+      this.a = a
+      local args = this.args
+      ok, v, current = cresume(c, a, unpack(args, 1, args.n))
+      this.args = nil
+    else
+      a.t = t
+      ok, v, current = cresume(a.c)
+    end
+    checkYieldAsync(a, ok, v, current)
+    return t
+  end
+})
+
+local function yieldIAsyncEnumerable(f, T, ...)
+  return setmetatable({ f = f, args = pack(...) }, YieldAsyncEnumerable(T))
+end
+
+System.yieldIAsyncEnumerable = yieldIAsyncEnumerable
+System.yieldIAsyncEnumerator = yieldIAsyncEnumerable
+
+local function eachFn(en, async)
+  if async:await(en:MoveNextAsync()) then
+    return async, en:getCurrent()
+  end
+  return nil
+end
+
+local function each(async, t)
+  if t == nil then throw(NullReferenceException(), 1) end
+  local en = t:GetAsyncEnumerator()
+  return eachFn, en, async
+end
+
+System.asynceach = each

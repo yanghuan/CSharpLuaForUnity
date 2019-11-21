@@ -22,6 +22,8 @@ local compareObj = System.compareObj
 local ArgumentException = System.ArgumentException
 local ArgumentNullException = System.ArgumentNullException
 
+local type = type
+
 local EqualityComparer
 EqualityComparer = define("System.EqualityComparer", function (T)
   local equals
@@ -36,6 +38,12 @@ EqualityComparer = define("System.EqualityComparer", function (T)
     end
   else
     equals = equalsObj
+  end
+  local function getHashCode(x)
+    if type(x) == "table" then
+      return x:GetHashCode()
+    end
+    return x
   end
   local defaultComparer
   return {
@@ -59,11 +67,11 @@ EqualityComparer = define("System.EqualityComparer", function (T)
     end,
     GetHashCodeOf = function (this, obj)
       if obj == nil then return 0 end
-      return obj:GetHashCode()
+      return getHashCode(obj)
     end,
     GetHashCodeObjOf = function (this, obj)
       if obj == nil then return 0 end
-      if System.is(obj, T) then return obj:GetHashCode() end
+      if System.is(obj, T) then return getHashCode(obj) end
       throw(ArgumentException("Type of argument is not compatible with the generic comparer."))
       return false
     end,
@@ -114,6 +122,11 @@ Comparer = define("System.Comparer_1", function (T)
   local Compare
   local compareTo = T.CompareTo
   if compareTo then
+    if T.class ~= 'S' then
+      compareTo = function (x, y)
+        return x:CompareTo(y)
+      end
+    end
     Compare = function (this, x, y)
       if x ~= nil then
         if y ~= nil then 

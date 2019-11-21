@@ -18,6 +18,8 @@ local System = System
 local throw = System.throw
 local emptyFn = System.emptyFn
 local lengthFn = System.lengthFn
+local toString = System.toString
+local debugsetmetatable = System.debugsetmetatable
 local ArgumentException = System.ArgumentException
 local ArgumentNullException = System.ArgumentNullException
 local ArgumentOutOfRangeException = System.ArgumentOutOfRangeException
@@ -37,9 +39,11 @@ local gsub = string.gsub
 local table = table
 local tconcat = table.concat
 local unpack = table.unpack
+local getmetatable = getmetatable
 local setmetatable = setmetatable
 local select = select
 local type = type
+local String
 
 local function checkIndex(value, startIndex, count)
   if value == nil then throw(ArgumentNullException("value")) end
@@ -136,16 +140,16 @@ local function concat(...)
     local v = ...
     if System.isEnumerableLike(v) then
       for _, v in System.each(v) do
-        t[count] = v ~= nil and v:ToString() or ""
+        t[count] = v ~= nil and toString(v) or ""
         count = count + 1
       end
-    else 
-      return v:ToString()
+    else
+      return v ~= nil and toString(v) or ""
     end
   else
     for i = 1, len do
       local v = select(i, ...)
-      t[count] = v ~= nil and v:ToString() or ""
+      t[count] = v ~= nil and toString(v) or ""
       count = count + 1
     end
   end
@@ -212,7 +216,7 @@ local function formatBuild(format, len, select, ...)
     s = s + 1
     if s > len then throwFormatError() end
     s = select(s, ...)
-    s = (s ~= nil and s ~= System.null) and s:ToString() or ""
+    s = (s ~= nil and s ~= System.null) and toString(s) or ""
     t[count] = s
     count = count + 1
     i = j + 1
@@ -252,7 +256,7 @@ local function joinEnumerable(separator, values)
   local len = 1
   for _, v in System.each(values) do
     if v ~= nil then
-      t[len] = v:ToString()
+      t[len] = toString(v)
       len = len + 1
     end
   end
@@ -272,7 +276,7 @@ local function joinParams(separator, ...)
       for i = 0, #values - 1 do
         local v = values:get(i)
         if v ~= nil then
-          t[len] = v:ToString()
+          t[len] = toString(v)
           len = len + 1
         end
       end
@@ -282,7 +286,7 @@ local function joinParams(separator, ...)
   for i = 1, n do
     local v = select(i, ...)
     if v ~= nil then
-      t[len] = v:ToString()
+      t[len] = toString(v)
       len = len + 1
     end
   end
@@ -588,7 +592,7 @@ local function split(this, strings, count, options)
     end 
     startIndex = posEnd + 1
   end   
-  return System.arrayFromTable(t, string) 
+  return System.arrayFromTable(t, String) 
 end
 
 local function startsWith(this, prefix)
@@ -660,56 +664,70 @@ local function inherits(_, T)
   return { System.IEnumerable_1(System.Char), System.IComparable, System.IComparable_1(T), System.IConvertible, System.IEquatable_1(T), System.ICloneable }
 end
 
-local String = string
-String.traceback = emptyFn  -- make throw(str) not fail
-String.getLength = lengthFn
-String.getCount = lengthFn
-String.get = get
-String.Compare = compareFull
-String.CompareOrdinal = compareFull
-String.Concat = concat
-String.Copy = System.identityFn
-String.Equals = equals
-String.Format = format
-String.IsNullOrEmpty = isNullOrEmpty
-String.IsNullOrWhiteSpace = isNullOrWhiteSpace
-String.JoinEnumerable = joinEnumerable
-String.JoinParams = joinParams
-String.Join = join
-String.CompareTo = compare
-String.CompareToObj = compareToObj
-String.Contains = contains
-String.CopyTo = copyTo
-String.EndsWith = endsWith
-String.EqualsObj = equalsObj
-String.GetEnumerator = getEnumerator
-String.GetTypeCode = getTypeCode
-String.IndexOf = indexOf
-String.IndexOfAny = indexOfAny
-String.Insert = insert
-String.LastIndexOf = lastIndexOf
-String.LastIndexOfAny = lastIndexOfAny
-String.PadLeft = padLeft
-String.PadRight = padRight
-String.Remove = remove
-String.Replace = replace
-String.Split = split
-String.StartsWith = startsWith
-String.Substring = substring
-String.ToCharArray = toCharArray
-String.ToLower = lower
-String.ToLowerInvariant = lower
-String.ToString = System.identityFn
-String.ToUpper = upper
-String.ToUpperInvariant = upper
-String.Trim = trim
-String.TrimEnd = trimEnd
-String.TrimStart = trimStart
-String.__genericT__ = System.Char
-String.__inherits__ = inherits
-System.define("System.String", String)
+string.traceback = emptyFn  -- make throw(str) not fail
+string.getLength = lengthFn
+string.getCount = lengthFn
+string.get = get
+string.Compare = compareFull
+string.CompareOrdinal = compareFull
+string.Concat = concat
+string.Copy = System.identityFn
+string.Equals = equals
+string.Format = format
+string.IsNullOrEmpty = isNullOrEmpty
+string.IsNullOrWhiteSpace = isNullOrWhiteSpace
+string.JoinEnumerable = joinEnumerable
+string.JoinParams = joinParams
+string.Join = join
+string.CompareTo = compare
+string.CompareToObj = compareToObj
+string.Contains = contains
+string.CopyTo = copyTo
+string.EndsWith = endsWith
+string.EqualsObj = equalsObj
+string.GetEnumerator = getEnumerator
+string.GetTypeCode = getTypeCode
+string.IndexOf = indexOf
+string.IndexOfAny = indexOfAny
+string.Insert = insert
+string.LastIndexOf = lastIndexOf
+string.LastIndexOfAny = lastIndexOfAny
+string.PadLeft = padLeft
+string.PadRight = padRight
+string.Remove = remove
+string.Replace = replace
+string.Split = split
+string.StartsWith = startsWith
+string.Substring = substring
+string.ToCharArray = toCharArray
+string.ToLower = lower
+string.ToLowerInvariant = lower
+string.ToString = System.identityFn
+string.ToUpper = upper
+string.ToUpperInvariant = upper
+string.Trim = trim
+string.TrimEnd = trimEnd
+string.TrimStart = trimStart
 
-debug.setmetatable("", String)
-local Object = System.Object
-local StringMetaTable = setmetatable({ __index = Object, __call = ctor }, Object)
-setmetatable(String, StringMetaTable)
+if debugsetmetatable then
+  String = string
+  String.__genericT__ = System.Char
+  String.__inherits__ = inherits
+  System.define("System.String", String)
+
+  debugsetmetatable("", String)
+  local Object = System.Object
+  local StringMetaTable = setmetatable({ __index = Object, __call = ctor }, Object)
+  setmetatable(String, StringMetaTable)
+else
+  string.__call = ctor
+  string.__index = string
+  
+  String = getmetatable("")
+  String.__genericT__ = System.Char
+  String.__inherits__ = inherits
+  System.define("System.String", String)
+  String.__index = string
+  setmetatable(String, string)
+  setmetatable(string, System.Object)  
+end
