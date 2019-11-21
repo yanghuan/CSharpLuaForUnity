@@ -2647,6 +2647,11 @@ public static class ToLuaExport
 
     static bool IsNumberEnum(Type t)
     {
+        if (t.IsEnum) 
+        {
+            return true;
+        }
+
         if (t == typeof(BindingFlags))
         {
             return true;

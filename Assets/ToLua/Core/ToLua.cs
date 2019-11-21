@@ -1350,6 +1350,30 @@ namespace LuaInterface
                 return null;
             }
 
+            TypeCode code = Type.GetTypeCode(t);
+            switch (code) {
+              case TypeCode.Boolean: {
+                return LuaDLL.luaL_checkboolean(L, stackPos);
+              }
+              case TypeCode.Char:
+              case TypeCode.SByte:
+              case TypeCode.Byte:
+              case TypeCode.Int16:
+              case TypeCode.UInt16:
+              case TypeCode.Int32:
+              case TypeCode.UInt32:
+              case TypeCode.Int64:
+              case TypeCode.UInt64:
+              case TypeCode.Single:
+              case TypeCode.Double: {
+                double d = LuaDLL.luaL_checknumber(L, stackPos);
+                return Convert.ChangeType(d, t);
+              }
+              case TypeCode.String: {
+                return CheckString(L, stackPos);
+              }
+            }
+
             if (beValue)
             {
                 if (TypeChecker.IsNullable(t))
@@ -1445,7 +1469,11 @@ namespace LuaInterface
             {
                 if (t.IsEnum)
                 {
-                    return LuaDLL.lua_isnumber(L, stackPos);
+                    return ToLua.CheckObject(L, stackPos, t);
+                }
+                else if (t == typeof(string))
+                {
+                    return CheckString(L, stackPos);
                 }
                 else
                 {
