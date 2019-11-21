@@ -2790,6 +2790,63 @@ namespace LuaInterface
             }
 
             Type t = obj.GetType();
+            TypeCode code = Type.GetTypeCode(t);
+            switch (code) {
+              case TypeCode.Boolean: {
+                bool b = (bool)obj;
+                LuaDLL.lua_pushboolean(L, b);
+                return;
+              }
+              case TypeCode.Char: {
+                char ch = (char)obj;
+                LuaDLL.lua_pushnumber(L, ch);
+                return;
+              }
+              case TypeCode.SByte: {
+                LuaDLL.lua_pushnumber(L, (sbyte)obj);
+                return;
+              }
+              case TypeCode.Byte: {
+                LuaDLL.lua_pushnumber(L, (byte)obj);
+                return;
+              }
+              case TypeCode.Int16: {
+                LuaDLL.lua_pushnumber(L, (Int16)obj);
+                return;
+              }
+              case TypeCode.UInt16: {
+                LuaDLL.lua_pushnumber(L, (UInt16)obj);
+                return;
+              }
+              case TypeCode.Int32: {
+                LuaDLL.lua_pushnumber(L, (Int32)obj);
+                return;
+              }
+              case TypeCode.UInt32: {
+                LuaDLL.lua_pushnumber(L, (UInt32)obj);
+                return;
+              }
+              case TypeCode.Int64: {
+                LuaDLL.lua_pushnumber(L, (Int64)obj);
+                return;
+              }
+              case TypeCode.UInt64: {
+                LuaDLL.lua_pushnumber(L, (UInt64)obj);
+                return;
+              }
+              case TypeCode.Single: {
+                LuaDLL.lua_pushnumber(L, (Single)obj);
+                return; ;
+              }
+              case TypeCode.Double: {
+                LuaDLL.lua_pushnumber(L, (double)obj);
+                return;
+              }
+              case TypeCode.String: {
+                LuaDLL.lua_pushstring(L, (string)obj);
+                return;
+              }
+            }
 
             if (t.IsValueType)
             {
