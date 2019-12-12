@@ -19,8 +19,9 @@ namespace CSharpLua {
     private const string kDotnet = "dotnet";
     private static readonly string compiledScriptDir_ = Settings.Paths.CompiledScriptDir;
     private static readonly string outDir_ = Settings.Paths.CompiledOutDir;
-    private static readonly string toolsDir_ = Settings.Paths.ToolsDir;
-    private static readonly string csharpLua_ = toolsDir_ + "/CSharp.lua/CSharp.lua.Launcher.dll";
+    private static readonly string csharpToolsDir_ = $"{Settings.Paths.ToolsDir}/CSharpLua";
+    private static readonly string csharpLua_ = $"{csharpToolsDir_}/CSharp.lua/CSharp.lua.Launcher.dll";
+    private static readonly string genProtobuf = $"{Settings.Paths.ToolsDir}/ProtobufGen/protogen.bat";
     private static readonly string settingFilePath_ = Settings.Paths.SettingFilePath;
 
     [MenuItem(Settings.Menus.kCompile)]
@@ -48,7 +49,7 @@ namespace CSharpLua {
         }
       }
 
-      string[] metas = new string[] { toolsDir_ + "/UnityEngine.xml" };
+      string[] metas = new string[] { $"{csharpToolsDir_}/UnityEngine.xml" };
       string lib = string.Join(";", libs.ToArray());
       string meta = string.Join(";", metas);
       string args = $"{csharpLua_}  -s \"{compiledScriptDir_}\" -d \"{outDir_}\" -l \"{lib}\" -m {meta} -c";
@@ -67,13 +68,17 @@ namespace CSharpLua {
         StandardErrorEncoding = Encoding.UTF8,
       };
       using (var p = Process.Start(info)) {
+        var output = new StringBuilder();
+        var error = new StringBuilder();
+        p.OutputDataReceived += (sender, eventArgs) => output.AppendLine(eventArgs.Data);
+        p.ErrorDataReceived += (sender, eventArgs) => error.AppendLine(eventArgs.Data);
+        p.BeginOutputReadLine();
+        p.BeginErrorReadLine();
         p.WaitForExit();
         if (p.ExitCode == 0) {
-          UnityEngine.Debug.Log("compile success");
+          UnityEngine.Debug.Log(output);
         } else {
-          string outString = p.StandardOutput.ReadToEnd();
-          string errorString = p.StandardError.ReadToEnd();
-          throw new CompiledFail($"Compile fail, {errorString}\n{outString}\n{kDotnet} {args}");
+          throw new CompiledFail($"Compile fail, {error}\n{output}\n{kDotnet} {args}");
         }
       }
     }
@@ -131,7 +136,7 @@ namespace CSharpLua {
 
     [MenuItem(Settings.kIsRunFromLua ? Settings.Menus.kRunFromCSharp : Settings.Menus.kRunFromLua)]
     public static void Switch() {
-#if UNITY_2017 || UNITY_2018
+#if UNITY_2018_1_OR_NEWER 
       const string kFieldName = nameof(Settings.kIsRunFromLua);
 #else
       const string kFieldName = "kIsRunFromLua";
@@ -156,9 +161,36 @@ namespace CSharpLua {
         throw new InvalidProgramException($"not found field {kFieldName} in {settingFilePath_}");
       }
     }
+
+    [MenuItem(Settings.Menus.kGenProtobuf)]
+    public static void GenProtobuf() {
+      var info = new ProcessStartInfo() {
+        FileName = genProtobuf,
+        UseShellExecute = false,
+        RedirectStandardOutput = true,
+        RedirectStandardError = true,
+        CreateNoWindow = true,
+        StandardOutputEncoding = Encoding.UTF8,
+        StandardErrorEncoding = Encoding.UTF8,
+        WorkingDirectory = $"{Settings.Paths.ToolsDir}/ProtobufGen/",
+      };
+      var p = Process.Start(info);
+      p.OutputDataReceived += (sender, eventArgs) => {
+        if (!string.IsNullOrEmpty(eventArgs.Data)) {
+          UnityEngine.Debug.Log(eventArgs.Data);
+        }
+      };
+      p.ErrorDataReceived += (sender, eventArgs) => { 
+        if (!string.IsNullOrEmpty(eventArgs.Data)) {
+          UnityEngine.Debug.LogError(eventArgs.Data);
+        }
+      };
+      p.BeginOutputReadLine();
+      p.BeginErrorReadLine();
+    }
   }
 
-#if UNITY_2018
+#if UNITY_2018_1_OR_NEWER 
   [InitializeOnLoad]
   public class EditorQuitHandler {
     static void Quit() {

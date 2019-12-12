@@ -12,7 +12,7 @@ namespace CSharpLua {
     public static class Paths {
       public static readonly string CompiledScriptDir = Application.dataPath + "/CSharpLua/Compiled";
       public static readonly string CompiledOutDir = Application.dataPath + "/Lua/Compiled";
-      public static readonly string ToolsDir = Application.dataPath + "/../Tools/CSharpLua";
+      public static readonly string ToolsDir = Application.dataPath + "/../Tools";
       public const string kTempDir = "Assets/CSharpLuaTemp";
       public const string kCompiledScripts = "Compiled";
       public static readonly string SettingFilePath = Application.dataPath + "/CSharpLua/Base/CSharpLua/Settings.cs";
@@ -22,6 +22,7 @@ namespace CSharpLua {
       public const string kCompile = "CharpLua/Compile";
       public const string kRunFromCSharp = "CharpLua/Switch to RunFromCSharp";
       public const string kRunFromLua = "CharpLua/Swicth to RunFromLua";
+      public const string kGenProtobuf = "CharpLua/Gen protobuf";
     }
 #endif
 

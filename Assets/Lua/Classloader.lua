@@ -33,19 +33,28 @@ local config = {
 
 UnityEngine.isFromCSharp = isFromCSharp
 
--- luajit table.move may causes a crash
 if jit then
+  -- luajit table.move may causes a crash in a version, do not confirm whether the current version is fixed
   table.move = function(a1, f, e, t, a2)
     if a2 == nil then a2 = a1 end
-    t = e - f + t
-    while e >= f do
-      a2[t] = a1[e]
-      t = t - 1
-      e = e - 1
+    if t > f then
+      t = e - f + t
+      while e >= f do
+        a2[t] = a1[e]
+        t = t - 1
+        e = e - 1
+      end
+    else
+      while f <= e do
+        a2[t] = a1[f]
+        t = t + 1
+        f = f + 1
+      end
     end
   end
 end
 
 require("CoreSystemLua.All")("CoreSystemLua", config)
 require("UnityAdapter")
+require("ProtobufAdapter")
 require("Compiled.manifest")("Compiled")

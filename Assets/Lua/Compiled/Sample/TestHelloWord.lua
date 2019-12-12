@@ -20,6 +20,8 @@ System.namespace("Sample", function (namespace)
       local i = TestUtils.Load("Assets/CSharpLua/Examples/01_HelloWorld/TestLoader.prefab")
       local obj = UnityEngine.Object.Instantiate(i)
       obj:gettransform():setparent(this:gettransform())
+
+      Sample.TestProtobuf.Run()
     end
     Start = function (this)
       UnityEngine.MonoBehaviour.print("TestHelloWord.Start")

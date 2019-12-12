@@ -6,14 +6,21 @@ return function (out)
     local load = function(module) return require(out .. module) end
 
     -- load all files
+    load("Protocol.AutoGen.CommonPrototype")
+    load("Protocol.IProtocol")
     load("Sample.TestCoroutine")
     load("Sample.TestHangingScript")
     load("Sample.TestHelloWord")
+    load("Sample.TestProtobuf")
   end
 
   System.init({
+    "ProtoBuf.IProtocol",
+    "CSharpLua.Project.Protocol.SettingProto",
+    "CSharpLua.Project.Protocol.SettingProto.ValuePairProto",
     "Sample.TestCoroutine",
     "Sample.TestHangingScript",
-    "Sample.TestHelloWord"
+    "Sample.TestHelloWord",
+    "Sample.TestProtobuf"
   })
 end

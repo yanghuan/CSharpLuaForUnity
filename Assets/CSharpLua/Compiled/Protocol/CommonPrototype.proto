@@ -1,0 +1,13 @@
+package CSharpLua.Project.Protocol;
+
+message SettingProto {
+  message ValuePairProto {
+    required string Key = 1;
+    required string Value = 2;
+  }
+
+  repeated ValuePairProto Values = 1;         
+  required int32 SettingsMark = 2;
+}
+
+

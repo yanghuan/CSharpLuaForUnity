@@ -38,6 +38,9 @@ local isFromCSharp = UnityEngine.isFromCSharp
 
 System.define("UnityEngine.Debug", {
   Log = Debugger.Log,
+  LogFormat = function (format, ...)
+    Debugger.Log(format:Format(...))
+  end,
   LogErrorFormat = function (format, ...)
     Debugger.LogError(format:Format(...))
   end,
