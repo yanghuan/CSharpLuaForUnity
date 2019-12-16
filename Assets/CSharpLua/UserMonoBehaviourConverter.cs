@@ -195,8 +195,8 @@ namespace CSharpLua {
     }
 
     private void LoadClassNames() {
-      const string kBeginToken = "System.init({";
-      const string kEndToken = "})";
+      const string kBeginToken = "types = {";
+      const string kEndToken = "}";
 
       if (!File.Exists(compiledScriptsManifestPath_)) {
         PauseEdit();
