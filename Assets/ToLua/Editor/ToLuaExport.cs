@@ -814,6 +814,7 @@ public static class ToLuaExport
         GenEventFunctions();
         if (type.IsValueType && !type.IsEnum) 
         {
+            GenCSharpLuaValueTypeDefault();
             GenCSharpLuaValueTypeClone();
         }
 
@@ -1452,6 +1453,7 @@ public static class ToLuaExport
         
         if (type.IsValueType && !type.IsEnum) 
         {
+            sb.Append("\t\tL.RegFunction(\"default\", __default__);\r\n");
             sb.Append("\t\tL.RegFunction(\"__clone__\", __clone__);\r\n");
         }
 
@@ -3317,6 +3319,18 @@ public static class ToLuaExport
       sb.AppendLineEx("\t}");
   }
 
+  private static void GenCSharpLuaValueTypeDefault() {
+    sb.AppendLineEx("\r\n\t[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]");
+    sb.AppendFormat("\tstatic int __default__(IntPtr L)\r\n");
+    sb.AppendLineEx("\t{");
+    BeginTry();
+    sb.AppendFormat("\t\t\tvar o = new {0}();\r\n", className);
+    sb.Append("\t\t\tToLua.PushValue(L, o);\r\n");
+    sb.AppendLineEx("\t\t\treturn 1;");
+    EndTry();
+    sb.AppendLineEx("\t}");
+  }
+
   private static void GenCSharpLuaValueTypeClone() 
   {
       sb.AppendLineEx("\r\n\t[MonoPInvokeCallbackAttribute(typeof(LuaCSFunction))]");
@@ -3328,7 +3342,7 @@ public static class ToLuaExport
       sb.Append("\t\t\tvar o = obj;\r\n");
       sb.Append("\t\t\tToLua.PushValue(L, o);\r\n");
       sb.Append("\t\t\tToLua.SetBack(L, 1, obj);\r\n");
-      sb.AppendLineEx("\t\t\treturn 0;");
+      sb.AppendLineEx("\t\t\treturn 1;");
       EndTry();
       sb.AppendLineEx("\t}");
   }
