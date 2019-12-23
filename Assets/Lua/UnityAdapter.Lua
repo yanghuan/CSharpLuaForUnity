@@ -823,7 +823,7 @@ local function setOfVector4(this, index, value, error)
 end
 
 function Vector4.set(this, index, value) 
-  setOfVector4(this, inde, value, "Invalid Vector4 index!")
+  setOfVector4(this, index, value, "Invalid Vector4 index!")
 end
 
 Vector4.getzero = function() return newVector4(0, 0, 0, 0) end
@@ -1066,3 +1066,24 @@ UnityEngine.ToLayerMask = newLayerMask
 
 LayerMask.__inherits__ = System.emptyFn
 defineUnityStruct("UnityEngine.LayerMask", LayerMask)
+
+local Ray = UnityEngine.Ray
+local newRay = Ray.New
+UnityEngine.Ray = nil
+
+Ray.__clone__ = function (this) return newRay(this.direction, this.origin) end
+Ray.ToString = Ray.__tostring
+Ray.__inherits__ = System.emptyFn
+defineUnityStruct("UnityEngine.Ray", Ray)
+
+local RaycastHit = UnityEngine.RaycastHit
+local newRaycastHit = RaycastHit.New
+UnityEngine.RaycastHit = nil
+
+RaycastHit.distance = 0.0
+RaycastHit.normal = Vector3.zero
+RaycastHit.point = Vector3.zero
+RaycastHit.__clone__ = function (this) return newRaycastHit(this.collider, this.distance, this.normal, this.point, this.rigidbody, this.transform) end
+RaycastHit.__inherits__ = System.emptyFn
+defineUnityStruct("UnityEngine.RaycastHit", RaycastHit)
+

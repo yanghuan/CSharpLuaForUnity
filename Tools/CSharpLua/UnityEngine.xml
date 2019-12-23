@@ -94,6 +94,18 @@
         <method name="op_Implicit" RetType="System.Int32" Template="this.value" />
         <method name="op_Implicit" RetType="UnityEngine.LayerMask" Template="UnityEngine.ToLayerMask({0})" />
       </class>
+      <class name="Ray">
+        <property name="origin" IsField="true" />
+        <property name="direction" IsField="true" />
+      </class>
+      <class name="RaycastHit">
+        <property name="collider" IsField="true" />
+        <property name="distance" IsField="true" />
+        <property name="normal" IsField="true" />
+        <property name="point" IsField="true" />
+        <property name="rigidbody" IsField="true" />
+        <property name="transform" IsField="true" />
+      </class>
     </namespace>
     <namespace name="LuaInterface">
       <class name="Debugger" Name="Debugger" />

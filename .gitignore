@@ -32,5 +32,8 @@ ProjectSettings
 /Assets/Source/Generate
 /Assets/CSharpLuaTemp
 /Assets/CSharpLuaTemp.meta
-Assets/Lua/.idea/
-
+/Assets/Lua/.idea/
+/Assets/.lpproj
+/Assets/ThirdParty/
+/Assets/ThirdParty.meta
+LuaDebuggee.dll

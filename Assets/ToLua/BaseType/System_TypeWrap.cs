@@ -696,7 +696,7 @@ public class System_TypeWrap
 		{
 			ToLua.CheckArgsCount(L, 5);
 			System.Type obj = ToLua.CheckMonoType(L, 1);
-			System.Reflection.MemberTypes arg0 = (System.Reflection.MemberTypes)ToLua.CheckObject(L, 2, typeof(System.Reflection.MemberTypes));
+			System.Reflection.MemberTypes arg0 = (System.Reflection.MemberTypes)LuaDLL.luaL_checknumber(L, 2);
 			System.Reflection.BindingFlags arg1 = (System.Reflection.BindingFlags)LuaDLL.luaL_checknumber(L, 3);
 			System.Reflection.MemberFilter arg2 = (System.Reflection.MemberFilter)ToLua.CheckDelegate<System.Reflection.MemberFilter>(L, 4);
 			object arg3 = ToLua.ToVarObject(L, 5);
