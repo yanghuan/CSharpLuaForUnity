@@ -15,22 +15,19 @@ using LuaInterface;
 namespace CSharpLua {
   public sealed class UserMonoBehaviourConverter {
     private sealed class StructField {
-      private object v_;
+      private string s_;
+      public bool HasField { get; set; }
 
       public StructField(object v) {
-        v_ = v;
-      }
-
-      public override string ToString() {
         StringBuilder sb = new StringBuilder();
         sb.Append('{');
-        Type t = v_.GetType();
+        Type t = v.GetType();
         bool isFirst = true;
         foreach (var field in t.GetFields(BindingFlags.Instance | BindingFlags.Public)) {
-          object x = field.GetValue(v_);
+          object x = field.GetValue(v);
           if (x != null) {
             var y = Activator.CreateInstance(x.GetType());
-            if (!EqualityComparer<object>.Default.Equals(x, y)) {
+            if (!x.EQ(y)) {
               if (isFirst) {
                 isFirst = false;
               } else {
@@ -39,13 +36,18 @@ namespace CSharpLua {
               sb.Append(field.Name);
               sb.Append('=');
               sb.Append(SerializeFieldsInfo.NormalValueToString(x));
+              HasField = true;
             }
           }
         }
         sb.Append(',');
         sb.Append(t.FullName);
         sb.Append('}');
-        return sb.ToString();
+        s_ = sb.ToString();
+      }
+
+      public override string ToString() {
+        return s_;
       }
     }
 
@@ -447,7 +449,7 @@ namespace CSharpLua {
             x = System.Convert.ToDouble(x);
           }
         }
-        if (!EqualityComparer<object>.Default.Equals(x, y)) {
+        if (!x.EQ(y)) {
           info.Normals.Add(field.Name, x);
         }
         return;
@@ -463,13 +465,14 @@ namespace CSharpLua {
       }
 
       if (fieldType.IsUnityEngineStruct()) {
-        info.Normals.Add(field.Name, new StructField(fieldValue));
+        var structField = new StructField(fieldValue);
+        if (structField.HasField) {
+          info.Normals.Add(field.Name, structField);
+        }
         return;
       }
 
       if (fieldValue == null) {
-        fieldValue.GetType().GetFields();
-
         return;
       }
 
@@ -516,6 +519,10 @@ namespace CSharpLua {
 
     public static bool IsUnityEngineObject(this Type type) {
       return typeof(UnityEngine.Object).IsAssignableFrom(type);
+    }
+
+    public static bool EQ(this object x, object y) {
+      return EqualityComparer<object>.Default.Equals(x, y);
     }
     
     public static bool IsUnityEngineStruct(this Type type) {
