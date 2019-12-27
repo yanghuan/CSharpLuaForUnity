@@ -13,6 +13,9 @@ namespace Sample {
     public GameObject DataOfGameObject;
     public UnityEngine.Object DateOfObject;
     public TestCoroutine HangingMonoBehaviour;
+    public List<int> l = new List<int>();
+    public Vector2 vector2;
+    public Vector3 vector3;
 
     public void Awake() {
       print("Awake");
@@ -20,8 +23,9 @@ namespace Sample {
       print(DataOfInt);
       print(DataOfString2);
       print(a);
-
       print(HangingMonoBehaviour.name);
+      print(string.Join(",", l));
+      print($"{vector2}, {vector3}");
     }
 
     public void Start() {

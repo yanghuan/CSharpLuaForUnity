@@ -14,6 +14,41 @@ using LuaInterface;
 
 namespace CSharpLua {
   public sealed class UserMonoBehaviourConverter {
+    private sealed class StructField {
+      private object v_;
+
+      public StructField(object v) {
+        v_ = v;
+      }
+
+      public override string ToString() {
+        StringBuilder sb = new StringBuilder();
+        sb.Append('{');
+        Type t = v_.GetType();
+        bool isFirst = true;
+        foreach (var field in t.GetFields(BindingFlags.Instance | BindingFlags.Public)) {
+          object x = field.GetValue(v_);
+          if (x != null) {
+            var y = Activator.CreateInstance(x.GetType());
+            if (!EqualityComparer<object>.Default.Equals(x, y)) {
+              if (isFirst) {
+                isFirst = false;
+              } else {
+                sb.Append(',');
+              }
+              sb.Append(field.Name);
+              sb.Append('=');
+              sb.Append(SerializeFieldsInfo.NormalValueToString(x));
+            }
+          }
+        }
+        sb.Append(',');
+        sb.Append(t.FullName);
+        sb.Append('}');
+        return sb.ToString();
+      }
+    }
+
     private sealed class SerializeFieldsInfo {
       internal abstract class ObjectField {
         public string Name;
@@ -124,7 +159,7 @@ namespace CSharpLua {
         return sb.ToString();
       }
 
-      private static string NormalValueToString(object v) {
+      internal static string NormalValueToString(object v) {
         if (v is string) {
           return "\"" + v + "\"";
         }
@@ -427,7 +462,14 @@ namespace CSharpLua {
         return;
       }
 
+      if (fieldType.IsUnityEngineStruct()) {
+        info.Normals.Add(field.Name, new StructField(fieldValue));
+        return;
+      }
+
       if (fieldValue == null) {
+        fieldValue.GetType().GetFields();
+
         return;
       }
 
@@ -474,6 +516,12 @@ namespace CSharpLua {
 
     public static bool IsUnityEngineObject(this Type type) {
       return typeof(UnityEngine.Object).IsAssignableFrom(type);
+    }
+    
+    public static bool IsUnityEngineStruct(this Type type) {
+      return type == typeof(Vector2)
+        || type == typeof(Vector3)
+        || type == typeof(Vector4);
     }
   }
 }

@@ -133,8 +133,6 @@ namespace CSharpLua {
     }
   }
 
-#pragma warning disable 0162
-
   public class CSharpLuaClient : LuaClient, IProvider {
     public string[] Components;
     private LuaFunction bindFn_;
@@ -181,12 +179,14 @@ namespace CSharpLua {
           }
         }
       } else {
+#pragma warning disable 0162
         if (Components != null) {
           foreach (string type in Components) {
             Type componentType = Type.GetType(type, true, false);
             gameObject.AddComponent(componentType);
           }
         }
+#pragma warning restore 0162
       }
     }
 
@@ -216,8 +216,6 @@ namespace CSharpLua {
       }
 #endif
     }
-
-#pragma warning restore 0162
   }
 }
 
