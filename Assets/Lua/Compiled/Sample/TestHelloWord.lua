@@ -30,7 +30,7 @@ System.namespace("Sample", function (namespace)
       UnityEngine.MonoBehaviour.print("TestHelloWord.Update")
     end
     return {
-      __inherits__ = function (out)
+      base = function (out)
         return {
           out.UnityEngine.MonoBehaviour
         }

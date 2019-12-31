@@ -46,12 +46,13 @@ System.namespace("Sample", function (namespace)
       end, System.Object, this)
     end
     return {
-      __inherits__ = function (out)
+      base = function (out)
         return {
           out.UnityEngine.MonoBehaviour
         }
       end,
       Awake = Awake,
+      OnTick = OnTick,
       Test = Test,
       __ctor__ = __ctor__
     }

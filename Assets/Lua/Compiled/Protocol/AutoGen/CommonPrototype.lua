@@ -20,7 +20,7 @@ System.namespace("CSharpLua.Project.Protocol", function (namespace)
     local __ctor__
     namespace.class("ValuePairProto", function (namespace)
       return {
-        __inherits__ = function (out)
+        base = function (out)
           return {
             out.ProtoBuf.IProtocol
           }
@@ -31,7 +31,7 @@ System.namespace("CSharpLua.Project.Protocol", function (namespace)
       this.Values = ListValuePairProto()
     end
     return {
-      __inherits__ = function (out)
+      base = function (out)
         return {
           out.ProtoBuf.IProtocol
         }
