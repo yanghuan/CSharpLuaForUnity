@@ -16,7 +16,12 @@ namespace CSharpLua {
       }
     }
 
+#if UNITY_EDITOR_WIN
     private const string kDotnet = "dotnet";
+#else
+    private const string kDotnet = "/usr/local/share/dotnet/dotnet";
+#endif
+
     private static readonly string compiledScriptDir_ = Settings.Paths.CompiledScriptDir;
     private static readonly string outDir_ = Settings.Paths.CompiledOutDir;
     private static readonly string csharpToolsDir_ = $"{Settings.Paths.ToolsDir}/CSharpLua";
@@ -34,8 +39,11 @@ namespace CSharpLua {
         throw new InvalidProgramException($"{csharpLua_} not found");
       }
 
-      if (Directory.Exists(outDir_)) {
-        Directory.Delete(outDir_, true);
+      var outDirectoryInfo = new DirectoryInfo(outDir_);
+      if (outDirectoryInfo.Exists) {
+        foreach (var luaFile in outDirectoryInfo.EnumerateFiles("*.lua", SearchOption.AllDirectories)) {
+          luaFile.Delete();
+        }
       }
 
       HashSet<string> libs = new HashSet<string>();
@@ -136,7 +144,7 @@ namespace CSharpLua {
 
     [MenuItem(Settings.kIsRunFromLua ? Settings.Menus.kRunFromCSharp : Settings.Menus.kRunFromLua)]
     public static void Switch() {
-#if UNITY_2018_1_OR_NEWER 
+#if UNITY_2018_1_OR_NEWER
       const string kFieldName = nameof(Settings.kIsRunFromLua);
 #else
       const string kFieldName = "kIsRunFromLua";
@@ -190,7 +198,7 @@ namespace CSharpLua {
     }
   }
 
-#if UNITY_2018_1_OR_NEWER 
+#if UNITY_2018_1_OR_NEWER
   [InitializeOnLoad]
   public class EditorQuitHandler {
     static void Quit() {
