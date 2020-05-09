@@ -28,7 +28,8 @@ Assembly-CSharp.dll --------> Compiled.dll --------> Bridge.dll --------> Base.d
 * https://github.com/jarjin/LuaFramework_UGUI_V2
 
 ## 相关工程
+* DCET 在ET框架的基础上集成了CSharp.lua和**xlua**  
+  https://github.com/DukeChiang/DCET
 * ILRuntime C#实现的IL运行环境   
   https://github.com/Ourpalm/ILRuntime
-* DCET 集成了CSharp.lua和**xlua**  
-  https://github.com/DukeChiang/DCET
+
