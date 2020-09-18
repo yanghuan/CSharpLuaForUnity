@@ -46,6 +46,13 @@ System.define("UnityEngine.Debug", {
   end,
 })
 
+System.typeof = function (cls)
+  if isFromCSharp(cls) then
+    return typeof(cls)
+  end
+  return SystemTypeof(cls)
+end
+
 local UnityEngineMonoBehaviour = UnityEngine.MonoBehaviour
 UnityEngine.MonoBehaviour = nil
 
