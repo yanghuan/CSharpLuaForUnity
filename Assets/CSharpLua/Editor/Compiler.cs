@@ -103,8 +103,8 @@ namespace CSharpLua {
       bool has = InternalCheckDotnetInstall();
       if (!has) {
         UnityEngine.Debug.LogWarning("not found dotnet");
-        if (EditorUtility.DisplayDialog("dotnet未安装", "未安装.NET Core 3.0+运行环境，点击确定前往安装", "确定", "取消")) {
-          Application.OpenURL("https://www.microsoft.com/net/download");
+        if (EditorUtility.DisplayDialog(".NET未安装", "未安装.NET 5.0运行环境，点击确定前往安装", "确定", "取消")) {
+          Application.OpenURL("https://dotnet.microsoft.com/download/dotnet/5.0");
         }
       }
       return has;

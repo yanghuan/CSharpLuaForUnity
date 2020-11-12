@@ -45,6 +45,7 @@ local type = type
 local table = table
 local select = select
 local assert = assert
+local getmetatable = getmetatable
 local setmetatable = setmetatable
 local tremove = table.remove
 local pack = table.pack
@@ -327,7 +328,7 @@ local function getAwaitResult(task)
 end
 
 local factory = {
-  StartNew = function (f, state)
+  StartNew = function (_, f, state)
     local t = newWaitingTask()
     post(function ()
       try(function ()
@@ -425,7 +426,7 @@ Task = define("System.Threading.Tasks.Task", {
     t:Start()
     return t
   end,
-  WhenAll = function (...)
+  WhenAll = function (T, ...)
     local tasks = checkTasks(...)
     local count = #tasks
     if count == 0 then
@@ -450,7 +451,10 @@ Task = define("System.Threading.Tasks.Task", {
         elseif cancelled then
           trySetCanceled(t)
         else
-          trySetResult(arrayFromTable(result, System.getClassFromObj(result[1])))
+          if T then
+            trySetResult(t, arrayFromTable(result, T))
+          end
+            trySetResult(t)
         end
       end
     end
@@ -533,12 +537,12 @@ Task = define("System.Threading.Tasks.Task", {
   Await = function (this, t)
     local a = t:GetAwaiter()
     if a:getIsCompleted() then
-      return a:getResult()
+      return a:GetResult()
     end
     a:OnCompleted(function ()
       local ok, v
       try(function ()
-        ok, v = true, a:getResult()
+        ok, v = true, a:GetResult()
       end, function (e)
         ok, v = false, e
       end)
@@ -555,6 +559,10 @@ Task = define("System.Threading.Tasks.Task", {
     end
   end,
   await = function (this, task)
+    if getmetatable(task) ~= Task then
+      return this:Await(task)
+    end
+
     local result = getResult(task, true)
     if result ~= waitToken then
       return result

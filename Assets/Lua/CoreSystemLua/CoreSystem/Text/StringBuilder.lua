@@ -209,5 +209,4 @@ local StringBuilder = System.define("System.Text.StringBuilder", {
     end
   end
 })
-
 System.StringBuilder = StringBuilder

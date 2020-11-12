@@ -1,5 +1,5 @@
 set csharplua=D:\Project\Person\CSharp.lua
-set launcher=%csharplua%\CSharp.lua.Launcher\bin\Debug\netcoreapp3.0
+set launcher=%csharplua%\CSharp.lua.Launcher\bin\Debug\net5.0
 set coresystem=%csharplua%\CSharp.lua\CoreSystem.Lua
 set localcoresystem=..\..\Assets\Lua\CoreSystemLua
 
