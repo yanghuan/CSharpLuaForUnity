@@ -106,6 +106,9 @@
         <property name="rigidbody" IsField="true" />
         <property name="transform" IsField="true" />
       </class>
+      <class name="Resources">
+        <method name="Load" GenericArgCount="1" ArgCount="1" Template="UnityEngine.Resources.Load({0}, typeof({`0}))" />
+      </class>
     </namespace>
     <namespace name="LuaInterface">
       <class name="Debugger" Name="Debugger" />
