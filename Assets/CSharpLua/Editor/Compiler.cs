@@ -128,10 +128,10 @@ namespace CSharpLua {
             string version = p.StandardOutput.ReadToEnd();
             UnityEngine.Debug.LogFormat("found dotnet {0}", version);
             int major = version[0] - '0';
-            if (major >= 3) {
+            if (major >= 5) {
               return true;
             } else {
-              UnityEngine.Debug.LogErrorFormat("dotnet verson {0} must >= 3.0", version);
+              UnityEngine.Debug.LogErrorFormat("dotnet verson {0} must >= 5.0", version);
             }
           }
           return false;
