@@ -32,6 +32,8 @@ Assembly-CSharp.dll --------> Compiled.dll --------> Bridge.dll --------> Base.d
 ## 相关工程
 * DCET 在ET框架的基础上集成了CSharp.lua和**xlua**  
   https://github.com/DukeChiang/DCET
+* 也是在T框架的基础上集成了CSharp.lua和**xlua**  
+  https://github.com/zzjfengqing/ETCsharpToXLua 
 * ILRuntime C#实现的IL运行环境   
   https://github.com/Ourpalm/ILRuntime
 
